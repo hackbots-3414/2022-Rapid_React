@@ -1,17 +1,17 @@
 # 2022-Rapid_React
 Hackbots code for the 2022 FRC Rapid React game.
 
-#CAN IDs
+# CAN IDs
 
 
 
-#Driver Controls
+# Driver Controls
 
 
 
-#Operator Controls
+# Operator Controls
 
 
-#CANSparkMax extension for RobotBuilder 2022
+# CANSparkMax extension for RobotBuilder 2022
 Unzip the CANSparkMax_for_RobotBuilder_2022_v...zip file in C:\Users\Public.  The folder structure required is built-in.
 
