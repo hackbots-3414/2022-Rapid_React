@@ -8,7 +8,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.subsystems.Drivetrain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TeleopCommand extends CommandBase {
+
+  private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
 
   private Drivetrain driveTrain; 
   
