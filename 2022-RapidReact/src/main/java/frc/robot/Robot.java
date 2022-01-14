@@ -19,6 +19,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -27,6 +30,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * the project.
  */
 public class Robot extends TimedRobot {
+
+    private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
 
     private Command m_autonomousCommand;
 
