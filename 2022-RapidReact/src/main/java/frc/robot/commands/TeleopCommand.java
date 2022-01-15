@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class TeleopCommand extends CommandBase {
 
-  private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
+  private static final Logger LOG = LoggerFactory.getLogger(TeleopCommand.class);
 
   private Drivetrain driveTrain; 
   

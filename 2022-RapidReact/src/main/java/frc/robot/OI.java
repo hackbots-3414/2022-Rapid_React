@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class OI {
 
-    private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
+    private static final Logger LOG = LoggerFactory.getLogger(OI.class);
     private static Joystick joystick = new Joystick(0);
     
 
@@ -29,13 +29,10 @@ public class OI {
 
     public static double getThrottle() {
         return joystick.getRawAxis(1) / SmartDashboard.getNumber("Left_Y_Max", 1.0);
-
     }
 
     public static double getSteering() { 
-
         return joystick.getRawAxis(3) / SmartDashboard.getNumber("Right_X_Max", 1.0);
-
     }
 
 
