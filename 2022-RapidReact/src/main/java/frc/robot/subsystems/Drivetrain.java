@@ -94,5 +94,8 @@ differentialDrive.setMaxOutput(1.0);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
+    public void arcadeDrive(double throttle, double steering){
+        differentialDrive.arcadeDrive(throttle, steering);
+    }
 }
 
