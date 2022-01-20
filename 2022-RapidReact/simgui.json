@@ -1,0 +1,34 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "Talon FX[11]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Drivetrain": "Subsystem",
+      "/LiveWindow/Drivetrain/DifferentialDrive": "DifferentialDrive",
+      "/LiveWindow/Intake": "Subsystem",
+      "/LiveWindow/LEDFeedback": "Subsystem",
+      "/LiveWindow/Shooter": "Subsystem",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/SmartDashboard/Auto Mode": "String Chooser",
+      "/SmartDashboard/Autonomous Command": "Command",
+      "/SmartDashboard/DriveStraigt": "Command",
+      "/SmartDashboard/TeleopCommand": "Command"
+    }
+  },
+  "NetworkTables": {
+    "SmartDashboard": {
+      "DriveStraigt": {
+        "open": true
+      },
+      "open": true
+    }
+  }
+}
