@@ -11,7 +11,7 @@
   <logger name="frc.robot.commands" level="INFO"/>
   <!--logger name="frc.robot.commands.MrZPrintCommand" level="TRACE"/-->
 
-  <root level="WARN">
+  <root level="DEBUG">
     <appender-ref ref="STDOUT"/>
   </root>
 
