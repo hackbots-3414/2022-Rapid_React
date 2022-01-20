@@ -6,3 +6,6 @@
 | Left Back   | 2 |
 | Right Front | 4 |
 | Right Back  | 5 |
+
+Degree - between 179 and -176
+Turn Speed - > 0.65
