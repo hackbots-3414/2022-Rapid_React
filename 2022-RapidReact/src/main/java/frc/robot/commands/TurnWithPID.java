@@ -56,7 +56,6 @@ public class TurnWithPID extends PIDCommand {
     SmartDashboard.putNumber("Current Heading", m_drivetrain.getHeading());
     SmartDashboard.putBoolean("PIDController", getController().atSetpoint());
 
-    // return super.getController().atSetpoint();
-    return false;
+    return super.getController().atSetpoint();
   }
 }
