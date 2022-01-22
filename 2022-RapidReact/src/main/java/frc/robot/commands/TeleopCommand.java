@@ -15,7 +15,7 @@ public class TeleopCommand extends CommandBase {
 
   private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
 
-  private Drivetrain driveTrain; 
+  private Drivetrain drivetrain; 
   
 
   /** Creates a new TeleopCommand. */
@@ -23,7 +23,7 @@ public class TeleopCommand extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
  
-    this.driveTrain = driveTrain;
+    this.drivetrain = drivetrain;
  
   }
 
@@ -37,7 +37,7 @@ public class TeleopCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.arcadeDrive(OI.getThrottle(), OI.getSteering());
+    drivetrain.arcadeDrive(OI.getThrottle(), OI.getSteering());
   }
 
   // Called once the command ends or is interrupted.
