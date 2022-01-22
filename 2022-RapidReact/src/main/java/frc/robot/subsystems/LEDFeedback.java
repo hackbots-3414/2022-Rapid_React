@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
@@ -75,83 +76,21 @@ public class LEDFeedback extends SubsystemBase {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-   public void setSolidColor(int r, int g, int b){
+
+   public void setColor(Color color){
     for (int i=0; i<LED_ARRAY_LENGTH; i++) {
 
-        ledBuffer.setRGB(i, r, g, b);
+        ledBuffer.setLED(i, color);
     }
     ledString.setData(ledBuffer);
     ledString.start();
    }
 
-    public void setSolidPurple(){
-        LOG.info("SolidPurple");
-        setSolidColor(130, 5, 255);
-    }
-    public void setSolidBlue(){
-        LOG.info("SolidBlue");
-        setSolidColor(5, 5, 255);
-    }
-    public void setSolidRed(){
-        LOG.info("SolidRed");
-        setSolidColor(255, 0, 0);
-    }
-    public void setSolidWhite(){
-        LOG.info("SolidWhite");
-        setSolidColor(255, 255, 255);
-    }
-    public void setSolidGreen(){
-        LOG.info("SolidGreen");
-        setSolidColor(34, 139, 34);
-    }
-    public void setSolidBlack(){
-        LOG.info("SolidBlack");
-        setSolidColor(0, 0, 0);
-    }
-
-    //Flashing not tested....
-    public void setFlashBlue(){
-        LOG.info("FlashBlue");
-        setSolidBlue();
-        Timer.delay(1);
-        setSolidBlack();
-        Timer.delay(1);
-    }
-    public void setFlashRed(){
-        LOG.info("FlashRed");
-        setSolidRed();
-        Timer.delay(1);
-        setSolidBlack();
-        Timer.delay(1);
-    }
-    public void setSlowFlashWhite(){
-        LOG.info("SlowFlashWhite");
-        setSolidWhite();
-        Timer.delay(2);
-        setSolidBlack();
-        Timer.delay(2);
-    }
-    public void setFlashWhite(){
-        LOG.info("FlashWhite");
-        setSolidWhite();
-        Timer.delay(1);
-        setSolidBlack();
-        Timer.delay(1);
-    }
-    public void setFastFlashWhite(){
+    public void setFlash(Color color, double flashSpeed){
         LOG.info("FastFlashWhite");
-        setSolidWhite();
-        Timer.delay(0.3);
-        setSolidBlack();
-        Timer.delay(0.3);
+        setColor(color);
+        Timer.delay(flashSpeed);
+        setColor(Color.kBlack);
+        Timer.delay(flashSpeed);
     }
-    public void setFlashGreen(){
-        LOG.info("FlashGreen");
-        setSolidGreen();
-        Timer.delay(1);
-        setSolidBlack();
-        Timer.delay(1);
-    }
-    
-
 }
