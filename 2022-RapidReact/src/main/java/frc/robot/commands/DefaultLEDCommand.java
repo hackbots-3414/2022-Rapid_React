@@ -55,7 +55,7 @@ public class DefaultLEDCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_lEDFeedback.setFlash(Color.kTomato, .25);
+        m_lEDFeedback.setFlash(Color.kPurple, 2.0);
     }
 
     // Called once the command ends or is interrupted.
