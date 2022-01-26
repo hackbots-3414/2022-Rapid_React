@@ -26,13 +26,25 @@ public class Constants {
 
     private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
     
-   /**
-    * public static final class DriveConstants {
-    *   public static final int kLeftMotor1Port = 0;
-    *   public static final int kLeftMotor2Port = 1;
-    *   public static final int kRightMotor1Port = 2;
-    *   public static final int kRightMotor2Port = 3; 
-    * }
-    */ 
+             public static final class DriveConstants {
+              public static final int kLeftMotor1Port = 10;
+              public static final int kLeftMotor2Port = 11;
+             public static final int kRightMotor1Port = 13;
+            public static final int kRightMotor2Port = 14; 
+ }
+
+            public static final class Transport {
+            
+                public static final int transportMotor1 = 20;
+              public static final int transportMotor2 = 21;
+              public static final int transportMotor3 = 22;
+
+
+            }
+            public static final class Intake {
+                public static final int intakeMotor1= 30;
+              public static final int intakeMotor2 = 31;
+            }
+
 }
 
