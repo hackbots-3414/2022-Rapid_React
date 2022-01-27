@@ -11,6 +11,8 @@
 
 package frc.robot;
 
+import javax.xml.namespace.QName;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,8 +45,11 @@ public class Constants {
             }
             public static final class Intake {
                 public static final int intakeMotor1= 30;
-              public static final int intakeMotor2 = 31;
+              
             }
-
+            public static final class Shooter { 
+                public static final int shooterMotor1 = 40;
+                public static final int shooterMotor2 = 41;
+            }
 }
 
