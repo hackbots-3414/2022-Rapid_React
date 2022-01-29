@@ -71,8 +71,8 @@ public class Turn extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        m_drivetrain.resetHeading();
-        startHeading = m_drivetrain.getHeading();
+       // m_drivetrain.resetHeading();
+        //startHeading = m_drivetrain.getHeading();
         LOG.debug("StartHeading = {}", startHeading);
         targetHeading = m_degrees;
         LOG.debug("TargetHeading = {}", targetHeading);
@@ -97,15 +97,15 @@ public class Turn extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         LOG.debug("Turn Stopped, interrupted: {}", interrupted);
-        m_drivetrain.stopDriving();
+        //m_drivetrain.stopDriving();
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        currentHeading = m_drivetrain.getHeading();
+        //currentHeading = m_drivetrain.getHeading();
         LOG.debug("In IsFinished");
-        LOG.debug("m_degrees = {}, StartHeading = {}, TargetHeading = {}, CurrentHeading = {}", m_degrees, startHeading, targetHeading, m_drivetrain.getHeading());
+        //LOG.debug("m_degrees = {}, StartHeading = {}, TargetHeading = {}, CurrentHeading = {}", m_degrees, startHeading, targetHeading, m_drivetrain.getHeading());
         if (m_degrees > 0) {
             LOG.debug("In Turn/Isfinished/first if statement");
             if (currentHeading > targetHeading) {
