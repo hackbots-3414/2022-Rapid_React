@@ -37,7 +37,15 @@ public class TeleopCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.arcadeDrive(OI.getThrottle(), OI.getSteering());
+    if (OI.getButtonB() == 0) {
+      drivetrain.arcadeDrive(OI.getLeftVertical(), OI.getRightLateral());
+    }
+    else if (OI.getButtonB() == 1) {
+      drivetrain.arcadeDrive(OI.getLeftVertical(), OI.getLeftLateral());
+    }
+    else if (OI.getButtonB() == 2) {
+      drivetrain.tankDrive(OI.getLeftVertical(), OI.getRightVertical());
+    }
   }
 
   // Called once the command ends or is interrupted.
