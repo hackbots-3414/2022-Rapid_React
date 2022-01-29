@@ -82,7 +82,7 @@ leftMotor = new WPI_TalonFX(21);
     // here. Call these from Commands.
 
     public void shoot() {
-        leftMotor.set(ControlMode.Velocity, 5665);
+        leftMotor.set(ControlMode.Velocity, 5965);
         
     }
 
