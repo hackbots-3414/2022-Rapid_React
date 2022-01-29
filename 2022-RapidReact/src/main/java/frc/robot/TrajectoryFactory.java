@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 
 /** Add your docs here. */
 public class TrajectoryFactory {
-    private static final String BASE_PATH = "paths/";
+    private static final String BASE_PATH = "Paths/";
     private static final TrajectoryFactory me = new TrajectoryFactory();
     private static final Logger LOG = LoggerFactory.getLogger(TrajectoryFactory.class);
     private Trajectory testPath1;
@@ -31,6 +31,7 @@ public class TrajectoryFactory {
             return TrajectoryUtil.fromPathweaverJson(trajectoryPath);
         } catch (IOException ex) {
             DriverStation.reportError("Unable to open trajectory: " + BASE_PATH+fileName, ex.getStackTrace());
+            LOG.error("Failed to load Trajectory path {}, error: {}", BASE_PATH + fileName, ex);
         }
         return null;
     }

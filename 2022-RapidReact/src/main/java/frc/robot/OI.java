@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class OI {
 
-    private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
+    private static final Logger LOG = LoggerFactory.getLogger(OI.class);
     private static Joystick joystick = new Joystick(0);
     
 

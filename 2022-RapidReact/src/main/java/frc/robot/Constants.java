@@ -33,30 +33,38 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  */
 public class Constants {
 
-    public static final Logger LOG = LoggerFactory.getLogger("Constants.java");
-
-    public static final double ksVolts = 1.3153;
-    public static final double kvVoltSecondsPerMeter = 5.933;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.75429;
-
-    public static final double kPDriveVel = 8.528;
+    public static final Logger LOG = LoggerFactory.getLogger(Constants.class);
 
     public static final double kTrackWidthMeters = 0.4925;
-    public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
-
-    public static final double kMaxSpeedMetersPerSecond = 1;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
-
-    public static final double kRamseteB = 2;
-    public static final double kRamseteZeta = 0.7;
 
     public static final class DriveConstants {
-        public static final int kLeftMotor1Port = 10;
-        public static final int kLeftMotor2Port = 11;
-        public static final int kRightMotor1Port = 13;
-        public static final int kRightMotor2Port = 14;
+        // public static final int kLeftMotor1Port = 1;
+        // public static final int kLeftMotor2Port = 2;
+        // public static final int kRightMotor1Port = 4;
+        // public static final int kRightMotor2Port = 5;
+
+        public static final double testChassisWheelDiameterInCentimeters = 10.16;
+
+        public static final double maxDriveVoltage = 7; //orignal: 10
+
+        public static final double ksVolts = 1.3153;
+        public static final double kvVoltSecondsPerMeter =  5.933;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.75429;
+
+        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+
+        public static final double kPDriveVel = 8.528;
+
         // MUST BE VALIDATED
-        public static final double testChassisDistancePerTick = 0.00009765625 * Math.PI;
+        public static final double testChassisDistancePerTick = ((testChassisWheelDiameterInCentimeters / 100) * Math.PI) / 4096;
+    }
+
+    public static final class AutoConstants {
+        public static final double kMaxSpeedMetersPerSecond = 1;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
+
+        public static final double kRamseteB = 2;
+        public static final double kRamseteZeta = 0.7;
     }
 
     public static final class Transport {
