@@ -1,9 +1,5 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +21,7 @@ public class OI {
         SmartDashboard.putNumber("Right_X_Max", 0.80713);
         SmartDashboard.putNumber("Right_Y_Offset", 0.03418);
         SmartDashboard.putNumber("Right_Y_Max", 0.85005);
+        SmartDashboard.putNumber("R_Knob_Offset", 0.03371);
 
     }
 
@@ -44,13 +41,25 @@ public class OI {
         return (joystick.getRawAxis(4) - SmartDashboard.getNumber("Right_Y_Offset", 0.0)) / SmartDashboard.getNumber("Right_Y_Max", 1.0);
     }
 
+    public static double getRKnob() {
+        return (joystick.getRawAxis(8) + SmartDashboard.getNumber("R_Knob_Offset", 0.0) + 1) / 2;
+    }
+
+    public static double getRKnobRaw() {
+        return joystick.getRawAxis(8);
+    }
+
+    public static boolean getButtonA() {
+        return joystick.getRawButton(1);
+    }
+
     public static int getButtonB() {
         // returns the value of switch B as labled on the controller (down == 0, middle == 1, up == 2)
 
-        if (joystick.getRawButton(1)) {
+        if (joystick.getRawButton(2)) {
             return 0;
         }
-        else if (joystick.getRawButton(2)) {
+        else if (joystick.getRawButton(3)) {
             return 2;
         }
         else {
