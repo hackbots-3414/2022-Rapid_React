@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -47,21 +48,22 @@ public class Constants {
 
         public static final double maxDriveVoltage = 7; //orignal: 10
 
-        public static final double ksVolts = 1.3153;
-        public static final double kvVoltSecondsPerMeter =  5.933;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.75429;
+        public static final double ksVolts = 0.71082; // 1.3153; 
+        public static final double kvVoltSecondsPerMeter = 3.8555; // 5.933;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.53729; // 0.75429;
 
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
-        public static final double kPDriveVel = 8.528;
+        public static final double kPDriveVel = 3; // 18.165
+        public static final double kIDriveVel = 0;
+        public static final double kDDriveVel = 0; // 3.9626
 
-        // MUST BE VALIDATED
-        public static final double testChassisDistancePerTick = ((testChassisWheelDiameterInCentimeters / 100) * Math.PI) / 4096;
+        public static final double testChassisDistancePerTick = ((testChassisWheelDiameterInCentimeters / 100) * Math.PI) / 4096 / 2;
     }
 
     public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 1;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 2.5; //2.5
 
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
