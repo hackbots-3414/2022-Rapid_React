@@ -10,7 +10,7 @@
 
   <logger name="frc.robot.commands" level="DEBUG"/>
   <!--logger name="frc.robot.commands.MrZPrintCommand" level="TRACE"/-->
-
+<logger name="frc.robot.subsystems.Shooter" level="TRACE"/>
   <root level="WARN">
     <appender-ref ref="STDOUT"/>
   </root>

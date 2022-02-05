@@ -26,13 +26,12 @@ import org.slf4j.LoggerFactory;
  */
 public class Constants {
 
-    private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
     
              public static final class DriveConstants {
-              public static final int kLeftMotor1Port = 10;
-              public static final int kLeftMotor2Port = 11;
-             public static final int kRightMotor1Port = 13;
-            public static final int kRightMotor2Port = 14; 
+              public static final int kLeftMotorFrontPort = 10;
+              public static final int kLeftMotorRearPort = 11;
+             public static final int kRightMotorFrontPort = 13;
+            public static final int kRightMotorRearPort = 14; 
  }
 
             public static final class Transport {
