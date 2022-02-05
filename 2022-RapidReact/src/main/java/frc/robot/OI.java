@@ -10,50 +10,82 @@ public class OI {
     private static Joystick joystick = new Joystick(0);
     
 
+    static double left_x_offset = -0.13379;
+    static double left_x_max = 0.81982;
+    static double left_y_offset = 0.01758;
+    static double left_y_max = 0.62793;
+    static double right_x_offset = 0.03418;
+    static double right_x_max = 0.80713;
+    static double right_y_offset = 0.03418;
+    static double right_y_max = 0.85005;
+    static double r_knob_offset = 0.03371;
 
     static {
+        SmartDashboard.putBoolean("Controller (false = dev, true = comp)", false);
+    }
 
-        SmartDashboard.putNumber("Left_X_Offset", -0.13379);
-        SmartDashboard.putNumber("Left_X_Max", 0.81982);
-        SmartDashboard.putNumber("Left_Y_Offset", 0.01758);
-        SmartDashboard.putNumber("Left_Y_Max", 0.62793);
-        SmartDashboard.putNumber("Right_X_Offset", 0.03418);
-        SmartDashboard.putNumber("Right_X_Max", 0.80713);
-        SmartDashboard.putNumber("Right_Y_Offset", 0.03418);
-        SmartDashboard.putNumber("Right_Y_Max", 0.85005);
-        SmartDashboard.putNumber("R_Knob_Offset", 0.03371);
-
+    private static void updateController() {
+        if (SmartDashboard.getBoolean("Controller (false = dev, true = comp)", false)) {
+            left_x_offset = -0.05518;
+            left_x_max = 0.83401;
+            left_y_offset = -0.01953;
+            left_y_max = 0.64453;
+            right_x_offset = 0.03711;
+            right_x_max = 0.73144;
+            right_y_offset = 0.01367;
+            right_y_max = 0.87256;
+            r_knob_offset = 0.03371;
+        }
+        else {
+            left_x_offset = -0.13379;
+            left_x_max = 0.81982;
+            left_y_offset = 0.01758;
+            left_y_max = 0.62793;
+            right_x_offset = 0.03418;
+            right_x_max = 0.80713;
+            right_y_offset = 0.03418;
+            right_y_max = 0.85005;
+            r_knob_offset = 0.03613;
+        }
     }
 
     public static double getLeftLateral() {
-        return (joystick.getRawAxis(0) - SmartDashboard.getNumber("Left_X_Offset", 0.0)) / SmartDashboard.getNumber("Left_X_Max", 1.0);
+        updateController();
+        return (joystick.getRawAxis(0) - left_x_offset) / left_x_max;
     }
 
     public static double getLeftVertical() {
-        return (joystick.getRawAxis(1) - SmartDashboard.getNumber("Left_Y_Offset", 0.0)) / SmartDashboard.getNumber("Left_Y_Max", 1.0);
+        updateController();
+        return (joystick.getRawAxis(1) - left_y_offset) / left_y_max;
     }
 
     public static double getRightLateral() {
-        return (joystick.getRawAxis(3) - SmartDashboard.getNumber("Right_X_Offset", 0.0)) / SmartDashboard.getNumber("Right_X_Max", 1.0);
+        updateController();
+        return (joystick.getRawAxis(3) - right_x_offset) / right_x_max;
     }
 
     public static double getRightVertical() {
-        return (joystick.getRawAxis(4) - SmartDashboard.getNumber("Right_Y_Offset", 0.0)) / SmartDashboard.getNumber("Right_Y_Max", 1.0);
+        updateController();
+        return (joystick.getRawAxis(4) - right_y_offset) / right_y_max;
     }
 
     public static double getRKnob() {
-        return (joystick.getRawAxis(8) + SmartDashboard.getNumber("R_Knob_Offset", 0.0) + 1) / 2;
+        updateController();
+        return (joystick.getRawAxis(6) + r_knob_offset + 1) / 2;
     }
 
     public static double getRKnobRaw() {
-        return joystick.getRawAxis(8);
+        updateController();
+        return joystick.getRawAxis(6);
     }
 
     public static boolean getButtonA() {
+        updateController();
         return joystick.getRawButton(1);
     }
 
     public static int getButtonB() {
+        updateController();
         // returns the value of switch B as labled on the controller (down == 0, middle == 1, up == 2)
 
         if (joystick.getRawButton(2)) {
