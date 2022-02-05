@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class Main {
 
-  private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
+  private static final Logger LOG = LoggerFactory.getLogger(Main.class);
   
   private Main() {
   }

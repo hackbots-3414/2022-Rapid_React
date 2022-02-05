@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Robot extends TimedRobot {
 
-    private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
+    private static final Logger LOG = LoggerFactory.getLogger(Robot.class);
 
     private Command m_autonomousCommand;
 
