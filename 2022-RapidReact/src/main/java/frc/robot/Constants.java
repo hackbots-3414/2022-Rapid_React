@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
  */
 public class Constants {
 
-    private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
     
              public static final class DriveConstants {
               public static final int kLeftMotorFrontPort = 10;

@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  */
 public class RobotContainer {
 
-  private static final Logger LOG = LoggerFactory.getLogger("Constants.java");
+  private static final Logger LOG = LoggerFactory.getLogger(RobotContainer.class);
 
   private static RobotContainer m_robotContainer = new RobotContainer();
 
