@@ -46,7 +46,7 @@ public class Constants {
                 public static final int intakeMotor1= 30;
               
             }
-            public static final class Shooter { 
+            public static final class ShooterConstants { 
                 public static final int shooterMotor1 = 40;
                 public static final int shooterMotor2 = 41;
             }
