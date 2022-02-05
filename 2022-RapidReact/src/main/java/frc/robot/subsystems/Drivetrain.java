@@ -92,6 +92,25 @@ public class Drivetrain extends SubsystemBase {
 
     }
 
+    public double getLeftEncoderPosition() {
+        return backLeft.getSelectedSensorPosition();
+    }
+
+    public double getRightEncoderPosition() {
+        return frontRight.getSelectedSensorPosition();
+    }
+
+    public double getAverageEncoderPosition() {
+        return (getLeftEncoderPosition() + getRightEncoderPosition()) / 2;
+    }
+
+    public void resetEncoders() {
+        frontLeft.setSelectedSensorPosition(0);
+        frontRight.setSelectedSensorPosition(0);
+        backRight.setSelectedSensorPosition(0);
+        backLeft.setSelectedSensorPosition(0);
+    }
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void arcadeDrive(double throttle, double steering) {
