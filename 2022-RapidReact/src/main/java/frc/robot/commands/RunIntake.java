@@ -51,7 +51,7 @@ public class RunIntake extends CommandBase {
     intakeMotor1.set(ControlMode.Velocity, 1000);
     intakeMotor2.set(ControlMode.Velocity, 1000);
     intakeMotor3.set(ControlMode.Velocity, 1000);
-
+    
   }
 
   // Called once the command ends or is interrupted.
