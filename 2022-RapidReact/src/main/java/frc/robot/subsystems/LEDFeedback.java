@@ -40,6 +40,7 @@ import org.slf4j.LoggerFactory;
 public class LEDFeedback extends SubsystemBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(LEDFeedback.class);
+
     public static final int LED_ARRAY_LENGTH = 9;
     private AddressableLED ledString;
     private AddressableLEDBuffer ledBuffer;
