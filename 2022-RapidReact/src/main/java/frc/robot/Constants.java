@@ -36,7 +36,7 @@ public class Constants {
 
     public static final Logger LOG = LoggerFactory.getLogger(Constants.class);
 
-    public static final double kTrackWidthMeters = 0.4925;
+    public static final double kTrackWidthMeters = 0.6096;
 
     public static final class DriveConstants {
         // public static final int kLeftMotor1Port = 1;
@@ -44,21 +44,21 @@ public class Constants {
         // public static final int kRightMotor1Port = 4;
         // public static final int kRightMotor2Port = 5;
 
-        public static final double testChassisWheelDiameterInCentimeters = 10.16;
+        public static final double testChassisWheelDiameterInCentimeters = 16;
 
         public static final double maxDriveVoltage = 7; //orignal: 10
 
-        public static final double ksVolts = 0.71082; // 1.3153; 
-        public static final double kvVoltSecondsPerMeter = 3.8555; // 5.933;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.53729; // 0.75429;
+        public static final double ksVolts = 0.59216;
+        public static final double kvVoltSecondsPerMeter = 0.65842;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.042965;
 
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
-        public static final double kPDriveVel = 3; // 18.165
+        public static final double kPDriveVel = 0.85259; 
         public static final double kIDriveVel = 0;
-        public static final double kDDriveVel = 0; // 3.9626
+        public static final double kDDriveVel = 0;
 
-        public static final double testChassisDistancePerTick = ((testChassisWheelDiameterInCentimeters / 100) * Math.PI) / 4096 / 2;
+        public static final double testChassisDistancePerTick = ((testChassisWheelDiameterInCentimeters / 100) * Math.PI) / 2048;
     }
 
     public static final class AutoConstants {
