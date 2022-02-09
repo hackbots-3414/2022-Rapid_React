@@ -10,7 +10,7 @@
 
 // ROBOTBUILDER TYPE: Subsystem.
 
-package rc.robot.subsystems;
+package frc.robot.subsystems;
 import frc.robot.Constants.Intake;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
