@@ -14,10 +14,12 @@ package frc.robot;
 
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Drivetrain;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +38,8 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
 
     private RobotContainer m_robotContainer;
+
+    public final Drivetrain m_drivetrain = new Drivetrain();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -117,6 +121,10 @@ public class Robot extends TimedRobot {
 
     @Override
     public void testInit() {
+        DifferentialDriveOdometry m_odometry = m_drivetrain.getOdometry();
+
+        LOG.info("Pose - Translation: {}, X: {}, Y: {}, Rotation: {}, Pose: {}", m_odometry.getPoseMeters().getTranslation(), m_odometry.getPoseMeters().getX(), m_odometry.getPoseMeters().getY(), m_odometry.getPoseMeters().getRotation(), m_odometry.getPoseMeters().toString());   
+
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
     }

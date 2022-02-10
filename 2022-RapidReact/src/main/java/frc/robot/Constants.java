@@ -38,6 +38,8 @@ public class Constants {
 
     public static final double kTrackWidthMeters = 0.6096;
 
+    public static final double kMotorToWheelGearRatio = 12; // 12:1 m:w
+
     public static final class DriveConstants {
         // public static final int kLeftMotor1Port = 1;
         // public static final int kLeftMotor2Port = 2;
@@ -46,19 +48,19 @@ public class Constants {
 
         public static final double testChassisWheelDiameterInCentimeters = 16;
 
-        public static final double maxDriveVoltage = 7; //orignal: 10
+        public static final double maxDriveVoltage = 10;
 
-        public static final double ksVolts = 0.59216;
-        public static final double kvVoltSecondsPerMeter = 0.65842;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.042965;
+        public static final double ksVolts = 0.59223;
+        public static final double kvVoltSecondsPerMeter = 2.5071; //0.65842;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.16821; //0.042965;
 
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
 
-        public static final double kPDriveVel = 0.85259; 
+        public static final double kPDriveVel = 0.39333; 
         public static final double kIDriveVel = 0;
         public static final double kDDriveVel = 0;
 
-        public static final double testChassisDistancePerTick = ((testChassisWheelDiameterInCentimeters / 100) * Math.PI) / 2048;
+        public static final double testChassisDistancePerTick = ((testChassisWheelDiameterInCentimeters / 100) * Math.PI) / 2048 / Constants.kMotorToWheelGearRatio;
     }
 
     public static final class AutoConstants {

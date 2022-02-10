@@ -118,6 +118,10 @@ public class Drivetrain extends SubsystemBase {
 
     }
 
+    public DifferentialDriveOdometry getOdometry() {
+        return this.m_odometry;
+    }
+
     public Pose2d getPose() {
         LOG.trace("Pose - Translation: {}, X: {}, Y: {}, Rotation: {}, Pose: {}", m_odometry.getPoseMeters().getTranslation(), m_odometry.getPoseMeters().getX(), m_odometry.getPoseMeters().getY(), m_odometry.getPoseMeters().getRotation(), m_odometry.getPoseMeters().toString());
         return m_odometry.getPoseMeters();
@@ -182,7 +186,7 @@ public class Drivetrain extends SubsystemBase {
 
     public double getLeftMetersPerSecond() {
         LOG.trace("LeftMetersPerSecond: {}", frontLeft.getSelectedSensorVelocity());
-        return frontLeft.getSelectedSensorVelocity() * DriveConstants.testChassisDistancePerTick * 10;
+        return frontLeft.getSelectedSensorVelocity() * DriveConstants.testChassisDistancePerTick * Constants.kMotorToWheelGearRatio;
     }
 
     public double getRightEncoderPostion() {
