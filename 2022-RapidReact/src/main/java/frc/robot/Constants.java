@@ -54,4 +54,12 @@ public class Constants {
         public static final double kI = 0.0005;
         public static final double kP = 0.15;
     }
+
+
+    public static final class BeltConstants {
+        public static final int topMotor = 50;
+        public static final int middleMotor = 51;
+        public static final int bottomMotor = 52;
+    }
+
 }
