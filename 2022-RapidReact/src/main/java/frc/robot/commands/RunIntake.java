@@ -63,12 +63,16 @@ public class RunIntake extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    if ((intakeMotor1.getActiveTrajectoryVelocity() == 0) && (intakeMotor2.getActiveTrajectoryVelocity() == 0)
-        && (intakeMotor3.getActiveTrajectoryVelocity() == 0)) {
-      return true;
-    } else {
-      return false;
-    }
+    return false;
+
+    // This code was commented out because default commands never stop.
+
+    // if ((intakeMotor1.getActiveTrajectoryVelocity() == 0) && (intakeMotor2.getActiveTrajectoryVelocity() == 0)
+    //     && (intakeMotor3.getActiveTrajectoryVelocity() == 0)) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
 
   }
 }
