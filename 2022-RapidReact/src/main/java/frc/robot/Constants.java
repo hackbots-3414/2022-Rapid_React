@@ -50,5 +50,8 @@ public class Constants {
                 public static final int shooterMotor1 = 40;
                 public static final int shooterMotor2 = 41;
             }
+            public static final class ClimberConstants {
+                public static final int climberSolenoidChannel = 1;
+            }
 }
 
