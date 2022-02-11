@@ -5,10 +5,12 @@
 package frc.robot;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.security.KeyStore.LoadStoreParameter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -19,7 +21,9 @@ public class TrajectoryFactory {
     private static final String BASE_PATH = "paths/";
     private static final TrajectoryFactory me = new TrajectoryFactory();
     private static final Logger LOG = LoggerFactory.getLogger(TrajectoryFactory.class);
-    private Trajectory testPath1;
+    private static Trajectory testPath1;
+    private static Trajectory taxi;
+    private static Trajectory taxiback
     
     private TrajectoryFactory() {
         
@@ -40,10 +44,26 @@ public class TrajectoryFactory {
         return me;
     }
     
-    public Trajectory getTestPath1() {
+    public static Trajectory getTestPath1() {
         if (testPath1 == null) {
-            testPath1 = loadTrajectory("TestPath1.path");
+            testPath1 = me.loadTrajectory("TestPathSmooth.wpilib.json");
         }
         return testPath1;
+    }
+
+    public static Trajectory getTaxi() {
+        if (taxi == null) {
+            taxi = me.loadTrajectory("Taxi.wpilib.json");
+        }
+
+        return taxi.transformBy(new Transform2d().inverse());
+    } 
+
+    public static Trajectory getTaxiBack() {
+        if (taxiback == null) {
+            taxiback = me.loadTrajectory("Taxiback.wpilib.json");
+        }
+
+        return taxiback.transformBy(new Transform2d().inverse());
     }
 }
