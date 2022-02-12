@@ -37,6 +37,6 @@ public class BeltCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return !isRunning;
+        return false;
     }
 }

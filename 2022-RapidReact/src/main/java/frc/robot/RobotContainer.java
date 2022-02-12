@@ -57,7 +57,7 @@ public class RobotContainer {
         m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_belt.setDefaultCommand(new BeltCommand(m_belt, 1.0));
-        m_intake.setDefaultCommand(new RunIntake(m_intake));
+        //m_intake.setDefaultCommand(new RunIntake(m_intake));
 
         // Configure autonomous sendable chooser
 
