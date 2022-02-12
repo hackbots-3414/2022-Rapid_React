@@ -94,14 +94,12 @@ public class Shooter extends SubsystemBase {
 
     public void shoot() {
         //6500 works well for high shot on 02/05/2022
-        //5000 works well for low shot on 02/05/2022
         //shooter degree at 4.5 degrees on 2/5/22
         leftMotor.set(ControlMode.Velocity, 6500);
         
     }
 
     public void shootLow() {
-        //6500 works well for high shot on 02/05/2022
         //5000 works well for low shot on 02/05/2022
         //shooter degree at 4.5 degrees on 2/5/22
         leftMotor.set(ControlMode.Velocity, 5000);
