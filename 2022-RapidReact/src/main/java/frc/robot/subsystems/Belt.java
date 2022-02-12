@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI.Port;
-import frc.robot.Constants.BeltConstants;;
+import frc.robot.Constants.BeltConstants;
 import frc.robot.Constants.DriveConstants;
 
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;

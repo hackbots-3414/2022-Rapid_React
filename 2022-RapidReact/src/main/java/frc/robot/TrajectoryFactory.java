@@ -23,7 +23,7 @@ public class TrajectoryFactory {
     private static final Logger LOG = LoggerFactory.getLogger(TrajectoryFactory.class);
     private static Trajectory testPath1;
     private static Trajectory taxi;
-    private static Trajectory taxiback
+    private static Trajectory taxiback;
     
     private TrajectoryFactory() {
         
