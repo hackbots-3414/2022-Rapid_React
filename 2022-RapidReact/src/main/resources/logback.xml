@@ -12,7 +12,7 @@
   <logger name="frc.robot.Robot" level="INFO"/>
   <!-- <logger name="frc.robot.subsystems.Drivetrain" level="TRACE"/> -->
   <!--logger name="frc.robot.commands.MrZPrintCommand" level="TRACE"/-->
-
+<logger name="frc.robot.subsystems.Shooter" level="TRACE"/>
   <root level="WARN">
     <appender-ref ref="STDOUT"/>
   </root>

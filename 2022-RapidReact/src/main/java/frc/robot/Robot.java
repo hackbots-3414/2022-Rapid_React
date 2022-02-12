@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.cameraserver.CameraServer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
+        CameraServer.startAutomaticCapture();
     }
 
     /**
