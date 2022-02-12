@@ -53,7 +53,7 @@ public class AutonomousFactory {
         SequentialCommandGroup scGroup = new SequentialCommandGroup();
         // TODO Shoot & Wait Command
         // TODO Add intake and shoot
-        scGroup.addCommands(createRamseteCommand(TrajectoryFactory.getTaxi(), TrajectoryFactory.getTaxiBack().andThen(() -> m_drivetrain.tankDriveVolts(0, 0))));
+        scGroup.addCommands(createRamseteCommand(TrajectoryFactory.getTaxi()), TrajectoryFactory.getTaxiBack())); // .andThen(() -> m_drivetrain.tankDriveVolts(0, 0))
 
         return scGroup;
     }  
