@@ -21,7 +21,7 @@ private Shooter shooter;
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
-    addCommands(new ShooterCommand(shooter), new DriveStraight(drive, -0.35));
+    addCommands(new ShootLowCommand(shooter),new WaitCommand(), new DriveStraight(drive, -86.5));
     this.shooter = shooter;
     this.drive = drive;
 
@@ -31,7 +31,7 @@ private Shooter shooter;
   }
 
   public void end(boolean interrupted){
-  shooter.shoot();
+  shooter.stop();
   drive.stopDriving();
   super.end(interrupted);
   }
