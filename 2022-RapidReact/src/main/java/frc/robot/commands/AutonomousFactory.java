@@ -13,11 +13,13 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.TrajectoryFactory;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.Shooter;
 import frc.robot.subsystems.Drivetrain;
 
 /** Add your docs here. */
@@ -37,8 +39,6 @@ public class AutonomousFactory {
 
         TrajectoryConfig config = new TrajectoryConfig(AutoConstants.kMaxSpeedMetersPerSecond, AutoConstants.kMaxAccelerationMetersPerSecondSquared).setKinematics(DriveConstants.kDriveKinematics).addConstraint(autoVoltageConstraint);
 
-        TrajectoryFactory trajectoryFactory = TrajectoryFactory.getInstance();
-
         m_drivetrain.resetOdometry(trajectory.getInitialPose());
 
         RamseteCommand ramseteCommand = new RamseteCommand(trajectory, m_drivetrain::getPose, new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta), new SimpleMotorFeedforward(DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter, DriveConstants.kaVoltSecondsSquaredPerMeter), DriveConstants.kDriveKinematics, m_drivetrain::getWheelSpeeds, new PIDController(DriveConstants.kPDriveVel, DriveConstants.kIDriveVel, DriveConstants.kDDriveVel), new PIDController(DriveConstants.kPDriveVel, DriveConstants.kIDriveVel, DriveConstants.kDDriveVel), m_drivetrain::tankDriveVolts, m_drivetrain);
@@ -46,14 +46,16 @@ public class AutonomousFactory {
         m_drivetrain.resetOdometry(trajectory.getInitialPose());
 
         return ramseteCommand;
-
     }
 
     public Command createShootBackupIntake() {
         SequentialCommandGroup scGroup = new SequentialCommandGroup();
-        // TODO Shoot & Wait Command
-        // TODO Add intake and shoot
-        scGroup.addCommands(createRamseteCommand(TrajectoryFactory.getTaxi())); // .andThen(() -> m_drivetrain.tankDriveVolts(0, 0))
+        // scGroup.addCommands(shoot);
+        scGroup.addCommands(new ParallelCommandGroup(createRamseteCommand(TrajectoryFactory.getBlueBottom1Rev())));
+        // scGroup.addCommands(intake); // ADD TO PARALLEL 
+        scGroup.addCommands(createRamseteCommand(TrajectoryFactory.getBlueBottom1For()));
+        // scGroup.addCommands(shoot);
+        m_drivetrain.tankDriveVolts(0, 0);
 
         return scGroup;
     }  
