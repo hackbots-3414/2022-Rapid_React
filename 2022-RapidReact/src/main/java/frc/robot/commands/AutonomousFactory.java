@@ -3,6 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +31,7 @@ public class AutonomousFactory {
     private static final AutonomousFactory me = new AutonomousFactory();
     private static final Logger LOG = LoggerFactory.getLogger(AutonomousFactory.class);
     public final Drivetrain m_drivetrain = new Drivetrain();
-    private static final LEDFeedback LED_FEEDBACK = new LEDFeedback();
+    private static final LEDFeedback m_ledfeedback = new LEDFeedback();
 
     private AutonomousFactory() {
 
@@ -51,14 +53,18 @@ public class AutonomousFactory {
         return ramseteCommand;
     }
 
+    private DefaultLEDCommand createLEDCommand(Color colour) {
+        DefaultLEDCommand ledCommand = new DefaultLEDCommand(m_ledfeedback, colour);
+        return ledCommand;
+    }
+
     public Command createShootBackupIntake() {
         SequentialCommandGroup scGroup = new SequentialCommandGroup();
-        // scGroup.addCommands(shoot);
-        scGroup.addCommands();
-        scGroup.addCommands(new ParallelCommandGroup(createRamseteCommand(TrajectoryFactory.getBlueBottom1Rev())));
+        scGroup.addCommands(createLEDCommand(new Color(255, 0, 0))); // red // scGroup.addCommands(shoot);
+        scGroup.addCommands(new ParallelCommandGroup(createRamseteCommand(TrajectoryFactory.getBlueBottom2Rev()), createLEDCommand(new Color(0, 255, 0))));
         // scGroup.addCommands(intake); // ADD TO PARALLEL 
         scGroup.addCommands(createRamseteCommand(TrajectoryFactory.getBlueBottom1For()));
-        // scGroup.addCommands(shoot);
+        scGroup.addCommands(createLEDCommand(new Color (0, 0, 255))); // scGroup.addCommands(shoot);
         m_drivetrain.tankDriveVolts(0, 0);
 
         return scGroup;

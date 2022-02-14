@@ -1,5 +1,8 @@
 package frc.robot.commands;
 
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LEDFeedback;
@@ -7,10 +10,12 @@ import frc.robot.subsystems.LEDFeedback;
 public class DefaultLEDCommand extends CommandBase {
 
     private final LEDFeedback m_lEDFeedback;
+    private final Color color;
 
-    public DefaultLEDCommand(LEDFeedback subsystem) {
+    public DefaultLEDCommand(LEDFeedback subsystem, Color color) {
         m_lEDFeedback = subsystem;
         addRequirements(m_lEDFeedback);
+        this.color = color;
     }
 
     @Override
@@ -19,17 +24,13 @@ public class DefaultLEDCommand extends CommandBase {
 
     @Override
     public void execute() {
-        System.out.print("Running");
-        m_lEDFeedback.setColor(Color.kPurple);
+        m_lEDFeedback.setColor(this.color);
 
         // if (false /* check if clmbing */) {
-        // m_lEDFeedback.setFlash(Color.kGreen, .5);
+        //     m_lEDFeedback.setFlash(Color.kGreen, .5);
         // } else if (DriverStation.getMatchTime() <= 30.0){
-        // if (m_lEDFeedback.isClimbLineDetected()){
-
+        //     if (m_lEDFeedback.isClimbLineDetected()){}
         // }
-        // }
-
         // m_lEDFeedback.setColor(Color.kPurple);
     }
 
