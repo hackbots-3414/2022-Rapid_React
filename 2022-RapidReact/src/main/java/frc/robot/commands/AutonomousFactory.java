@@ -12,6 +12,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -21,12 +22,14 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.Shooter;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.LEDFeedback;
 
 /** Add your docs here. */
 public class AutonomousFactory {
     private static final AutonomousFactory me = new AutonomousFactory();
     private static final Logger LOG = LoggerFactory.getLogger(AutonomousFactory.class);
     public final Drivetrain m_drivetrain = new Drivetrain();
+    private static final LEDFeedback LED_FEEDBACK = new LEDFeedback();
 
     private AutonomousFactory() {
 
@@ -51,6 +54,7 @@ public class AutonomousFactory {
     public Command createShootBackupIntake() {
         SequentialCommandGroup scGroup = new SequentialCommandGroup();
         // scGroup.addCommands(shoot);
+        scGroup.addCommands();
         scGroup.addCommands(new ParallelCommandGroup(createRamseteCommand(TrajectoryFactory.getBlueBottom1Rev())));
         // scGroup.addCommands(intake); // ADD TO PARALLEL 
         scGroup.addCommands(createRamseteCommand(TrajectoryFactory.getBlueBottom1For()));
