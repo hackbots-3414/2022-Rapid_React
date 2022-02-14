@@ -12,7 +12,7 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.DefaultIntakeCommand;
 import frc.robot.commands.RunIntake;
-import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ShootHighCommand;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitCommand;
 import frc.robot.subsystems.Belt;
@@ -46,7 +46,7 @@ public class RobotContainer {
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("ShooterCommand", new ShooterCommand(m_shooter));
+        SmartDashboard.putData("ShooterCommand", new ShootHighCommand(m_shooter));
         SmartDashboard.putData("Intake Command", new RunIntake(m_intake));
 
         // Configure the button bindings
@@ -77,7 +77,7 @@ public class RobotContainer {
         final JoystickButton shootButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         intakeButton.whileHeld(new RunIntake(m_intake), true);
-        shootButton.whileHeld(new ShooterCommand(m_shooter), true);
+        shootButton.whileHeld(new ShootHighCommand(m_shooter), true);
 
     }
 
