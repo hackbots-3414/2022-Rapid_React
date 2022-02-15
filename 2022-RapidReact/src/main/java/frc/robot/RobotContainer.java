@@ -12,7 +12,7 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.DefaultIntakeCommand;
 import frc.robot.commands.RunIntake;
-import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ShootHighCommand;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
@@ -33,11 +33,10 @@ public class RobotContainer {
     public final Shooter m_shooter = new Shooter();
     public final Intake m_intake = new Intake();
     public final Drivetrain m_drivetrain = new Drivetrain();
+    public final Belt m_belt = new Belt();
 
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
-
-    public final Belt m_belt = new Belt();
 
     // A chooser for autonomous commands
     SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -47,7 +46,7 @@ public class RobotContainer {
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("ShooterCommand", new ShooterCommand(m_shooter));
+        SmartDashboard.putData("ShooterCommand", new ShootHighCommand(m_shooter));
         SmartDashboard.putData("Intake Command", new RunIntake(m_intake));
 
         // Configure the button bindings
@@ -58,7 +57,7 @@ public class RobotContainer {
         m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_belt.setDefaultCommand(new BeltCommand(m_belt, 1.0));
-        //m_intake.setDefaultCommand(new RunIntake(m_intake));
+        // m_intake.setDefaultCommand(new RunIntake(m_intake));
 
         // Configure autonomous sendable chooser
 
@@ -79,7 +78,7 @@ public class RobotContainer {
         final JoystickButton shootButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         intakeButton.whileHeld(new RunIntake(m_intake), true);
-        shootButton.whileHeld(new ShooterCommand(m_shooter), true);
+        shootButton.whileHeld(new ShootHighCommand(m_shooter), true);
 
         
 

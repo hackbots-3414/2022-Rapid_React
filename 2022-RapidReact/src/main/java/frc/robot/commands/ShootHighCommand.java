@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Shooter;
 
-public class ShootLowCommand extends SequentialCommandGroup {
+public class ShootHighCommand extends SequentialCommandGroup {
 
     private final Shooter m_shooter;
 
-    public ShootLowCommand(Shooter subsystem) {
+    public ShootHighCommand(Shooter subsystem) {
         m_shooter = subsystem;
         addRequirements(m_shooter);
     }
@@ -18,7 +18,7 @@ public class ShootLowCommand extends SequentialCommandGroup {
 
     @Override
     public void execute() {
-        m_shooter.shootLow();
+        m_shooter.shootHigh();
     }
 
     @Override
