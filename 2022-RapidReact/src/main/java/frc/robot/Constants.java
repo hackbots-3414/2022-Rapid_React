@@ -26,6 +26,9 @@ public class Constants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
 
+        public static final double highShootVelocity = 6500;
+        public static final double lowShootVelocity = 5000;
+
         public static final double integralZone = 201;
         public static final double kD = 8;
         public static final double kF = 0.045;

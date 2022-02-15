@@ -1,13 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class ShootHighCommand extends SequentialCommandGroup {
+public class ShootHighSpinUp extends CommandBase {
 
     private final Shooter m_shooter;
 
-    public ShootHighCommand(Shooter subsystem) {
+    public ShootHighSpinUp(Shooter subsystem) {
         m_shooter = subsystem;
         addRequirements(m_shooter);
     }
@@ -28,6 +28,6 @@ public class ShootHighCommand extends SequentialCommandGroup {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return m_shooter.highAtSpeed();
     }
 }

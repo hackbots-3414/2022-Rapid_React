@@ -10,16 +10,13 @@ public class ShootWaitBackup extends SequentialCommandGroup {
     private Shooter shooter;
 
     public ShootWaitBackup(Shooter shooter, Drivetrain drive) {
-        addCommands(new ShootLowCommand(shooter), new WaitCommand(), new DriveStraight(drive, -86.5));
+        addCommands(new ShootLowSpinUp(shooter), new WaitCommand(), new DriveStraight(drive, -86.5));
 
         this.shooter = shooter;
         this.drive = drive;
     }
 
-    public void execute() {
-        super.execute();
-    }
-
+    @Override
     public void end(boolean interrupted) {
         shooter.stop();
         drive.stopDriving();

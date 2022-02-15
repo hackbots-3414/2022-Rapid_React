@@ -51,17 +51,19 @@ public class Shooter extends SubsystemBase {
     }
 
     public void shootHigh() {
-        // 6500 works well for high shot on 2/5/2022
-        // shooter degree at 4.5 degrees on 2/5/2022
-        leftMotor.set(ControlMode.Velocity, 6500);
-
+        leftMotor.set(ControlMode.Velocity, Constants.Shooter.highShootVelocity);
     }
 
     public void shootLow() {
-        // 5000 works well for low shot on 2/5/2022
-        // shooter degree at 4.5 degrees on 2/5/2022
-        leftMotor.set(ControlMode.Velocity, 5000);
+        leftMotor.set(ControlMode.Velocity, Constants.Shooter.lowShootVelocity);
+    }
 
+    public boolean highAtSpeed() {
+        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.Shooter.highShootVelocity) <= 50);
+    }
+
+    public boolean lowAtSpeed() {
+        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.Shooter.lowShootVelocity) <= 50);
     }
 
     public void stop() {

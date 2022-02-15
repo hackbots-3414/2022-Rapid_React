@@ -24,7 +24,6 @@ public class Belt extends SubsystemBase {
     private boolean conveyorSensorBack = false;
 
     public Belt() {
-
         topMotor = new WPI_TalonFX(BeltConstants.topMotor);
         middleMotor = new WPI_TalonFX(BeltConstants.middleMotor);
         bottomMotor = new WPI_TalonFX(BeltConstants.bottomMotor);
