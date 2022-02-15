@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+
 public class Constants {
 
 
@@ -38,6 +40,15 @@ public class Constants {
         public static final int topMotor = 50;
         public static final int middleMotor = 51;
         public static final int bottomMotor = 52;
+    }
+
+    public static final class ClimberConstants{
+
+
+        
+        //Should be fixed later. Need instance of XboxController in Contstants to work
+        // final POVButton climberUpButton = new POVButton(operatorPad, 0); 
+        // final POVButton climberDownButton = new POVButton(operatorPad, 180);
     }
 
 }
