@@ -14,6 +14,7 @@ import frc.robot.commands.DefaultIntakeCommand;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TeleopCommand;
+import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
@@ -61,7 +62,8 @@ public class RobotContainer {
 
         // Configure autonomous sendable chooser
 
-        m_chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
+        m_chooser.addOption("Autonomous Command", new AutonomousCommand());
+        m_chooser.setDefaultOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
 
         SmartDashboard.putData("Auto Mode", m_chooser);
         SmartDashboard.putData("Wait Command", new WaitCommand());
@@ -78,6 +80,8 @@ public class RobotContainer {
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         intakeButton.whileHeld(new RunIntake(m_intake), true);
         shootButton.whileHeld(new ShooterCommand(m_shooter), true);
+
+        
 
     }
 
