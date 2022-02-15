@@ -15,7 +15,7 @@ public class WaitCommand extends CommandBase {
   public long waitTime;
   
   static {
-    SmartDashboard.putNumber("Auton Delay", 1000);
+    SmartDashboard.putNumber("Auton Delay", 5000);
   }
   public WaitCommand() {
   }
