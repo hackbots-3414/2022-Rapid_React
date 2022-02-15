@@ -63,7 +63,7 @@ public class AutonomousFactory {
         scGroup.addCommands(createLEDCommand(new Color(255, 0, 0))); // red // scGroup.addCommands(shoot);
         scGroup.addCommands(new ParallelCommandGroup(createRamseteCommand(TrajectoryFactory.getBlueBottom2Rev()), createLEDCommand(new Color(0, 255, 0))));
         // scGroup.addCommands(intake); // ADD TO PARALLEL 
-        scGroup.addCommands(createRamseteCommand(TrajectoryFactory.getBlueBottom1For()));
+        scGroup.addCommands(createRamseteCommand(TrajectoryFactory.getBlueBottom2For()));
         scGroup.addCommands(createLEDCommand(new Color (0, 0, 255))); // scGroup.addCommands(shoot);
         m_drivetrain.tankDriveVolts(0, 0);
 
