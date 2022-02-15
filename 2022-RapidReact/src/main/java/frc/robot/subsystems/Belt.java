@@ -39,7 +39,7 @@ public class Belt extends SubsystemBase {
 
   public Belt() {
 
-    WPI_TalonFX topMotor = new WPI_TalonFX(BeltConstants.topMotor);
+    topMotor = new WPI_TalonFX(BeltConstants.topMotor);
     middleMotor = new WPI_TalonFX(BeltConstants.middleMotor);
     bottomMotor = new WPI_TalonFX(BeltConstants.bottomMotor);
   }
@@ -50,9 +50,9 @@ public class Belt extends SubsystemBase {
   }
 
   public void setBeltSpeed(double speed) {
-    topMotor.set(speed / 3);// divide by 4
-    middleMotor.set(speed / 2);
-    bottomMotor.set(-speed);
+    // topMotor.set(speed / 3);// divide by 4
+    // middleMotor.set(speed / 2);
+    // bottomMotor.set(-speed);
   }
 
   public int getConveyorState() {
