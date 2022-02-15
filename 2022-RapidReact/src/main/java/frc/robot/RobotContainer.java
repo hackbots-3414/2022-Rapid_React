@@ -32,11 +32,10 @@ public class RobotContainer {
     public final Shooter m_shooter = new Shooter();
     public final Intake m_intake = new Intake();
     public final Drivetrain m_drivetrain = new Drivetrain();
+    public final Belt m_belt = new Belt();
 
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
-
-    public final Belt m_belt = new Belt();
 
     // A chooser for autonomous commands
     SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -57,7 +56,7 @@ public class RobotContainer {
         m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_belt.setDefaultCommand(new BeltCommand(m_belt, 1.0));
-        //m_intake.setDefaultCommand(new RunIntake(m_intake));
+        // m_intake.setDefaultCommand(new RunIntake(m_intake));
 
         // Configure autonomous sendable chooser
 

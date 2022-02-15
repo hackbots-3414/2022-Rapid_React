@@ -34,8 +34,9 @@ public class Constants {
     }
 
     public static final class BeltConstants {
-        public static final int topMotor = 50;
-        public static final int middleMotor = 51;
-        public static final int bottomMotor = 52;
+        public static final int topMotor = 22;
+        public static final int middleMotor = 21;
+        public static final int bottomMotor = 20;
+        public static final double Motorspeed = 100.0;
     }
 }
