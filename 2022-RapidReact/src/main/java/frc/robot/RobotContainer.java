@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.DefaultIntakeCommand;
+import frc.robot.commands.DriveStraight;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TeleopCommand;
+import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
@@ -22,6 +24,11 @@ import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
 
 public class RobotContainer {
+
+
+    // Declare random constants 
+
+    private static int x = 1000; 
 
     private static final Logger LOG = LoggerFactory.getLogger(RobotContainer.class);
 
@@ -32,6 +39,7 @@ public class RobotContainer {
     public final Shooter m_shooter = new Shooter();
     public final Intake m_intake = new Intake();
     public final Drivetrain m_drivetrain = new Drivetrain();
+   
 
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
@@ -48,6 +56,9 @@ public class RobotContainer {
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("ShooterCommand", new ShooterCommand(m_shooter));
         SmartDashboard.putData("Intake Command", new RunIntake(m_intake));
+        SmartDashboard.putData("Drive-Straight Command", new DriveStraight(m_drivetrain, x));
+        SmartDashboard.putData("Wait Command", new WaitCommand());
+        SmartDashboard.putData("Wait Backup Command", new WaitBackupSequential(m_drivetrain));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -57,14 +68,25 @@ public class RobotContainer {
         m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_belt.setDefaultCommand(new BeltCommand(m_belt, 1.0));
+        m_drivetrain.setDefaultCommand(new DriveStraight(m_drivetrain, x));
+        m_drivetrain.setDefaultCommand(new WaitCommand());
+        m_drivetrain.setDefaultCommand(new WaitBackupSequential(m_drivetrain));
+
+        
+
         //m_intake.setDefaultCommand(new RunIntake(m_intake));
 
         // Configure autonomous sendable chooser
 
         m_chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
+        m_chooser.addOption("Drive-Straight Command", new DriveStraight(m_drivetrain, x));
+        m_chooser.addOption("Wait Command", new WaitCommand());
+        m_chooser.addOption("Wait Backup Command", new WaitBackupSequential(m_drivetrain));
+        
+
 
         SmartDashboard.putData("Auto Mode", m_chooser);
-        SmartDashboard.putData("Wait Command", new WaitCommand());
+    
 
     }
 
