@@ -10,10 +10,9 @@ public class BeltCommand extends CommandBase {
   double output;
   private boolean isBallMoving = false;
 
-  public BeltCommand(Belt belt, double output) {
+  public BeltCommand(Belt belt) {
     addRequirements(belt);
     m_belt = belt;
-    this.output = output;
 
   }
 
@@ -23,41 +22,39 @@ public class BeltCommand extends CommandBase {
 
   @Override
   public void execute() {
-    
 
-    if(isBallMoving == false && m_belt.getIRBottom() == true) { //Check the state if we are in the process of moving a ball already 
-      if( m_belt.getIRMiddle() == false || m_belt.getIRTop() == false) { //space open; start belts
-        isBallMoving = true; //set the state to start moving a new ball
+    if (isBallMoving == false && m_belt.getIRBottom() == true) { // Check the state if we are in the process of moving a
+                                                                 // ball already
+      if (m_belt.getIRMiddle() == false || m_belt.getIRTop() == false) { // space open; start belts
+        isBallMoving = true; // set the state to start moving a new ball
       }
     }
 
-    if(isBallMoving == true) {
-      if((m_belt.getIRTop() == true) && (m_belt.getIRMiddle() == false)) { // Have ball in top position, but not in middle
-        if(m_belt.getIRMiddle() == true) {
+    if (isBallMoving == true) {
+      if ((m_belt.getIRTop() == true) && (m_belt.getIRMiddle() == false)) { // Have ball in top position, but not in
+                                                                            // middle
+        if (m_belt.getIRMiddle() == true) {
 
           isBallMoving = false; // fully loaded
           m_belt.stopAllMotors();
-          
 
-        } // Have ball in middle position       
+        } // Have ball in middle position
+      } else {
+        m_belt.startMotorBottom();
+        m_belt.startMotorMiddle();
+        if (m_belt.getIRMiddle() == true) {
+          m_belt.stopAllMotors();
+          isBallMoving = false;
         }
-        else {
-          m_belt.startMotorBottom();
-          m_belt.startMotorMiddle();
-          if(m_belt.getIRMiddle() == true) {
-            m_belt.stopAllMotors();
-            isBallMoving = false;
-          }
-        }
-
-
-      } else if (m_belt.getIRTop() == true) { // Have no balls in top or middle
-        isBallMoving = false; // top is loaded
-        m_belt.stopAllMotors();
-      } else {  //ball not in top position yet
-        m_belt.startAllMotors();
       }
-     }
+
+    } else if (m_belt.getIRTop() == true) { // Have no balls in top or middle
+      isBallMoving = false; // top is loaded
+      m_belt.stopAllMotors();
+    } else { // ball not in top position yet
+      m_belt.startAllMotors();
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -71,4 +68,23 @@ public class BeltCommand extends CommandBase {
   public boolean isFinished() {
     return false; // Default command
   }
+
+  private boolean ballMovingMidtoTop = false;
+  private boolean ballMovingBottomtoMid = false;
+
+  public void cases(int type) {
+        switch (type) {
+            case 1: //no ball
+                break;
+            case 2: //move ball from bottom to mid
+                ballMovingBottomtoMid = true;
+
+                if (m_belt.getIRMiddle() == false) {
+                m_belt.startMotorBottom();
+                m_belt.startMotorMiddle();
+                }
+
+        }
+    }
+
 }
