@@ -26,6 +26,7 @@ public class LEDFeedback extends SubsystemBase {
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
     private final ColorMatch m_colorMatcher = new ColorMatch();
     private final Color kBlackTarget = new Color(0, 0, 0);
+    private boolean climbingActivated = false;
 
     public LEDFeedback() {
 
@@ -64,4 +65,13 @@ public class LEDFeedback extends SubsystemBase {
     Color detectedColor = m_colorSensor.getColor();
     return detectedColor.equals(Color.kBlack);
     }
+
+    public boolean isClimbingActivated() {
+        return climbingActivated;
+    }
+
+    public void setClimbingActivated(boolean climbingActivated) {
+        this.climbingActivated = climbingActivated;
+    }
+    
 }

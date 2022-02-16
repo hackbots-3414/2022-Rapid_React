@@ -23,16 +23,26 @@ public class DefaultLEDCommand extends CommandBase {
         System.out.print("Running");
         m_lEDFeedback.setColor(Color.kPurple);
 
-        if (false /* check if clmbing */) {
-        m_lEDFeedback.setFlash(Color.kGreen, .5);
-        } else if (DriverStation.getMatchTime() <= 30.0){
-        if (m_lEDFeedback.isClimbLineDetected()){
-        m_lEDFeedback.setColor(Color.kGreen);
+        if (m_lEDFeedback.isClimbingActivated()) {
+            m_lEDFeedback.setFlash(Color.kGreen, .5);
+        } else if (DriverStation.getMatchTime() <= 30.0) {
+            if (m_lEDFeedback.isClimbLineDetected()) {
+                m_lEDFeedback.setColor(Color.kGreen);
+            } else if (DriverStation.getMatchTime() <= 10.0) {
+                m_lEDFeedback.setFlash(Color.kWhite, .8);
+            } else if (DriverStation.getMatchTime() <= 15.0) {
+                m_lEDFeedback.setFlash(Color.kWhite, 1.3);
+            } else if (DriverStation.getMatchTime() <= 20.0) {
+                m_lEDFeedback.setFlash(Color.kWhite, 2.0);
+            } else {
+                m_lEDFeedback.setColor(Color.kWhite);
+            }
+            
         }
-       
-    }
+        else {
+            m_lEDFeedback.setColor(Color.kPurple);
+        }
 
-        m_lEDFeedback.setColor(Color.kPurple);
     }
 
     @Override
