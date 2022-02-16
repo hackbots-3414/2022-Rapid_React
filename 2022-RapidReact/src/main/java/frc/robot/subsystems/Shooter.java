@@ -50,7 +50,7 @@ public class Shooter extends SubsystemBase {
     public void simulationPeriodic() {
     }
 
-    public void shoot() {
+    public void shootHigh() {
         // 6500 works well for high shot on 2/5/2022
         // shooter degree at 4.5 degrees on 2/5/2022
         leftMotor.set(ControlMode.Velocity, 6500);

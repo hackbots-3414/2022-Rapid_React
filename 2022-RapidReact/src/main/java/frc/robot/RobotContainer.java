@@ -15,8 +15,9 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.DefaultIntakeCommand;
 import frc.robot.commands.RunIntake;
-import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ShootHighCommand;
 import frc.robot.commands.TeleopCommand;
+import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
@@ -36,12 +37,14 @@ public class RobotContainer {
     public final Shooter m_shooter = new Shooter();
     public final Intake m_intake = new Intake();
     public final Drivetrain m_drivetrain = new Drivetrain();
+
     public final Climber m_climber = new Climber();
+
+    public final Belt m_belt = new Belt();
+
 
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
-
-    public final Belt m_belt = new Belt();
 
     // A chooser for autonomous commands
     SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -51,7 +54,7 @@ public class RobotContainer {
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("ShooterCommand", new ShooterCommand(m_shooter));
+        SmartDashboard.putData("ShooterCommand", new ShootHighCommand(m_shooter));
         SmartDashboard.putData("Intake Command", new RunIntake(m_intake));
         SmartDashboard.putData("climberUp", new ClimberUpCommand(m_climber));
         SmartDashboard.putData("climberDown", new ClimberDownCommand(m_climber));
@@ -64,14 +67,18 @@ public class RobotContainer {
         m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_belt.setDefaultCommand(new BeltCommand(m_belt, 1.0));
+
         m_climber.setDefaultCommand(new ClimberUpCommand(m_climber));
         m_climber.setDefaultCommand(new ClimberDownCommand(m_climber));
+
+
 
         // m_intake.setDefaultCommand(new RunIntake(m_intake));
 
         // Configure autonomous sendable chooser
 
-        m_chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
+        m_chooser.addOption("Autonomous Command", new AutonomousCommand());
+        m_chooser.setDefaultOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
 
         SmartDashboard.putData("Auto Mode", m_chooser);
         SmartDashboard.putData("Wait Command", new WaitCommand());
@@ -89,11 +96,13 @@ public class RobotContainer {
         final JoystickButton shootButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         intakeButton.whileHeld(new RunIntake(m_intake), true);
+
         shootButton.whileHeld(new ShooterCommand(m_shooter), true);
         final POVButton climberUpButton = new POVButton(operatorPad, Constants.ClimberConstants.climbUpAngle);
         final POVButton climberDownButton = new POVButton(operatorPad, Constants.ClimberConstants.climbDownAngle);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
+
     }
 
     public XboxController getoperatorPad() {
