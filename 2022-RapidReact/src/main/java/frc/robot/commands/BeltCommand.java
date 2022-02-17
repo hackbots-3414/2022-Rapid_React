@@ -9,12 +9,10 @@ public class BeltCommand extends CommandBase {
   boolean isRunning;
   double output;
   private boolean isBallMoving = false;
-
-  public BeltCommand(Belt belt, double output) {
+  
+  public BeltCommand(Belt belt) {
     addRequirements(belt);
     m_belt = belt;
-    this.output = output;
-
   }
 
   @Override
@@ -23,8 +21,6 @@ public class BeltCommand extends CommandBase {
 
   @Override
   public void execute() {
-    
-
     if(isBallMoving == false && m_belt.getIRBottom() == true) { //Check the state if we are in the process of moving a ball already 
       if( m_belt.getIRMiddle() == false || m_belt.getIRTop() == false) { //space open; start belts
         isBallMoving = true; //set the state to start moving a new ball
@@ -62,7 +58,7 @@ public class BeltCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_belt.stopAllMotors();
+    m_belt.stop();
     // super.end(interrupted);
   }
 

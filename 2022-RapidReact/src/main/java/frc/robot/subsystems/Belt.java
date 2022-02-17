@@ -13,20 +13,21 @@ import frc.robot.Constants.Transport;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.BeltConstants;
 
 public class Belt extends SubsystemBase {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Belt.class);
+  private static final Logger LOG = LoggerFactory.getLogger(Belt.class);
 
   private DigitalInput irBottom = new DigitalInput(0);
   private DigitalInput irMiddle = new DigitalInput(1);
   private DigitalInput irTop = new DigitalInput(2);
   private double beltSpeed = 100.0;
 
-    WPI_TalonFX topMotor = new WPI_TalonFX(BeltConstants.topMotor);
-    WPI_TalonFX middleMotor = new WPI_TalonFX(BeltConstants.middleMotor);
-    WPI_TalonFX bottomMotor = new WPI_TalonFX(BeltConstants.bottomMotor);
+  WPI_TalonFX topMotor = new WPI_TalonFX(BeltConstants.topMotor);
+  WPI_TalonFX middleMotor = new WPI_TalonFX(BeltConstants.middleMotor);
+  WPI_TalonFX bottomMotor = new WPI_TalonFX(BeltConstants.bottomMotor);
 
   public boolean getIRBottom () {
     return irBottom.get();
