@@ -29,7 +29,6 @@ public class LEDFeedback extends SubsystemBase {
     private boolean climbingActivated = false;
 
     public LEDFeedback() {
-
         ledString = new AddressableLED(8);
         ledString.setLength(LED_ARRAY_LENGTH);
         ledBuffer = new AddressableLEDBuffer(LED_ARRAY_LENGTH);

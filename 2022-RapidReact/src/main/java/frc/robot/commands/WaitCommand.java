@@ -1,8 +1,7 @@
 package frc.robot.commands;
 
-import org.slf4j.LoggerFactory;
-
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -15,7 +14,7 @@ public class WaitCommand extends CommandBase {
   public long waitTime;
   
   static {
-    SmartDashboard.putNumber("Auton Delay", 1000);
+    SmartDashboard.putNumber("Auton Delay", 5000);
   }
   public WaitCommand() {
   }
@@ -48,5 +47,4 @@ public class WaitCommand extends CommandBase {
     } else {
       return false;
     }
-  }
 }

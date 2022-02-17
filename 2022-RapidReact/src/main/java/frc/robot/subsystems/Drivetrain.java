@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
@@ -32,6 +33,14 @@ public class Drivetrain extends SubsystemBase {
         frontLeft = new WPI_TalonFX(DriveConstants.kLeftMotorFrontPort);
 
         frontRight = new WPI_TalonFX(DriveConstants.kRightMotorFrontPort);
+
+        backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        
+        backRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        
+        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        
+        frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
 
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
         addChild("DifferentialDrive", differentialDrive);

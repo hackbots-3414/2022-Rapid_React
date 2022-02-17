@@ -14,8 +14,8 @@ public class Intake extends SubsystemBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(Intake.class);
 
-    Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.Intake.solenoidChannel);
-    WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.Intake.intakeMotor);
+    Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.IntakeConstants.solenoidChannel);
+    WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.IntakeConstants.intakeMotor);
 
     public void goDown() {
         solenoid.set(true);
