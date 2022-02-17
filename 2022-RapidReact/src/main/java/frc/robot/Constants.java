@@ -18,7 +18,7 @@ public class Constants {
     public static final class Intake {
         public static final int intakeMotor = 30;
         public static final double intakeMotorSpeed = 0.35;
-        public static final int solenoidChannel = 0;
+        public static final int solenoidChannel = 9;
 
     }
 
