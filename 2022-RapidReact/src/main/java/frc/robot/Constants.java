@@ -39,7 +39,7 @@ public class Constants {
         public static final int topMotor = 22;
         public static final int middleMotor = 21;
         public static final int bottomMotor = 20;
-        public static final double Motorspeed = 100.0;
+        public static final double motorSpeed = 100.0;
     }
 
     public static final class LEDConstants {
@@ -54,9 +54,10 @@ public class Constants {
         public static final int climbDownAngle = 180;
 
         public static final int climberSolenoidChannel = 1;
+        
+        //Should be fixed later. Need instance of XboxController in Contstants to work
+        // final POVButton climberUpButton = new POVButton(operatorPad, 0); 
 
-        // Should be fixed later. Need instance of XboxController in Contstants to work
-        // final POVButton climberUpButton = new POVButton(operatorPad, 0);
         // final POVButton climberDownButton = new POVButton(operatorPad, 180);
     }
 }
