@@ -1,8 +1,6 @@
 package frc.robot;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,7 +20,6 @@ import frc.robot.subsystems.Shooter;
 public class RobotContainer {
 
     private static final Logger LOG = LoggerFactory.getLogger(RobotContainer.class);
-
     private static RobotContainer m_robotContainer = new RobotContainer();
 
     // The robot's subsystems
@@ -70,8 +67,8 @@ public class RobotContainer {
     private void configureButtonBindings() {
         // Create some buttons
         final JoystickButton shootButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
-        final JoystickButton beltButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
-        beltButton.whileHeld(new BeltCommand(m_belt), true);
+        final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
+        intakeButton.whileHeld(new BeltCommand(m_belt), true);
         shootButton.whileHeld(new ShootHighCommand(m_shooter), true);
 
         
