@@ -58,7 +58,7 @@ public class BeltCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_belt.stop();
+    m_belt.stopAllMotors();
     // super.end(interrupted);
   }
 

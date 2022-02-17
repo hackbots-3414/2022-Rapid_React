@@ -2,7 +2,6 @@ package frc.robot.commands.shoot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Belt;
-import frc.robot.subsystems.Shooter;
 
 public class BeltHold extends CommandBase {
 
@@ -19,12 +18,12 @@ public class BeltHold extends CommandBase {
 
     @Override
     public void execute() {
-        m_belt.go();
+        m_belt.startAllMotors();
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_belt.stop();
+        m_belt.stopAllMotors();
     }
 
     @Override
