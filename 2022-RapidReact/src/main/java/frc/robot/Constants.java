@@ -42,8 +42,12 @@ public class Constants {
         public static final int bottomMotor = 52;
     }
 
-    public static final class ClimberConstants{
+    public static final class ClimberConstants {
 
+        public static final int climbUpAngle = 0;
+        public static final int climbDownAngle = 180;
+
+        public static final int climberSolenoidChannel = 1;
 
         
         //Should be fixed later. Need instance of XboxController in Contstants to work
