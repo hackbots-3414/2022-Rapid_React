@@ -3,6 +3,10 @@ package frc.robot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CameraServerCvJNI;
+import edu.wpi.first.cscore.MjpegServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,6 +27,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
 
+
 public class RobotContainer {
 
 
@@ -40,6 +45,9 @@ public class RobotContainer {
     public final Intake m_intake = new Intake();
     public final Drivetrain m_drivetrain = new Drivetrain();
    
+    
+    
+   
 
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
@@ -53,12 +61,16 @@ public class RobotContainer {
         // Smartdashboard Subsystems
 
         // SmartDashboard Buttons
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+        
         SmartDashboard.putData("ShooterCommand", new ShooterCommand(m_shooter));
         SmartDashboard.putData("Intake Command", new RunIntake(m_intake));
         SmartDashboard.putData("Drive-Straight Command", new DriveStraight(m_drivetrain, x));
         SmartDashboard.putData("Wait Command", new WaitCommand());
         SmartDashboard.putData("Wait Backup Command", new WaitBackupSequential(m_drivetrain));
+        CameraServer.startAutomaticCapture();
+        
+
+
 
         // Configure the button bindings
         configureButtonBindings();
@@ -78,7 +90,7 @@ public class RobotContainer {
 
         // Configure autonomous sendable chooser
 
-        m_chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
+      
         m_chooser.addOption("Drive-Straight Command", new DriveStraight(m_drivetrain, x));
         m_chooser.addOption("Wait Command", new WaitCommand());
         m_chooser.addOption("Wait Backup Command", new WaitBackupSequential(m_drivetrain));
@@ -86,6 +98,8 @@ public class RobotContainer {
 
 
         SmartDashboard.putData("Auto Mode", m_chooser);
+
+ 
     
 
     }
@@ -100,6 +114,7 @@ public class RobotContainer {
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         intakeButton.whileHeld(new RunIntake(m_intake), true);
         shootButton.whileHeld(new ShooterCommand(m_shooter), true);
+         
 
     }
 
@@ -111,4 +126,6 @@ public class RobotContainer {
         // The selected command will be run in autonomous
         return m_chooser.getSelected();
     }
+
+    
 }
