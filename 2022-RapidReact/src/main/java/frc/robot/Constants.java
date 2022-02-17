@@ -38,4 +38,10 @@ public class Constants {
         public static final int middleMotor = 51;
         public static final int bottomMotor = 52;
     }
+
+    public static final class LED_Constants {
+        public static final double defaultFlash = 1.0;
+        public static final double defaultFastFlash = 0.5;
+        public static final double defaultSlowFlash = 2;
+    }
 }
