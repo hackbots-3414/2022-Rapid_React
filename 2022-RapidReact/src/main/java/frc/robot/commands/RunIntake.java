@@ -20,7 +20,7 @@ public class RunIntake extends CommandBase {
     @Override
     public void execute() {
         intake.goDown();
-        intake.setSpeed(Constants.Intake.intakeMotorSpeed);
+        intake.setSpeed(Constants.IntakeConstants.intakeMotorSpeed);
     }
 
     @Override

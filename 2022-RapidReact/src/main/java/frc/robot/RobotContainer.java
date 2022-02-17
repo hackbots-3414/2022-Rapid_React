@@ -12,9 +12,9 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.DefaultIntakeCommand;
 import frc.robot.commands.RunIntake;
-import frc.robot.commands.ShootHighSpinUp;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitCommand;
+import frc.robot.commands.shoot.shootHigh.ShootHigh;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
@@ -46,7 +46,7 @@ public class RobotContainer {
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("ShooterCommand", new ShootHighSpinUp(m_shooter));
+        SmartDashboard.putData("ShooterCommand", new ShootHigh(m_shooter, m_belt));
         SmartDashboard.putData("Intake Command", new RunIntake(m_intake));
 
         // Configure the button bindings
@@ -56,7 +56,7 @@ public class RobotContainer {
 
         m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
-        m_belt.setDefaultCommand(new BeltCommand(m_belt, 1.0));
+        m_belt.setDefaultCommand(new BeltCommand(m_belt));
         //m_intake.setDefaultCommand(new RunIntake(m_intake));
 
         // Configure autonomous sendable chooser
@@ -77,7 +77,7 @@ public class RobotContainer {
         final JoystickButton shootButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         intakeButton.whileHeld(new RunIntake(m_intake), true);
-        shootButton.whileHeld(new ShootHighSpinUp(m_shooter), true);
+        shootButton.whileHeld(new ShootHigh(m_shooter, m_belt), true);
 
     }
 

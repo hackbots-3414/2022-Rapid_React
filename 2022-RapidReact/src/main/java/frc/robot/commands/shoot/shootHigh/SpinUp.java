@@ -1,13 +1,13 @@
-package frc.robot.commands;
+package frc.robot.commands.shoot.shootHigh;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class ShootHighSpinUp extends CommandBase {
+public class SpinUp extends CommandBase {
 
     private final Shooter m_shooter;
 
-    public ShootHighSpinUp(Shooter subsystem) {
+    public SpinUp(Shooter subsystem) {
         m_shooter = subsystem;
         addRequirements(m_shooter);
     }
@@ -23,7 +23,7 @@ public class ShootHighSpinUp extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        m_shooter.stop();
+        if (interrupted) m_shooter.stop();
     }
 
     @Override

@@ -24,17 +24,17 @@ public class Shooter extends SubsystemBase {
 
     public Shooter() {
 
-        rightMotor = new WPI_TalonFX(Constants.Shooter.shooterMotor1);
-        leftMotor = new WPI_TalonFX(Constants.Shooter.shooterMotor2);
+        rightMotor = new WPI_TalonFX(Constants.ShooterConstants.shooterMotor1);
+        leftMotor = new WPI_TalonFX(Constants.ShooterConstants.shooterMotor2);
 
         leftMotor.setInverted(TalonFXInvertType.Clockwise);
         rightMotor.setInverted(TalonFXInvertType.CounterClockwise);
 
-        PIDConfig.integralZone = Constants.Shooter.integralZone;
-        PIDConfig.kD = Constants.Shooter.kD;
-        PIDConfig.kF = Constants.Shooter.kF;
-        PIDConfig.kI = Constants.Shooter.kI;
-        PIDConfig.kP = Constants.Shooter.kP;
+        PIDConfig.integralZone = Constants.ShooterConstants.integralZone;
+        PIDConfig.kD = Constants.ShooterConstants.kD;
+        PIDConfig.kF = Constants.ShooterConstants.kF;
+        PIDConfig.kI = Constants.ShooterConstants.kI;
+        PIDConfig.kP = Constants.ShooterConstants.kP;
         motorConfig.slot0 = PIDConfig;
 
         leftMotor.configAllSettings(motorConfig);
@@ -51,19 +51,19 @@ public class Shooter extends SubsystemBase {
     }
 
     public void shootHigh() {
-        leftMotor.set(ControlMode.Velocity, Constants.Shooter.highShootVelocity);
+        leftMotor.set(ControlMode.Velocity, Constants.ShooterConstants.highShootVelocity);
     }
 
     public void shootLow() {
-        leftMotor.set(ControlMode.Velocity, Constants.Shooter.lowShootVelocity);
+        leftMotor.set(ControlMode.Velocity, Constants.ShooterConstants.lowShootVelocity);
     }
 
     public boolean highAtSpeed() {
-        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.Shooter.highShootVelocity) <= 50);
+        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.highShootVelocity) <= 50);
     }
 
     public boolean lowAtSpeed() {
-        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.Shooter.lowShootVelocity) <= 50);
+        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.lowShootVelocity) <= 50);
     }
 
     public void stop() {

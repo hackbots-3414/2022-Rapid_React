@@ -1,13 +1,13 @@
-package frc.robot.commands;
+package frc.robot.commands.shoot.shootLow;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class ShootLowSpinUp extends CommandBase {
+public class Hold extends CommandBase {
 
     private final Shooter m_shooter;
 
-    public ShootLowSpinUp(Shooter subsystem) {
+    public Hold(Shooter subsystem) {
         m_shooter = subsystem;
         addRequirements(m_shooter);
     }
@@ -28,6 +28,6 @@ public class ShootLowSpinUp extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return m_shooter.lowAtSpeed();
+        return false;
     }
 }

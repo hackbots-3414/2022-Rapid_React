@@ -8,12 +8,10 @@ public class BeltCommand extends CommandBase {
     final Belt m_belt;
 
     boolean isRunning;
-    double output;
 
-    public BeltCommand(Belt belt, double output) {
+    public BeltCommand(Belt belt) {
         addRequirements(belt);
         m_belt = belt;
-        this.output = output;
     }
 
     @Override
@@ -23,13 +21,13 @@ public class BeltCommand extends CommandBase {
     @Override
     public void execute() {
         isRunning = true;
-        m_belt.setBeltSpeed(output);
+        m_belt.go();
     }
 
     @Override
     public void end(boolean interrupted) {
         isRunning = false;
-        m_belt.setBeltSpeed(0.0);
+        m_belt.stop();
         m_belt.setConveyorSensorfront(false);
         m_belt.setConveyorSensorback(false);
         super.end(interrupted);

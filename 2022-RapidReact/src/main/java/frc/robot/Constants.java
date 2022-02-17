@@ -9,20 +9,20 @@ public class Constants {
         public static final int kRightMotorRearPort = 14;
     }
 
-    public static final class Transport {
+    public static final class TransportConstants {
         public static final int transportMotor1 = 20;
         public static final int transportMotor2 = 21;
         public static final int transportMotor3 = 22;
     }
 
-    public static final class Intake {
+    public static final class IntakeConstants {
         public static final int intakeMotor = 30;
         public static final double intakeMotorSpeed = 0.35;
         public static final int solenoidChannel = 0;
 
     }
 
-    public static final class Shooter {
+    public static final class ShooterConstants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
 
@@ -40,5 +40,6 @@ public class Constants {
         public static final int topMotor = 50;
         public static final int middleMotor = 51;
         public static final int bottomMotor = 52;
+        public static final double motorSpeed = 100.0;
     }
 }

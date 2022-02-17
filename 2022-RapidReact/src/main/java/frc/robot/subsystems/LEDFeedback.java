@@ -24,7 +24,6 @@ public class LEDFeedback extends SubsystemBase {
     // private final Color kBlackTarget = new Color(0, 0, 0);
 
     public LEDFeedback() {
-
         ledString = new AddressableLED(8);
         ledString.setLength(LED_ARRAY_LENGTH);
         ledBuffer = new AddressableLEDBuffer(LED_ARRAY_LENGTH);

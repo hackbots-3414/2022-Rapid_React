@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.BeltConstants;
 
 public class Belt extends SubsystemBase {
@@ -33,10 +34,22 @@ public class Belt extends SubsystemBase {
     public void periodic() {
     }
 
-    public void setBeltSpeed(double speed) {
-        topMotor.set(speed / 3); // divide by 4
-        middleMotor.set(speed / 2);
-        bottomMotor.set(-speed);
+    public void go() {
+        topMotor.set(Constants.BeltConstants.motorSpeed / 3);
+        middleMotor.set(Constants.BeltConstants.motorSpeed / 2);
+        bottomMotor.set(-Constants.BeltConstants.motorSpeed);
+        setConveyorSensorback(false);
+        setConveyorSensorfront(false);
+    }
+
+    public void stop() {
+        topMotor.set(0);
+        middleMotor.set(0);
+        bottomMotor.set(0);
+    }
+
+    public boolean atSpeed() {
+        return (Math.abs(((topMotor.getSelectedSensorVelocity() + middleMotor.getSelectedSensorVelocity() + bottomMotor.getSelectedSensorVelocity()) / 3) - Constants.BeltConstants.motorSpeed) <= 5);
     }
 
     public int getConveyorState() {
