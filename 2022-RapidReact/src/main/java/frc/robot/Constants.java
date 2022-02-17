@@ -26,10 +26,8 @@ public class Constants {
     public static final class ShooterConstants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
-
         public static final double highShootVelocity = 6500;
         public static final double lowShootVelocity = 5000;
-
         public static final double integralZone = 201;
         public static final double kD = 8;
         public static final double kF = 0.045;
@@ -44,6 +42,12 @@ public class Constants {
         public static final double motorSpeed = 100.0;
     }
 
+    public static final class LEDConstants {
+        public static final double defaultFlash = 1.0;
+        public static final double defaultFastFlash = 0.5;
+        public static final double defaultSlowFlash = 2;
+    }
+
     public static final class ClimberConstants {
 
         public static final int climbUpAngle = 0;
@@ -53,6 +57,7 @@ public class Constants {
         
         //Should be fixed later. Need instance of XboxController in Contstants to work
         // final POVButton climberUpButton = new POVButton(operatorPad, 0); 
+
         // final POVButton climberDownButton = new POVButton(operatorPad, 180);
     }
 }
