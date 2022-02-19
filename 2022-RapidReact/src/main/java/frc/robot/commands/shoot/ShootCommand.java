@@ -4,13 +4,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Shooter;
 
-public class BeltHold extends CommandBase {
+public class ShootCommand extends CommandBase {
 
     private final Belt m_belt;
     private final Shooter m_shooter;
     private final boolean isHigh;
 
-    public BeltHold(Belt subsystem, Shooter shooter, boolean isHigh) {
+    private long topIRTimer;
+
+    public ShootCommand(Belt subsystem, Shooter shooter, boolean isHigh) {
         m_belt = subsystem;
         m_shooter = shooter;
         this.isHigh = isHigh;
@@ -20,10 +22,14 @@ public class BeltHold extends CommandBase {
 
     @Override
     public void initialize() {
+        topIRTimer = System.currentTimeMillis();
     }
 
     @Override
     public void execute() {
+        if(m_belt.getIRTop()) {
+            topIRTimer = System.currentTimeMillis();
+        }
         if (isHigh) {
             m_shooter.shootHigh();
            if ( m_shooter.highAtSpeed()){
@@ -55,6 +61,6 @@ public class BeltHold extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return (System.currentTimeMillis() - topIRTimer > 2000);
     }
 }

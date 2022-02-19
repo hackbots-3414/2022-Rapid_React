@@ -16,7 +16,7 @@ import frc.robot.commands.Eject;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
-import frc.robot.commands.shoot.BeltHold;
+import frc.robot.commands.shoot.ShootCommand;
 import frc.robot.commands.shoot.shootHigh.ShootHigh;
 import frc.robot.commands.shoot.shootLow.ShootLow;
 import frc.robot.subsystems.Belt;
@@ -88,9 +88,8 @@ public class RobotContainer {
         final JoystickButton ejectButton = new JoystickButton(operatorPad, XboxController.Button.kX.value);
         ejectButton.whileHeld(new Eject(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
-        shootHighButton.whileHeld(new ShootHigh(m_shooter, m_belt), true);
-        // shootLowButton.whileHeld(new ShootLow(m_shooter, m_belt), true);
-        shootLowButton.whileHeld(new BeltHold(m_belt, m_shooter, false), true);
+        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true), true);
+        shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
     }

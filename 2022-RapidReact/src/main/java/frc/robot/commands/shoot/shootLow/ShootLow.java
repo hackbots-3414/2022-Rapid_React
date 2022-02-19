@@ -1,6 +1,6 @@
 package frc.robot.commands.shoot.shootLow;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.shoot.BeltHold;
+import frc.robot.commands.shoot.ShootCommand;
 import frc.robot.commands.shoot.BeltThread;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Shooter;
