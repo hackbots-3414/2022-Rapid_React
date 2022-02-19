@@ -12,11 +12,14 @@ public class DriveStraight extends CommandBase {
 
     private double speed;
     private double distance;
+    private final double requestedDistance;
 
     private final Drivetrain m_drivetrain;
 
     public DriveStraight(Drivetrain subsystem, double distance) {
         this.distance = distance;
+        this.requestedDistance = distance;
+        LOG.info("distance: {}", distance);
 
         m_drivetrain = subsystem;
         addRequirements(m_drivetrain);
@@ -25,10 +28,13 @@ public class DriveStraight extends CommandBase {
     @Override
     public void initialize() {
         LOG.info("driveStraigt initialized");
+        this.distance = requestedDistance;
         this.speed = 0;
         m_drivetrain.arcadeDrive(0, 0);
         m_drivetrain.resetEncoders();
+
         LOG.info("distance, inches: {}", this.distance);
+
         this.speed = Math.copySign(0.3, this.distance);
         LOG.info("speed: {}", this.speed);
         this.distance = Math.abs(this.distance / 0.001198047515388888); // converts from inches to motor ticks (wheel diameter 6.432 inches)
@@ -39,6 +45,10 @@ public class DriveStraight extends CommandBase {
     public void execute() {
         LOG.trace("driveStraigt executed");
         m_drivetrain.arcadeDrive(speed, 0);
+        LOG.info("Average Encoder: {}\nLeft Encoder: {}\nRight Encoder: {}", m_drivetrain.getAverageEncoderPosition(), m_drivetrain.getLeftEncoderPosition(), m_drivetrain.getRightEncoderPosition());
+        if (m_drivetrain.getAverageEncoderPosition() > this.distance){
+            isFinished();
+        }
         LOG.trace("driveStraigt executed 2");
     }
 

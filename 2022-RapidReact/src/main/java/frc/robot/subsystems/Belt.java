@@ -7,53 +7,74 @@ import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.BeltConstants;
 
 public class Belt extends SubsystemBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(Belt.class);
 
-    private WPI_TalonFX topMotor;
-    private WPI_TalonFX middleMotor;
-    private WPI_TalonFX bottomMotor;
+    private DigitalInput irBottom = new DigitalInput(0);
+    private DigitalInput irMiddle = new DigitalInput(1);
+    private DigitalInput irTop = new DigitalInput(2);
 
-    public DigitalInput irsfront = new DigitalInput(1);
-    public DigitalInput irsback = new DigitalInput(0);
+    WPI_TalonFX topMotor = new WPI_TalonFX(BeltConstants.topMotor);
+    WPI_TalonFX middleMotor = new WPI_TalonFX(BeltConstants.middleMotor);
+    WPI_TalonFX bottomMotor = new WPI_TalonFX(BeltConstants.bottomMotor);
 
-    private boolean conveyorSensorFront = false;
-    private boolean conveyorSensorBack = false;
+    public boolean getIRBottom() {
+        return irBottom.get();
+    }
 
-    public Belt() {
+    public boolean getIRMiddle() {
+        return irMiddle.get();
+    }
 
-        topMotor = new WPI_TalonFX(BeltConstants.topMotor);
-        middleMotor = new WPI_TalonFX(BeltConstants.middleMotor);
-        bottomMotor = new WPI_TalonFX(BeltConstants.bottomMotor);
+    public boolean getIRTop() {
+        return irTop.get();
+    }
+
+    public void startMotorTop() {
+        topMotor.set(Constants.BeltConstants.motorSpeed);
+    }
+
+    public void stopMotorTop() {
+        topMotor.set(0.0);
+    }
+
+    public void startMotorMiddle() {
+        middleMotor.set(Constants.BeltConstants.motorSpeed);
+    }
+
+    public void stopMotorMiddle() {
+        middleMotor.set(0.0);
+    }
+
+    public void startMotorBottom() {
+        bottomMotor.set(Constants.BeltConstants.motorSpeed);
+    }
+
+    public void stopMotorBottom() {
+        bottomMotor.set(0.0);
+    }
+
+    public void stopAllMotors() {
+        bottomMotor.set(0.0);
+        middleMotor.set(0.0);
+        topMotor.set(0.0);
+    }
+
+    public void startAllMotors() {
+        bottomMotor.set(Constants.BeltConstants.motorSpeed);
+        middleMotor.set(Constants.BeltConstants.motorSpeed);
+        topMotor.set(Constants.BeltConstants.motorSpeed);
     }
 
     @Override
     public void periodic() {
     }
 
-    public void setBeltSpeed(double speed) {
-        topMotor.set(speed / 3); // divide by 4
-        middleMotor.set(speed / 2);
-        bottomMotor.set(-speed);
-    }
-
-    public int getConveyorState() {
-        if (conveyorSensorFront == false && conveyorSensorBack == false) {
-            return 0;
-        } else if (conveyorSensorBack == true && conveyorSensorFront == false) {
-            return 1;
-        }
-        return 2;
-    }
-
-    public void setConveyorSensorfront(boolean conveyorSensorFront) {
-        this.conveyorSensorFront = conveyorSensorFront;
-    }
-
-    public void setConveyorSensorback(boolean conveyorSensorBack) {
-        this.conveyorSensorBack = conveyorSensorBack;
+    public boolean atSpeed() {
+        return (Math.abs(((bottomMotor.getSelectedSensorVelocity() + middleMotor.getSelectedSensorVelocity() + topMotor.getSelectedSensorVelocity()) / 3) - Constants.BeltConstants.motorSpeed) <= 50);
     }
 }

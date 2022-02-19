@@ -16,15 +16,14 @@ Hackbots code for the 2022 FRC Rapid React game.
 Unzip the CANSparkMax_for_RobotBuilder_2022_v...zip file in C:\Users\Public.  The folder structure required is built-in.
 
 ## LED patterns
-|Event | Color pattern |
-|Idle/Default | Solid Purple |
-|Red alliance ball | Solid red |
-|Red alliance balls | Flash red |
-|Blue alliance ball | Solid blue  |
-|Blue alliance balls | Flash blue |
+|Event|Color pattern|
+|----|----|
+|Idle/Default|Solid Purple|
 |30 seconds remaining | Solid White |
 |20 seconds remaining | Slow Flash White |
 |15 seconds remaining | Flash White |
 |10 seconds remaining | Fast Flash White |
 |Found climb line | Solid green |
 |Robot is Climbing | Flash green |
+| One ball | Solid Orange |
+| Two ball | Flash Orange |
