@@ -3,15 +3,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import frc.robot.Constants.LEDConstants;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.LEDConstants;
+
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.LEDFeedback;
 
 public class DefaultLEDCommand extends CommandBase {
 
     private final LEDFeedback m_lEDFeedback;
+    private final Belt m_belt = RobotContainer.getInstance().m_belt;
 
     public DefaultLEDCommand(LEDFeedback subsystem) {
         m_lEDFeedback = subsystem;
@@ -24,14 +26,15 @@ public class DefaultLEDCommand extends CommandBase {
 
     @Override
     public void execute() {
-        // System.out.print("Running");
-        // m_lEDFeedback.setColor(Color.kPurple);
-        Belt beltSubsystem = RobotContainer.getInstance().m_belt;
-       
-         if (DriverStation.getMatchTime() <= 30.0) {
-            if (m_lEDFeedback.isClimbingActivated()) {
-                m_lEDFeedback.setFlash(Color.kGreen, LEDConstants.defaultFlash);
-            } else if (m_lEDFeedback.isClimbLineDetected()) {
+
+        System.out.print("Running");
+        m_lEDFeedback.setColor(Color.kPurple);
+
+        if (m_lEDFeedback.isClimbingActivated()) {
+            m_lEDFeedback.setFlash(Color.kGreen, LEDConstants.defaultFlash);
+        } else if (DriverStation.getMatchTime() <= 30.0) {
+            if (m_lEDFeedback.isClimbLineDetected()) {
+
                 m_lEDFeedback.setColor(Color.kGreen);
             } else if (DriverStation.getMatchTime() <= 10.0) {
                 m_lEDFeedback.setFlash(Color.kWhite, LEDConstants.defaultFastFlash);
@@ -43,9 +46,13 @@ public class DefaultLEDCommand extends CommandBase {
                 m_lEDFeedback.setColor(Color.kWhite);
             }
 
-        } else if (beltSubsystem.getIRTop() && beltSubsystem.getIRMiddle()) {
+            
+        }
+        else if (m_belt.getIRTop() && m_belt.getIRBottom() ){
             m_lEDFeedback.setFlash(Color.kOrange, LEDConstants.defaultFlash);
-        } else if (beltSubsystem.getIRTop() && !beltSubsystem.getIRMiddle()) {
+        }
+       else if (m_belt.getIRTop() && !m_belt.getIRBottom()){
+
             m_lEDFeedback.setColor(Color.kOrange);
         } else {
             m_lEDFeedback.setColor(Color.kPurple);

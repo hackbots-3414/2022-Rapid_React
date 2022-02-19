@@ -28,6 +28,9 @@ public class BeltSpinUp extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return m_belt.atSpeed();
+        //return m_belt.atSpeed();
+        //FIXME
+        Thread.currentThread().dumpStack();
+        return true;
     }
 }
