@@ -1,7 +1,8 @@
 package frc.robot;
 
-public class Constants {
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
+public class Constants {
     public static final class DriveConstants {
         public static final int kLeftMotorFrontPort = 10;
         public static final int kLeftMotorRearPort = 11;
@@ -9,9 +10,17 @@ public class Constants {
         public static final int kRightMotorRearPort = 14;
     }
 
-    public static final class Shooter {
+    public static final class TransportConstants {
+        public static final int transportMotor1 = 20;
+        public static final int transportMotor2 = 21;
+        public static final int transportMotor3 = 22;
+    }
+
+    public static final class ShooterConstants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
+        public static final double highShootVelocity = 6500;
+        public static final double lowShootVelocity = 5000;
         public static final double integralZone = 201;
         public static final double kD = 8;
         public static final double kF = 0.045;
@@ -24,7 +33,19 @@ public class Constants {
         public static final int middleMotor = 21;
         public static final int bottomMotor = 20;
         public static final int intakeMotor = 30;
-        public static final int solenoidChannel = 9;
-        public static final double Motorspeed = 0.1;
+        public static final int solenoidChannel = 0;
+        public static final double motorSpeed = 100.0;
+    }
+
+    public static final class LEDConstants {
+        public static final double defaultFlash = 1.0;
+        public static final double defaultFastFlash = 0.5;
+        public static final double defaultSlowFlash = 2;
+    }
+
+    public static final class ClimberConstants {
+        public static final int climbUpAngle = 0;
+        public static final int climbDownAngle = 180;
+        public static final int climberSolenoidChannel = 1;
     }
 }

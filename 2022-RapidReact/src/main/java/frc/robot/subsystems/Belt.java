@@ -5,11 +5,9 @@ import org.slf4j.LoggerFactory;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI.Port;
 import frc.robot.Constants;
-import frc.robot.Constants.BeltConstants;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.BeltConstants;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 public class Belt extends SubsystemBase {
@@ -18,51 +16,78 @@ public class Belt extends SubsystemBase {
 
   DigitalInput irBottom = new DigitalInput(0);
   DigitalInput irTop = new DigitalInput(1);
-  WPI_TalonFX topMotor = new WPI_TalonFX(BeltConstants.topMotor);
-  WPI_TalonFX middleMotor = new WPI_TalonFX(BeltConstants.middleMotor);
-  WPI_TalonFX bottomMotor = new WPI_TalonFX(BeltConstants.bottomMotor);
+  WPI_TalonFX topMotor = new WPI_TalonFX(Constants.BeltConstants.topMotor);
+  WPI_TalonFX middleMotor = new WPI_TalonFX(Constants.BeltConstants.middleMotor);
+  WPI_TalonFX bottomMotor = new WPI_TalonFX(Constants.BeltConstants.bottomMotor);
   WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.BeltConstants.intakeMotor);
   Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.BeltConstants.solenoidChannel);
 
 
-  public void goDown() {solenoid.set(true);}
+    public boolean getIRBottom() {
+        return irBottom.get();
+    }
 
-  public void goUp() {solenoid.set(false);}
+    public boolean getIRTop() {
+        return irTop.get();
+    }
 
-  public boolean getIRBottom () {return !irBottom.get();}
+    public void startMotorTop() {
+        topMotor.set(Constants.BeltConstants.motorSpeed);
+    }
 
-  public boolean getIRTop () {return !irTop.get();}
+    public void stopMotorTop() {
+        topMotor.set(0.0);
+    }
 
-  public void startIntakeMotor () {intakeMotor.set(Constants.BeltConstants.Motorspeed);}
+    public void startMotorMiddle() {
+        middleMotor.set(Constants.BeltConstants.motorSpeed);
+    }
 
-  public void stopIntakeMotor () {intakeMotor.set(0.0);}
+    public void stopMotorMiddle() {
+        middleMotor.set(0.0);
+    }
 
-  public void startMotorTop () {topMotor.set(Constants.BeltConstants.Motorspeed);}
+    public void startMotorBottom() {
+        bottomMotor.set(Constants.BeltConstants.motorSpeed);
+    }
 
-  public void stopMotorTop () {topMotor.set(0.0);}
+    public void stopMotorBottom() {
+        bottomMotor.set(0.0);
+    }
 
-  public void startMotorMiddle () {middleMotor.set(Constants.BeltConstants.Motorspeed);}
+    public void stopAllMotors() {
+        bottomMotor.set(0.0);
+        middleMotor.set(0.0);
+        topMotor.set(0.0);
+        intakeMotor.set(0.0);
+    }
 
-  public void stopMotorMiddle () {middleMotor.set(0.0);}
-  
-  public void startMotorBottom () {bottomMotor.set(Constants.BeltConstants.Motorspeed);}
+    public void goUp() {
+        solenoid.set(true);
+    }
 
-  public void stopMotorBottom () {bottomMotor.set(0.0);}
+    public void goDown() {
+        solenoid.set(false);
+    }
 
-  public void stopAllMotors () {
-    bottomMotor.set(0.0);
-    middleMotor.set(0.0);
-    topMotor.set(0.0);
-    intakeMotor.set(0.0);
-  }
+    public void eject() {
+        topMotor.set(-Constants.BeltConstants.motorSpeed);
+        middleMotor.set(-Constants.BeltConstants.motorSpeed);
+        topMotor.set(-Constants.BeltConstants.motorSpeed);
+    }
 
-  public void startAllMotors () {
-    bottomMotor.set(Constants.BeltConstants.Motorspeed);
-    middleMotor.set(Constants.BeltConstants.Motorspeed);
-    topMotor.set(Constants.BeltConstants.Motorspeed);
-    intakeMotor.set(Constants.BeltConstants.Motorspeed);
-  }
+    public void startAllMotors() {
+        bottomMotor.set(Constants.BeltConstants.motorSpeed);
+        middleMotor.set(Constants.BeltConstants.motorSpeed);
+        topMotor.set(Constants.BeltConstants.motorSpeed);
+        intakeMotor.set(Constants.BeltConstants.motorSpeed);
+    }
 
-  @Override
-  public void periodic() {}
+    @Override
+    public void periodic() {
+    }
+
+    public boolean atSpeed() {
+        return (Math.abs(((bottomMotor.getSelectedSensorVelocity() + middleMotor.getSelectedSensorVelocity() + topMotor.getSelectedSensorVelocity()) / 3) - Constants.BeltConstants.motorSpeed) <= 50);
+    }
 }
