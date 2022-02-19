@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.LEDConstants;
+
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.LEDFeedback;
 
@@ -24,6 +26,7 @@ public class DefaultLEDCommand extends CommandBase {
 
     @Override
     public void execute() {
+
         System.out.print("Running");
         m_lEDFeedback.setColor(Color.kPurple);
 
@@ -31,6 +34,7 @@ public class DefaultLEDCommand extends CommandBase {
             m_lEDFeedback.setFlash(Color.kGreen, LEDConstants.defaultFlash);
         } else if (DriverStation.getMatchTime() <= 30.0) {
             if (m_lEDFeedback.isClimbLineDetected()) {
+
                 m_lEDFeedback.setColor(Color.kGreen);
             } else if (DriverStation.getMatchTime() <= 10.0) {
                 m_lEDFeedback.setFlash(Color.kWhite, LEDConstants.defaultFastFlash);
@@ -41,16 +45,16 @@ public class DefaultLEDCommand extends CommandBase {
             } else {
                 m_lEDFeedback.setColor(Color.kWhite);
             }
+
             
         }
         else if (m_belt.getIRTop() && m_belt.getIRBottom() ){
             m_lEDFeedback.setFlash(Color.kOrange, LEDConstants.defaultFlash);
         }
        else if (m_belt.getIRTop() && !m_belt.getIRBottom()){
+
             m_lEDFeedback.setColor(Color.kOrange);
-          
-        }
-        else {
+        } else {
             m_lEDFeedback.setColor(Color.kPurple);
         }
     }
