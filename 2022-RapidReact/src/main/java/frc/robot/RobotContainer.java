@@ -12,9 +12,11 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
+import frc.robot.commands.Eject;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
+import frc.robot.commands.shoot.BeltHold;
 import frc.robot.commands.shoot.shootHigh.ShootHigh;
 import frc.robot.commands.shoot.shootLow.ShootLow;
 import frc.robot.subsystems.Belt;
@@ -83,9 +85,12 @@ public class RobotContainer {
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         final POVButton climberUpButton = new POVButton(operatorPad, Constants.ClimberConstants.climbUpAngle);
         final POVButton climberDownButton = new POVButton(operatorPad, Constants.ClimberConstants.climbDownAngle);
+        final JoystickButton ejectButton = new JoystickButton(operatorPad, XboxController.Button.kX.value);
+        ejectButton.whileHeld(new Eject(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
         shootHighButton.whileHeld(new ShootHigh(m_shooter, m_belt), true);
-        shootLowButton.whileHeld(new ShootLow(m_shooter, m_belt), true);
+        // shootLowButton.whileHeld(new ShootLow(m_shooter, m_belt), true);
+        shootLowButton.whileHeld(new BeltHold(m_belt, m_shooter, false), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
     }

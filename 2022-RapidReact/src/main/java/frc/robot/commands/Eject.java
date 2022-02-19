@@ -20,7 +20,9 @@ public class Eject extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_belt.stopAllMotors();
+  }
 
   @Override
   public boolean isFinished() {

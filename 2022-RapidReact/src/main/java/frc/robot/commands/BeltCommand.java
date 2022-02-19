@@ -27,6 +27,7 @@ public class BeltCommand extends CommandBase {
             m_belt.stopMotorTop();
             m_belt.startMotorBottom();
             m_belt.startMotorMiddle();
+            m_belt.startIntakeMotor();
             m_belt.goDown();
         }
         //ball not in top but in bottom

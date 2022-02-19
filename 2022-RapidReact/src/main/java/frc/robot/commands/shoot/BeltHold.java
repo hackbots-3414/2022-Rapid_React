@@ -2,14 +2,20 @@ package frc.robot.commands.shoot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Belt;
+import frc.robot.subsystems.Shooter;
 
 public class BeltHold extends CommandBase {
 
     private final Belt m_belt;
+    private final Shooter m_shooter;
+    private final boolean isHigh;
 
-    public BeltHold(Belt subsystem) {
+    public BeltHold(Belt subsystem, Shooter shooter, boolean isHigh) {
         m_belt = subsystem;
+        m_shooter = shooter;
+        this.isHigh = isHigh;
         addRequirements(m_belt);
+        addRequirements(m_shooter);
     }
 
     @Override
@@ -18,12 +24,33 @@ public class BeltHold extends CommandBase {
 
     @Override
     public void execute() {
-        m_belt.startAllMotors();
+        if (isHigh) {
+            m_shooter.shootHigh();
+           if ( m_shooter.highAtSpeed()){
+            
+            m_belt.startMotorTop();
+            m_belt.startMotorMiddle();
+            m_belt.startMotorBottom();
+            } else {
+                m_belt.stopAllMotors();
+            }
+        } else {
+            m_shooter.shootLow();
+            if(m_shooter.lowAtSpeed()) {
+                
+            m_belt.startMotorTop();
+            m_belt.startMotorMiddle();
+            m_belt.startMotorBottom();
+            } else {
+                m_belt.stopAllMotors();
+            }
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
         m_belt.stopAllMotors();
+        m_shooter.stop();
     }
 
     @Override

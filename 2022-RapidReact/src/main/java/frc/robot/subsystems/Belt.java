@@ -1,4 +1,6 @@
 package frc.robot.subsystems;
+import java.lang.invoke.ConstantBootstraps;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +26,15 @@ public class Belt extends SubsystemBase {
 
 
     public boolean getIRBottom() {
-        return irBottom.get();
+        return !irBottom.get();
     }
 
     public boolean getIRTop() {
-        return irTop.get();
+        return !irTop.get();
     }
 
     public void startMotorTop() {
-        topMotor.set(Constants.BeltConstants.motorSpeed);
+        topMotor.set(Constants.BeltConstants.topMotorSpeed);
     }
 
     public void stopMotorTop() {
@@ -63,24 +65,32 @@ public class Belt extends SubsystemBase {
     }
 
     public void goUp() {
-        solenoid.set(true);
-    }
-
-    public void goDown() {
         solenoid.set(false);
     }
 
+    public void goDown() {
+        solenoid.set(true);
+    }
+
+    public void startIntakeMotor() {
+        intakeMotor.set(-Constants.BeltConstants.intakeSpeed);
+    }
+
+    public void stopIntakeMotor() {
+        intakeMotor.set(0.0);
+    }
+
     public void eject() {
-        topMotor.set(-Constants.BeltConstants.motorSpeed);
-        middleMotor.set(-Constants.BeltConstants.motorSpeed);
-        topMotor.set(-Constants.BeltConstants.motorSpeed);
+        topMotor.set(2*(-Constants.BeltConstants.motorSpeed));
+        middleMotor.set(2*(-Constants.BeltConstants.motorSpeed));
+        bottomMotor.set(2*(-Constants.BeltConstants.motorSpeed));
     }
 
     public void startAllMotors() {
         bottomMotor.set(Constants.BeltConstants.motorSpeed);
         middleMotor.set(Constants.BeltConstants.motorSpeed);
-        topMotor.set(Constants.BeltConstants.motorSpeed);
-        intakeMotor.set(Constants.BeltConstants.motorSpeed);
+        topMotor.set(Constants.BeltConstants.topMotorSpeed);
+        intakeMotor.set(-Constants.BeltConstants.motorSpeed);
     }
 
     @Override
