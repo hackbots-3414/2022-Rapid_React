@@ -27,13 +27,11 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
 
-
 public class RobotContainer {
 
+    // Declare random constants
 
-    // Declare random constants 
-
-    private static int x = 1000; 
+    private static int x = 1000;
 
     private static final Logger LOG = LoggerFactory.getLogger(RobotContainer.class);
 
@@ -44,10 +42,6 @@ public class RobotContainer {
     public final Shooter m_shooter = new Shooter();
     public final Intake m_intake = new Intake();
     public final Drivetrain m_drivetrain = new Drivetrain();
-   
-    
-    
-   
 
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
@@ -58,49 +52,66 @@ public class RobotContainer {
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     private RobotContainer() {
+
+        LOG.info("Started the Shuffleboard, hope this works!");
         // Smartdashboard Subsystems
 
         // SmartDashboard Buttons
+        putData();
+
+        // Configure the button bindings
+        configureButtonBindings();
+
+        // Configure default commands
+        setCommands();
+
+      
+
+        // m_intake.setDefaultCommand(new RunIntake(m_intake));
+
+        // Configure autonomous sendable chooser
+        editUI();
+
+    }
+
+
+
+    private void setCommands() {
+
+         // Sets default commands
+
+         m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
+         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
+         m_belt.setDefaultCommand(new BeltCommand(m_belt, 1.0));
+         m_drivetrain.setDefaultCommand(new DriveStraight(m_drivetrain, x));
+         m_drivetrain.setDefaultCommand(new WaitCommand());
+         m_drivetrain.setDefaultCommand(new WaitBackupSequential(m_drivetrain));
+
         
+
+    }
+
+    private void putData() {
+
+        // Puts data of the commands into the Shuffleboard Layout
+
         SmartDashboard.putData("ShooterCommand", new ShooterCommand(m_shooter));
         SmartDashboard.putData("Intake Command", new RunIntake(m_intake));
         SmartDashboard.putData("Drive-Straight Command", new DriveStraight(m_drivetrain, x));
         SmartDashboard.putData("Wait Command", new WaitCommand());
         SmartDashboard.putData("Wait Backup Command", new WaitBackupSequential(m_drivetrain));
         CameraServer.startAutomaticCapture();
-        
 
+    }
 
+    private void editUI() {
+        // Setting options for the dropdown menu
 
-        // Configure the button bindings
-        configureButtonBindings();
-
-        // Configure default commands
-
-        m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
-        m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
-        m_belt.setDefaultCommand(new BeltCommand(m_belt, 1.0));
-        m_drivetrain.setDefaultCommand(new DriveStraight(m_drivetrain, x));
-        m_drivetrain.setDefaultCommand(new WaitCommand());
-        m_drivetrain.setDefaultCommand(new WaitBackupSequential(m_drivetrain));
-
-        
-
-        //m_intake.setDefaultCommand(new RunIntake(m_intake));
-
-        // Configure autonomous sendable chooser
-
-      
         m_chooser.addOption("Drive-Straight Command", new DriveStraight(m_drivetrain, x));
         m_chooser.addOption("Wait Command", new WaitCommand());
         m_chooser.addOption("Wait Backup Command", new WaitBackupSequential(m_drivetrain));
-        
-
 
         SmartDashboard.putData("Auto Mode", m_chooser);
-
- 
-    
 
     }
 
@@ -114,7 +125,6 @@ public class RobotContainer {
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         intakeButton.whileHeld(new RunIntake(m_intake), true);
         shootButton.whileHeld(new ShooterCommand(m_shooter), true);
-         
 
     }
 
@@ -127,5 +137,4 @@ public class RobotContainer {
         return m_chooser.getSelected();
     }
 
-    
 }
