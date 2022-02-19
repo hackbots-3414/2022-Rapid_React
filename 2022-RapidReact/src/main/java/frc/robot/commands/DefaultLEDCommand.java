@@ -3,14 +3,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import frc.robot.Constants.LEDConstants;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.LED_Constants;
+import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.LEDFeedback;
 
 public class DefaultLEDCommand extends CommandBase {
 
     private final LEDFeedback m_lEDFeedback;
+    private final Belt m_belt = RobotContainer.getInstance().m_belt;
 
     public DefaultLEDCommand(LEDFeedback subsystem) {
         m_lEDFeedback = subsystem;
@@ -27,25 +28,25 @@ public class DefaultLEDCommand extends CommandBase {
         m_lEDFeedback.setColor(Color.kPurple);
 
         if (m_lEDFeedback.isClimbingActivated()) {
-            m_lEDFeedback.setFlash(Color.kGreen, LED_Constants.defaultFlash);
+            m_lEDFeedback.setFlash(Color.kGreen, LEDConstants.defaultFlash);
         } else if (DriverStation.getMatchTime() <= 30.0) {
             if (m_lEDFeedback.isClimbLineDetected()) {
                 m_lEDFeedback.setColor(Color.kGreen);
             } else if (DriverStation.getMatchTime() <= 10.0) {
-                m_lEDFeedback.setFlash(Color.kWhite, LED_Constants.defaultFastFlash);
+                m_lEDFeedback.setFlash(Color.kWhite, LEDConstants.defaultFastFlash);
             } else if (DriverStation.getMatchTime() <= 15.0) {
-                m_lEDFeedback.setFlash(Color.kWhite, LED_Constants.defaultFlash);
+                m_lEDFeedback.setFlash(Color.kWhite, LEDConstants.defaultFlash);
             } else if (DriverStation.getMatchTime() <= 20.0) {
-                m_lEDFeedback.setFlash(Color.kWhite, LED_Constants.defaultSlowFlash);
+                m_lEDFeedback.setFlash(Color.kWhite, LEDConstants.defaultSlowFlash);
             } else {
                 m_lEDFeedback.setColor(Color.kWhite);
             }
             
         }
-        else if (RobotContainer.getInstance().m_belt.getConveyorState() == 2){
-            m_lEDFeedback.setFlash(Color.kOrange, LED_Constants.defaultFlash);
+        else if (m_belt.getIRTop() && m_belt.getIRBottom() ){
+            m_lEDFeedback.setFlash(Color.kOrange, LEDConstants.defaultFlash);
         }
-       else if (RobotContainer.getInstance().m_belt.getConveyorState() == 1){
+       else if (m_belt.getIRTop() && !m_belt.getIRBottom()){
             m_lEDFeedback.setColor(Color.kOrange);
           
         }

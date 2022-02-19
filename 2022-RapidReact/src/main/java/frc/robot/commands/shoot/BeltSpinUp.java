@@ -18,16 +18,19 @@ public class BeltSpinUp extends CommandBase {
 
     @Override
     public void execute() {
-        m_belt.go();
+        m_belt.startAllMotors();
     }
 
     @Override
     public void end(boolean interrupted) {
-        if (interrupted) m_belt.stop();
+        if (interrupted) m_belt.stopAllMotors();
     }
 
     @Override
     public boolean isFinished() {
-        return m_belt.atSpeed();
+        //return m_belt.atSpeed();
+        //FIXME
+        Thread.currentThread().dumpStack();
+        return true;
     }
 }

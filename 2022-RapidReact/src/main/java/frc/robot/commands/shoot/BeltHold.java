@@ -19,12 +19,12 @@ public class BeltHold extends CommandBase {
 
     @Override
     public void execute() {
-        m_belt.go();
+        m_belt.startAllMotors();
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_belt.stop();
+        m_belt.stopAllMotors();
     }
 
     @Override
