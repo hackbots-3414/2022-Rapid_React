@@ -50,4 +50,4 @@ public class WaitCommand extends CommandBase {
         }
     }
 }
-}
+
