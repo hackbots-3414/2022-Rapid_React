@@ -15,11 +15,11 @@ public class Climber extends SubsystemBase {
     }
 
     public void climberUp() {
-        climber.set(false);
+        climber.set(true);
     }
 
     public void climberDown() {
-        climber.set(true);
+        climber.set(false);
     }
 
     @Override

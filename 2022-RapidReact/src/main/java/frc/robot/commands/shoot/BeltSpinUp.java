@@ -18,7 +18,9 @@ public class BeltSpinUp extends CommandBase {
 
     @Override
     public void execute() {
-        m_belt.startAllMotors();
+        m_belt.startMotorBottom();
+        m_belt.startMotorMiddle();
+        m_belt.startMotorTop();
     }
 
     @Override
