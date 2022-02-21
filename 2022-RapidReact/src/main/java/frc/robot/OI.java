@@ -1,16 +1,17 @@
 package frc.robot;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import edu.wpi.first.wpilibj.XboxController;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class OI {
 
     private static final Logger LOG = LoggerFactory.getLogger(OI.class);
+
     private static Joystick joystick = new Joystick(0);
-    
 
     static double left_x_offset = -0.13379;
     static double left_x_max = 0.81982;
@@ -88,8 +89,8 @@ public class OI {
 
     public static int getButtonB() {
         updateController();
+        
         // returns the value of switch B as labled on the controller (down == 0, middle == 1, up == 2)
-
         if (joystick.getRawButton(2)) {
             return 0;
         }
@@ -100,5 +101,4 @@ public class OI {
             return 1;
         }
     }
-
 }

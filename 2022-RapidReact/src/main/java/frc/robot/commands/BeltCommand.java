@@ -1,51 +1,50 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Belt;
 
 public class BeltCommand extends CommandBase {
-  /** Creates a new BeltCommand. */
 
-  final Belt m_belt;
-  boolean isRunning;
-  double output;
+    final Belt m_belt;
 
+    public BeltCommand(Belt belt) {
+        addRequirements(belt);
+        m_belt = belt;
+    }
 
-  public BeltCommand(Belt belt, double output) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(belt);
-    m_belt = belt;
-    this.output = output;
-  }
+    @Override
+    public void initialize() {}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
+    @Override
+    public void execute() {
+        //ball not in top and bottom
+        if (!m_belt.getIRTop() && !m_belt.getIRBottom()) {
+            m_belt.startAllMotors();
+            m_belt.goDown();
+        }
+        // Robot has one ball in the top position
+        if (m_belt.getIRTop() && !m_belt.getIRBottom()) {
+            m_belt.stopMotorTop();
+            m_belt.startMotorBottom();
+            m_belt.startMotorMiddle();
+            m_belt.startIntakeMotor();
+            m_belt.goDown();
+        }
+        //ball not in top but in bottom
+        if (!m_belt.getIRTop() && m_belt.getIRBottom()) {
+            m_belt.startAllMotors();
+            m_belt.goDown();
+        }
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    isRunning = true;
-    m_belt.setBeltSpeed(output);
-  }
+    @Override
+    public boolean isFinished() {
+        // Robot has two balls in position
+        return m_belt.getIRTop() && m_belt.getIRBottom();
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    isRunning = false;
-    m_belt.setBeltSpeed(0.0);
-    m_belt.setconveyorSensorfront(false);
-    m_belt.setconveyorSensorback(false);
-    super.end(interrupted);
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    public void end(boolean interrupted) {
+        m_belt.stopAllMotors();
+        m_belt.goUp();
+    }
 }

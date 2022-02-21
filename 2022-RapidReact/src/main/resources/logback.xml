@@ -14,6 +14,9 @@
   <logger name="frc.robot.commands.AutonomousFactory" level="TRACE"/>
   <!-- logger name="frc.robot.commands.MrZPrintCommand" level="TRACE"/ -->
 <!-- logger name="frc.robot.subsystems.Shooter" level="TRACE"/ -->
+ <logger name="frc.robot.subsystems" level="INFO"/>
+<logger name="frc.robot.subsystems.Shooter" level="TRACE"/>
+
   <root level="WARN">
     <appender-ref ref="STDOUT"/>
   </root>

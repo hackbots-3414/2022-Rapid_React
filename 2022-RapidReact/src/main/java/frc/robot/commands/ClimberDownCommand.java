@@ -1,15 +1,14 @@
 package frc.robot.commands;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Climber;
 
-public class AutonomousCommand extends CommandBase {
+public class ClimberDownCommand extends CommandBase {
+    private final Climber m_climber;
 
-    private static final Logger LOG = LoggerFactory.getLogger(AutonomousCommand.class);
-
-    public AutonomousCommand() {
+    public ClimberDownCommand(Climber subsystem) {
+        m_climber = subsystem;
+        addRequirements(m_climber);
     }
 
     @Override
@@ -18,6 +17,7 @@ public class AutonomousCommand extends CommandBase {
 
     @Override
     public void execute() {
+        m_climber.climberDown();
     }
 
     @Override
@@ -26,11 +26,6 @@ public class AutonomousCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return false;
-    }
-
-    @Override
-    public boolean runsWhenDisabled() {
         return false;
     }
 }
