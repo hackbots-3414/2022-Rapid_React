@@ -1,14 +1,9 @@
 package frc.robot.subsystems;
-import java.lang.invoke.ConstantBootstraps;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI.Port;
-import frc.robot.Constants.BeltConstants;
 import frc.robot.Constants;
-import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Solenoid;

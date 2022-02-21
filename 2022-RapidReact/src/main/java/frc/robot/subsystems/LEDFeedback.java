@@ -24,8 +24,6 @@ public class LEDFeedback extends SubsystemBase {
     private final I2C.Port i2cPort = I2C.Port.kMXP;
 
     private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
-    private final ColorMatch m_colorMatcher = new ColorMatch();
-    private final Color kBlackTarget = new Color(0, 0, 0);
     private boolean climbingActivated = false;
 
     public LEDFeedback() {
@@ -42,14 +40,6 @@ public class LEDFeedback extends SubsystemBase {
 
     @Override
     public void simulationPeriodic() {
-    }
-
-    public void setColor(Color color) {
-        for (int i = 0; i < LED_ARRAY_LENGTH; i++) {
-            ledBuffer.setLED(i, color);
-        }
-        ledString.setData(ledBuffer);
-        ledString.start();
     }
 
     public void setColor(Color color) {

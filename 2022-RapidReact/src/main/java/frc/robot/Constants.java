@@ -1,14 +1,9 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj2.command.button.POVButton;
-
-<<<<<<< HEAD
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -31,9 +26,6 @@ public class Constants {
 
     public static final double kMotorToWheelGearRatio = 12; // 12:1 m:w
 
-=======
-public class Constants {
->>>>>>> main
     public static final class DriveConstants {
         public static final int kLeftMotorFrontPort = 13;
         public static final int kLeftMotorRearPort = 14;
@@ -76,7 +68,6 @@ public class Constants {
         public static final double kP = 0.15;
     }
 
-<<<<<<< HEAD
     public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 1;
         public static final double kMaxAccelerationMetersPerSecondSquared = 2.5; //2.5
@@ -84,12 +75,7 @@ public class Constants {
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
     }
-
-    public static final class BeltConstants {
-        public static final int topMotor = 20;
-        public static final int middleMotor = 21;
-        public static final int bottomMotor = 22;
-=======
+    
     public static final class BeltConstants {
         public static final int topMotor = 22;
         public static final int middleMotor = 21;
@@ -99,7 +85,6 @@ public class Constants {
         public static final double motorSpeed = 0.8;
         public static final double intakeSpeed = 0.4;
         public static final double topMotorSpeed = 0.5;
->>>>>>> main
     }
 
     public static final class LEDConstants {
