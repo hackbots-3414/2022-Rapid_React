@@ -1,6 +1,7 @@
 package frc.robot.commands.shoot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Shooter;
 
@@ -9,13 +10,15 @@ public class ShootCommand extends CommandBase {
     private final Belt m_belt;
     private final Shooter m_shooter;
     private final boolean isHigh;
+    private final int shooterTimer;
 
     private long topIRTimer;
 
-    public ShootCommand(Belt subsystem, Shooter shooter, boolean isHigh) {
+    public ShootCommand(Belt subsystem, Shooter shooter, boolean isHigh, int shooterTimer) {
         m_belt = subsystem;
         m_shooter = shooter;
         this.isHigh = isHigh;
+        this.shooterTimer = shooterTimer;
         addRequirements(m_belt);
         addRequirements(m_shooter);
     }
@@ -61,6 +64,6 @@ public class ShootCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (System.currentTimeMillis() - topIRTimer > 2000);
+        return (System.currentTimeMillis() - topIRTimer > shooterTimer);
     }
 }

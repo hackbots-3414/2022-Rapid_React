@@ -20,13 +20,14 @@ public class Constants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
         public static final double highShootVelocity = 6500;
-        public static final double lowShootVelocity = 5000;
+        public static final double lowShootVelocity = 3800;
         public static final double shootVelocityTolerance = 350;
         public static final double integralZone = 201;
         public static final double kD = 8;
         public static final double kF = 0.045;
         public static final double kI = 0.0005;
         public static final double kP = 0.15;
+        public static final int shooterTimer = 1000;
     }
 
     public static final class BeltConstants {

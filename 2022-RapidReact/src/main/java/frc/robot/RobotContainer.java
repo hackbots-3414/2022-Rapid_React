@@ -88,8 +88,8 @@ public class RobotContainer {
         final JoystickButton ejectButton = new JoystickButton(operatorPad, XboxController.Button.kX.value);
         ejectButton.whileHeld(new Eject(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
-        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true), true);
-        shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false), true);
+        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
+        shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
     }
