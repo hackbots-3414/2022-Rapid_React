@@ -8,17 +8,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.Eject;
+import frc.robot.commands.ShootHighWaitBackup;
+import frc.robot.commands.ShootLowWaitBackup;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
 import frc.robot.commands.shoot.ShootCommand;
-import frc.robot.commands.shoot.shootHigh.ShootHigh;
-import frc.robot.commands.shoot.shootLow.ShootLow;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -51,11 +50,6 @@ public class RobotContainer {
         // Smartdashboard Subsystems
 
         // SmartDashboard Buttons
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("Belt Command", new BeltCommand(m_belt));
-        SmartDashboard.putData("ShooterCommand", new ShootHigh(m_shooter, m_belt));
-        SmartDashboard.putData("climberUp", new ClimberUpCommand(m_climber));
-        SmartDashboard.putData("climberDown", new ClimberDownCommand(m_climber));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -66,8 +60,9 @@ public class RobotContainer {
 
         // Configure autonomous sendable chooser
 
-        m_chooser.addOption("Autonomous Command", new AutonomousCommand());
-        m_chooser.setDefaultOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
+        m_chooser.addOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
+        m_chooser.addOption("ShootLow, Wait, Back Up", new ShootLowWaitBackup(m_shooter, m_drivetrain, m_belt));
+        m_chooser.setDefaultOption("ShootHigh, Wait, Backup", new ShootHighWaitBackup(m_shooter, m_drivetrain, m_belt));
 
         SmartDashboard.putData("Auto Mode", m_chooser);
         SmartDashboard.putData("Wait Command", new WaitCommand());
@@ -88,8 +83,8 @@ public class RobotContainer {
         final JoystickButton ejectButton = new JoystickButton(operatorPad, XboxController.Button.kX.value);
         ejectButton.whileHeld(new Eject(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
-        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true), true);
-        shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false), true);
+        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
+        shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
     }

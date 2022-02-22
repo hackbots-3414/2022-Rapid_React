@@ -1,7 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj2.command.button.POVButton;
-
 public class Constants {
     public static final class DriveConstants {
         public static final int kLeftMotorFrontPort = 10;
@@ -19,14 +17,15 @@ public class Constants {
     public static final class ShooterConstants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
-        public static final double highShootVelocity = 6500;
-        public static final double lowShootVelocity = 5000;
+        public static final double highShootVelocity = 6000;
+        public static final double lowShootVelocity = 3800;
         public static final double shootVelocityTolerance = 350;
         public static final double integralZone = 201;
         public static final double kD = 8;
         public static final double kF = 0.045;
         public static final double kI = 0.0005;
         public static final double kP = 0.15;
+        public static final int shooterTimer = 1000;
     }
 
     public static final class BeltConstants {
@@ -35,7 +34,7 @@ public class Constants {
         public static final int bottomMotor = 20;
         public static final int intakeMotor = 30;
         public static final int solenoidChannel = 9;
-        public static final double motorSpeed = 0.8;
+        public static final double motorSpeed = 1.0;
         public static final double intakeSpeed = 0.4;
         public static final double topMotorSpeed = 0.5;
     }
