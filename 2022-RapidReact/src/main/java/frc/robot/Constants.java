@@ -19,7 +19,7 @@ public class Constants {
     public static final class ShooterConstants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
-        public static final double highShootVelocity = 6500;
+        public static final double highShootVelocity = 6000;
         public static final double lowShootVelocity = 3800;
         public static final double shootVelocityTolerance = 350;
         public static final double integralZone = 201;
@@ -36,7 +36,7 @@ public class Constants {
         public static final int bottomMotor = 20;
         public static final int intakeMotor = 30;
         public static final int solenoidChannel = 9;
-        public static final double motorSpeed = 0.8;
+        public static final double motorSpeed = 1.0;
         public static final double intakeSpeed = 0.4;
         public static final double topMotorSpeed = 0.5;
     }
