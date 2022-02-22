@@ -50,7 +50,6 @@ public class RobotContainer {
 
     public final Belt m_belt = new Belt();
 
-
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
 
@@ -72,21 +71,11 @@ public class RobotContainer {
         SmartDashboard.putData("climberUp", new ClimberUpCommand(m_climber));
         SmartDashboard.putData("climberDown", new ClimberDownCommand(m_climber));
 
-
         // Configure the button bindings
         configureButtonBindings();
 
         // Configure default commands
         setCommands();
-
-        m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
-        m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
-        m_belt.setDefaultCommand(new BeltCommand(m_belt));
-
-        m_climber.setDefaultCommand(new ClimberUpCommand(m_climber));
-        m_climber.setDefaultCommand(new ClimberDownCommand(m_climber));
-
-
 
         // m_intake.setDefaultCommand(new RunIntake(m_intake));
 
@@ -95,18 +84,10 @@ public class RobotContainer {
 
     }
 
-
-
     private void setCommands() {
 
-         // Sets default commands
-
-         m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
-         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
-         m_drivetrain.setDefaultCommand(new DriveStraight(m_drivetrain, x));
-         m_drivetrain.setDefaultCommand(new WaitCommand());
-         m_drivetrain.setDefaultCommand(new WaitBackupSequential(m_drivetrain));
-
+        // Sets default commands   
+        m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         
 
     }
@@ -120,7 +101,7 @@ public class RobotContainer {
         SmartDashboard.putData("Drive-Straight Command", new DriveStraight(m_drivetrain, x));
         SmartDashboard.putData("Wait Command", new WaitCommand());
         SmartDashboard.putData("Wait Backup Command", new WaitBackupSequential(m_drivetrain));
-        CameraServer.startAutomaticCapture();
+        CameraServer.startAutomaticCapture(0);
 
     }
 
@@ -141,12 +122,13 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         // Create some buttons
-        final JoystickButton shootHighButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
+        final JoystickButton shootHighButton = new JoystickButton(operatorPad,
+                XboxController.Button.kRightBumper.value);
 
         final JoystickButton shootLowButton = new JoystickButton(operatorPad, XboxController.Button.kB.value);
 
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
-        
+
         intakeButton.whileHeld(new RunIntake(m_intake), true);
         shootHighButton.whileHeld(new ShootHigh(m_shooter, m_belt), true);
         shootLowButton.whileHeld(new ShootLow(m_shooter, m_belt), true);
