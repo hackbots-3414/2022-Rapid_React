@@ -13,6 +13,7 @@ import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.Eject;
+import frc.robot.commands.ShootWaitBackup;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
@@ -67,7 +68,8 @@ public class RobotContainer {
         // Configure autonomous sendable chooser
 
         m_chooser.addOption("Autonomous Command", new AutonomousCommand());
-        m_chooser.setDefaultOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
+        m_chooser.addOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
+        m_chooser.setDefaultOption("Shoot, Wait, Back Up", new ShootWaitBackup(m_shooter, m_drivetrain, m_belt));
 
         SmartDashboard.putData("Auto Mode", m_chooser);
         SmartDashboard.putData("Wait Command", new WaitCommand());
