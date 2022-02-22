@@ -5,6 +5,10 @@ import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DriveStraight;
+import frc.robot.commands.ConfigureReverseControls;
+import frc.robot.subsystems.Drivetrain;
 
 
 public class OI {
@@ -22,9 +26,13 @@ public class OI {
     static double right_y_offset = 0.03418;
     static double right_y_max = 0.85005;
     static double r_knob_offset = 0.03371;
+    Drivetrain drivetrainSubsystem = new Drivetrain();
+    // ConfigureReverseControls normalDriveButton = new ConfigureReverseControls(drivetrainSubsystem);
 
     static {
         SmartDashboard.putBoolean("Controller (false = dev, true = comp)", false);
+        JoystickButton reverseControlsButton = new JoystickButton(joystick, 12);
+        reverseControlsButton.whileHeld(new ConfigureReverseControls(RobotContainer.getInstance().m_drivetrain));
     }
 
     private static void updateController() {
@@ -85,6 +93,11 @@ public class OI {
     public static boolean getButtonA() {
         updateController();
         return joystick.getRawButton(1);
+    }
+
+    public static boolean getButtonH() {
+        updateController();
+        return joystick.getRawButton(12);
     }
 
     public static int getButtonB() {

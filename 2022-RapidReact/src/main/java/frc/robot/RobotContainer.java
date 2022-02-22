@@ -15,7 +15,9 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
+import frc.robot.commands.ConfigureReverseControls;
 import frc.robot.commands.DefaultIntakeCommand;
+import frc.robot.commands.DefaultLEDCommand;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
@@ -34,14 +36,13 @@ public class RobotContainer {
     private static RobotContainer m_robotContainer = new RobotContainer();
 
     // The robot's subsystems
-    public final LEDFeedback m_lEDFeedback = new LEDFeedback();
-    public final Shooter m_shooter = new Shooter();
-    public final Intake m_intake = new Intake();
-    public final Drivetrain m_drivetrain = new Drivetrain();
+    public final Belt m_belt;
+    public final LEDFeedback m_lEDFeedback;
+    public final Shooter m_shooter;
+    public final Intake m_intake;
+    public final Drivetrain m_drivetrain;
+    public final Climber m_climber;
 
-    public final Climber m_climber = new Climber();
-
-    public final Belt m_belt = new Belt();
 
 
     // Joysticks
@@ -51,6 +52,14 @@ public class RobotContainer {
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     private RobotContainer() {
+        // The robot's subsystems
+        m_belt = new Belt();
+        m_lEDFeedback = new LEDFeedback();
+        m_shooter = new Shooter();
+        m_intake = new Intake();
+        m_drivetrain = new Drivetrain();
+        m_climber = new Climber();
+
         // Smartdashboard Subsystems
 
         // SmartDashboard Buttons
@@ -66,8 +75,9 @@ public class RobotContainer {
         // Configure default commands
 
         m_intake.setDefaultCommand(new DefaultIntakeCommand(m_lEDFeedback, m_intake));
-        m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_belt.setDefaultCommand(new BeltCommand(m_belt));
+        m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback));
+        m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
 
         m_climber.setDefaultCommand(new ClimberUpCommand(m_climber));
         m_climber.setDefaultCommand(new ClimberDownCommand(m_climber));
@@ -90,6 +100,9 @@ public class RobotContainer {
         return m_robotContainer;
     }
 
+
+
+
     private void configureButtonBindings() {
         // Create some buttons
         final JoystickButton shootHighButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
@@ -97,6 +110,7 @@ public class RobotContainer {
         final JoystickButton shootLowButton = new JoystickButton(operatorPad, XboxController.Button.kB.value);
 
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
+
         intakeButton.whileHeld(new RunIntake(m_intake), true);
         shootHighButton.whileHeld(new ShootHigh(m_shooter, m_belt), true);
         shootLowButton.whileHeld(new ShootLow(m_shooter, m_belt), true);
@@ -104,6 +118,7 @@ public class RobotContainer {
         final POVButton climberDownButton = new POVButton(operatorPad, Constants.ClimberConstants.climbDownAngle);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
+
 
     }
 

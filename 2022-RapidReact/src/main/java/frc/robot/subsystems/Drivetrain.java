@@ -17,6 +17,8 @@ public class Drivetrain extends SubsystemBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(Drivetrain.class);
 
+    private boolean controlsReversed = false;
+
     private AHRS ahrs = new AHRS(Port.kMXP);
 
     private WPI_TalonFX backLeft;
@@ -56,6 +58,10 @@ public class Drivetrain extends SubsystemBase {
 
     }
 
+    public void setControlsReversed(boolean controlsReversed) {
+        this.controlsReversed = controlsReversed;
+    }
+
     @Override
     public void periodic() {
     }
@@ -84,7 +90,12 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void arcadeDrive(double throttle, double steering) {
-        differentialDrive.arcadeDrive(throttle, steering);
+        if(controlsReversed){
+            differentialDrive.arcadeDrive(throttle*(-1), steering*(-1));
+        }
+        else {
+            differentialDrive.arcadeDrive(throttle, steering);
+        }
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {

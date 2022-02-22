@@ -34,6 +34,7 @@ public class TeleopCommand extends CommandBase {
         } else if (OI.getButtonB() == 2) {
             drivetrain.tankDrive(OI.getLeftVertical(), OI.getRightVertical());
         }
+        drivetrain.setControlsReversed(false);
     }
 
     @Override
