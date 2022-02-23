@@ -1,7 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj2.command.button.POVButton;
-
 public class Constants {
     public static final class DriveConstants {
         public static final int kLeftMotorFrontPort = 10;
