@@ -72,17 +72,12 @@ public class AutonomousFactory {
         return new BeltCommand(belt);
     }
 
-    private DefaultLEDCommand createLEDFeedback(LEDFeedback ledFeedback) {
-        return new DefaultLEDCommand(ledFeedback);
-    }
-
     public Command createShootBackupIntake() {
         SequentialCommandGroup scGroup = new SequentialCommandGroup();
-        scGroup.addCommands(createShootCommand(m_belt, m_shooter, false));
-        scGroup.addCommands(new ParallelCommandGroup(createRamseteCommand("BlueBottom2Rev", TrajectoryFactory.getBlueBottom2For()), createIntakeCommand(m_belt)));
+        // scGroup.addCommands(createShootCommand(m_belt, m_shooter, false));
+        scGroup.addCommands(new ParallelCommandGroup(createRamseteCommand("BlueBottom2Rev", TrajectoryFactory.getBlueBottom2For())/*, createIntakeCommand(m_belt)*/));
         scGroup.addCommands(createRamseteCommand("BlueBottom2For", TrajectoryFactory.getBlueBottom2For()));
-        scGroup.addCommands(createShootCommand(m_belt, m_shooter, false));
-        scGroup.addCommands(createRamseteCommand("exampleTrajectory", TrajectoryFactory.getTestPathSmooth()));
+        // scGroup.addCommands(createShootCommand(m_belt, m_shooter, false));
         m_drivetrain.tankDriveVolts(0, 0);
         
         return scGroup;
