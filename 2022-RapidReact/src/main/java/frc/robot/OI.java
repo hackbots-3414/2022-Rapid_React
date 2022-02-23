@@ -30,13 +30,14 @@ public class OI {
     // ConfigureReverseControls normalDriveButton = new ConfigureReverseControls(drivetrainSubsystem);
 
     static {
-        SmartDashboard.putBoolean("Controller (false = dev, true = comp)", false);
+        SmartDashboard.putBoolean("Controller (false = dev, true = comp)", true);
         JoystickButton reverseControlsButton = new JoystickButton(joystick, 12);
-        reverseControlsButton.whileHeld(new ConfigureReverseControls(RobotContainer.getInstance().m_drivetrain));
+        reverseControlsButton.whenPressed(new ConfigureReverseControls(RobotContainer.getInstance().m_drivetrain, true));
+        reverseControlsButton.whenReleased(new ConfigureReverseControls(RobotContainer.getInstance().m_drivetrain, false));
     }
 
     private static void updateController() {
-        if (SmartDashboard.getBoolean("Controller (false = dev, true = comp)", false)) {
+        if (SmartDashboard.getBoolean("Controller (false = dev, true = comp)", true)) {
             left_x_offset = -0.05518;
             left_x_max = 0.83401;
             left_y_offset = -0.01953;
@@ -102,8 +103,10 @@ public class OI {
 
     public static int getButtonB() {
         updateController();
+        return 0;
         
         // returns the value of switch B as labled on the controller (down == 0, middle == 1, up == 2)
+        /*
         if (joystick.getRawButton(2)) {
             return 0;
         }
@@ -113,5 +116,6 @@ public class OI {
         else {
             return 1;
         }
+        */
     }
 }

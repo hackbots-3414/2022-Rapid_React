@@ -4,26 +4,36 @@
 
 package frc.robot.commands;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
 public class ConfigureReverseControls extends CommandBase {
+  private boolean reverse;
+  
+  private static final Logger LOG = LoggerFactory.getLogger(ConfigureReverseControls.class);
+
   /** Creates a new configureReverseControls. */
 private final Drivetrain m_drivetrain;
-  public ConfigureReverseControls(Drivetrain subsystem) {
+  public ConfigureReverseControls(Drivetrain subsystem, boolean reverse) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drivetrain = subsystem;
-    addRequirements(m_drivetrain);
+    // addRequirements(m_drivetrain);
+    this.reverse = reverse;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.setControlsReversed(true);
+    LOG.trace("ConfigureReverseControls @ execute(), reverse = {}", reverse);
+    m_drivetrain.setControlsReversed(reverse);
   }
 
   // Called once the command ends or is interrupted.
@@ -34,6 +44,7 @@ private final Drivetrain m_drivetrain;
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    LOG.trace("ConfigureReverseControls isFinished(), reverse = {}", m_drivetrain.isControlsReversed());
+    return reverse==m_drivetrain.isControlsReversed();
   }
 }

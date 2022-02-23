@@ -1,19 +1,18 @@
 package frc.robot.commands;
 
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.LEDConstants;
-
-import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.LEDFeedback;
 
 public class DefaultLEDCommand extends CommandBase {
 
     private final LEDFeedback m_lEDFeedback;
-    private final Belt m_belt = RobotContainer.getInstance().m_belt;
 
     public DefaultLEDCommand(LEDFeedback subsystem) {
         m_lEDFeedback = subsystem;
@@ -48,10 +47,10 @@ public class DefaultLEDCommand extends CommandBase {
 
             
         }
-        else if (m_belt.getIRTop() && m_belt.getIRBottom() ){
+        else if (RobotContainer.getInstance().m_belt.getIRTop() && RobotContainer.getInstance().m_belt.getIRBottom() ){
             m_lEDFeedback.setFlash(Color.kOrange, LEDConstants.defaultFlash);
         }
-       else if (m_belt.getIRTop() && !m_belt.getIRBottom()){
+       else if (RobotContainer.getInstance().m_belt.getIRTop() && !RobotContainer.getInstance().m_belt.getIRBottom()){
 
             m_lEDFeedback.setColor(Color.kOrange);
         } else {
