@@ -59,11 +59,11 @@ public class Shooter extends SubsystemBase {
     }
 
     public boolean highAtSpeed() {
-        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.highShootVelocity) <= 50);
+        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.highShootVelocity) <= Constants.ShooterConstants.shootVelocityTolerance);
     }
 
     public boolean lowAtSpeed() {
-        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.lowShootVelocity) <= 50);
+        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.lowShootVelocity) <= Constants.ShooterConstants.shootVelocityTolerance);
     }
 
     public void stop() {

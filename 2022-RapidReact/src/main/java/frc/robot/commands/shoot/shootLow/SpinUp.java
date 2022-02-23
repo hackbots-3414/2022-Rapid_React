@@ -23,11 +23,11 @@ public class SpinUp extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        if (interrupted) m_shooter.stop();
+        m_shooter.stop();
     }
 
     @Override
     public boolean isFinished() {
-        return m_shooter.lowAtSpeed();
+        return false;
     }
 }
