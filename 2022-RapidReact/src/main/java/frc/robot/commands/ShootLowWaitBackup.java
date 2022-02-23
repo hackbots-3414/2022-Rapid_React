@@ -1,6 +1,5 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Constants;
 import frc.robot.commands.shoot.ShootCommand;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
