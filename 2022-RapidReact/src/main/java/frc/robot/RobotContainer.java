@@ -13,14 +13,12 @@ import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.Eject;
+import frc.robot.commands.ShootCommand;
 import frc.robot.commands.ShootHighWaitBackup;
 import frc.robot.commands.ShootLowWaitBackup;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
-import frc.robot.commands.shoot.ShootCommand;
-import frc.robot.commands.shoot.shootHigh.ShootHigh;
-import frc.robot.commands.shoot.shootLow.ShootLow;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -53,11 +51,10 @@ public class RobotContainer {
         // Smartdashboard Subsystems
 
         // SmartDashboard Buttons
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("Belt Command", new BeltCommand(m_belt));
-        SmartDashboard.putData("ShooterCommand", new ShootHigh(m_shooter, m_belt));
-        SmartDashboard.putData("climberUp", new ClimberUpCommand(m_climber));
-        SmartDashboard.putData("climberDown", new ClimberDownCommand(m_climber));
+        // SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+        // SmartDashboard.putData("Belt Command", new BeltCommand(m_belt));
+        // SmartDashboard.putData("climberUp", new ClimberUpCommand(m_climber));
+        // SmartDashboard.putData("climberDown", new ClimberDownCommand(m_climber));
 
         // Configure the button bindings
         configureButtonBindings();
