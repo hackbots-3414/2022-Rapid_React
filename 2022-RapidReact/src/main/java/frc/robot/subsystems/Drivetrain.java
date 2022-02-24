@@ -29,6 +29,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 public class Drivetrain extends SubsystemBase {
     private static final Logger LOG = LoggerFactory.getLogger(Drivetrain.class);
 
+    private boolean controlsReversed = false;
+
     private AHRS ahrs = new AHRS(Port.kMXP);
     private final DifferentialDriveOdometry m_odometry;
 
@@ -89,6 +91,14 @@ public class Drivetrain extends SubsystemBase {
         return motor;
     }
 
+    public void setControlsReversed(boolean controlsReversed) {
+        this.controlsReversed = controlsReversed;
+    }
+
+    public boolean isControlsReversed() {
+        return controlsReversed;
+    }
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
@@ -128,7 +138,13 @@ public class Drivetrain extends SubsystemBase {
     // here. Call these from Commands.
     
     public void arcadeDrive(double throttle, double steering) {
-        differentialDrive.arcadeDrive(throttle, steering);
+        LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
+        if(controlsReversed){
+            differentialDrive.arcadeDrive(throttle, steering);
+        }
+        else {
+            differentialDrive.arcadeDrive(-throttle, -steering);
+        }
     }
 
     public void tankDriveVolts(double leftVolts, double rightVolts) {
