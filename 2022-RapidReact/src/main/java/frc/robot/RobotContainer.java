@@ -37,9 +37,7 @@ import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.ConfigureReverseControls;
-import frc.robot.commands.DefaultIntakeCommand;
 import frc.robot.commands.DefaultLEDCommand;
-import frc.robot.commands.RunIntake;
 import frc.robot.commands.Eject;
 import frc.robot.commands.ShootHighWaitBackup;
 import frc.robot.commands.ShootLowWaitBackup;
@@ -63,7 +61,6 @@ public class RobotContainer {
     public final Belt m_belt;
     public final LEDFeedback m_lEDFeedback;
     public final Shooter m_shooter;
-    public final Intake m_intake;
     public final Drivetrain m_drivetrain;
     public final Climber m_climber;
 
@@ -80,7 +77,6 @@ public class RobotContainer {
         m_belt = new Belt();
         m_lEDFeedback = new LEDFeedback();
         m_shooter = new Shooter();
-        m_intake = new Intake();
         m_drivetrain = new Drivetrain();
         m_climber = new Climber();
 
