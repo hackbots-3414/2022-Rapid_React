@@ -48,6 +48,7 @@ public class Constants {
     public static final class ClimberConstants {
         public static final int climbUpAngle = 0;
         public static final int climbDownAngle = 180;
-        public static final int climberSolenoidChannel = 8;
+        public static final int climberSolenoidChannel_1 = 8;
+        public static final int climberSolenoidChannel_2 = 10;
     }
 }
