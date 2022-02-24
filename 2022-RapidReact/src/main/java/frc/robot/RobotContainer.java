@@ -45,6 +45,7 @@ import frc.robot.commands.ShootLowWaitBackup;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
+import frc.robot.commands.Pathweaver.AutonomousFactory;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -63,6 +64,7 @@ public class RobotContainer {
     public final Shooter m_shooter;
     public final Drivetrain m_drivetrain;
     public final Climber m_climber;
+    public final AutonomousFactory autonomousFactory = AutonomousFactory.getInstance();
 
 
     // Joysticks
@@ -97,6 +99,7 @@ public class RobotContainer {
 
         m_chooser.addOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
         m_chooser.addOption("ShootLow, Wait, Back Up", new ShootLowWaitBackup(m_shooter, m_drivetrain, m_belt));
+        m_chooser.addOption("PathweaverTest", autonomousFactory.createShootBackupIntake());
         m_chooser.setDefaultOption("ShootHigh, Wait, Backup", new ShootHighWaitBackup(m_shooter, m_drivetrain, m_belt));
 
         SmartDashboard.putData("Auto Mode", m_chooser);
