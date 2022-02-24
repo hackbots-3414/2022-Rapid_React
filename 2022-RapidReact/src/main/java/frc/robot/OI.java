@@ -5,6 +5,10 @@ import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DriveStraight;
+import frc.robot.commands.ConfigureReverseControls;
+import frc.robot.subsystems.Drivetrain;
 
 
 public class OI {
@@ -22,13 +26,18 @@ public class OI {
     static double right_y_offset = 0.03418;
     static double right_y_max = 0.85005;
     static double r_knob_offset = 0.03371;
+    Drivetrain drivetrainSubsystem = new Drivetrain();
+    // ConfigureReverseControls normalDriveButton = new ConfigureReverseControls(drivetrainSubsystem);
 
     static {
-        SmartDashboard.putBoolean("Controller (false = dev, true = comp)", false);
+        SmartDashboard.putBoolean("Controller (false = dev, true = comp)", true);
+        JoystickButton reverseControlsButton = new JoystickButton(joystick, 12);
+        reverseControlsButton.whenPressed(new ConfigureReverseControls(RobotContainer.getInstance().m_drivetrain, true));
+        reverseControlsButton.whenReleased(new ConfigureReverseControls(RobotContainer.getInstance().m_drivetrain, false));
     }
 
     private static void updateController() {
-        if (SmartDashboard.getBoolean("Controller (false = dev, true = comp)", false)) {
+        if (SmartDashboard.getBoolean("Controller (false = dev, true = comp)", true)) {
             left_x_offset = -0.05518;
             left_x_max = 0.83401;
             left_y_offset = -0.01953;
@@ -87,10 +96,17 @@ public class OI {
         return joystick.getRawButton(1);
     }
 
+    public static boolean getButtonH() {
+        updateController();
+        return joystick.getRawButton(12);
+    }
+
     public static int getButtonB() {
         updateController();
+        return 0;
         
         // returns the value of switch B as labled on the controller (down == 0, middle == 1, up == 2)
+        /*
         if (joystick.getRawButton(2)) {
             return 0;
         }
@@ -100,5 +116,6 @@ public class OI {
         else {
             return 1;
         }
+        */
     }
 }
