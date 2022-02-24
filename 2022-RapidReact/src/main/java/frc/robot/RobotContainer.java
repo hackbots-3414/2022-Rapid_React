@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
+import frc.robot.commands.ConfigureReverseControls;
+import frc.robot.commands.DefaultLEDCommand;
 import frc.robot.commands.Eject;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.ShootHighWaitBackup;
@@ -31,11 +33,11 @@ public class RobotContainer {
     private static RobotContainer m_robotContainer = new RobotContainer();
 
     // The robot's subsystems
-    public final LEDFeedback m_lEDFeedback = new LEDFeedback();
-    public final Shooter m_shooter = new Shooter();
-    public final Drivetrain m_drivetrain = new Drivetrain();
-    public final Climber m_climber = new Climber();
-    public final Belt m_belt = new Belt();
+    public final Belt m_belt;
+    public final LEDFeedback m_lEDFeedback;
+    public final Shooter m_shooter;
+    public final Drivetrain m_drivetrain;
+    public final Climber m_climber;
 
 
     // Joysticks
@@ -45,6 +47,13 @@ public class RobotContainer {
     SendableChooser<Command> m_chooser = new SendableChooser<>();
 
     private RobotContainer() {
+        // The robot's subsystems
+        m_belt = new Belt();
+        m_lEDFeedback = new LEDFeedback();
+        m_shooter = new Shooter();
+        m_drivetrain = new Drivetrain();
+        m_climber = new Climber();
+
         // Smartdashboard Subsystems
 
         // SmartDashboard Buttons
@@ -59,7 +68,7 @@ public class RobotContainer {
 
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
 
-        // Configure autonomous sendable chooser
+      // Configure autonomous sendable chooser
 
         m_chooser.addOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
         m_chooser.addOption("ShootLow, Wait, Back Up", new ShootLowWaitBackup(m_shooter, m_drivetrain, m_belt));
@@ -73,6 +82,9 @@ public class RobotContainer {
     public static RobotContainer getInstance() {
         return m_robotContainer;
     }
+
+
+
 
     private void configureButtonBindings() {
         // Create some buttons
@@ -90,6 +102,7 @@ public class RobotContainer {
         shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
+
     }
 
     public XboxController getoperatorPad() {
