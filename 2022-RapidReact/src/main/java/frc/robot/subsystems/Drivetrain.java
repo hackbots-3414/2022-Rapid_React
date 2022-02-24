@@ -1,15 +1,10 @@
 package frc.robot.subsystems;
-import frc.robot.Constants.DriveConstants;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.kauailabs.navx.frc.AHRS;
-
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SPI.Port;
 
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;

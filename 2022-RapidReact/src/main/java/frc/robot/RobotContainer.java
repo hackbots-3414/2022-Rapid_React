@@ -39,12 +39,12 @@ import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.ConfigureReverseControls;
 import frc.robot.commands.DefaultLEDCommand;
 import frc.robot.commands.Eject;
+import frc.robot.commands.ShootCommand;
 import frc.robot.commands.ShootHighWaitBackup;
 import frc.robot.commands.ShootLowWaitBackup;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
 import frc.robot.commands.WaitCommand;
-import frc.robot.commands.shoot.ShootCommand;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -65,7 +65,6 @@ public class RobotContainer {
     public final Climber m_climber;
 
 
-
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
 
@@ -83,6 +82,9 @@ public class RobotContainer {
         // Smartdashboard Subsystems
 
         // SmartDashboard Buttons
+        // SmartDashboard.putData("Belt Command", new BeltCommand(m_belt));
+        // SmartDashboard.putData("climberUp", new ClimberUpCommand(m_climber));
+        // SmartDashboard.putData("climberDown", new ClimberDownCommand(m_climber));
 
         // Configure the button bindings
         configureButtonBindings();
@@ -117,6 +119,8 @@ public class RobotContainer {
         final POVButton climberUpButton = new POVButton(operatorPad, Constants.ClimberConstants.climbUpAngle);
         final POVButton climberDownButton = new POVButton(operatorPad, Constants.ClimberConstants.climbDownAngle);
         final JoystickButton ejectButton = new JoystickButton(operatorPad, XboxController.Button.kX.value);
+
+        //assign button fuctions
         ejectButton.whileHeld(new Eject(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
         shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
