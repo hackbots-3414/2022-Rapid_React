@@ -1,15 +1,12 @@
 package frc.robot;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.ConfigureReverseControls;
 import frc.robot.subsystems.Drivetrain;
-
 
 public class OI {
 

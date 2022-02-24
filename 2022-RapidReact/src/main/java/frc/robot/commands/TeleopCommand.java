@@ -1,8 +1,6 @@
 package frc.robot.commands;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.subsystems.Drivetrain;
@@ -16,9 +14,6 @@ public class TeleopCommand extends CommandBase {
     public TeleopCommand(Drivetrain drivetrain) {
         addRequirements(drivetrain);
         this.drivetrain = drivetrain;
-    }
-
-    public TeleopCommand() {
     }
 
     @Override
@@ -37,8 +32,7 @@ public class TeleopCommand extends CommandBase {
     }
 
     @Override
-    public void end(boolean interrupted) {
-    }
+    public void end(boolean interrupted) {}
 
     @Override
     public boolean isFinished() {
