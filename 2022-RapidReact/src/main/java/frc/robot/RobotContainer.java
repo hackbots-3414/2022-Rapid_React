@@ -72,6 +72,13 @@ public class RobotContainer {
 
     // A chooser for autonomous commands
     SendableChooser<Command> m_chooser = new SendableChooser<>();
+    SendableChooser<String> m_team = new SendableChooser<>();
+    SendableChooser<String> m_tarmac = new SendableChooser<>();
+    SendableChooser<String> m_position = new SendableChooser<>();
+
+    public String team;
+    public String tarmac;
+    public String position;
 
     private RobotContainer() {
         // The robot's subsystems
@@ -96,10 +103,24 @@ public class RobotContainer {
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
 
       // Configure autonomous sendable chooser
+        m_team.addOption("Red", "red");
+        m_team.addOption("Blue", "blue");
+
+        m_tarmac.addOption("Top", "top");
+        m_tarmac.addOption("Bottom", "bottom");
+
+        m_position.addOption("One", "1");
+        m_position.addOption("Two", "2");
+        m_position.addOption("Tnree", "3");
+
+        team = m_team.getSelected();
+        tarmac = m_tarmac.getSelected();
+        position = m_position.getSelected();
+        
 
         m_chooser.addOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
         m_chooser.addOption("ShootLow, Wait, Back Up", new ShootLowWaitBackup(m_shooter, m_drivetrain, m_belt));
-        m_chooser.addOption("PathweaverTest", autonomousFactory.createShootBackupIntake());
+        m_chooser.addOption("PathweaverTest", autonomousFactory.createShootBackupIntake(team, tarmac, position));
         m_chooser.setDefaultOption("ShootHigh, Wait, Backup", new ShootHighWaitBackup(m_shooter, m_drivetrain, m_belt));
 
         SmartDashboard.putData("Auto Mode", m_chooser);

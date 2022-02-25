@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.KeyStore.LoadStoreParameter;
@@ -28,10 +29,10 @@ public class TrajectoryFactory {
 
     private static Trajectory loadTrajectory(String fileName) {
         try {
-            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(BASE_PATH+fileName);
+            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(BASE_PATH + fileName);
             return TrajectoryUtil.fromPathweaverJson(trajectoryPath);
         } catch (IOException ex) {
-            DriverStation.reportError("Unable to open trajectory: " + BASE_PATH+fileName, ex.getStackTrace());
+            DriverStation.reportError("Unable to open trajectory: " + BASE_PATH + fileName, ex.getStackTrace());
             LOG.error("Failed to load Trajectory path {}, error: {}", BASE_PATH + fileName, ex);
         }
         return null;
@@ -45,80 +46,62 @@ public class TrajectoryFactory {
         }
         return trajectory;
     }
-    
-    public static Trajectory getTestPathSmooth() {
-        return getTrajectory("TestPathSmooth.wpilib.json");
-    }
-    public static Trajectory getBlueBottom1Rev() {
-        return getTrajectory("BlueBottom1Rev.wpilib.json");
-    }
-    public static Trajectory getBlueBottom1For() {
-        return getTrajectory("BlueBottom1For.wpilib.json");
-    }
-    public static Trajectory getBlueBottom2Rev() {
-        return getTrajectory("BlueBottom2Rev.wpilib.json");
-    }
-    public static Trajectory getBlueBottom2For() {
-        return getTrajectory("BlueBottom2For.wpilib.json");
-    }
-    public static Trajectory getBlueBottom3Rev() {
-        return getTrajectory("BlueBottom3Rev.wpilib.json");
-    }
-    public static Trajectory getBlueBottom3For() {
-        return getTrajectory("BlueBottom3For.wpilib.json");
-    }
-    public static Trajectory getBlueTop1Rev() {
-        return getTrajectory("BlueTop1Rev.wpilib.json");
-    }
-    public static Trajectory getBlueTop1For() {
-        return getTrajectory("BlueTop1For.wpilib.json");
-    }
-    public static Trajectory getBlueTop2Rev() {
-        return getTrajectory("BlueTop2Rev.wpilib.json");
-    }
-    public static Trajectory getBlueTop2For() {
-        return getTrajectory("BlueTop2For.wpilib.json");
-    }
-    public static Trajectory getBlueTop3Rev() {
-        return getTrajectory("BlueTop3Rev.wpilib.json");
-    }
-    public static Trajectory getBlueTop3For() {
-        return getTrajectory("BlueTop3For.wpilib.json");
-    }
-    public static Trajectory getRedBottom1Rev() {
-        return getTrajectory("RedBottom1Rev.wpilib.json");
-    }
-    public static Trajectory getRedBottom1For() {
-        return getTrajectory("RedBottom1For.wpilib.json");
-    }
-    public static Trajectory getRedBottom2Rev() {
-        return getTrajectory("RedBottom2Rev.wpilib.json");
-    }
-    public static Trajectory getRedBottom2For() {
-        return getTrajectory("RedBottom2For.wpilib.json");
-    }
-    public static Trajectory getRedBottom3Rev() {
-        return getTrajectory("RedBottom3Rev.wpilib.json");
-    }
-    public static Trajectory getRedBottom3For() {
-        return getTrajectory("RedBottom3For.wpilib.json");
-    }
-    public static Trajectory getRedTop1Rev() {
-        return getTrajectory("RedTop1Rev.wpilib.json");
-    }
-    public static Trajectory getRedTop1For() {
-        return getTrajectory("RedTop1For.wpilib.json");
-    }
-    public static Trajectory getRedTop2Rev() {
-        return getTrajectory("RedTop2Rev.wpilib.json");
-    }
-    public static Trajectory getRedTop2For() {
-        return getTrajectory("RedTop2For.wpilib.json");
-    }
-    public static Trajectory getRedTop3Rev() {
-        return getTrajectory("RedTop3Rev.wpilib.json");
-    }
-    public static Trajectory getRedTop3For() {
-        return getTrajectory("RedTop3For.wpilib.json");
+
+    public static Trajectory getPath(String name) {
+        switch (name) {
+            case "TestPathSmooth":
+                return getTrajectory("TestPathSmooth.wpilib.json");
+            case "BlueBottom1Rev":
+                return getTrajectory("BlueBottom1Rev.wpilib.json");
+            case "BlueBottom1For":
+                return getTrajectory("BlueBottom1For.wpilib.json");
+            case "BlueBottom2Rev":
+                return getTrajectory("BlueBottom2Rev.wpilib.json");
+            case "BlueBottom2For":
+                return getTrajectory("BlueBottom3For.wpilib.json");
+            case "BlueBottom3Rev":
+                return getTrajectory("BlueBottom3Rev.wpilib.json");
+            case "BlueBottom3For":
+                return getTrajectory("BlueBottom3For.wpilib.json");
+            case "BlueTop1Rev":
+                return getTrajectory("BlueTop1Rev.wpilib.json");
+            case "BlueTop1For":
+                return getTrajectory("BlueTop1For.wpilib.json");
+            case "BlueTop2Rev":
+                return getTrajectory("BlueTop2Rev.wpilib.json");
+            case "BlueTop2For":
+                return getTrajectory("BlueTop2For.wpilib.json");
+            case "BlueTop3Rev":
+                return getTrajectory("BlueTop3Rev.wpilib.json");
+            case "BlueTop3For":
+                return getTrajectory("BlueTop3For.wpilib.json");
+            case "RedBottom1Rev":
+                return getTrajectory("RedBottom1Rev.wpilib.json");
+            case "RedBottom1For":
+                return getTrajectory("RedBottom1For.wpilib.json");
+            case "RedBottom2Rev":
+                return getTrajectory("RedBottom2Rev.wpilib.json");
+            case "RedBottom2For":
+                return getTrajectory("RedBottom2For.wpilib.json");
+            case "RedBottom3Rev":
+                return getTrajectory("RedBottom3Rev.wpilib.json");
+            case "RedBottom3For":
+                return getTrajectory("RedBottom3For.wpilib.json");
+            case "RedTop1Rev":
+                return getTrajectory("RedTop1Rev.wpilib.json");
+            case "RedTop1For":
+                return getTrajectory("RedTop1For.wpilib.json");
+            case "RedTop2Rev":
+                return getTrajectory("RedTop2Rev.wpilib.json");
+            case "RedTop2For":
+                return getTrajectory("RedTop2For.wpilib.json");
+            case "RedTop3Rev":
+                return getTrajectory("RedTop3Rev.wpilib.json");
+            case "RedTop3For":
+                return getTrajectory("RedTop3For.wpilib.json");
+            default:
+                return getTrajectory("TestPathSmooth.wpilib.json");
+
+        }
     }
 }
