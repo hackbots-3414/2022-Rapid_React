@@ -58,7 +58,7 @@ public class TrajectoryFactory {
             case "BlueBottom2Rev":
                 return getTrajectory("BlueBottom2Rev.wpilib.json");
             case "BlueBottom2For":
-                return getTrajectory("BlueBottom3For.wpilib.json");
+                return getTrajectory("BlueBottom2For.wpilib.json");
             case "BlueBottom3Rev":
                 return getTrajectory("BlueBottom3Rev.wpilib.json");
             case "BlueBottom3For":

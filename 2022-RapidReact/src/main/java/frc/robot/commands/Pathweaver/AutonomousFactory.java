@@ -29,6 +29,8 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.TrajectoryFactory;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
@@ -43,11 +45,11 @@ import frc.robot.subsystems.Shooter;
 public class AutonomousFactory {
     private static final AutonomousFactory me = new AutonomousFactory();
     private static final Logger LOG = LoggerFactory.getLogger(AutonomousFactory.class);
-    public final static Drivetrain m_drivetrain = new Drivetrain();
-    public final Belt m_belt = new Belt();
-    public final Shooter m_shooter = new Shooter();
-    public final LEDFeedback m_ledFeedback = new LEDFeedback();
     public Trajectory trajectory;
+    private Drivetrain m_drivetrain;
+    private Belt m_belt;
+    private Shooter m_shooter;
+    private LEDFeedback m_ledFeedback;
 
     private String team;
     private String tarmac;
@@ -58,6 +60,7 @@ public class AutonomousFactory {
     }
 
     private RamseteCommand createRamseteCommand(String name, Trajectory trajectory) {
+
         m_drivetrain.resetHeading();
         RamseteCommand ramseteCommand = new RamseteCommandProxy(name, trajectory,
                 m_drivetrain::getPose, new RamseteController(AutoConstants.kRamseteB,
@@ -83,6 +86,7 @@ public class AutonomousFactory {
     }
 
     public Command createShootBackupIntake(String team, String tarmac, String position) {
+
         // Path Chooser
         this.team = team;
         this.tarmac = tarmac;
@@ -90,8 +94,11 @@ public class AutonomousFactory {
 
         ArrayList<String> pathNames = getPathNames();
 
-        String forward = pathNames.get(0);
-        String reverse = pathNames.get(1);
+        // String forward = pathNames.get(0);
+        // String reverse = pathNames.get(1);
+
+        String forward = "BlueBottom2For";
+        String reverse = "BlueBottom2Rev";
 
         SequentialCommandGroup scGroup = new SequentialCommandGroup();
         // scGroup.addCommands(createShootCommand(m_belt, m_shooter, false, 100));
@@ -175,6 +182,14 @@ public class AutonomousFactory {
     }
 
     public static AutonomousFactory getInstance() {
+        return me;
+    }
+
+    public static AutonomousFactory getInstance(Drivetrain drivetrain, Belt belt, LEDFeedback ledFeedback, Shooter shooter) {
+        me.m_drivetrain = drivetrain;
+        me.m_belt = belt;
+        me.m_ledFeedback = ledFeedback;
+        me.m_shooter = shooter;
         return me;
     }
 
