@@ -12,7 +12,7 @@ public class ShootLowWaitBackup extends SequentialCommandGroup {
 
     public ShootLowWaitBackup(Shooter shooter, Drivetrain drive, Belt belt) {
         //Using Low Shoot Command
-        addCommands(new WaitBeforeShoot(), new ShootCommand(belt, shooter, false, 100), new WaitCommand(), new DriveStraight(drive, -86.5));
+        addCommands(new WaitBeforeShoot(), new ShootCommand(belt, shooter, false, 100), new WaitCommand(), new DriveStraight(drive, 86.5));
         this.belt = belt;
         this.shooter = shooter;
         this.drive = drive;
