@@ -88,8 +88,8 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         // Create some buttons
-        final JoystickButton shootHighButton = new JoystickButton(operatorPad, XboxController.Button.kB.value);
-        final JoystickButton shootLowButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
+        final JoystickButton shootHighButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
+        final JoystickButton shootLowButton = new JoystickButton(operatorPad, XboxController.Button.kB.value);
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         final POVButton climberUpButton = new POVButton(operatorPad, Constants.ClimberConstants.climbUpAngle);
         final POVButton climberDownButton = new POVButton(operatorPad, Constants.ClimberConstants.climbDownAngle);
@@ -98,7 +98,7 @@ public class RobotContainer {
         //assign button fuctions
         ejectButton.whileHeld(new Eject(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
-        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
+        shootHighButton.whenPressed(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
         shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);

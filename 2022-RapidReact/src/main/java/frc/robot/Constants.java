@@ -6,9 +6,9 @@ public class Constants {
     public static final class CompControllerConstants {
         public static final double left_x_offset = -0.13379;
         public static final double left_x_max = 0.81982;
-        public static final double left_y_offset = 0.01758;
+        public static final double left_y_offset = 0.02;
         public static final double left_y_max = 0.62793;
-        public static final double right_x_offset = 0.03418;
+        public static final double right_x_offset = 0.05;
         public static final double right_x_max = 0.80713;
         public static final double right_y_offset = 0.03418;
         public static final double right_y_max = 0.85005;
@@ -33,7 +33,7 @@ public class Constants {
         public static final int kRightMotorFrontPort = 13;
         public static final int kRightMotorRearPort = 14;
         public static final double voltageRampRate = 0.63;
-        public static final double kMaxSpeed = 2;
+        public static final double kMaxSpeed = 2.5; // 2
     }
 
     public static final class TransportConstants {
@@ -46,7 +46,7 @@ public class Constants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
         public static final double highShootVelocity = 6200;
-        public static final double lowShootVelocity = 3800;
+        public static final double lowShootVelocity = 4100;
         public static final double shootVelocityTolerance = 350;
         public static final double integralZone = 201;
         public static final double kD = 8;
