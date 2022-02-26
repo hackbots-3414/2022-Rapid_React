@@ -6,6 +6,7 @@ public class Constants {
         public static final int kLeftMotorRearPort = 11;
         public static final int kRightMotorFrontPort = 13;
         public static final int kRightMotorRearPort = 14;
+        public static final double voltageRampRate = 0.63;
     }
 
     public static final class TransportConstants {
