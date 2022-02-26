@@ -13,6 +13,7 @@ import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.ConfigureReverseControls;
 import frc.robot.commands.DefaultLEDCommand;
+import frc.robot.commands.EatBall;
 import frc.robot.commands.Eject;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.ShootHighWaitBackup;
@@ -79,6 +80,7 @@ public class RobotContainer {
 
         SmartDashboard.putData("Auto Mode", m_chooser);
         SmartDashboard.putData("Wait Command", new WaitCommand());
+        SmartDashboard.putData("EatBall Command", new EatBall());
 
     }
 

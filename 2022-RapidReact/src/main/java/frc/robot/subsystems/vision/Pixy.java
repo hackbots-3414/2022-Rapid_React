@@ -14,7 +14,7 @@ import io.github.pseudoresonance.pixy2api.links.SPILink;
 
 public class Pixy extends SubsystemBase {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LEDFeedback.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Pixy.class);
     
     private Pixy2 pixy;
     
@@ -50,19 +50,19 @@ public class Pixy extends SubsystemBase {
         return new Ball(block.getX(), block.getY(), block.getWidth(), block.getHeight());
     }
 
-    @Override
-    public void periodic() {
-        int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1 | Pixy2CCC.CCC_SIG2, 2);
+    // @Override
+    // public void periodic() {
+    //     int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1 | Pixy2CCC.CCC_SIG2, 2);
         
-        if (blockCount != -2) {
-            ArrayList<Block> block = pixy.getCCC().getBlockCache();
+    //     if (blockCount != -2) {
+    //         ArrayList<Block> block = pixy.getCCC().getBlockCache();
             
-            if (block.size() == 0) {
-                LOG.info("No blocks detected");
-            }
-            else {
-                LOG.info("First block pos: (" + Integer.toString(block.get(0).getX()) + ", " + Integer.toString(block.get(0).getY()) + "), size: (" + Integer.toString(block.get(0).getWidth()) + ", " + Integer.toString(block.get(0).getHeight()) + ")");
-            }
-        }
-    }
+    //         if (block.size() == 0) {
+    //             LOG.info("No blocks detected");
+    //         }
+    //         else {
+    //             LOG.info("First block pos: (" + Integer.toString(block.get(0).getX()) + ", " + Integer.toString(block.get(0).getY()) + "), size: (" + Integer.toString(block.get(0).getWidth()) + ", " + Integer.toString(block.get(0).getHeight()) + ")");
+    //         }
+    //     }
+    // }
 }

@@ -13,4 +13,8 @@ public class Ball {
         this.width = width;
         this.height = height;
     }
+
+    public static String toString(Ball ball) {
+        return "Pos: (" + Integer.toString(ball.x) + ", " + Integer.toString(ball.y) + "); Size: (" + Integer.toString(ball.width) + ", " + Integer.toString(ball.height) + ")";
+    }
 }
