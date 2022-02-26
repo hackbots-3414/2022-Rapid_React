@@ -88,8 +88,8 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         // Create some buttons
-        final JoystickButton shootHighButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
-        final JoystickButton shootLowButton = new JoystickButton(operatorPad, XboxController.Button.kB.value);
+        final JoystickButton shootHighButton = new JoystickButton(operatorPad, XboxController.Button.kB.value);
+        final JoystickButton shootLowButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         final POVButton climberUpButton = new POVButton(operatorPad, Constants.ClimberConstants.climbUpAngle);
         final POVButton climberDownButton = new POVButton(operatorPad, Constants.ClimberConstants.climbDownAngle);

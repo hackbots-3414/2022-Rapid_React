@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.util.function.DoubleBinaryOperator;
+
 public class Constants {
     public static final class CompControllerConstants {
         public static final double left_x_offset = -0.13379;
@@ -60,9 +62,13 @@ public class Constants {
         public static final int bottomMotor = 20;
         public static final int intakeMotor = 30;
         public static final int solenoidChannel = 8;
-        public static final double motorSpeed = 1.0;
+        public static final double motorSpeedShooter = 1.0; //used for lower two motors (Bottom and Middle)
         public static final double intakeSpeed = 0.4;
-        public static final double topMotorSpeed = 0.5;
+        public static final double topMotorSpeedShooter = 0.5;
+        public static final double motorSpeedTransfer = 0.75;
+        public static final double topMotorSpeedTransfer = 0.3;
+        public static final double ejectSpeed = 1.0;
+
     }
 
     public static final class LEDConstants {
