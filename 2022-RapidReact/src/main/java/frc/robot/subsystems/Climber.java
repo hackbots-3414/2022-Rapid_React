@@ -6,16 +6,16 @@ import frc.robot.Constants.ClimberConstants;
 
 public class Climber extends SubsystemBase {
 
-    Solenoid climber = new Solenoid(PneumaticsModuleType.REVPH, ClimberConstants.climberSolenoidChannel);
+    // Solenoid climber = new Solenoid(PneumaticsModuleType.REVPH, ClimberConstants.climberSolenoidChannel);
 
     public Climber() {}
 
     public void climberUp() {
-        climber.set(true);
+        // climber.set(true);
     }
 
     public void climberDown() {
-        climber.set(false);
+        // climber.set(false);
     }
 
     @Override
