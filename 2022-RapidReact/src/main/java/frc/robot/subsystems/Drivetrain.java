@@ -106,6 +106,10 @@ public class Drivetrain extends SubsystemBase {
         }
     }
 
+    public void curvatureDrive(double throttle, double rotation, boolean turnInPlace) {
+        DifferentialDrive.curvatureDriveIK(throttle, rotation, turnInPlace);
+    }
+
     public void tankDrive(double leftSpeed, double rightSpeed) {
         differentialDrive.tankDrive(leftSpeed, rightSpeed);
     }
