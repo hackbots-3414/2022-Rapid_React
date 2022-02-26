@@ -41,6 +41,12 @@ public class Drivetrain extends SubsystemBase {
         
         frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
 
+        backLeft.configOpenloopRamp(DriveConstants.voltageRampRate);
+        backRight.configOpenloopRamp(DriveConstants.voltageRampRate);
+        frontLeft.configOpenloopRamp(DriveConstants.voltageRampRate);
+        frontRight.configOpenloopRamp(DriveConstants.voltageRampRate);
+
+
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
         addChild("DifferentialDrive", differentialDrive);
         differentialDrive.setSafetyEnabled(true);
