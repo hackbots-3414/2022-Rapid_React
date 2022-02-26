@@ -33,7 +33,7 @@ public class Constants {
         public static final int middleMotor = 21;
         public static final int bottomMotor = 20;
         public static final int intakeMotor = 30;
-        public static final int solenoidChannel = 9;
+        public static final int solenoidChannel = 8;
         public static final double motorSpeed = 1.0;
         public static final double intakeSpeed = 0.4;
         public static final double topMotorSpeed = 0.5;
@@ -48,6 +48,7 @@ public class Constants {
     public static final class ClimberConstants {
         public static final int climbUpAngle = 0;
         public static final int climbDownAngle = 180;
-        public static final int climberSolenoidChannel = 8;
+        public static final int climberSolenoidChannel_1 = 9;
+        public static final int climberSolenoidChannel_2 = 10;
     }
 }

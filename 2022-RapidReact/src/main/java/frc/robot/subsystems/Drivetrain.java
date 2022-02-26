@@ -93,7 +93,7 @@ public class Drivetrain extends SubsystemBase {
     public void arcadeDrive(double throttle, double steering) {
         LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
         if(controlsReversed){
-            differentialDrive.arcadeDrive(throttle, -steering);
+            differentialDrive.arcadeDrive(throttle, steering);
         }
         else {
             differentialDrive.arcadeDrive(-throttle, steering);
