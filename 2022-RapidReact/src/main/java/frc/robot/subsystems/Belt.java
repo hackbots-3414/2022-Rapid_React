@@ -33,24 +33,24 @@ public class Belt extends SubsystemBase {
         return !irTop.get();
     }
 
-    public void startMotorTop() {
-        topMotor.set(Constants.BeltConstants.topMotorSpeed);
+    public void startMotorTop(double speed) {
+        topMotor.set(speed);
     }
 
     public void stopMotorTop() {
         topMotor.set(0.0);
     }
 
-    public void startMotorMiddle() {
-        middleMotor.set(Constants.BeltConstants.motorSpeed);
+    public void startMotorMiddle(double speed) {
+        middleMotor.set(speed);
     }
 
     public void stopMotorMiddle() {
         middleMotor.set(0.0);
     }
 
-    public void startMotorBottom() {
-        bottomMotor.set(Constants.BeltConstants.motorSpeed);
+    public void startMotorBottom(double speed) {
+        bottomMotor.set(speed);
     }
 
     public void stopMotorBottom() {
@@ -72,32 +72,29 @@ public class Belt extends SubsystemBase {
         solenoid.set(true);
     }
 
-    public void startIntakeMotor() {
-        intakeMotor.set(-Constants.BeltConstants.intakeSpeed);
+    public void startIntakeMotor(double speed) {
+        intakeMotor.set(-speed);
     }
 
     public void stopIntakeMotor() {
         intakeMotor.set(0.0);
     }
 
-    public void eject() {
-        topMotor.set(2*(-Constants.BeltConstants.motorSpeed));
-        middleMotor.set(2*(-Constants.BeltConstants.motorSpeed));
-        bottomMotor.set(2*(-Constants.BeltConstants.motorSpeed));
+    public void eject(double speed) {
+        topMotor.set((-speed));
+        middleMotor.set((-speed));
+        bottomMotor.set((-speed));
     }
 
-    public void startAllMotors() {
-        bottomMotor.set(Constants.BeltConstants.motorSpeed);
-        middleMotor.set(Constants.BeltConstants.motorSpeed);
-        topMotor.set(Constants.BeltConstants.topMotorSpeed);
-        intakeMotor.set(-Constants.BeltConstants.motorSpeed);
+    public void startAllMotors(double lower, double top, double intake) {
+        bottomMotor.set(lower);
+        middleMotor.set(lower);
+        topMotor.set(top);
+        intakeMotor.set(-intake);
     }
 
     @Override
     public void periodic() {
     }
 
-    public boolean atSpeed() {
-        return (Math.abs(((bottomMotor.getSelectedSensorVelocity() + middleMotor.getSelectedSensorVelocity() + topMotor.getSelectedSensorVelocity()) / 3) - Constants.BeltConstants.motorSpeed) <= 50);
-    }
 }
