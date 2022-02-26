@@ -75,7 +75,7 @@ public class RobotContainer {
         m_chooser.setDefaultOption("ShootHigh, Wait, Backup", new ShootHighWaitBackup(m_shooter, m_drivetrain, m_belt));
 
         SmartDashboard.putData("Auto Mode", m_chooser);
-        SmartDashboard.putData("Wait Command", new WaitCommand());
+        //SmartDashboard.putData("Wait Command", new WaitCommand());
 
     }
 
