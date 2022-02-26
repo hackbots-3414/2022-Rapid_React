@@ -1,12 +1,37 @@
 package frc.robot;
 
 public class Constants {
+    public static final class CompControllerConstants {
+        public static final double left_x_offset = -0.13379;
+        public static final double left_x_max = 0.81982;
+        public static final double left_y_offset = 0.01758;
+        public static final double left_y_max = 0.62793;
+        public static final double right_x_offset = 0.03418;
+        public static final double right_x_max = 0.80713;
+        public static final double right_y_offset = 0.03418;
+        public static final double right_y_max = 0.85005;
+        public static final double r_knob_offset = 0.03371;
+    }
+
+    public static final class DevControllerConstants {
+        public static final double left_x_offset = -0.05518;
+        public static final double left_x_max = 0.83401;
+        public static final double left_y_offset = -0.01953;
+        public static final double left_y_max = 0.64453;
+        public static final double right_x_offset = 0.03711;
+        public static final double right_x_max = 0.73144;
+        public static final double right_y_offset = 0.01367;
+        public static final double right_y_max = 0.87256;
+        public static final double r_knob_offset = 0.03371;
+    }
+
     public static final class DriveConstants {
         public static final int kLeftMotorFrontPort = 10;
         public static final int kLeftMotorRearPort = 11;
         public static final int kRightMotorFrontPort = 13;
         public static final int kRightMotorRearPort = 14;
         public static final double voltageRampRate = 0.63;
+        public static final double kMaxSpeed = 2;
     }
 
     public static final class TransportConstants {
