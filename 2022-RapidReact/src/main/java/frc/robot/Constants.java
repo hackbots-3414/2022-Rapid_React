@@ -72,9 +72,9 @@ public class Constants {
     }
 
     public static final class LEDConstants {
-        public static final double defaultFlash = 1.0;
-        public static final double defaultFastFlash = 0.5;
-        public static final double defaultSlowFlash = 2;
+        public static final double defaultFlash = 500;
+        public static final double defaultFastFlash = 250;
+        public static final double defaultSlowFlash = 1000;
     }
 
     public static final class ClimberConstants {

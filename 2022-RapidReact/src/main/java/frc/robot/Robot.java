@@ -22,6 +22,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+        
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
         UsbCamera camera = CameraServer.startAutomaticCapture();
@@ -44,6 +45,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        m_robotContainer.getInstance().m_lEDFeedback.setClimbingActivated(false);
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
         // schedule the autonomous command (example)
@@ -58,6 +60,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        
+        m_robotContainer.getInstance().m_lEDFeedback.setClimbingActivated(false);
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
