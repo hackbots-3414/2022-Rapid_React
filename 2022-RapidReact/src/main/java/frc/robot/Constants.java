@@ -37,11 +37,11 @@ public class Constants {
         public static final int bottomMotor = 20;
         public static final int intakeMotor = 30;
         public static final int solenoidChannel = 8;
-        public static final double motorSpeed_Shooter = 1.0; //used for lower two motors (Bottom and Middle)
+        public static final double motorSpeedShooter = 1.0; //used for lower two motors (Bottom and Middle)
         public static final double intakeSpeed = 0.4;
-        public static final double topMotorSpeed_Shooter = 0.5;
-        public static final double motorSpeed_Transfer = 0.75;
-        public static final double topMotorSpeed_Transfer = 0.3;
+        public static final double topMotorSpeedShooter = 0.5;
+        public static final double motorSpeedTransfer = 0.75;
+        public static final double topMotorSpeedTransfer = 0.3;
         public static final double ejectSpeed = 1.0;
 
     }

@@ -19,20 +19,20 @@ public class BeltCommand extends CommandBase {
     public void execute() {
         //ball not in top and bottom
         if (!m_belt.getIRTop() && !m_belt.getIRBottom()) {
-            m_belt.startAllMotors(Constants.BeltConstants.motorSpeed_Transfer, Constants.BeltConstants.topMotorSpeed_Transfer, Constants.BeltConstants.intakeSpeed);
+            m_belt.startAllMotors(Constants.BeltConstants.motorSpeedTransfer, Constants.BeltConstants.topMotorSpeedTransfer, Constants.BeltConstants.intakeSpeed);
             m_belt.goDown();
         }
         // Robot has one ball in the top position
         if (m_belt.getIRTop() && !m_belt.getIRBottom()) {
             m_belt.stopMotorTop();
-            m_belt.startMotorBottom(Constants.BeltConstants.motorSpeed_Transfer);
-            m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeed_Transfer);
+            m_belt.startMotorBottom(Constants.BeltConstants.motorSpeedTransfer);
+            m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeedTransfer);
             m_belt.startIntakeMotor(Constants.BeltConstants.intakeSpeed);
             m_belt.goDown();
         }
         //ball not in top but in bottom
         if (!m_belt.getIRTop() && m_belt.getIRBottom()) {
-            m_belt.startAllMotors(Constants.BeltConstants.motorSpeed_Transfer, Constants.BeltConstants.topMotorSpeed_Transfer, Constants.BeltConstants.intakeSpeed);
+            m_belt.startAllMotors(Constants.BeltConstants.motorSpeedTransfer, Constants.BeltConstants.topMotorSpeedTransfer, Constants.BeltConstants.intakeSpeed);
             m_belt.goDown();
         }
     }

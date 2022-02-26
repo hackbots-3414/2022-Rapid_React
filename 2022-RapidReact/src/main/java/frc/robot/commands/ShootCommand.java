@@ -35,9 +35,9 @@ public class ShootCommand extends CommandBase {
             m_shooter.shootHigh();
            if ( m_shooter.highAtSpeed()){
             
-            m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeed_Shooter);
-            m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeed_Shooter);
-            m_belt.startMotorBottom(Constants.BeltConstants.motorSpeed_Shooter);
+            m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeedShooter);
+            m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeedShooter);
+            m_belt.startMotorBottom(Constants.BeltConstants.motorSpeedShooter);
             } else {
                 m_belt.stopAllMotors();
             }
@@ -45,9 +45,9 @@ public class ShootCommand extends CommandBase {
             m_shooter.shootLow();
             if(m_shooter.lowAtSpeed()) {
                 
-                m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeed_Shooter);
-                m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeed_Shooter);
-                m_belt.startMotorBottom(Constants.BeltConstants.motorSpeed_Shooter);
+                m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeedShooter);
+                m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeedShooter);
+                m_belt.startMotorBottom(Constants.BeltConstants.motorSpeedShooter);
             } else {
                 m_belt.stopAllMotors();
             }
