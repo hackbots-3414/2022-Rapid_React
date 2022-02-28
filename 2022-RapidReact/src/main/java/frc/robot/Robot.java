@@ -27,7 +27,6 @@ public class Robot extends TimedRobot {
         UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setFPS(30);
         camera.setResolution(320, 240);
-        System.out.println(camera.getConfigJson());
     }
 
     @Override
