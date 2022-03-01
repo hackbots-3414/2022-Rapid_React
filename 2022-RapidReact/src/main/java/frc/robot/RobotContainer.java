@@ -80,7 +80,7 @@ public class RobotContainer {
 
         SmartDashboard.putData("Auto Mode", m_chooser);
         SmartDashboard.putData("Wait Command", new WaitCommand());
-        SmartDashboard.putData("EatBall Command", new EatBall());
+        SmartDashboard.putData("EatBall Command", new EatBall(m_drivetrain, m_pixy));
 
     }
 
@@ -99,6 +99,7 @@ public class RobotContainer {
         final POVButton climberUpButton = new POVButton(operatorPad, Constants.ClimberConstants.climbUpAngle);
         final POVButton climberDownButton = new POVButton(operatorPad, Constants.ClimberConstants.climbDownAngle);
         final JoystickButton ejectButton = new JoystickButton(operatorPad, XboxController.Button.kX.value);
+        final JoystickButton eatBallButton = new JoystickButton(operatorPad, XboxController.Button.kA.value);
 
         //assign button fuctions
         ejectButton.whileHeld(new Eject(m_belt), true);
@@ -107,6 +108,7 @@ public class RobotContainer {
         shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
+        eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
 
     }
 
