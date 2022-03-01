@@ -17,6 +17,8 @@ public class EatBall extends CommandBase {
 
     private Ball ball;
     private boolean aligned = false;
+    private double throttle;
+    private double steering;
 
     public EatBall(Drivetrain drivetrain, Pixy pixy) {
         m_drivetrain = drivetrain;
@@ -34,27 +36,31 @@ public class EatBall extends CommandBase {
     public void execute() {
         LOG.trace("EatBall executed");
         ball = m_pixy.getBall();
+        throttle = 0;
+        steering = 0;
         if (ball != null) {
-            if ((double) ball.x - 157.5D >= 75) {
-                m_drivetrain.arcadeDrive(0, -0.3);
+            if ((double) ball.x - 157.5D >= 25) {
+                steering = -0.4;
+                // m_drivetrain.arcadeDrive(0, -0.3);
             }
-            else if ((double) ball.x - 157.5D <= -75) {
-                m_drivetrain.arcadeDrive(0, 0.3);
+            else if ((double) ball.x - 157.5D <= -25) {
+                steering = 0.4;
+                // m_drivetrain.arcadeDrive(0, 0.3);
+            }
+            // m_drivetrain.arcadeDrive(0, 0);
+            if (Math.max(ball.width, ball.height) >= 180) {
+                throttle = 0;
+                steering = 0;
+                aligned = true;
             }
             else {
-                m_drivetrain.arcadeDrive(0, 0);
-                if (Math.max(ball.width, ball.height) >= 180) {
-                    m_drivetrain.arcadeDrive(0, 0);
-                    aligned = true;
-                }
-                else {
-                    m_drivetrain.arcadeDrive(0.4, 0);
-                }
+                throttle = 0.6;
             }
         }
         else {
             LOG.info("No balls detected");
         }
+        m_drivetrain.arcadeDrive(throttle, steering);
     }
 
     @Override
