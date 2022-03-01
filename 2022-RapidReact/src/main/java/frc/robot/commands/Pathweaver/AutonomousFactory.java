@@ -85,7 +85,7 @@ public class AutonomousFactory {
         return new BeltCommand(belt);
     }
 
-    public Command createShootBackupIntake(String team, String tarmac, String position) {
+    public SequentialCommandGroup createShootBackupIntake(String team, String tarmac, String position) {
 
         // Path Chooser
         this.team = team;
@@ -102,8 +102,7 @@ public class AutonomousFactory {
 
         SequentialCommandGroup scGroup = new SequentialCommandGroup();
         // scGroup.addCommands(createShootCommand(m_belt, m_shooter, false, 100));
-        scGroup.addCommands(new ParallelCommandGroup(createRamseteCommand(reverse,
-                TrajectoryFactory.getPath(reverse))/* , createIntakeCommand(m_belt) */));
+        scGroup.addCommands(createRamseteCommand(reverse, TrajectoryFactory.getPath(reverse)/* , createIntakeCommand(m_belt) */));
         scGroup.addCommands(createRamseteCommand(forward, TrajectoryFactory.getPath(forward)));
         // scGroup.addCommands(createShootCommand(m_belt, m_shooter, false, 100));
         m_drivetrain.tankDriveVolts(0, 0);

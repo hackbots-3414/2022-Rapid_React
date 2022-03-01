@@ -51,6 +51,8 @@ public class TrajectoryFactory {
         switch (name) {
             case "TestPathSmooth":
                 return getTrajectory("TestPathSmooth.wpilib.json");
+            case "TestPath2":
+                return getTrajectory("TestPath2.wpilib.json");
             case "BlueBottom1Rev":
                 return getTrajectory("BlueBottom1Rev.wpilib.json");
             case "BlueBottom1For":
