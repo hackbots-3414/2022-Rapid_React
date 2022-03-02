@@ -1,13 +1,10 @@
 package frc.robot.subsystems;
-
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,6 +13,8 @@ import frc.robot.Constants.DriveConstants;
 public class Drivetrain extends SubsystemBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(Drivetrain.class);
+
+    private boolean controlsReversed = false;
 
     private AHRS ahrs = new AHRS(Port.kMXP);
 
@@ -56,6 +55,14 @@ public class Drivetrain extends SubsystemBase {
 
     }
 
+    public void setControlsReversed(boolean controlsReversed) {
+        this.controlsReversed = controlsReversed;
+    }
+
+    public boolean isControlsReversed() {
+        return controlsReversed;
+    }
+
     @Override
     public void periodic() {
     }
@@ -84,7 +91,13 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void arcadeDrive(double throttle, double steering) {
-        differentialDrive.arcadeDrive(throttle, steering);
+        LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
+        if(controlsReversed){
+            differentialDrive.arcadeDrive(throttle, steering);
+        }
+        else {
+            differentialDrive.arcadeDrive(-throttle, steering);
+        }
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {

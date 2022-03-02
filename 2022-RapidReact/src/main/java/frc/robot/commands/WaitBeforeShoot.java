@@ -4,18 +4,15 @@ import org.slf4j.LoggerFactory;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class WaitCommand extends CommandBase {
+public class WaitBeforeShoot extends CommandBase {
 
-    private static final Logger LOG = LoggerFactory.getLogger(WaitCommand.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WaitBeforeShoot.class);
 
     public long prevMilliseconds;
     public long waitTime;
 
     static {
-        SmartDashboard.putNumber("Auton Delay", 0);
-    }
-
-    public WaitCommand() {
+        SmartDashboard.putNumber("Delay Before Shoot", 2000);
     }
 
     @Override
@@ -27,12 +24,10 @@ public class WaitCommand extends CommandBase {
     }
 
     @Override
-    public void execute() {
-    }
+    public void execute() {}
 
     @Override
-    public void end(boolean interrupted) {
-    }
+    public void end(boolean interrupted) {}
 
     @Override
     public boolean isFinished() {
@@ -41,7 +36,7 @@ public class WaitCommand extends CommandBase {
         long newMilliseconds = currentMillis - prevMilliseconds;
 
         if (newMilliseconds >= waitTime) {
-            LOG.info("wait command finished");
+            LOG.info("wait before shoot command finished");
             return true;
         } else {
             return false;

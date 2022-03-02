@@ -1,8 +1,6 @@
 package frc.robot.commands;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
@@ -35,9 +33,10 @@ public class DriveStraight extends CommandBase {
 
         LOG.info("distance, inches: {}", this.distance);
 
-        this.speed = Math.copySign(0.3, this.distance);
+        this.speed = Math.copySign(0.45, this.distance);
         LOG.info("speed: {}", this.speed);
-        this.distance = Math.abs(this.distance / 0.001198047515388888); // converts from inches to motor ticks (wheel diameter 6.432 inches)
+        // this.distance = Math.abs(this.distance / 0.001198047515388888); // converts from inches to motor ticks (wheel diameter 6.432 inches)
+        this.distance = Math.abs(this.distance / 0.00083101561761); // converts from inches to motor ticks (wheel diameter 6.432 inches)
         LOG.info("distance, ticks: {}", this.distance);
     }
 
