@@ -1,14 +1,19 @@
 package frc.robot.subsystems;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorSensorV3;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 
 public class LEDFeedback extends SubsystemBase {
 
@@ -17,6 +22,11 @@ public class LEDFeedback extends SubsystemBase {
     public static final int LED_ARRAY_LENGTH = 9;
     private AddressableLED ledString;
     private AddressableLEDBuffer ledBuffer;
+    private AnalogInput gauge; 
+    
+
+   
+
 
     private final I2C.Port i2cPort = I2C.Port.kMXP;
 
@@ -31,10 +41,14 @@ public class LEDFeedback extends SubsystemBase {
         ledBuffer = new AddressableLEDBuffer(LED_ARRAY_LENGTH);
         ledString.setData(ledBuffer);
         ledString.start();
+
+        gauge = new AnalogInput(1);
     }
 
     @Override
     public void periodic() {
+        //  TODO Add the air pressure once calculated
+        //  SmartDashboard.putNumber("Air Pressure", checkPressure());
     }
 
     @Override
@@ -68,6 +82,20 @@ public class LEDFeedback extends SubsystemBase {
 
     public void setClimbingActivated(boolean climbingActivated) {
         this.climbingActivated = climbingActivated;
+    }
+
+    public double checkPressure() {
+        final PowerDistribution pdp = RobotContainer.getInstance().m_powerdistribution;
+
+        final double supplyVoltage = pdp.getVoltage();
+
+        final double outputVoltage = gauge.getAverageVoltage();
+
+        double pressure = 250 * (outputVoltage / supplyVoltage) - 25;
+
+        
+       return pressure;
+
     }
     
 }

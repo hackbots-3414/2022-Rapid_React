@@ -1,7 +1,10 @@
 package frc.robot;
+import com.revrobotics.AnalogInput;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -39,6 +42,8 @@ public class RobotContainer {
     public final Shooter m_shooter;
     public final Drivetrain m_drivetrain;
     public final Climber m_climber;
+    public final PowerDistribution m_powerdistribution;
+
 
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
@@ -53,6 +58,7 @@ public class RobotContainer {
         m_shooter = new Shooter();
         m_drivetrain = new Drivetrain();
         m_climber = new Climber();
+        m_powerdistribution = new PowerDistribution();
 
         // Smartdashboard Subsystems
 
