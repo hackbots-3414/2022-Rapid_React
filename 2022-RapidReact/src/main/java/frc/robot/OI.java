@@ -23,7 +23,7 @@ public class OI {
     static double right_y_offset = 0.03418;
     static double right_y_max = 0.85005;
     static double r_knob_offset = 0.03371;
-    Drivetrain drivetrainSubsystem = new Drivetrain();
+
     // ConfigureReverseControls normalDriveButton = new ConfigureReverseControls(drivetrainSubsystem);
 
     static {

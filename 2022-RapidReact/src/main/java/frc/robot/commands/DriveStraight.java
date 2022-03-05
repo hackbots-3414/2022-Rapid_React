@@ -45,9 +45,9 @@ public class DriveStraight extends CommandBase {
         //LOG.trace("driveStraigt executed");
         m_drivetrain.arcadeDrive(speed, 0);
         //LOG.info("Average Encoder: {}\nLeft Encoder: {}\nRight Encoder: {}", m_drivetrain.getAverageEncoderPosition(), m_drivetrain.getLeftEncoderPosition(), m_drivetrain.getRightEncoderPosition());
-        if (m_drivetrain.getAverageEncoderPosition() > this.distance){
-            isFinished();
-        }
+        // if (m_drivetrain.getAverageEncoderPosition() > this.distance){
+        //     isFinished();
+        // }
         //LOG.trace("driveStraigt executed 2");
     }
 
