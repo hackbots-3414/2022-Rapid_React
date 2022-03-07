@@ -1,8 +1,14 @@
 package frc.robot;
 
-import java.util.function.DoubleBinaryOperator;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 
 public class Constants {
+    public static final class RobotPartsConstants {
+        public static final double wheelDiameter = 16;
+        public static final double trackWidth = 60.96;
+        public static final double distancePerTick = wheelDiameter * Math.PI / 2048 / 12;
+    }
+
     public static final class CompControllerConstants {
         public static final double left_x_offset = -0.13379;
         public static final double left_x_max = 0.81982;
@@ -34,6 +40,13 @@ public class Constants {
         public static final int kRightMotorRearPort = 14;
         public static final double voltageRampRate = 0.63;
         public static final double kMaxSpeed = 2.5; // 2
+        public static final double ksVolts = 0.58049;
+        public static final double kvVoltSecondsPerMeter = 2.5715;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.14127;
+        public static final double kPDriveVel = 2.547;
+        public static final double kIDriveVel = 0;
+        public static final double kDDriveVel = 0;
+        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(RobotPartsConstants.trackWidth);
     }
 
     public static final class TransportConstants {
