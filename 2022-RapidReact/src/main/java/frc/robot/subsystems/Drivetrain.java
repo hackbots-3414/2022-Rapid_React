@@ -35,9 +35,9 @@ public class Drivetrain extends SubsystemBase {
 
         backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         
-        backRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        backRight.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
         
-        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
         
         frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
 
