@@ -99,8 +99,8 @@ public class RobotContainer {
         //assign button fuctions
         ejectButton.whileHeld(new Eject(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
-        shootHighButton.whenPressed(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
-        shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
+        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, 100000), true);
+        shootLowButton.whileHeld(new ShootCommand(m_belt, m_shooter, false, 100000), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
 
