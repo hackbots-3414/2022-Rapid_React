@@ -52,11 +52,17 @@ public class Drivetrain extends SubsystemBase {
 
         backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         
-        backRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        backRight.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
         
-        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
         
         frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+
+        backLeft.configOpenloopRamp(DriveConstants.voltageRampRate);
+        backRight.configOpenloopRamp(DriveConstants.voltageRampRate);
+        frontLeft.configOpenloopRamp(DriveConstants.voltageRampRate);
+        frontRight.configOpenloopRamp(DriveConstants.voltageRampRate);
+
 
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
         addChild("DifferentialDrive", differentialDrive);
@@ -151,6 +157,10 @@ public class Drivetrain extends SubsystemBase {
     public void tankDriveVolts(double leftVolts, double rightVolts) {
         frontLeft.setVoltage(-leftVolts);
         frontRight.setVoltage(-rightVolts);
+    }
+    
+    public void curvatureDrive(double throttle, double rotation, boolean turnInPlace) {
+        DifferentialDrive.curvatureDriveIK(throttle, rotation, turnInPlace);
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {

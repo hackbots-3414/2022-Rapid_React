@@ -1,34 +1,39 @@
 package frc.robot;
 
-import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import java.util.function.DoubleBinaryOperator;
 
 public class Constants {
+    public static final class CompControllerConstants {
+        public static final double left_x_offset = -0.13379;
+        public static final double left_x_max = 0.81982;
+        public static final double left_y_offset = 0.02;
+        public static final double left_y_max = 0.62793;
+        public static final double right_x_offset = 0.05;
+        public static final double right_x_max = 0.80713;
+        public static final double right_y_offset = 0.03418;
+        public static final double right_y_max = 0.85005;
+        public static final double r_knob_offset = 0.03371;
+    }
 
-    public static final double kTrackWidthMeters = 0.6096;
-
-    public static final double kMotorToWheelGearRatio = 12; // 12:1 m:w
+    public static final class DevControllerConstants {
+        public static final double left_x_offset = -0.05518;
+        public static final double left_x_max = 0.83401;
+        public static final double left_y_offset = -0.01953;
+        public static final double left_y_max = 0.64453;
+        public static final double right_x_offset = 0.03711;
+        public static final double right_x_max = 0.73144;
+        public static final double right_y_offset = 0.01367;
+        public static final double right_y_max = 0.87256;
+        public static final double r_knob_offset = 0.03371;
+    }
 
     public static final class DriveConstants {
-        public static final int kLeftMotorFrontPort = 13;
-        public static final int kLeftMotorRearPort = 14;
-        public static final int kRightMotorFrontPort = 10;
-        public static final int kRightMotorRearPort = 11;
-
-        public static final double testChassisWheelDiameterInCentimeters = 16;
-
-        public static final double maxDriveVoltage = 10;
-
-        public static final double ksVolts = 0.58049;
-        public static final double kvVoltSecondsPerMeter = 2.5715;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.14127;
-
-        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
-
-        public static final double kPDriveVel = 2.1416; 
-        public static final double kIDriveVel = 0;
-        public static final double kDDriveVel = 0;
-
-        public static final double testChassisDistancePerTick = ((testChassisWheelDiameterInCentimeters / 100) * Math.PI) / 2048 / Constants.kMotorToWheelGearRatio;
+        public static final int kLeftMotorFrontPort = 10;
+        public static final int kLeftMotorRearPort = 11;
+        public static final int kRightMotorFrontPort = 13;
+        public static final int kRightMotorRearPort = 14;
+        public static final double voltageRampRate = 0.63;
+        public static final double kMaxSpeed = 2.5; // 2
     }
 
     public static final class TransportConstants {
@@ -40,8 +45,8 @@ public class Constants {
     public static final class ShooterConstants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
-        public static final double highShootVelocity = 6000;
-        public static final double lowShootVelocity = 3800;
+        public static final double highShootVelocity = 6300;
+        public static final double lowShootVelocity = 4100;
         public static final double shootVelocityTolerance = 350;
         public static final double integralZone = 201;
         public static final double kD = 8;
@@ -64,22 +69,26 @@ public class Constants {
         public static final int middleMotor = 21;
         public static final int bottomMotor = 20;
         public static final int intakeMotor = 30;
-        public static final int solenoidChannel = 8;
-        public static final double motorSpeed = 1.0;
+        public static final int solenoidChannel = 4;
+        public static final double motorSpeedShooter = 1.0; //used for lower two motors (Bottom and Middle)
         public static final double intakeSpeed = 0.4;
-        public static final double topMotorSpeed = 0.5;
+        public static final double topMotorSpeedShooter = 0.5;
+        public static final double motorSpeedTransfer = 0.75;
+        public static final double topMotorSpeedTransfer = 0.3;
+        public static final double ejectSpeed = 1.0;
+
     }
 
     public static final class LEDConstants {
-        public static final double defaultFlash = 1.0;
-        public static final double defaultFastFlash = 0.5;
-        public static final double defaultSlowFlash = 2;
+        public static final double defaultFlash = 500;
+        public static final double defaultFastFlash = 250;
+        public static final double defaultSlowFlash = 1000;
     }
 
     public static final class ClimberConstants {
         public static final int climbUpAngle = 0;
         public static final int climbDownAngle = 180;
-        public static final int climberSolenoidChannel_1 = 9;
-        public static final int climberSolenoidChannel_2 = 10;
+        public static final int climberSolenoidChannel_1 = 5;
+        public static final int climberSolenoidChannel_2 = 6;
     }
 }

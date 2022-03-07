@@ -1,5 +1,6 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Belt;
 
 public class Eject extends CommandBase {
@@ -16,7 +17,7 @@ public class Eject extends CommandBase {
 
   @Override
   public void execute() {
-    m_belt.eject();
+    m_belt.eject(Constants.BeltConstants.ejectSpeed);
   }
 
   @Override
