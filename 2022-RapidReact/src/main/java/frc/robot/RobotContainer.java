@@ -26,6 +26,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import frc.robot.subsystems.vision.Pixy;
 
 public class RobotContainer {
@@ -40,6 +41,7 @@ public class RobotContainer {
     public final Shooter m_shooter;
     public final Drivetrain m_drivetrain;
     public final Climber m_climber;
+    public final PowerDistribution m_powerdistribution;
     public final Pixy m_pixy;
 
 
@@ -56,6 +58,7 @@ public class RobotContainer {
         m_shooter = new Shooter();
         m_drivetrain = new Drivetrain();
         m_climber = new Climber();
+        m_powerdistribution = new PowerDistribution();
         m_pixy = new Pixy();
 
         // Smartdashboard Subsystems
@@ -81,8 +84,6 @@ public class RobotContainer {
 
         SmartDashboard.putData("Auto Mode", m_chooser);
         //SmartDashboard.putData("Wait Command", new WaitCommand());
-        //SmartDashboard.putData("EatBall Command", new EatBall(m_drivetrain, m_pixy));
-
 
     }
 
