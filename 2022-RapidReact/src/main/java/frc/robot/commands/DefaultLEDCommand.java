@@ -33,7 +33,7 @@ public class DefaultLEDCommand extends CommandBase {
             // Checks if we're in a Practice, Qualification or Final match to use end game times to flash the LEDs
             if (m_lEDFeedback.isClimbLineDetected()) {
                 m_lEDFeedback.setColor(Color.kGreen);
-            } else if (DriverStation.getMatchTime() <= 30.0 ) {
+            } else if (DriverStation.getMatchTime() <= 15.0 ) {
                 m_lEDFeedback.setFlash(Color.kRed, LEDConstants.defaultFastFlash);
             } else if (DriverStation.getMatchTime() <= 15.0 ) {
                 m_lEDFeedback.setColor(Color.kRed);
