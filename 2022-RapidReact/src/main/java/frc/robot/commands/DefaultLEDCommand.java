@@ -33,12 +33,10 @@ public class DefaultLEDCommand extends CommandBase {
             // Checks if we're in a Practice, Qualification or Final match to use end game times to flash the LEDs
             if (m_lEDFeedback.isClimbLineDetected()) {
                 m_lEDFeedback.setColor(Color.kGreen);
-            } else if (DriverStation.getMatchTime() <= 10.0 ) {
-                m_lEDFeedback.setFlash(Color.kWhite, LEDConstants.defaultFastFlash);
+            } else if (DriverStation.getMatchTime() <= 30.0 ) {
+                m_lEDFeedback.setColor(Color.kRed);
             } else if (DriverStation.getMatchTime() <= 15.0 ) {
-                m_lEDFeedback.setFlash(Color.kWhite, LEDConstants.defaultFlash);
-            } else if (DriverStation.getMatchTime() <= 20.0 ) {
-                m_lEDFeedback.setFlash(Color.kWhite, LEDConstants.defaultSlowFlash);
+                m_lEDFeedback.setFlash(Color.kRed, LEDConstants.defaultFastFlash);
             } else {
                 m_lEDFeedback.setColor(Color.kWhite);
             }
@@ -48,9 +46,14 @@ public class DefaultLEDCommand extends CommandBase {
         } else if (RobotContainer.getInstance().m_belt.getIRTop() || RobotContainer.getInstance().m_belt.getIRBottom()) {
             // Check if Robot has one ball and set LEDs to solid color
             m_lEDFeedback.setColor(Color.kOrange);
-        } else {
+        } else if (m_lEDFeedback.checkPressure() < 80.0){
+            m_lEDFeedback.setColor(Color.kYellow);
+        }
+
+        else {
             m_lEDFeedback.setColor(Color.kPurple);
         }
+
     }
 
     @Override

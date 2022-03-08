@@ -25,6 +25,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.PowerDistribution;
 
 public class RobotContainer {
 
@@ -38,6 +39,7 @@ public class RobotContainer {
     public final Shooter m_shooter;
     public final Drivetrain m_drivetrain;
     public final Climber m_climber;
+    public final PowerDistribution m_powerdistribution;
 
 
     // Joysticks
@@ -53,7 +55,7 @@ public class RobotContainer {
         m_shooter = new Shooter();
         m_drivetrain = new Drivetrain();
         m_climber = new Climber();
-
+        m_powerdistribution = new PowerDistribution();
         // Smartdashboard Subsystems
 
         // SmartDashboard Buttons
