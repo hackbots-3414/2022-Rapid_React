@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
@@ -21,9 +22,12 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+        
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
-        CameraServer.startAutomaticCapture();
+        UsbCamera camera = CameraServer.startAutomaticCapture();
+        camera.setFPS(30);
+        camera.setResolution(320, 240);
     }
 
     @Override
@@ -41,6 +45,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+        m_robotContainer.getInstance().m_lEDFeedback.setClimbingActivated(false);
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
         // schedule the autonomous command (example)
@@ -55,6 +60,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        
+        m_robotContainer.getInstance().m_lEDFeedback.setClimbingActivated(false);
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }

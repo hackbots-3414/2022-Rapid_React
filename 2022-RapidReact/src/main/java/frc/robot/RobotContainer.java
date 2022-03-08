@@ -71,6 +71,7 @@ public class RobotContainer {
         // Configure default commands
 
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
+        m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback));
 
       // Configure autonomous sendable chooser
 
@@ -79,8 +80,9 @@ public class RobotContainer {
         m_chooser.setDefaultOption("ShootHigh, Wait, Backup", new ShootHighWaitBackup(m_shooter, m_drivetrain, m_belt));
 
         SmartDashboard.putData("Auto Mode", m_chooser);
-        SmartDashboard.putData("Wait Command", new WaitCommand());
-        SmartDashboard.putData("EatBall Command", new EatBall(m_drivetrain, m_pixy));
+        //SmartDashboard.putData("Wait Command", new WaitCommand());
+        //SmartDashboard.putData("EatBall Command", new EatBall(m_drivetrain, m_pixy));
+
 
     }
 
@@ -104,8 +106,8 @@ public class RobotContainer {
         //assign button fuctions
         ejectButton.whileHeld(new Eject(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
-        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
-        shootLowButton.whenPressed(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
+        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, 100000), true);
+        shootLowButton.whileHeld(new ShootCommand(m_belt, m_shooter, false, 100000), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
         eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
