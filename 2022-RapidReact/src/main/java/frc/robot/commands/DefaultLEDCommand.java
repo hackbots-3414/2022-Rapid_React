@@ -45,8 +45,7 @@ public class DefaultLEDCommand extends CommandBase {
         } else if (RobotContainer.getInstance().m_belt.getIRTop() && RobotContainer.getInstance().m_belt.getIRBottom()) {
             // Check if Robot has two balls and flash the LEDs
             m_lEDFeedback.setFlash(Color.kOrange, LEDConstants.defaultFlash);
-
-        } else if (RobotContainer.getInstance().m_belt.getIRTop() && !RobotContainer.getInstance().m_belt.getIRBottom()) {
+        } else if (RobotContainer.getInstance().m_belt.getIRTop() || RobotContainer.getInstance().m_belt.getIRBottom()) {
             // Check if Robot has one ball and set LEDs to solid color
             m_lEDFeedback.setColor(Color.kOrange);
         } else {
