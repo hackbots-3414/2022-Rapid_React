@@ -13,6 +13,7 @@ import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.ConfigureReverseControls;
 import frc.robot.commands.DefaultLEDCommand;
+import frc.robot.commands.EatBall;
 import frc.robot.commands.Eject;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.ShootHighWaitBackup;
@@ -26,6 +27,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.PowerDistribution;
+import frc.robot.subsystems.vision.Pixy;
 
 public class RobotContainer {
 
@@ -40,6 +42,7 @@ public class RobotContainer {
     public final Drivetrain m_drivetrain;
     public final Climber m_climber;
     public final PowerDistribution m_powerdistribution;
+    public final Pixy m_pixy;
 
 
     // Joysticks
@@ -56,6 +59,8 @@ public class RobotContainer {
         m_drivetrain = new Drivetrain();
         m_climber = new Climber();
         m_powerdistribution = new PowerDistribution();
+        m_pixy = new Pixy();
+
         // Smartdashboard Subsystems
 
         // SmartDashboard Buttons
@@ -97,6 +102,7 @@ public class RobotContainer {
         final POVButton climberUpButton = new POVButton(operatorPad, Constants.ClimberConstants.climbUpAngle);
         final POVButton climberDownButton = new POVButton(operatorPad, Constants.ClimberConstants.climbDownAngle);
         final JoystickButton ejectButton = new JoystickButton(operatorPad, XboxController.Button.kX.value);
+        final JoystickButton eatBallButton = new JoystickButton(operatorPad, XboxController.Button.kA.value);
 
         //assign button fuctions
         ejectButton.whileHeld(new Eject(m_belt), true);
@@ -105,6 +111,7 @@ public class RobotContainer {
         shootLowButton.whileHeld(new ShootCommand(m_belt, m_shooter, false, 100000), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
+        eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
 
     }
 
