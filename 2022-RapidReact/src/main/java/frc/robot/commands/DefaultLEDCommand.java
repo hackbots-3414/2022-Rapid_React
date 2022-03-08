@@ -35,7 +35,7 @@ public class DefaultLEDCommand extends CommandBase {
                 m_lEDFeedback.setColor(Color.kGreen);
             } else if (DriverStation.getMatchTime() <= 15.0 ) {
                 m_lEDFeedback.setFlash(Color.kRed, LEDConstants.defaultFastFlash);
-            } else if (DriverStation.getMatchTime() <= 15.0 ) {
+            } else if (DriverStation.getMatchTime() <= 30.0 ) {
                 m_lEDFeedback.setColor(Color.kRed);
             } else {
                 m_lEDFeedback.setColor(Color.kWhite);
