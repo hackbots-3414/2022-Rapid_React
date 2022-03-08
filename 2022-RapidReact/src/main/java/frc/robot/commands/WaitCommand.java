@@ -12,7 +12,7 @@ public class WaitCommand extends CommandBase {
     public long waitTime;
 
     static {
-        SmartDashboard.putNumber("Auton Delay", 0);
+        SmartDashboard.putNumber("Delay Before Drive", 0);
     }
 
     public WaitCommand() {
@@ -21,7 +21,7 @@ public class WaitCommand extends CommandBase {
     @Override
     public void initialize() {
         prevMilliseconds = System.currentTimeMillis();
-        waitTime = (long) SmartDashboard.getNumber("Auton Delay", 0);
+        waitTime = (long) SmartDashboard.getNumber("Delay Before Drive", 0);
 
         LOG.info("wait command starting prevMilliseconds = {}, waitTime = {}", prevMilliseconds, waitTime);
     }

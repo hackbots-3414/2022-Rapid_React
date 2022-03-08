@@ -18,7 +18,7 @@ public class WaitBeforeShoot extends CommandBase {
     @Override
     public void initialize() {
         prevMilliseconds = System.currentTimeMillis();
-        waitTime = (long) SmartDashboard.getNumber("Auton Delay", 0);
+        waitTime = (long) SmartDashboard.getNumber("Delay Before Shoot", 0);
 
         LOG.info("wait command starting prevMilliseconds = {}, waitTime = {}", prevMilliseconds, waitTime);
     }

@@ -15,8 +15,9 @@ public class LEDFeedback extends SubsystemBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(LEDFeedback.class);
 
-    public static final int LED_ARRAY_LENGTH = 10;
+    public static final int LED_ARRAY_LENGTH = 20;
     private AddressableLED ledString;
+    private AddressableLED ledString2;
     private AddressableLEDBuffer ledBuffer;
 
     private final I2C.Port i2cPort = I2C.Port.kMXP;
@@ -54,7 +55,7 @@ public class LEDFeedback extends SubsystemBase {
 
     public void setFlash(Color color, double flashSpeed) {
         // Do not use Timer.delay here as it will interrupt default commands
-         System.out.println("flashTimer: "+ flashTimer); 
+        System.out.println("flashTimer: "+ flashTimer); 
         System.out.println("System time:" + System.currentTimeMillis());
         if (System.currentTimeMillis() - flashSpeed > flashTimer) {
             

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
@@ -24,7 +25,9 @@ public class Robot extends TimedRobot {
         
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
-        CameraServer.startAutomaticCapture();
+        UsbCamera camera = CameraServer.startAutomaticCapture();
+        camera.setFPS(30);
+        camera.setResolution(320, 240);
     }
 
     @Override
