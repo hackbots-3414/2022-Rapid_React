@@ -83,4 +83,8 @@ public class Constants {
         public static final int climberSolenoidChannel_1 = 5;
         public static final int climberSolenoidChannel_2 = 6;
     }
+
+    public static final class PressureConstants {
+        public static final int pressureValue = 80;
+    }
 }
