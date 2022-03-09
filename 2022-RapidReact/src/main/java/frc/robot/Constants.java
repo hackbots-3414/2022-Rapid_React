@@ -66,7 +66,7 @@ public class Constants {
         public static final double kF = 0.045;
         public static final double kI = 0.0005;
         public static final double kP = 0.15;
-        public static final int shooterTimer = 1000;
+        public static final int shooterTimer = 100000;
     }
 
     public static final class AutoConstants {
@@ -103,5 +103,9 @@ public class Constants {
         public static final int climbDownAngle = 180;
         public static final int climberSolenoidChannel_1 = 5;
         public static final int climberSolenoidChannel_2 = 6;
+    }
+
+    public static final class PressureConstants {
+        public static final double pressureValue = 80;
     }
 }
