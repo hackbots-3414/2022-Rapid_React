@@ -106,6 +106,10 @@ public class Drivetrain extends SubsystemBase {
         }
     }
 
+    public void drive(double speed, double rotation) {
+        differentialDrive.arcadeDrive(speed, rotation);
+      }
+
     public void curvatureDrive(double throttle, double rotation, boolean turnInPlace) {
         DifferentialDrive.curvatureDriveIK(throttle, rotation, turnInPlace);
     }
