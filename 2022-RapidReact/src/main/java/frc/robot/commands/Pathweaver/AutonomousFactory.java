@@ -77,12 +77,17 @@ public class AutonomousFactory {
         return ramseteCommand;
     }
 
-    private ShootCommand createShootCommand(Belt belt, Shooter shooter, boolean isHigh, int shooterTimer) {
-        return new ShootCommand(belt, shooter, isHigh, shooterTimer);
-    }
-
-    private BeltCommand createIntakeCommand(Belt belt) {
-        return new BeltCommand(belt);
+    public SequentialCommandGroup create3BallAuton() {
+        SequentialCommandGroup group = new SequentialCommandGroup();
+        // group.addCommands(shoot);
+        group.addCommands(new ParallelCommandGroup(createRamseteCommand("3BallAutonBall2", TrajectoryFactory.getPath("3BallAutonBall2")/* , intake */)));
+        group.addCommands(createRamseteCommand("3BallAutonBall3For", TrajectoryFactory.getPath("3BallAutonBall3For")));
+        group.addCommands(new ParallelCommandGroup(createRamseteCommand("3BallAutonBall3Rev", TrajectoryFactory.getPath("3BallAutonBall3Rev"))/* , intake */));
+        group.addCommands(createRamseteCommand("3BallAutonShoot2", TrajectoryFactory.getPath("3BallAutonShoot2")));
+        // group.addCommands(shoot);
+        group.addCommands(createRamseteCommand("3BallAutonBackup", TrajectoryFactory.getPath("3BallAutonBackup")));
+        
+        return group;
     }
 
     public SequentialCommandGroup createShootBackupIntake(String team, String tarmac, String position) {

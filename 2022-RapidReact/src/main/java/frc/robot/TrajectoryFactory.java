@@ -51,56 +51,20 @@ public class TrajectoryFactory {
         switch (name) {
             case "TestPathSmooth":
                 return getTrajectory("TestPathSmooth.wpilib.json");
-            case "TestPath2":
-                return getTrajectory("TestPath2.wpilib.json");
-            case "BlueBottom1Rev":
-                return getTrajectory("BlueBottom1Rev.wpilib.json");
-            case "BlueBottom1For":
-                return getTrajectory("BlueBottom1For.wpilib.json");
-            case "BlueBottom2Rev":
-                return getTrajectory("BlueBottom2Rev.wpilib.json");
+            case "3BallAutonBall2":
+                return getTrajectory("3BallAutonBall2.wpilib.json");
+            case "3BallAutonBall3For":
+                return getTrajectory("3BallAutonBall3For.wpilib.json");
+            case "3BallAutonBall3Rev":
+                return getTrajectory("3BallAutonBall3Rev.wpilib.json");
+            case "3BallAutonShoot2":
+                return getTrajectory("3BallAutonShoot2.wpilib.json");
+            case "3BallAutonBackup":
+                return getTrajectory("3BallAutonBackup.wpilib.json");
             case "BlueBottom2For":
                 return getTrajectory("BlueBottom2For.wpilib.json");
-            case "BlueBottom3Rev":
-                return getTrajectory("BlueBottom3Rev.wpilib.json");
-            case "BlueBottom3For":
-                return getTrajectory("BlueBottom3For.wpilib.json");
-            case "BlueTop1Rev":
-                return getTrajectory("BlueTop1Rev.wpilib.json");
-            case "BlueTop1For":
-                return getTrajectory("BlueTop1For.wpilib.json");
-            case "BlueTop2Rev":
-                return getTrajectory("BlueTop2Rev.wpilib.json");
-            case "BlueTop2For":
-                return getTrajectory("BlueTop2For.wpilib.json");
-            case "BlueTop3Rev":
-                return getTrajectory("BlueTop3Rev.wpilib.json");
-            case "BlueTop3For":
-                return getTrajectory("BlueTop3For.wpilib.json");
-            case "RedBottom1Rev":
-                return getTrajectory("RedBottom1Rev.wpilib.json");
-            case "RedBottom1For":
-                return getTrajectory("RedBottom1For.wpilib.json");
-            case "RedBottom2Rev":
-                return getTrajectory("RedBottom2Rev.wpilib.json");
-            case "RedBottom2For":
-                return getTrajectory("RedBottom2For.wpilib.json");
-            case "RedBottom3Rev":
-                return getTrajectory("RedBottom3Rev.wpilib.json");
-            case "RedBottom3For":
-                return getTrajectory("RedBottom3For.wpilib.json");
-            case "RedTop1Rev":
-                return getTrajectory("RedTop1Rev.wpilib.json");
-            case "RedTop1For":
-                return getTrajectory("RedTop1For.wpilib.json");
-            case "RedTop2Rev":
-                return getTrajectory("RedTop2Rev.wpilib.json");
-            case "RedTop2For":
-                return getTrajectory("RedTop2For.wpilib.json");
-            case "RedTop3Rev":
-                return getTrajectory("RedTop3Rev.wpilib.json");
-            case "RedTop3For":
-                return getTrajectory("RedTop3For.wpilib.json");
+            case "BlueBottom2Rev":
+                return getTrajectory("BlueBottom2Rev.wpilib.json");
             default:
                 return getTrajectory("TestPathSmooth.wpilib.json");
 

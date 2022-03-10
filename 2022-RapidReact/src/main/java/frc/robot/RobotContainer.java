@@ -5,6 +5,7 @@ package frc.robot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,8 +16,6 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
-import frc.robot.commands.ConfigureReverseControls;
-import frc.robot.commands.DefaultLEDCommand;
 import frc.robot.commands.EatBall;
 import frc.robot.commands.Eject;
 import frc.robot.commands.ShootCommand;
@@ -24,14 +23,12 @@ import frc.robot.commands.ShootHighWaitBackup;
 import frc.robot.commands.ShootLowWaitBackup;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.WaitBackupSequential;
-import frc.robot.commands.WaitCommand;
 import frc.robot.commands.Pathweaver.AutonomousFactory;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
-import edu.wpi.first.wpilibj.PowerDistribution;
 import frc.robot.subsystems.vision.Pixy;
 
 public class RobotContainer {
@@ -112,6 +109,7 @@ public class RobotContainer {
         m_chooser.addOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
         m_chooser.addOption("ShootLow, Wait, Back Up", new ShootLowWaitBackup(m_shooter, m_drivetrain, m_belt));
         m_chooser.addOption("PathweaverTest", autonomousFactory.createShootBackupIntake(team, tarmac, position));
+        m_chooser.addOption("3BallAuton", autonomousFactory.create3BallAuton());
         m_chooser.setDefaultOption("ShootHigh, Wait, Backup", new ShootHighWaitBackup(m_shooter, m_drivetrain, m_belt));
 
         SmartDashboard.putData("Auto Mode", m_chooser);
