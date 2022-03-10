@@ -23,7 +23,7 @@ public class OI {
     static double right_y_offset = 0.03418;
     static double right_y_max = 0.85005;
     static double r_knob_offset = 0.03371;
-    Drivetrain drivetrainSubsystem = new Drivetrain();
+
     // ConfigureReverseControls normalDriveButton = new ConfigureReverseControls(drivetrainSubsystem);
 
     static {
@@ -37,23 +37,31 @@ public class OI {
         if (SmartDashboard.getBoolean("Controller (false = dev, true = comp)", true)) {
             left_x_offset = -0.05518;
             left_x_max = 0.83401;
+
             left_y_offset = -0.01953;
             left_y_max = 0.64453;
+
             right_x_offset = 0.03711;
             right_x_max = 0.73144;
+
             right_y_offset = 0.01367;
             right_y_max = 0.87256;
+
             r_knob_offset = 0.03371;
         }
         else {
             left_x_offset = -0.13379;
             left_x_max = 0.81982;
+
             left_y_offset = 0.01758;
             left_y_max = 0.62793;
+
             right_x_offset = 0.03418;
             right_x_max = 0.80713;
+
             right_y_offset = 0.03418;
             right_y_max = 0.85005;
+
             r_knob_offset = 0.03613;
         }
     }
@@ -76,6 +84,26 @@ public class OI {
     public static double getRightVertical() {
         updateController();
         return (joystick.getRawAxis(4) - right_y_offset) / right_y_max;
+    }
+
+    public static double getLeftLateralRaw() {
+        updateController();
+        return joystick.getRawAxis(0);
+    }
+
+    public static double getLeftVerticalRaw() {
+        updateController();
+        return joystick.getRawAxis(1);
+    }
+
+    public static double getRightLateralRaw() {
+        updateController();
+        return joystick.getRawAxis(3);
+    }
+
+    public static double getRightVerticalRaw() {
+        updateController();
+        return joystick.getRawAxis(4);
     }
 
     public static double getRKnob() {

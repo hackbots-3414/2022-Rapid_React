@@ -17,7 +17,7 @@ public class DriveStraight extends CommandBase {
     public DriveStraight(Drivetrain subsystem, double distance) {
         this.distance = distance;
         this.requestedDistance = distance;
-        LOG.info("distance: {}", distance);
+        //LOG.info("distance: {}", distance);
 
         m_drivetrain = subsystem;
         addRequirements(m_drivetrain);
@@ -25,47 +25,47 @@ public class DriveStraight extends CommandBase {
 
     @Override
     public void initialize() {
-        LOG.info("driveStraigt initialized");
+        //LOG.info("driveStraigt initialized");
         this.distance = requestedDistance;
         this.speed = 0;
         m_drivetrain.arcadeDrive(0, 0);
         m_drivetrain.resetEncoders();
 
-        LOG.info("distance, inches: {}", this.distance);
+        //LOG.info("distance, inches: {}", this.distance);
 
         this.speed = Math.copySign(0.45, this.distance);
-        LOG.info("speed: {}", this.speed);
+        //LOG.info("speed: {}", this.speed);
         // this.distance = Math.abs(this.distance / 0.001198047515388888); // converts from inches to motor ticks (wheel diameter 6.432 inches)
         this.distance = Math.abs(this.distance / 0.00083101561761); // converts from inches to motor ticks (wheel diameter 6.432 inches)
-        LOG.info("distance, ticks: {}", this.distance);
+        //LOG.info("distance, ticks: {}", this.distance);
     }
 
     @Override
     public void execute() {
-        LOG.trace("driveStraigt executed");
+        //LOG.trace("driveStraigt executed");
         m_drivetrain.arcadeDrive(speed, 0);
-        LOG.info("Average Encoder: {}\nLeft Encoder: {}\nRight Encoder: {}", m_drivetrain.getAverageEncoderPosition(), m_drivetrain.getLeftEncoderPosition(), m_drivetrain.getRightEncoderPosition());
-        if (m_drivetrain.getAverageEncoderPosition() > this.distance){
-            isFinished();
-        }
-        LOG.trace("driveStraigt executed 2");
+        //LOG.info("Average Encoder: {}\nLeft Encoder: {}\nRight Encoder: {}", m_drivetrain.getAverageEncoderPosition(), m_drivetrain.getLeftEncoderPosition(), m_drivetrain.getRightEncoderPosition());
+        // if (m_drivetrain.getAverageEncoderPosition() > this.distance){
+        //     isFinished();
+        // }
+        //LOG.trace("driveStraigt executed 2");
     }
 
     @Override
     public void end(boolean interrupted) {
-        LOG.info("driveStraigt ended");
+        //LOG.info("driveStraigt ended");
         m_drivetrain.arcadeDrive(0, 0);
         m_drivetrain.resetEncoders();
     }
 
     @Override
     public boolean isFinished() {
-        LOG.trace("Average Encoder: {}\nLeft Encoder: {}\nRight Encoder: {}", m_drivetrain.getAverageEncoderPosition(), m_drivetrain.getLeftEncoderPosition(), m_drivetrain.getRightEncoderPosition());
+        //LOG.trace("Average Encoder: {}\nLeft Encoder: {}\nRight Encoder: {}", m_drivetrain.getAverageEncoderPosition(), m_drivetrain.getLeftEncoderPosition(), m_drivetrain.getRightEncoderPosition());
         if (Math.abs(m_drivetrain.getAverageEncoderPosition()) <= this.distance) {
-            LOG.trace("driveStraigt not finished");
+            //LOG.trace("driveStraigt not finished");
             return false;
         } else {
-            LOG.trace("driveStraigt finished");
+            //LOG.trace("driveStraigt finished");
             return true;
         }
     }
