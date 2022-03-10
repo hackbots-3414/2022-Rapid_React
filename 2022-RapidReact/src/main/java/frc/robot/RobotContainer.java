@@ -45,7 +45,7 @@ public class RobotContainer {
     public final Climber m_climber;
     public final AutonomousFactory autonomousFactory;
     public final PowerDistribution m_powerdistribution;
-    public final Pixy m_pixy;
+    // public final Pixy m_pixy;
 
 
     // Joysticks
@@ -70,7 +70,7 @@ public class RobotContainer {
         m_climber = new Climber();
         autonomousFactory = AutonomousFactory.getInstance(m_drivetrain, m_belt, m_lEDFeedback, m_shooter);
         m_powerdistribution = new PowerDistribution();
-        m_pixy = new Pixy();
+        // m_pixy = new Pixy();
 
         // Smartdashboard Subsystems
 
@@ -141,7 +141,7 @@ public class RobotContainer {
         shootLowButton.whileHeld(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
-        eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
+        // eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
 
     }
 
