@@ -2,6 +2,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.MatchType;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.LEDConstants;
@@ -27,10 +29,10 @@ public class DefaultLEDCommand extends CommandBase {
 
         // System.out.print("Running");
         // m_lEDFeedback.setColor(Color.kPurple);
-    if (m_lEDFeedback.checkPressure() < PressureConstants.pressureValue){
+   /* if (m_lEDFeedback.checkPressure() < PressureConstants.pressureValue){
          m_lEDFeedback.setColor(Color.kYellow);
 
-    }   else if (m_lEDFeedback.isClimbingActivated()) {
+    }   else */if (m_lEDFeedback.isClimbingActivated()) {
             m_lEDFeedback.setFlash(Color.kGreen, LEDConstants.defaultFlash);
         } else if (DriverStation.getMatchTime() <= 30.0 && DriverStation.isTeleop() && (DriverStation.getMatchType()!= MatchType.None)) {
             // Checks if we're in a Practice, Qualification or Final match to use end game times to flash the LEDs
@@ -53,6 +55,20 @@ public class DefaultLEDCommand extends CommandBase {
         else {
             m_lEDFeedback.setColor(Color.kPurple);
         }
+
+        if (DriverStation.getMatchTime() <= 30) {
+            SmartDashboard.put
+          } else if (DriverStation.getMatchTime() <= 25) {
+            m_lEDFeedback.setColor(Color.kYellow);
+          } else if (DriverStation.getMatchTime() <= 20) {
+            m_lEDFeedback.setColor(Color.kOrange);
+          } else if (DriverStation.getMatchTime() <= 15) {
+            m_lEDFeedback.setColor(Color.kOrangeRed);
+          } else if (DriverStation.getMatchTime() <= 10) {
+            m_lEDFeedback.setColor(Color.kRed);
+          } else if (DriverStation.getMatchTime() <= 5) {
+            m_lEDFeedback.setColor(Color.kDarkRed);
+          }
 
     }
 
