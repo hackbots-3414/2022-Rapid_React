@@ -4,8 +4,8 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 
 public class Constants {
     public static final class RobotPartsConstants {
-        public static final double wheelDiameter = 16;
-        public static final double trackWidth = 60.96;
+        public static final double wheelDiameter = 0.16;
+        public static final double trackWidth = 0.6096;
         public static final double distancePerTick = wheelDiameter * Math.PI / 2048 / 12;
     }
 
@@ -43,7 +43,7 @@ public class Constants {
         public static final double ksVolts = 0.59109;
         public static final double kvVoltSecondsPerMeter = 2.5041;
         public static final double kaVoltSecondsSquaredPerMeter = 0.51497;
-        public static final double kPDriveVel = 1.81115;//3.6223
+        public static final double kPDriveVel = 3.6223;//3.6223
         public static final double kIDriveVel = 0;
         public static final double kDDriveVel = 0;
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(RobotPartsConstants.trackWidth);
