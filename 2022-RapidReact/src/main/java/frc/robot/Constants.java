@@ -40,10 +40,10 @@ public class Constants {
         public static final int kRightMotorRearPort = 14;
         public static final double voltageRampRate = 0.63;
         public static final double kMaxSpeed = 2.5; // 2
-        public static final double ksVolts = 0.59055;
-        public static final double kvVoltSecondsPerMeter = 2.5587;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.40961;
-        public static final double kPDriveVel = 3.5617;
+        public static final double ksVolts = 0.59109;
+        public static final double kvVoltSecondsPerMeter = 2.5041;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.51497;
+        public static final double kPDriveVel = 1.81115;//3.6223
         public static final double kIDriveVel = 0;
         public static final double kDDriveVel = 0;
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(RobotPartsConstants.trackWidth);

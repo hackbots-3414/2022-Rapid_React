@@ -156,8 +156,8 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void tankDriveVolts(double leftVolts, double rightVolts) {
-        frontLeft.setVoltage(-leftVolts);
-        frontRight.setVoltage(-rightVolts);
+        frontLeft.setVoltage(leftVolts);
+        frontRight.setVoltage(rightVolts);
     }
     
     public void curvatureDrive(double throttle, double rotation, boolean turnInPlace) {
@@ -174,7 +174,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getHeading() {
-        double angle = -ahrs.getYaw();
+        double angle = ahrs.getYaw();
         // FIXME - NavX on Cookie Monster reports reversed angles - CHECK ON OSCAR!
         LOG.info("NavX Heading: {}", angle);
         return angle;
@@ -185,32 +185,32 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getLeftEncoderPosition() {
-        LOG.trace("LeftEncoderPosition: {}", frontLeft.getSelectedSensorPosition());
+        // LOG.trace("LeftEncoderPosition: {}", frontLeft.getSelectedSensorPosition());
         return frontLeft.getSelectedSensorPosition();
     }
 
     public double getLeftEncoderDistance() {
-        LOG.trace("LeftEncoderDistance: {}", getLeftEncoderPosition() * RobotPartsConstants.distancePerTick);
+        // LOG.trace("LeftEncoderDistance: {}", getLeftEncoderPosition() * RobotPartsConstants.distancePerTick);
         return getLeftEncoderPosition() * RobotPartsConstants.distancePerTick;
     }
 
     public double getLeftMetersPerSecond() {
-        LOG.trace("LeftMetersPerSecond: {}", frontLeft.getSelectedSensorVelocity());
+        // LOG.trace("LeftMetersPerSecond: {}", frontLeft.getSelectedSensorVelocity());
         return frontLeft.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 100 /* ticks / 100ms convert to m/s*/;
     }
 
     public double getRightEncoderPosition() {
-        LOG.trace("RightEncoderPosition: {}", frontRight.getSelectedSensorPosition());
+        // LOG.trace("RightEncoderPosition: {}", frontRight.getSelectedSensorPosition());
         return frontRight.getSelectedSensorPosition();
     }
 
     public double getRightEncoderDistance() {
-        LOG.trace("RightEncoderDistance: {}", getRightEncoderPosition() * RobotPartsConstants.distancePerTick);
+        // LOG.trace("RightEncoderDistance: {}", getRightEncoderPosition() * RobotPartsConstants.distancePerTick);
         return getRightEncoderPosition() * RobotPartsConstants.distancePerTick;
     }
 
     public double getRightMetersPerSecond() {
-        LOG.trace("RightMetersPerSecond: {}", frontRight.getSelectedSensorVelocity());
+        // LOG.trace("RightMetersPerSecond: {}", frontRight.getSelectedSensorVelocity());
         return frontRight.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 100 /* ticks / 100ms convert to m/s */;
     }
 
