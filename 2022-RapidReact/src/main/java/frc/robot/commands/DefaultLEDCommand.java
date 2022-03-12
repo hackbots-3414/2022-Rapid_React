@@ -27,10 +27,10 @@ public class DefaultLEDCommand extends CommandBase {
 
         // System.out.print("Running");
         // m_lEDFeedback.setColor(Color.kPurple);
-    if (m_lEDFeedback.checkPressure() < PressureConstants.pressureValue){
+    /* if (m_lEDFeedback.checkPressure() < PressureConstants.pressureValue){
          m_lEDFeedback.setColor(Color.kYellow);
 
-    }   else if (m_lEDFeedback.isClimbingActivated()) {
+    }   else*/ if (m_lEDFeedback.isClimbingActivated()) {
             m_lEDFeedback.setFlash(Color.kGreen, LEDConstants.defaultFlash);
         } else if (DriverStation.getMatchTime() <= 30.0 && DriverStation.isTeleop() && (DriverStation.getMatchType()!= MatchType.None)) {
             // Checks if we're in a Practice, Qualification or Final match to use end game times to flash the LEDs

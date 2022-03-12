@@ -1,4 +1,5 @@
 package frc.robot.commands;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Belt;
@@ -17,8 +18,6 @@ public class ShootCommand extends CommandBase {
         m_shooter = shooter;
         this.isHigh = isHigh;
         this.shooterTimer = shooterTimer;
-        addRequirements(m_belt);
-        addRequirements(m_shooter);
     }
 
     @Override
@@ -28,23 +27,21 @@ public class ShootCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if(m_belt.getIRTop()) {
+        if (m_belt.getIRTop()) {
             topIRTimer = System.currentTimeMillis();
         }
         if (isHigh) {
             m_shooter.shootHigh();
-           if ( m_shooter.highAtSpeed()){
-            
-            m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeedShooter);
-            m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeedShooter);
-            m_belt.startMotorBottom(Constants.BeltConstants.motorSpeedShooter);
+            if (m_shooter.highAtSpeed()) {
+                m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeedShooter);
+                m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeedShooter);
+                m_belt.startMotorBottom(Constants.BeltConstants.motorSpeedShooter);
             } else {
                 m_belt.stopAllMotors();
             }
         } else {
             m_shooter.shootLow();
-            if(m_shooter.lowAtSpeed()) {
-                
+            if (m_shooter.lowAtSpeed()) {
                 m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeedShooter);
                 m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeedShooter);
                 m_belt.startMotorBottom(Constants.BeltConstants.motorSpeedShooter);
