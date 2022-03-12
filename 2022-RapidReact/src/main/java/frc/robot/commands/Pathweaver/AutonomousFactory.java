@@ -18,11 +18,12 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Constants.AutoConstants;
-import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.PathweaverConstants;
 import frc.robot.TrajectoryFactory;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
@@ -53,14 +54,14 @@ public class AutonomousFactory {
         RamseteCommand ramseteCommand = new RamseteCommandProxy(trajectory,
                 m_drivetrain::getPose, new RamseteController(AutoConstants.kRamseteB,
                         AutoConstants.kRamseteZeta),
-                new SimpleMotorFeedforward(DriveConstants.ksVolts,
-                        DriveConstants.kvVoltSecondsPerMeter,
-                        DriveConstants.kaVoltSecondsSquaredPerMeter),
-                DriveConstants.kDriveKinematics, m_drivetrain::getWheelSpeeds,
-                new PIDController(DriveConstants.kPDriveVel, DriveConstants.kIDriveVel,
-                        DriveConstants.kDDriveVel),
-                new PIDController(DriveConstants.kPDriveVel,
-                        DriveConstants.kIDriveVel, DriveConstants.kDDriveVel),
+                new SimpleMotorFeedforward(PathweaverConstants.ksVolts,
+                        PathweaverConstants.kvVoltSecondsPerMeter,
+                        PathweaverConstants.kaVoltSecondsSquaredPerMeter),
+                PathweaverConstants.kDriveKinematics, m_drivetrain::getWheelSpeeds,
+                new PIDController(PathweaverConstants.kPDriveVel, PathweaverConstants.kIDriveVel,
+                        PathweaverConstants.kDDriveVel),
+                new PIDController(PathweaverConstants.kPDriveVel,
+                        PathweaverConstants.kIDriveVel, PathweaverConstants.kDDriveVel),
                 m_drivetrain::tankDriveVolts, m_drivetrain);
         return ramseteCommand;
     }
@@ -68,15 +69,12 @@ public class AutonomousFactory {
     public SequentialCommandGroup create3BallAuton() {
         SequentialCommandGroup group = new SequentialCommandGroup();
         // group.addCommands(shoot);
-        group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonBall2")));
-
-
-        // group.addCommands(new ParallelCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonBall2")/* , intake */)));
-        // group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonBall3For")));
-        // group.addCommands(new ParallelCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonBall3Rev"))/* , intake */));
-        // group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonShoot2")));
-        // // group.addCommands(shoot);
-        // group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonBackup")));
+        group.addCommands(new ParallelCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonBall2")/* , intake */)));
+        group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonBall3For")));
+        group.addCommands(new ParallelCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonBall3Rev"))/* , intake */));
+        group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonShoot2")));
+        // group.addCommands(shoot);
+        group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonBackup")));
         
         return group;
     }

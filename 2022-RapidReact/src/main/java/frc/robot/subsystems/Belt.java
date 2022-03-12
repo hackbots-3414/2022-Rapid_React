@@ -2,17 +2,13 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-public class Belt extends SubsystemBase {
 
-  private static final Logger LOG = LoggerFactory.getLogger(Belt.class);
+public class Belt extends SubsystemBase {
 
   DigitalInput irBottom = new DigitalInput(0);
   DigitalInput irTop = new DigitalInput(1);

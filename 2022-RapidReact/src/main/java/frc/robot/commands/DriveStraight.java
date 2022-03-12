@@ -1,12 +1,8 @@
 package frc.robot.commands;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveStraight extends CommandBase {
-
-    private static final Logger LOG = LoggerFactory.getLogger(DriveStraight.class);
 
     private double speed;
     private double distance;

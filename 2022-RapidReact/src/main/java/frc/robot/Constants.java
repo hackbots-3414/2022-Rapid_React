@@ -40,6 +40,15 @@ public class Constants {
         public static final int kRightMotorRearPort = 14;
         public static final double voltageRampRate = 0.63;
         public static final double kMaxSpeed = 2.5; // 2
+    }
+
+    public static final class TransportConstants {
+        public static final int transportMotor1 = 20;
+        public static final int transportMotor2 = 21;
+        public static final int transportMotor3 = 22;
+    }
+
+    public static final class PathweaverConstants {
         public static final double ksVolts = 0.59109;
         public static final double kvVoltSecondsPerMeter = 2.5041;
         public static final double kaVoltSecondsSquaredPerMeter = 0.51497;
@@ -47,12 +56,6 @@ public class Constants {
         public static final double kIDriveVel = 0;
         public static final double kDDriveVel = 0;
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(RobotPartsConstants.trackWidth);
-    }
-
-    public static final class TransportConstants {
-        public static final int transportMotor1 = 20;
-        public static final int transportMotor2 = 21;
-        public static final int transportMotor3 = 22;
     }
 
     public static final class ShooterConstants {

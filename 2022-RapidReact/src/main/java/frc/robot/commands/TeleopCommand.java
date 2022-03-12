@@ -1,18 +1,14 @@
 package frc.robot.commands;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.strykeforce.thirdcoast.util.ExpoScale;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.OI;
 import frc.robot.Constants.CompControllerConstants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.OI;
 import frc.robot.subsystems.Drivetrain;
 
 public class TeleopCommand extends CommandBase {
-
-    private static final Logger LOG = LoggerFactory.getLogger(TeleopCommand.class);
 
     private static final double RIGHTX_DEADBAND = CompControllerConstants.right_x_offset;
     private static final double LEFTY_DEADBAND = CompControllerConstants.left_y_offset;
