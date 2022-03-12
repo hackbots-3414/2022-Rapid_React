@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.kauailabs.navx.frc.AHRS;
@@ -25,13 +26,13 @@ public class Drivetrain extends SubsystemBase {
     private DifferentialDrive differentialDrive;
 
     public Drivetrain() {
-        backLeft = new WPI_TalonFX(DriveConstants.kLeftMotorRearPort);
+        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort);
 
-        backRight = new WPI_TalonFX(DriveConstants.kRightMotorRearPort);
+        backRight = createTalonFX(DriveConstants.kRightMotorRearPort);
 
-        frontLeft = new WPI_TalonFX(DriveConstants.kLeftMotorFrontPort);
+        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort);
 
-        frontRight = new WPI_TalonFX(DriveConstants.kRightMotorFrontPort);
+        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort);
 
         backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         
@@ -40,11 +41,6 @@ public class Drivetrain extends SubsystemBase {
         frontLeft.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
         
         frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
-
-        backLeft.configOpenloopRamp(DriveConstants.voltageRampRate);
-        backRight.configOpenloopRamp(DriveConstants.voltageRampRate);
-        frontLeft.configOpenloopRamp(DriveConstants.voltageRampRate);
-        frontRight.configOpenloopRamp(DriveConstants.voltageRampRate);
 
 
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
@@ -60,6 +56,13 @@ public class Drivetrain extends SubsystemBase {
         backLeft.follow(frontLeft);
 
     }
+private WPI_TalonFX createTalonFX(int deviceID){
+    WPI_TalonFX motor = new WPI_TalonFX(deviceID);
+    motor.configFactoryDefault();
+    motor.configOpenloopRamp(DriveConstants.voltageRampRate);
+    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit,DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+return motor;
+}
 
     public void setControlsReversed(boolean controlsReversed) {
         this.controlsReversed = controlsReversed;
