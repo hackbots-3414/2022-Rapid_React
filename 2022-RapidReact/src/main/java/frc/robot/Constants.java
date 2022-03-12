@@ -32,6 +32,8 @@ public class Constants {
         public static final int kRightMotorRearPort = 14;
         public static final double voltageRampRate = 0.63;
         public static final double kMaxSpeed = 2.5; // 2
+        public static final double driveCurrentLimit = 70.0;
+        public static final double triggerThresholdTime = .05;
     }
 
     public static final class TransportConstants {
