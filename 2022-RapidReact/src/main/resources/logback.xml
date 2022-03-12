@@ -8,17 +8,8 @@
         </encoder>
     </appender>
 
-    <!-- <logger name="frc.robot.commands" level="INFO" /> -->
-    <!-- <logger name="frc.robot.commands.EatBall" level="TRACE" /> -->
-    <!-- <logger name="frc.robot.subsystems.vision.Pixy" level="TRACE" /> -->
-    <!--logger name="frc.robot.commands.MrZPrintCommand" level="TRACE"/-->
-    <!-- <logger name="frc.robot.RobotContainer" level="TRACE" /> -->
-    <!-- <logger name="frc.robot.commands.AutonomousFactory" level="TRACE" /> -->
-    <!-- <logger name="frc.robot.subsystems.Drivetrain" level="TRACE" /> -->
-    <!-- <logger name="frc.robot.subsystems" level="INFO" /> -->
-
-    <!-- <logger name="frc.robot.subsystems.Drivetrain" level="TRACE"/> -->
-    <!-- <logger name="frc.robot.commands.ConfigureReverseControls" level="TRACE"/> -->
+    <!-- logger name="frc.robot.commands.MrZPrintCommand" level="TRACE"/ -->
+    <logger name="frc.robot.subsystems.Drivetrain" level="TRACE" />
 
     <root level="WARN">
         <appender-ref ref="STDOUT" />

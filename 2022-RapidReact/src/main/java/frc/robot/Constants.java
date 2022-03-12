@@ -49,10 +49,10 @@ public class Constants {
     }
 
     public static final class PathweaverConstants {
-        public static final double ksVolts = 0.59109;
-        public static final double kvVoltSecondsPerMeter = 2.5041;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.51497;
-        public static final double kPDriveVel = 3.6223;//3.6223
+        public static final double ksVolts = 0.59963;
+        public static final double kvVoltSecondsPerMeter = 2.5306;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.19459;
+        public static final double kPDriveVel = 0.24276;//3.6223
         public static final double kIDriveVel = 0;
         public static final double kDDriveVel = 0;
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(RobotPartsConstants.trackWidth);

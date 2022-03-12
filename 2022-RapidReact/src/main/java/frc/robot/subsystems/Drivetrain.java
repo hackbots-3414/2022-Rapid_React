@@ -13,6 +13,7 @@ import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.RobotPartsConstants;
@@ -64,18 +65,20 @@ public class Drivetrain extends SubsystemBase {
         
         resetEncoders();
         m_odometry = new DifferentialDriveOdometry(ahrs.getRotation2d());
-        frontLeft.setInverted(TalonFXInvertType.Clockwise);
-        backLeft.setInverted(TalonFXInvertType.Clockwise);
-        frontRight.setInverted(TalonFXInvertType.CounterClockwise);
-        backRight.setInverted(TalonFXInvertType.CounterClockwise);
-        frontRight.setSensorPhase(true);
-        backRight.setSensorPhase(true);
-        backRight.follow(frontRight);
-        backLeft.follow(frontLeft);
         configureTalonFX(frontLeft);
         configureTalonFX(backLeft);
         configureTalonFX(frontRight);
         configureTalonFX(backRight);
+        frontLeft.setInverted(TalonFXInvertType.CounterClockwise);
+        backLeft.setInverted(TalonFXInvertType.CounterClockwise);
+        frontRight.setInverted(TalonFXInvertType.Clockwise);
+        backRight.setInverted(TalonFXInvertType.Clockwise);
+        // frontLeft.setSensorPhase(false);
+        // backLeft.setSensorPhase(false);
+        // frontRight.setSensorPhase(true);
+        // backRight.setSensorPhase(true);
+        backRight.follow(frontRight);
+        backLeft.follow(frontLeft);
     }
 
     /**
@@ -84,7 +87,9 @@ public class Drivetrain extends SubsystemBase {
      * @return motor
      */
     private WPI_TalonFX configureTalonFX(WPI_TalonFX motor) {
+        motor.configFactoryDefault();
         motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_10Ms);
+        motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 0);
         return motor;
     }
 
@@ -145,6 +150,10 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void tankDriveVolts(double leftVolts, double rightVolts) {
+        SmartDashboard.putNumber("Right Front", getRightEncoderPosition());
+        // SmartDashboard.putNumber("Right Back", backRight.getSelectedSensorPosition(1));
+        SmartDashboard.putNumber("Left Front", getLeftEncoderPosition());
+        // SmartDashboard.putNumber("Left Back", backLeft.getSelectedSensorPosition());
         frontLeft.setVoltage(leftVolts);
         frontRight.setVoltage(rightVolts);
     }
@@ -174,33 +183,33 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getLeftEncoderPosition() {
-        // LOG.trace("LeftEncoderPosition: {}", frontLeft.getSelectedSensorPosition());
+        LOG.trace("LeftEncoderPosition: {}", frontLeft.getSelectedSensorPosition());
         return frontLeft.getSelectedSensorPosition();
     }
 
     public double getLeftEncoderDistance() {
-        // LOG.trace("LeftEncoderDistance: {}", getLeftEncoderPosition() * RobotPartsConstants.distancePerTick);
+        LOG.trace("LeftEncoderDistance: {}", getLeftEncoderPosition() * RobotPartsConstants.distancePerTick);
         return getLeftEncoderPosition() * RobotPartsConstants.distancePerTick;
     }
 
     public double getLeftMetersPerSecond() {
-        // LOG.trace("LeftMetersPerSecond: {}", frontLeft.getSelectedSensorVelocity());
-        return frontLeft.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 100 /* ticks / 100ms convert to m/s*/;
+        LOG.trace("LeftMetersPerSecond: {}", frontLeft.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10);
+        return frontLeft.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10 /* ticks / 100ms convert to m/s*/;
     }
 
     public double getRightEncoderPosition() {
-        // LOG.trace("RightEncoderPosition: {}", frontRight.getSelectedSensorPosition());
+        LOG.trace("RightEncoderPosition: {}", frontRight.getSelectedSensorPosition());
         return frontRight.getSelectedSensorPosition();
     }
 
     public double getRightEncoderDistance() {
-        // LOG.trace("RightEncoderDistance: {}", getRightEncoderPosition() * RobotPartsConstants.distancePerTick);
+        LOG.trace("RightEncoderDistance: {}", getRightEncoderPosition() * RobotPartsConstants.distancePerTick);
         return getRightEncoderPosition() * RobotPartsConstants.distancePerTick;
     }
 
     public double getRightMetersPerSecond() {
-        // LOG.trace("RightMetersPerSecond: {}", frontRight.getSelectedSensorVelocity());
-        return frontRight.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 100 /* ticks / 100ms convert to m/s */;
+        LOG.trace("RightMetersPerSecond: {}", frontRight.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10);
+        return frontRight.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10 /* ticks / 100ms convert to m/s */;
     }
 
     public void resetEncoders() {
@@ -212,9 +221,5 @@ public class Drivetrain extends SubsystemBase {
 
     public void setMaxOutput(double maxOutput) {
         differentialDrive.setMaxOutput(maxOutput);
-    }
-
-    public double getTurnRate() {
-        return -ahrs.getRate();
     }
 }
