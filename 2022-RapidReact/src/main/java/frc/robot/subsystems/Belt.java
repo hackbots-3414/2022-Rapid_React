@@ -1,13 +1,15 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import frc.robot.Constants;
+
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 public class Belt extends SubsystemBase {
 
   private static final Logger LOG = LoggerFactory.getLogger(Belt.class);
@@ -18,7 +20,7 @@ public class Belt extends SubsystemBase {
   WPI_TalonFX middleMotor = new WPI_TalonFX(Constants.BeltConstants.middleMotor);
   WPI_TalonFX bottomMotor = new WPI_TalonFX(Constants.BeltConstants.bottomMotor);
   WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.BeltConstants.intakeMotor);
-  Solenoid solenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.BeltConstants.solenoidChannel);
+  Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.BeltConstants.solenoidChannel);
 
 
     public boolean getIRBottom() {
