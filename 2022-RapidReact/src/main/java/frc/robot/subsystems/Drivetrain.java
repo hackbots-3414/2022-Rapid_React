@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
@@ -78,6 +79,13 @@ public class Drivetrain extends SubsystemBase {
         motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         return motor;
     }
+private WPI_TalonFX createTalonFX(int deviceID){
+    WPI_TalonFX motor = new WPI_TalonFX(deviceID);
+    motor.configFactoryDefault();
+    motor.configOpenloopRamp(DriveConstants.voltageRampRate);
+    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit,DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+return motor;
+}
 
     public void setControlsReversed(boolean controlsReversed) {
         this.controlsReversed = controlsReversed;
