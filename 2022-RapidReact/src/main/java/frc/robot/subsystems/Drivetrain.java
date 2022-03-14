@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
@@ -38,18 +37,10 @@ public class Drivetrain extends SubsystemBase {
         backRight = new WPI_TalonFX(DriveConstants.kRightMotorRearPort);
         frontLeft = new WPI_TalonFX(DriveConstants.kLeftMotorFrontPort);
         frontRight = new WPI_TalonFX(DriveConstants.kRightMotorFrontPort);
-
         configureTalonFX(frontLeft);
         configureTalonFX(backLeft);
         configureTalonFX(frontRight);
         configureTalonFX(backRight);
-        backLeft.configOpenloopRamp(DriveConstants.voltageRampRate);
-        backRight.configOpenloopRamp(DriveConstants.voltageRampRate);
-        frontLeft.configOpenloopRamp(DriveConstants.voltageRampRate);
-        frontRight.configOpenloopRamp(DriveConstants.voltageRampRate);
-        
-        resetEncoders();
-        m_odometry = new DifferentialDriveOdometry(ahrs.getRotation2d());
         frontLeft.setInverted(TalonFXInvertType.CounterClockwise);
         backLeft.setInverted(TalonFXInvertType.CounterClockwise);
         frontRight.setInverted(TalonFXInvertType.Clockwise);
@@ -60,6 +51,9 @@ public class Drivetrain extends SubsystemBase {
         // backRight.setSensorPhase(true);
         backRight.follow(frontRight);
         backLeft.follow(frontLeft);
+
+        resetEncoders();
+        m_odometry = new DifferentialDriveOdometry(ahrs.getRotation2d());
 
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
         addChild("DifferentialDrive", differentialDrive);
@@ -77,15 +71,9 @@ public class Drivetrain extends SubsystemBase {
         motor.configFactoryDefault();
         motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_10Ms);
         motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        motor.configOpenloopRamp(DriveConstants.voltageRampRate);
         return motor;
     }
-private WPI_TalonFX createTalonFX(int deviceID){
-    WPI_TalonFX motor = new WPI_TalonFX(deviceID);
-    motor.configFactoryDefault();
-    motor.configOpenloopRamp(DriveConstants.voltageRampRate);
-    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit,DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
-return motor;
-}
 
     public void setControlsReversed(boolean controlsReversed) {
         this.controlsReversed = controlsReversed;
