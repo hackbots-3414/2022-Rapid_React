@@ -19,7 +19,7 @@ public class Belt extends SubsystemBase {
   WPI_TalonFX middleMotor = new WPI_TalonFX(Constants.BeltConstants.middleMotor);
   WPI_TalonFX bottomMotor = new WPI_TalonFX(Constants.BeltConstants.bottomMotor);
   WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.BeltConstants.intakeMotor);
-//   Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.BeltConstants.solenoidChannel);
+  Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.BeltConstants.solenoidChannel);
 
 
     public boolean getIRBottom() {
@@ -62,11 +62,11 @@ public class Belt extends SubsystemBase {
     }
 
     public void goUp() {
-        // solenoid.set(false);
+        solenoid.set(false);
     }
 
     public void goDown() {
-        // solenoid.set(true);
+        solenoid.set(true);
     }
 
     public void startIntakeMotor(double speed) {
