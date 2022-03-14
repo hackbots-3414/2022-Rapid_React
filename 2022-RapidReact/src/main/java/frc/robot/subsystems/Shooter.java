@@ -39,7 +39,7 @@ public class Shooter extends SubsystemBase {
 
         leftMotor.configAllSettings(motorConfig);
         rightMotor.follow(leftMotor);
-        LOG.error("got here");
+        // LOG.error("got here");
     }
 
     @Override

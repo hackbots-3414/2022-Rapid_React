@@ -1,7 +1,5 @@
 package frc.robot;
 
-import java.util.function.DoubleBinaryOperator;
-
 public class Constants {
     public static final class CompControllerConstants {
         public static final double left_x_offset = -0.13379;
@@ -34,6 +32,8 @@ public class Constants {
         public static final int kRightMotorRearPort = 14;
         public static final double voltageRampRate = 0.63;
         public static final double kMaxSpeed = 2.5; // 2
+        public static final double driveCurrentLimit = 70.0;
+        public static final double triggerThresholdTime = .05;
     }
 
     public static final class TransportConstants {
@@ -45,7 +45,7 @@ public class Constants {
     public static final class ShooterConstants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
-        public static final double highShootVelocity = 6300;
+        public static final double highShootVelocity = 6400;
         public static final double lowShootVelocity = 4100;
         public static final double shootVelocityTolerance = 350;
         public static final double integralZone = 201;
@@ -61,9 +61,9 @@ public class Constants {
         public static final int middleMotor = 21;
         public static final int bottomMotor = 20;
         public static final int intakeMotor = 30;
-        public static final int solenoidChannel = 4;
+        public static final int solenoidChannel = 8;
         public static final double motorSpeedShooter = 1.0; //used for lower two motors (Bottom and Middle)
-        public static final double intakeSpeed = 0.4;
+        public static final double intakeSpeed = 0.8;
         public static final double topMotorSpeedShooter = 0.5;
         public static final double motorSpeedTransfer = 0.75;
         public static final double topMotorSpeedTransfer = 0.3;
@@ -80,11 +80,16 @@ public class Constants {
     public static final class ClimberConstants {
         public static final int climbUpAngle = 0;
         public static final int climbDownAngle = 180;
-        public static final int climberSolenoidChannel_1 = 5;
-        public static final int climberSolenoidChannel_2 = 6;
+        public static final int climberSolenoidChannel_1 = 9;
+        public static final int climberSolenoidChannel_2 = 10;
     }
 
     public static final class PressureConstants {
         public static final double pressureValue = 80;
     }
+
+    public static final class PowerDistribution {
+        public static final int CanID = 2;
+    }
+
 }
