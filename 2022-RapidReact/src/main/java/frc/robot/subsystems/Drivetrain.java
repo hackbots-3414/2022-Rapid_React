@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
@@ -72,7 +74,22 @@ public class Drivetrain extends SubsystemBase {
         motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_10Ms);
         motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         motor.configOpenloopRamp(DriveConstants.voltageRampRate);
+        motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit,DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
         return motor;
+    }
+
+    public void setBrakeMode() {
+        frontLeft.setNeutralMode(NeutralMode.Brake);
+        frontRight.setNeutralMode(NeutralMode.Brake);
+        backLeft.setNeutralMode(NeutralMode.Brake);
+        backRight.setNeutralMode(NeutralMode.Brake);
+    }
+
+    public void setCoastMode() {
+        frontLeft.setNeutralMode(NeutralMode.Coast);
+        frontRight.setNeutralMode(NeutralMode.Coast);
+        backLeft.setNeutralMode(NeutralMode.Coast);
+        backRight.setNeutralMode(NeutralMode.Coast);
     }
 
     public void setControlsReversed(boolean controlsReversed) {

@@ -45,6 +45,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
+        m_drivetrain.setCoastMode();
     }
 
     @Override
@@ -55,6 +56,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         RobotContainer.getInstance().m_lEDFeedback.setClimbingActivated(false);
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+        m_drivetrain.setBrakeMode();
 
         // schedule the autonomous command (example)
         if (m_autonomousCommand != null) {
@@ -68,6 +70,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        m_drivetrain.setBrakeMode();
         
         RobotContainer.getInstance().m_lEDFeedback.setClimbingActivated(false);
         if (m_autonomousCommand != null) {
