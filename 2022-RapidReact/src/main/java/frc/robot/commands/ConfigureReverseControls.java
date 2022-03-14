@@ -33,7 +33,7 @@ private final Drivetrain m_drivetrain;
   @Override
   public void execute() {
     LOG.trace("ConfigureReverseControls @ execute(), reverse = {}", reverse);
-    m_drivetrain.setControlsReversed(reverse);
+   // m_drivetrain.setControlsReversed(reverse);
   }
 
   // Called once the command ends or is interrupted.

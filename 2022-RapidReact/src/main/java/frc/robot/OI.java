@@ -26,12 +26,12 @@ public class OI {
 
     // ConfigureReverseControls normalDriveButton = new ConfigureReverseControls(drivetrainSubsystem);
 
-    static {
+    /*static {
         SmartDashboard.putBoolean("Controller (false = dev, true = comp)", true);
         JoystickButton reverseControlsButton = new JoystickButton(joystick, 12);
-        reverseControlsButton.whenPressed(new ConfigureReverseControls(RobotContainer.getInstance().m_drivetrain, true));
+        reverseControlsButton.whileHeld(new ConfigureReverseControls(RobotContainer.getInstance().m_drivetrain, true));
         reverseControlsButton.whenReleased(new ConfigureReverseControls(RobotContainer.getInstance().m_drivetrain, false));
-    }
+    }*/
 
     private static void updateController() {
         if (SmartDashboard.getBoolean("Controller (false = dev, true = comp)", true)) {

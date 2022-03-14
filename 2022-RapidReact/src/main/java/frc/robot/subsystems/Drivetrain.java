@@ -78,10 +78,10 @@ public class Drivetrain extends SubsystemBase {
         backRight.setNeutralMode(NeutralMode.Coast);
     }
 
-    public void setControlsReversed(boolean controlsReversed) {
+    /*public void setControlsReversed(boolean controlsReversed) {
         this.controlsReversed = controlsReversed;
     }
-
+*/
     public boolean isControlsReversed() {
         return controlsReversed;
     }
