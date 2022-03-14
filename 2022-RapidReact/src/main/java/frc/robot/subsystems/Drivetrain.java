@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
@@ -30,21 +31,10 @@ public class Drivetrain extends SubsystemBase {
     private DifferentialDrive differentialDrive;
 
     public Drivetrain() {
-        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort);
-
-        backRight = createTalonFX(DriveConstants.kRightMotorRearPort);
-
-        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort);
-
-        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort);
-
-        backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
-
-        backRight.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
-
-        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
-
-        frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, TalonFXInvertType.Clockwise);
+        backRight = createTalonFX(DriveConstants.kRightMotorRearPort, TalonFXInvertType.CounterClockwise);
+        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, TalonFXInvertType.Clockwise);
+        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort, TalonFXInvertType.CounterClockwise);
 
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
         addChild("DifferentialDrive", differentialDrive);
@@ -52,19 +42,18 @@ public class Drivetrain extends SubsystemBase {
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
 
-        frontLeft.setInverted(TalonFXInvertType.Clockwise);
-        backLeft.setInverted(TalonFXInvertType.Clockwise);
-
-        backRight.follow(frontRight);
         backLeft.follow(frontLeft);
+        backRight.follow(frontRight);
     }
 
-    private WPI_TalonFX createTalonFX(int deviceID) {
+    private WPI_TalonFX createTalonFX(int deviceID, TalonFXInvertType direction) {
         WPI_TalonFX motor = new WPI_TalonFX(deviceID);
         motor.configFactoryDefault();
         motor.configOpenloopRamp(DriveConstants.voltageRampRate);
-        motor.setNeutralMode(NeutralMode.Brake);
         motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        motor.setInverted(direction);
+
         return motor;
     }
 
@@ -78,10 +67,12 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void periodic() {
+        super.periodic();
     }
 
     @Override
     public void simulationPeriodic() {
+        super.periodic();
     }
 
     public double getLeftEncoderPosition() {
