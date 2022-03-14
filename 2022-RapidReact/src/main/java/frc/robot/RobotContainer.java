@@ -18,6 +18,7 @@ import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.DefaultLEDCommand;
+import frc.robot.commands.EatBall;
 import frc.robot.commands.Eject;
 import frc.robot.commands.RunBelt;
 import frc.robot.commands.RunShoot;
@@ -34,6 +35,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.vision.Pixy;
 
 public class RobotContainer {
 
