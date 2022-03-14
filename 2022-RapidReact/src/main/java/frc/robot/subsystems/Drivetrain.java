@@ -61,10 +61,10 @@ public class Drivetrain extends SubsystemBase {
 
     }
 
-    public void setControlsReversed(boolean controlsReversed) {
+    /*public void setControlsReversed(boolean controlsReversed) {
         this.controlsReversed = controlsReversed;
     }
-
+*/
     public boolean isControlsReversed() {
         return controlsReversed;
     }

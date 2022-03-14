@@ -93,6 +93,12 @@ public class Belt extends SubsystemBase {
         intakeMotor.set(-intake);
     }
 
+    public void startBeltMotors(double lower, double top) {
+        bottomMotor.set(lower);
+        middleMotor.set(lower);
+        topMotor.set(top);
+    }
+
     @Override
     public void periodic() {
     }

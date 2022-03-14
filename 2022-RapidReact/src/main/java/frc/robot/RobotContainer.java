@@ -15,6 +15,8 @@ import frc.robot.commands.ConfigureReverseControls;
 import frc.robot.commands.DefaultLEDCommand;
 import frc.robot.commands.EatBall;
 import frc.robot.commands.Eject;
+import frc.robot.commands.RunBelt;
+import frc.robot.commands.RunShoot;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.ShootHighWaitBackup;
 import frc.robot.commands.ShootLowWaitBackup;
@@ -97,22 +99,26 @@ public class RobotContainer {
     private void configureButtonBindings() {
         // Create some buttons
         final JoystickButton shootHighButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
+        final JoystickButton beltButton = new JoystickButton(operatorPad, XboxController.Button.kY.value);
         final JoystickButton shootLowButton = new JoystickButton(operatorPad, XboxController.Button.kB.value);
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         final POVButton climberUpButton = new POVButton(operatorPad, Constants.ClimberConstants.climbUpAngle);
         final POVButton climberDownButton = new POVButton(operatorPad, Constants.ClimberConstants.climbDownAngle);
         final JoystickButton ejectButton = new JoystickButton(operatorPad, XboxController.Button.kX.value);
         final JoystickButton eatBallButton = new JoystickButton(operatorPad, XboxController.Button.kA.value);
+        final JoystickButton shootButton = new JoystickButton(operatorPad, XboxController.Button.kBack.value);
 
         //assign button fuctions
+        shootButton.whileHeld(new RunShoot(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
         ejectButton.whileHeld(new Eject(m_belt), true);
+        beltButton.whileHeld(new RunBelt(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
         shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
         shootLowButton.whileHeld(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
         eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
-
+        beltButton.whileHeld(new BeltCommand(m_belt));
     }
 
     public XboxController getoperatorPad() {
