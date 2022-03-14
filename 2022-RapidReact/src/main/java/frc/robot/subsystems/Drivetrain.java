@@ -64,14 +64,12 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("EncoderFrontLeft", frontLeft.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("EncoderBackLeft", backLeft.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("EncoderFrontRight", frontRight.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("EncoderBackRight", backRight.getSelectedSensorPosition(0));
+        super.periodic();
     }
 
     @Override
     public void simulationPeriodic() {
+        super.periodic();
     }
 
     public double getLeftEncoderPosition() {
