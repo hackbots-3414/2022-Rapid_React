@@ -46,7 +46,7 @@ public class RobotContainer {
     public final Drivetrain m_drivetrain;
     public final Climber m_climber;
     public final PowerDistribution m_powerdistribution;
-    // public final Pixy m_pixy;
+    public final Pixy m_pixy;
 
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
@@ -63,7 +63,7 @@ public class RobotContainer {
         m_climber = new Climber();
         m_powerdistribution = new PowerDistribution(Constants.PowerDistribution.CanID, ModuleType.kRev);
         
-        // m_pixy = new Pixy();
+        m_pixy = new Pixy();
 
         // Smartdashboard Subsystems
 
