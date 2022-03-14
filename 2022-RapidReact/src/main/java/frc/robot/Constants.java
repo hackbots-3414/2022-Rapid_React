@@ -1,7 +1,5 @@
 package frc.robot;
 
-import java.util.function.DoubleBinaryOperator;
-
 public class Constants {
     public static final class CompControllerConstants {
         public static final double left_x_offset = -0.13379;
@@ -47,7 +45,7 @@ public class Constants {
     public static final class ShooterConstants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
-        public static final double highShootVelocity = 6300;
+        public static final double highShootVelocity = 6400;
         public static final double lowShootVelocity = 4100;
         public static final double shootVelocityTolerance = 350;
         public static final double integralZone = 201;
