@@ -8,7 +8,6 @@ public class BeltCommand extends CommandBase {
     final Belt m_belt;
 
     public BeltCommand(Belt belt) {
-        addRequirements(belt);
         m_belt = belt;
     }
 
