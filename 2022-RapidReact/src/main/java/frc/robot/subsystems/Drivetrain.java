@@ -1,4 +1,5 @@
 package frc.robot.subsystems;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
@@ -30,18 +32,10 @@ public class Drivetrain extends SubsystemBase {
     private DifferentialDrive differentialDrive;
 
     public Drivetrain() {
-        backLeft = new WPI_TalonFX(DriveConstants.kLeftMotorRearPort);
-        backRight = new WPI_TalonFX(DriveConstants.kRightMotorRearPort);
-        frontLeft = new WPI_TalonFX(DriveConstants.kLeftMotorFrontPort);
-        frontRight = new WPI_TalonFX(DriveConstants.kRightMotorFrontPort);
-        configureTalonFX(frontLeft);
-        configureTalonFX(backLeft);
-        configureTalonFX(frontRight);
-        configureTalonFX(backRight);
-        frontLeft.setInverted(TalonFXInvertType.CounterClockwise);
-        backLeft.setInverted(TalonFXInvertType.CounterClockwise);
-        frontRight.setInverted(TalonFXInvertType.Clockwise);
-        backRight.setInverted(TalonFXInvertType.Clockwise);
+        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, TalonFXInvertType.CounterClockwise);
+        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, TalonFXInvertType.CounterClockwise);
+        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort, TalonFXInvertType.Clockwise);
+        backRight = createTalonFX(DriveConstants.kRightMotorRearPort, TalonFXInvertType.Clockwise);
         // frontLeft.setSensorPhase(false);
         // backLeft.setSensorPhase(false);
         // frontRight.setSensorPhase(true);
@@ -56,15 +50,17 @@ public class Drivetrain extends SubsystemBase {
         differentialDrive.setSafetyEnabled(true);
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
-
     }
-
-    private WPI_TalonFX configureTalonFX(WPI_TalonFX motor) {
+    
+    private WPI_TalonFX createTalonFX(int deviceID, TalonFXInvertType direction) {
+        WPI_TalonFX motor = new WPI_TalonFX(deviceID);
         motor.configFactoryDefault();
         motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_10Ms);
-        motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         motor.configOpenloopRamp(DriveConstants.voltageRampRate);
-        motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit,DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        motor.setInverted(direction);
+
         return motor;
     }
 
@@ -92,10 +88,12 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void periodic() {
+        super.periodic();
     }
 
     @Override
     public void simulationPeriodic() {
+        super.periodic();
     }
 
     public double getLeftEncoderPosition() {
@@ -119,10 +117,9 @@ public class Drivetrain extends SubsystemBase {
 
     public void arcadeDrive(double throttle, double steering) {
         LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
-        if(controlsReversed){
+        if (controlsReversed) {
             differentialDrive.arcadeDrive(throttle, steering);
-        }
-        else {
+        } else {
             differentialDrive.arcadeDrive(-throttle, steering);
         }
     }
