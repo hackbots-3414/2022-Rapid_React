@@ -1,8 +1,10 @@
 package frc.robot;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -44,7 +46,6 @@ public class RobotContainer {
     public final PowerDistribution m_powerdistribution;
     // public final Pixy m_pixy;
 
-
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
 
@@ -58,7 +59,8 @@ public class RobotContainer {
         m_shooter = new Shooter();
         m_drivetrain = new Drivetrain();
         m_climber = new Climber();
-        m_powerdistribution = new PowerDistribution();
+        m_powerdistribution = new PowerDistribution(Constants.PowerDistribution.CanID, ModuleType.kRev);
+        
         // m_pixy = new Pixy();
 
         // Smartdashboard Subsystems
@@ -76,14 +78,14 @@ public class RobotContainer {
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback));
 
-      // Configure autonomous sendable chooser
+        // Configure autonomous sendable chooser
 
         m_chooser.addOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
         m_chooser.addOption("ShootLow, Wait, Back Up", new ShootLowWaitBackup(m_shooter, m_drivetrain, m_belt));
         m_chooser.setDefaultOption("ShootHigh, Wait, Backup", new ShootHighWaitBackup(m_shooter, m_drivetrain, m_belt));
 
         SmartDashboard.putData("Auto Mode", m_chooser);
-        //SmartDashboard.putData("Wait Command", new WaitCommand());
+        // SmartDashboard.putData("Wait Command", new WaitCommand());
 
     }
 
@@ -91,12 +93,10 @@ public class RobotContainer {
         return m_robotContainer;
     }
 
-
-
-
     private void configureButtonBindings() {
         // Create some buttons
-        final JoystickButton shootHighButton = new JoystickButton(operatorPad, XboxController.Button.kRightBumper.value);
+        final JoystickButton shootHighButton = new JoystickButton(operatorPad,
+                XboxController.Button.kRightBumper.value);
         final JoystickButton shootLowButton = new JoystickButton(operatorPad, XboxController.Button.kB.value);
         final JoystickButton intakeButton = new JoystickButton(operatorPad, XboxController.Button.kLeftBumper.value);
         final POVButton climberUpButton = new POVButton(operatorPad, Constants.ClimberConstants.climbUpAngle);
@@ -104,11 +104,13 @@ public class RobotContainer {
         final JoystickButton ejectButton = new JoystickButton(operatorPad, XboxController.Button.kX.value);
         final JoystickButton eatBallButton = new JoystickButton(operatorPad, XboxController.Button.kA.value);
 
-        //assign button fuctions
+        // assign button fuctions
         ejectButton.whileHeld(new Eject(m_belt), true);
         intakeButton.whileHeld(new BeltCommand(m_belt), true);
-        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer), true);
-        shootLowButton.whileHeld(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
+        shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, true, Constants.ShooterConstants.shooterTimer),
+                true);
+        shootLowButton.whileHeld(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer),
+                true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
         // eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
