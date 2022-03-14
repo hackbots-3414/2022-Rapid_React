@@ -1,11 +1,15 @@
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 import com.kauailabs.navx.frc.AHRS;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -26,22 +30,26 @@ public class Drivetrain extends SubsystemBase {
     private DifferentialDrive differentialDrive;
 
     public Drivetrain() {
-        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort);
+        backLeft = new WPI_TalonFX(DriveConstants.kLeftMotorRearPort);
+        backRight = new WPI_TalonFX(DriveConstants.kRightMotorRearPort);
+        frontLeft = new WPI_TalonFX(DriveConstants.kLeftMotorFrontPort);
+        frontRight = new WPI_TalonFX(DriveConstants.kRightMotorFrontPort);
+        configureTalonFX(frontLeft);
+        configureTalonFX(backLeft);
+        configureTalonFX(frontRight);
+        configureTalonFX(backRight);
+        frontLeft.setInverted(TalonFXInvertType.CounterClockwise);
+        backLeft.setInverted(TalonFXInvertType.CounterClockwise);
+        frontRight.setInverted(TalonFXInvertType.Clockwise);
+        backRight.setInverted(TalonFXInvertType.Clockwise);
+        // frontLeft.setSensorPhase(false);
+        // backLeft.setSensorPhase(false);
+        // frontRight.setSensorPhase(true);
+        // backRight.setSensorPhase(true);
+        backRight.follow(frontRight);
+        backLeft.follow(frontLeft);
 
-        backRight = createTalonFX(DriveConstants.kRightMotorRearPort);
-
-        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort);
-
-        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort);
-
-        backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
-        
-        backRight.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
-        
-        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
-        
-        frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
-
+        resetEncoders();
 
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
         addChild("DifferentialDrive", differentialDrive);
@@ -49,20 +57,30 @@ public class Drivetrain extends SubsystemBase {
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
 
-        frontLeft.setInverted(TalonFXInvertType.Clockwise);
-        backLeft.setInverted(TalonFXInvertType.Clockwise);
-
-        backRight.follow(frontRight);
-        backLeft.follow(frontLeft);
-
     }
-private WPI_TalonFX createTalonFX(int deviceID){
-    WPI_TalonFX motor = new WPI_TalonFX(deviceID);
-    motor.configFactoryDefault();
-    motor.configOpenloopRamp(DriveConstants.voltageRampRate);
-    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit,DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
-return motor;
-}
+
+    private WPI_TalonFX configureTalonFX(WPI_TalonFX motor) {
+        motor.configFactoryDefault();
+        motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_10Ms);
+        motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        motor.configOpenloopRamp(DriveConstants.voltageRampRate);
+        motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit,DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        return motor;
+    }
+
+    public void setBrakeMode() {
+        frontLeft.setNeutralMode(NeutralMode.Brake);
+        frontRight.setNeutralMode(NeutralMode.Brake);
+        backLeft.setNeutralMode(NeutralMode.Brake);
+        backRight.setNeutralMode(NeutralMode.Brake);
+    }
+
+    public void setCoastMode() {
+        frontLeft.setNeutralMode(NeutralMode.Coast);
+        frontRight.setNeutralMode(NeutralMode.Coast);
+        backLeft.setNeutralMode(NeutralMode.Coast);
+        backRight.setNeutralMode(NeutralMode.Coast);
+    }
 
     public void setControlsReversed(boolean controlsReversed) {
         this.controlsReversed = controlsReversed;
