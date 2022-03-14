@@ -1,4 +1,5 @@
 package frc.robot.subsystems;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
@@ -26,22 +28,10 @@ public class Drivetrain extends SubsystemBase {
     private DifferentialDrive differentialDrive;
 
     public Drivetrain() {
-        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort);
-
-        backRight = createTalonFX(DriveConstants.kRightMotorRearPort);
-
-        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort);
-
-        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort);
-
-        backLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
-        
-        backRight.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
-        
-        frontLeft.configSelectedFeedbackSensor(FeedbackDevice.None, 0, 10);
-        
-        frontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
-
+        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, TalonFXInvertType.Clockwise);
+        backRight = createTalonFX(DriveConstants.kRightMotorRearPort, TalonFXInvertType.CounterClockwise);
+        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, TalonFXInvertType.Clockwise);
+        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort, TalonFXInvertType.CounterClockwise);
 
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
         addChild("DifferentialDrive", differentialDrive);
@@ -49,20 +39,20 @@ public class Drivetrain extends SubsystemBase {
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
 
-        frontLeft.setInverted(TalonFXInvertType.Clockwise);
-        backLeft.setInverted(TalonFXInvertType.Clockwise);
-
-        backRight.follow(frontRight);
         backLeft.follow(frontLeft);
-
+        backRight.follow(frontRight);
     }
-private WPI_TalonFX createTalonFX(int deviceID){
-    WPI_TalonFX motor = new WPI_TalonFX(deviceID);
-    motor.configFactoryDefault();
-    motor.configOpenloopRamp(DriveConstants.voltageRampRate);
-    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit,DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
-return motor;
-}
+
+    private WPI_TalonFX createTalonFX(int deviceID, TalonFXInvertType direction) {
+        WPI_TalonFX motor = new WPI_TalonFX(deviceID);
+        motor.configFactoryDefault();
+        motor.configOpenloopRamp(DriveConstants.voltageRampRate);
+        motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        motor.setInverted(direction);
+
+        return motor;
+    }
 
     public void setControlsReversed(boolean controlsReversed) {
         this.controlsReversed = controlsReversed;
@@ -74,6 +64,10 @@ return motor;
 
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("EncoderFrontLeft", frontLeft.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("EncoderBackLeft", backLeft.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("EncoderFrontRight", frontRight.getSelectedSensorPosition(0));
+        SmartDashboard.putNumber("EncoderBackRight", backRight.getSelectedSensorPosition(0));
     }
 
     @Override
@@ -101,10 +95,9 @@ return motor;
 
     public void arcadeDrive(double throttle, double steering) {
         LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
-        if(controlsReversed){
+        if (controlsReversed) {
             differentialDrive.arcadeDrive(throttle, steering);
-        }
-        else {
+        } else {
             differentialDrive.arcadeDrive(-throttle, steering);
         }
     }
