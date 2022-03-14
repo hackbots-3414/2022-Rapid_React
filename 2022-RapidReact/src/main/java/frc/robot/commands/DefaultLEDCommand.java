@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.MatchType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.LEDConstants;
@@ -25,6 +26,9 @@ public class DefaultLEDCommand extends CommandBase {
     @Override
     public void execute() {
 
+
+        SmartDashboard.putNumber("Air Pressure", m_lEDFeedback.checkPressure());
+        
         // System.out.print("Running");
         // m_lEDFeedback.setColor(Color.kPurple);
     /* if (m_lEDFeedback.checkPressure() < PressureConstants.pressureValue){
