@@ -89,4 +89,9 @@ public class Constants {
     public static final class PressureConstants {
         public static final double pressureValue = 80;
     }
+
+    public static final class PowerDistribution {
+        public static final int CanID = 2;
+    }
+
 }
