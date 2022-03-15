@@ -32,10 +32,10 @@ public class Drivetrain extends SubsystemBase {
     private DifferentialDrive differentialDrive;
 
     public Drivetrain() {
-        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, TalonFXInvertType.CounterClockwise);
-        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, TalonFXInvertType.CounterClockwise);
-        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort, TalonFXInvertType.Clockwise);
-        backRight = createTalonFX(DriveConstants.kRightMotorRearPort, TalonFXInvertType.Clockwise);
+        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, TalonFXInvertType.Clockwise);
+        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, TalonFXInvertType.Clockwise);
+        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort, TalonFXInvertType.CounterClockwise);
+        backRight = createTalonFX(DriveConstants.kRightMotorRearPort, TalonFXInvertType.CounterClockwise);
         // frontLeft.setSensorPhase(false);
         // backLeft.setSensorPhase(false);
         // frontRight.setSensorPhase(true);
@@ -97,7 +97,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getLeftEncoderPosition() {
-        return backLeft.getSelectedSensorPosition();
+        return frontLeft.getSelectedSensorPosition();
     }
 
     public double getRightEncoderPosition() {
@@ -109,19 +109,19 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void resetEncoders() {
-        frontLeft.setSelectedSensorPosition(0);
-        frontRight.setSelectedSensorPosition(0);
-        backRight.setSelectedSensorPosition(0);
-        backLeft.setSelectedSensorPosition(0);
+        frontLeft.setSelectedSensorPosition(0, 0, 10);
+        frontRight.setSelectedSensorPosition(0, 0, 10);
+        backRight.setSelectedSensorPosition(0, 0, 10);
+        backLeft.setSelectedSensorPosition(0,0 ,10 );
     }
 
     public void arcadeDrive(double throttle, double steering) {
         LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
-        if (controlsReversed) {
+        // if (controlsReversed) {
+        //     differentialDrive.arcadeDrive(throttle, steering);
+        // } else {
             differentialDrive.arcadeDrive(throttle, steering);
-        } else {
-            differentialDrive.arcadeDrive(-throttle, steering);
-        }
+        // }
     }
 
     public void curvatureDrive(double throttle, double rotation, boolean turnInPlace) {

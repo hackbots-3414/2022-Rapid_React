@@ -78,7 +78,7 @@ public class Pixy extends SubsystemBase {
 
     @Override
     public void periodic() {
-        int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1 | Pixy2CCC.CCC_SIG2, 2);
+        /*int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1 | Pixy2CCC.CCC_SIG2, 2);
 
         if (blockCount != -2) {
             ArrayList<Block> block = pixy.getCCC().getBlockCache();
@@ -92,6 +92,6 @@ public class Pixy extends SubsystemBase {
                         + Integer.toString(block.get(0).getWidth()) + ", " + Integer.toString(block.get(0).getHeight())
                         + ")");
             }
-        }
+        } */
     }
 }
