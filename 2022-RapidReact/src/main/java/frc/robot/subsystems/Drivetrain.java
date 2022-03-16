@@ -72,6 +72,7 @@ public class Drivetrain extends SubsystemBase {
     private WPI_TalonFX configureTalonFX(WPI_TalonFX motor) {
         motor.configFactoryDefault();
         motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_10Ms);
+        // motor.configVelocityMeasurementWindow(1, 10);
         motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         motor.configOpenloopRamp(DriveConstants.voltageRampRate);
         motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit,DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
@@ -112,14 +113,14 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public Pose2d getPose() {
-        LOG.debug("Pose - Translation: {}, X: {}, Y: {}, Rotation: {}, Pose: {}", m_odometry.getPoseMeters().getTranslation(), m_odometry.getPoseMeters().getX(), m_odometry.getPoseMeters().getY(), m_odometry.getPoseMeters().getRotation(), m_odometry.getPoseMeters().toString());
+        //LOG.debug("Pose - Translation: {}, X: {}, Y: {}, Rotation: {}, Pose: {}", m_odometry.getPoseMeters().getTranslation(), m_odometry.getPoseMeters().getX(), m_odometry.getPoseMeters().getY(), m_odometry.getPoseMeters().getRotation(), m_odometry.getPoseMeters().toString());
         return m_odometry.getPoseMeters();
     }
 
     public void resetOdometry(Pose2d pose) {
-        LOG.trace("Pre-Reset Encoders - Backleft: {}, Backright: {}, Frontleft: {}, Frontright: {}", backLeft.getSelectedSensorPosition(), backRight.getSelectedSensorPosition(), frontLeft.getSelectedSensorPosition(), frontRight.getSelectedSensorPosition());
+        //LOG.trace("Pre-Reset Encoders - Backleft: {}, Backright: {}, Frontleft: {}, Frontright: {}", backLeft.getSelectedSensorPosition(), backRight.getSelectedSensorPosition(), frontLeft.getSelectedSensorPosition(), frontRight.getSelectedSensorPosition());
         resetEncoders();
-        LOG.trace("Post-Reset Encoders - Backleft: {}, Backright: {}, Frontleft: {}, Frontright: {}", backLeft.getSelectedSensorPosition(), backRight.getSelectedSensorPosition(), frontLeft.getSelectedSensorPosition(), frontRight.getSelectedSensorPosition());
+        //LOG.trace("Post-Reset Encoders - Backleft: {}, Backright: {}, Frontleft: {}, Frontright: {}", backLeft.getSelectedSensorPosition(), backRight.getSelectedSensorPosition(), frontLeft.getSelectedSensorPosition(), frontRight.getSelectedSensorPosition());
         m_odometry.resetPosition(pose, ahrs.getRotation2d());
     }
 
@@ -139,7 +140,7 @@ public class Drivetrain extends SubsystemBase {
     // here. Call these from Commands.
     
     public void arcadeDrive(double throttle, double steering) {
-        LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
+        //LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
         if(controlsReversed){
             differentialDrive.arcadeDrive(throttle, steering);
         }
@@ -182,32 +183,32 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getLeftEncoderPosition() {
-        LOG.trace("LeftEncoderPosition: {}", frontLeft.getSelectedSensorPosition());
+        //LOG.trace("LeftEncoderPosition: {}", frontLeft.getSelectedSensorPosition());
         return frontLeft.getSelectedSensorPosition();
     }
 
     public double getLeftEncoderDistance() {
-        LOG.trace("LeftEncoderDistance: {}", getLeftEncoderPosition() * RobotPartsConstants.distancePerTick);
+        //LOG.trace("LeftEncoderDistance: {}", getLeftEncoderPosition() * RobotPartsConstants.distancePerTick);
         return getLeftEncoderPosition() * RobotPartsConstants.distancePerTick;
     }
 
     public double getLeftMetersPerSecond() {
-        LOG.trace("LeftMetersPerSecond: {}", frontLeft.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10);
+        //LOG.trace("LeftMetersPerSecond: {}", frontLeft.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10);
         return frontLeft.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10 /* ticks / 100ms convert to m/s*/;
     }
 
     public double getRightEncoderPosition() {
-        LOG.trace("RightEncoderPosition: {}", frontRight.getSelectedSensorPosition());
+        //LOG.trace("RightEncoderPosition: {}", frontRight.getSelectedSensorPosition());
         return frontRight.getSelectedSensorPosition();
     }
 
     public double getRightEncoderDistance() {
-        LOG.trace("RightEncoderDistance: {}", getRightEncoderPosition() * RobotPartsConstants.distancePerTick);
+        //LOG.trace("RightEncoderDistance: {}", getRightEncoderPosition() * RobotPartsConstants.distancePerTick);
         return getRightEncoderPosition() * RobotPartsConstants.distancePerTick;
     }
 
     public double getRightMetersPerSecond() {
-        LOG.trace("RightMetersPerSecond: {}", frontRight.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10);
+        //LOG.trace("RightMetersPerSecond: {}", frontRight.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10);
         return frontRight.getSelectedSensorVelocity() * RobotPartsConstants.distancePerTick * 10 /* ticks / 100ms convert to m/s */;
     }
 
