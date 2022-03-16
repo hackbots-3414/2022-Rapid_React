@@ -102,6 +102,7 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void periodic() {
+        differentialDrive.feed();
         super.periodic();
     }
 
