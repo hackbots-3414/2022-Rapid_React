@@ -72,7 +72,6 @@ public class Drivetrain extends SubsystemBase {
     private WPI_TalonFX createTalonFX(int deviceID, TalonFXInvertType direction) {
         WPI_TalonFX motor = new WPI_TalonFX(deviceID);
         motor.configFactoryDefault();
-        motor.configVelocityMeasurementPeriod(SensorVelocityMeasPeriod.Period_10Ms);
         motor.configOpenloopRamp(DriveConstants.voltageRampRate);
         motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
         motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
