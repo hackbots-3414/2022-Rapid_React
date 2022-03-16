@@ -87,14 +87,14 @@ public class LEDFeedback extends SubsystemBase {
     public void setClimbingActivated(boolean climbingActivated) {
         this.climbingActivated = climbingActivated;
     }
-    public double checkPressure() {
-        final PowerDistribution pdp = RobotContainer.getInstance().m_powerdistribution;
-        final double outputVoltage = gauge.getAverageVoltage();
-        final double supplyVoltage = pdp.getVoltage();
+    // public double checkPressure() {
+    //     final PowerDistribution pdp = RobotContainer.getInstance().m_powerdistribution;
+    //     final double outputVoltage = gauge.getAverageVoltage();
+    //     final double supplyVoltage = pdp.getVoltage();
 
-        double pressure = 250 * (outputVoltage / supplyVoltage) - 25;
+    //     double pressure = 250 * (outputVoltage / supplyVoltage) - 25;
 
         
-        return pressure;
-    }
+    //     return pressure;
+    // }
 }
