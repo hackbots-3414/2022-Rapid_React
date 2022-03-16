@@ -25,10 +25,6 @@ public class DefaultLEDCommand extends CommandBase {
 
     @Override
     public void execute() {
-
-
-       
-        
         // System.out.print("Running");
         // m_lEDFeedback.setColor(Color.kPurple);
     /* if (m_lEDFeedback.checkPressure() < PressureConstants.pressureValue){

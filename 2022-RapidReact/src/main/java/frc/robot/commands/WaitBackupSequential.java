@@ -3,17 +3,13 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Drivetrain;
 
 public class WaitBackupSequential extends SequentialCommandGroup {
-    private Drivetrain drive;
 
-    public WaitBackupSequential(Drivetrain drive) {
-        addCommands(new WaitCommand(), new DriveStraight(drive, -86.5));
+    public WaitBackupSequential(Drivetrain drivetrain) {
+        addRequirements(drivetrain);
         
-        this.drive = drive;
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        drive.stopDriving();
-        super.end(interrupted);
+        addCommands(
+            new WaitCommand(),
+            new DriveStraight(drivetrain, -86.5)
+        );
     }
 }

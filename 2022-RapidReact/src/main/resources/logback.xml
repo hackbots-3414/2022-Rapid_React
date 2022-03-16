@@ -12,6 +12,7 @@
     <!-- <logger name="frc.robot.commands.EatBall" level="TRACE" /> -->
     <!-- <logger name="frc.robot.subsystems.vision.Pixy" level="TRACE" /> -->
     <!--logger name="frc.robot.commands.MrZPrintCommand" level="TRACE"/-->
+    <!-- logger name="frc.robot.commands.ShootHighWaitBackup" level="TRACE"/ -->
 
     <!-- <logger name="frc.robot.subsystems" level="INFO" /> -->
 
