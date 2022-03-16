@@ -13,15 +13,15 @@ public class MovementShooting extends SequentialCommandGroup {
     public MovementShooting(Drivetrain drivetrain, Belt belt, Shooter shooter) {
         addCommands(
             new ShootCommand(belt, shooter, true, 200),
-            new DriveStraight(drivetrain, 50),
-            new Turn(drivetrain, -15),
-            new DriveStraight(drivetrain, 20),
-            new Turn(drivetrain, 100),
-            new DriveStraight(drivetrain, 70),
-            new Turn(drivetrain, -30),
-            new DriveStraight(drivetrain, -95),
-            new Turn(drivetrain, -30),
-            new DriveStraight(drivetrain, -25),
+            new DriveStraight(drivetrain, -50),
+            new Turn(drivetrain, -22),
+            new DriveStraight(drivetrain, -20),
+            new Turn(drivetrain, 112),
+            new DriveStraight(drivetrain, -70),
+            new Turn(drivetrain, -25),
+            new DriveStraight(drivetrain, 75),
+            new Turn(drivetrain, -13),
+            new DriveStraight(drivetrain, 12),
             new ShootCommand(belt, shooter, true, 3000)
         );
     }
