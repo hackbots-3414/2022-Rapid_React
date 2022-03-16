@@ -27,7 +27,7 @@ public class DefaultLEDCommand extends CommandBase {
     public void execute() {
 
 
-        SmartDashboard.putNumber("Air Pressure", m_lEDFeedback.checkPressure());
+        // SmartDashboard.putNumber("Air Pressure", m_lEDFeedback.checkPressure());
         
         // System.out.print("Running");
         // m_lEDFeedback.setColor(Color.kPurple);

@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
@@ -22,6 +21,29 @@ public class Drivetrain extends SubsystemBase {
     private static final Logger LOG = LoggerFactory.getLogger(Drivetrain.class);
 
     private boolean controlsReversed = false;
+
+    private class EncoderOffsets {
+        public double frontLeft;
+        public double backLeft;
+        public double frontRight;
+        public double backRight;
+
+        EncoderOffsets() {
+            frontLeft = 0;
+            backLeft = 0;
+            frontRight = 0;
+            backRight = 0;
+        }
+
+        public void setOffsets(WPI_TalonFX frontLeft, WPI_TalonFX backLeft, WPI_TalonFX frontRight, WPI_TalonFX backRight) {
+            this.frontLeft = frontLeft.getSelectedSensorPosition();
+            this.backLeft = backLeft.getSelectedSensorPosition();
+            this.frontRight = frontRight.getSelectedSensorPosition();
+            this.backRight = backRight.getSelectedSensorPosition();
+        }
+    };
+
+    private EncoderOffsets encoderOffsets = new EncoderOffsets();
 
     private AHRS ahrs = new AHRS(Port.kMXP);
 
@@ -32,18 +54,13 @@ public class Drivetrain extends SubsystemBase {
     private DifferentialDrive differentialDrive;
 
     public Drivetrain() {
-        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, TalonFXInvertType.CounterClockwise);
-        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, TalonFXInvertType.CounterClockwise);
-        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort, TalonFXInvertType.Clockwise);
-        backRight = createTalonFX(DriveConstants.kRightMotorRearPort, TalonFXInvertType.Clockwise);
-        // frontLeft.setSensorPhase(false);
-        // backLeft.setSensorPhase(false);
-        // frontRight.setSensorPhase(true);
-        // backRight.setSensorPhase(true);
+        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, TalonFXInvertType.Clockwise);
+        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, TalonFXInvertType.Clockwise);
+        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort, TalonFXInvertType.CounterClockwise);
+        backRight = createTalonFX(DriveConstants.kRightMotorRearPort, TalonFXInvertType.CounterClockwise);
+
         backRight.follow(frontRight);
         backLeft.follow(frontLeft);
-
-        resetEncoders();
 
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
         addChild("DifferentialDrive", differentialDrive);
@@ -59,6 +76,7 @@ public class Drivetrain extends SubsystemBase {
         motor.configOpenloopRamp(DriveConstants.voltageRampRate);
         motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
         motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
+        motor.setSelectedSensorPosition(0, 0, 10);
         motor.setInverted(direction);
 
         return motor;
@@ -78,10 +96,6 @@ public class Drivetrain extends SubsystemBase {
         backRight.setNeutralMode(NeutralMode.Coast);
     }
 
-    /*public void setControlsReversed(boolean controlsReversed) {
-        this.controlsReversed = controlsReversed;
-    }
-*/
     public boolean isControlsReversed() {
         return controlsReversed;
     }
@@ -93,15 +107,15 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void simulationPeriodic() {
-        super.periodic();
+        super.simulationPeriodic();
     }
 
     public double getLeftEncoderPosition() {
-        return backLeft.getSelectedSensorPosition();
+        return ((frontLeft.getSelectedSensorPosition() + backLeft.getSelectedSensorPosition()) / 2D) - encoderOffsets.frontLeft;
     }
 
     public double getRightEncoderPosition() {
-        return frontRight.getSelectedSensorPosition();
+        return ((frontRight.getSelectedSensorPosition() + backRight.getSelectedSensorPosition()) / 2D) - encoderOffsets.frontRight;
     }
 
     public double getAverageEncoderPosition() {
@@ -109,19 +123,12 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void resetEncoders() {
-        frontLeft.setSelectedSensorPosition(0);
-        frontRight.setSelectedSensorPosition(0);
-        backRight.setSelectedSensorPosition(0);
-        backLeft.setSelectedSensorPosition(0);
+        encoderOffsets.setOffsets(frontLeft, backLeft, frontRight, backRight);
     }
 
     public void arcadeDrive(double throttle, double steering) {
         LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
-        if (controlsReversed) {
-            differentialDrive.arcadeDrive(throttle, steering);
-        } else {
-            differentialDrive.arcadeDrive(-throttle, steering);
-        }
+        differentialDrive.arcadeDrive(-throttle, steering);
     }
 
     public void curvatureDrive(double throttle, double rotation, boolean turnInPlace) {

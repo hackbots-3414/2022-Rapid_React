@@ -50,7 +50,7 @@ public class RobotContainer {
     public final Drivetrain m_drivetrain;
     public final Climber m_climber;
     public final PowerDistribution m_powerdistribution;
-    public final Pixy m_pixy;
+    // public final Pixy m_pixy;
 
     // Joysticks
     private final XboxController operatorPad = new XboxController(1);
@@ -67,7 +67,7 @@ public class RobotContainer {
         m_climber = new Climber();
         m_powerdistribution = new PowerDistribution(Constants.PowerDistribution.CanID, ModuleType.kRev);
         
-        m_pixy = new Pixy();
+        // m_pixy = new Pixy();
 
         // Smartdashboard Subsystems
 
@@ -123,7 +123,7 @@ public class RobotContainer {
         shootLowButton.whileHeld(new ShootCommand(m_belt, m_shooter, false, Constants.ShooterConstants.shooterTimer), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
-        eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
+        // eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
         beltButton.whileHeld(new BeltCommand(m_belt));
 
     }
