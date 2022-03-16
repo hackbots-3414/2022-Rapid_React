@@ -29,7 +29,7 @@ public class Climber extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putData("Compressor", phCompressor);
+       
         SmartDashboard.putNumber("Air Pressure", phCompressor.getPressure());
     }
 }
