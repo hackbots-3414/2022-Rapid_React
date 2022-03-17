@@ -23,13 +23,15 @@ import frc.robot.commands.Eject;
 import frc.robot.commands.RunBelt;
 import frc.robot.commands.RunShoot;
 import frc.robot.commands.ShootCommand;
-import frc.robot.commands.ShootHighWaitBackup;
-import frc.robot.commands.ShootLowWaitBackup;
 import frc.robot.commands.TeleopCommand;
-import frc.robot.commands.WaitBackupSequential;
-import frc.robot.commands.autonomous.MovementShooting;
-import frc.robot.commands.autonomous.ThreeBall;
-import frc.robot.commands.autonomous.TwoBall;
+import frc.robot.commands.autonomous.TarmacOne.ThreeBallMovementShooting;
+import frc.robot.commands.autonomous.TarmacOne.OneBallHigh;
+import frc.robot.commands.autonomous.TarmacOne.OneBallLow;
+import frc.robot.commands.autonomous.TarmacOne.ThreeBall;
+import frc.robot.commands.autonomous.TarmacOne.TwoBall;
+import frc.robot.commands.autonomous.TarmacOne.ZeroBall;
+import frc.robot.commands.autonomous.TarmacTwo.TwoBallCloseMovementShooting;
+import frc.robot.commands.autonomous.TarmacTwo.TwoBallFar;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -86,11 +88,13 @@ public class RobotContainer {
 
         // Configure autonomous sendable chooser
 
-        m_chooser.addOption("Wait and Backup", new WaitBackupSequential(m_drivetrain));
-        m_chooser.addOption("ShootLow, Wait, Back Up", new ShootLowWaitBackup(m_shooter, m_drivetrain, m_belt));
-        m_chooser.addOption("ShootHigh, Wait, Backup", new ShootHighWaitBackup(m_shooter, m_drivetrain, m_belt));
-        m_chooser.addOption("2 Ball", new TwoBall(m_drivetrain, m_belt, m_shooter));
-        m_chooser.setDefaultOption("3 Ball", new ThreeBall(m_drivetrain, m_belt, m_shooter));
+        m_chooser.addOption("Any Tarmac - 0 Ball", new ZeroBall(m_drivetrain));
+        m_chooser.addOption("Any Tarmac - 1 Ball Low", new OneBallLow(m_shooter, m_drivetrain, m_belt));
+        m_chooser.addOption("Any Tarmac - 1 Ball High", new OneBallHigh(m_shooter, m_drivetrain, m_belt));
+        m_chooser.addOption("Tarmac 1 - 2 Ball", new TwoBall(m_drivetrain, m_belt, m_shooter));
+        m_chooser.setDefaultOption("Tarmac 1 - 3 Ball", new ThreeBall(m_drivetrain, m_belt, m_shooter));
+        m_chooser.addOption("Tarmac 2 - 2 Ball", new TwoBallFar(m_drivetrain, m_belt, m_shooter));
+        // m_chooser.addOption("Tarmac 2 - 2 Ball CLose", new TwoBallCloseMovementShooting(m_drivetrain, m_belt, m_shooter));
 
         SmartDashboard.putData("Auton Mode", m_chooser);
 

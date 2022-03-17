@@ -1,12 +1,16 @@
-package frc.robot.commands;
+package frc.robot.commands.autonomous.TarmacOne;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.DriveStraight;
+import frc.robot.commands.ShootCommand;
+import frc.robot.commands.autonomous.WaitBeforeShoot;
+import frc.robot.commands.autonomous.WaitCommand;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 
-public class ShootLowWaitBackup extends SequentialCommandGroup {
+public class OneBallLow extends SequentialCommandGroup {
     
-    public ShootLowWaitBackup(Shooter shooter, Drivetrain drivetrain, Belt belt) {
+    public OneBallLow(Shooter shooter, Drivetrain drivetrain, Belt belt) {
         addRequirements(drivetrain);
         addRequirements(belt);
         addRequirements(shooter);

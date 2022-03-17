@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomous;
+package frc.robot.commands.autonomous.TarmacOne;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveStraight;
@@ -8,9 +8,9 @@ import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 
-public class MovementShooting extends SequentialCommandGroup {
+public class ThreeBallMovementShooting extends SequentialCommandGroup {
 
-    public MovementShooting(Drivetrain drivetrain, Belt belt, Shooter shooter) {
+    public ThreeBallMovementShooting(Drivetrain drivetrain, Belt belt, Shooter shooter) {
         addCommands(
             new ShootCommand(belt, shooter, true, 200),
             new DriveStraight(drivetrain, -50),

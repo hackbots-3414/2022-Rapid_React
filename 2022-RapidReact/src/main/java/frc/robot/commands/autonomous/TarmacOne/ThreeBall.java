@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomous;
+package frc.robot.commands.autonomous.TarmacOne;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.BeltCommand;
@@ -14,7 +14,7 @@ public class ThreeBall extends ParallelCommandGroup {
         addRequirements(shooter);
         
         addCommands(
-            new MovementShooting(drivetrain, belt, shooter),
+            new ThreeBallMovementShooting(drivetrain, belt, shooter),
             new BeltCommand(belt)
         );
     }
