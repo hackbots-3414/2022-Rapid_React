@@ -7,6 +7,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -28,6 +29,9 @@ public class Robot extends TimedRobot {
         UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setFPS(30);
         camera.setResolution(320, 240);
+        camera.setExposureManual(30);
+
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
     }
 
     @Override
