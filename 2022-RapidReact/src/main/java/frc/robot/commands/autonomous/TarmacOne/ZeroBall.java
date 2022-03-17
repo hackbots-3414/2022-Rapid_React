@@ -1,10 +1,12 @@
-package frc.robot.commands;
+package frc.robot.commands.autonomous.TarmacOne;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.DriveStraight;
+import frc.robot.commands.autonomous.WaitCommand;
 import frc.robot.subsystems.Drivetrain;
 
-public class WaitBackupSequential extends SequentialCommandGroup {
+public class ZeroBall extends SequentialCommandGroup {
 
-    public WaitBackupSequential(Drivetrain drivetrain) {
+    public ZeroBall(Drivetrain drivetrain) {
         addRequirements(drivetrain);
         
         addCommands(
