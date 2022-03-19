@@ -37,7 +37,7 @@ public class ThreeBallNew extends SequentialCommandGroup {
         new DriveStraight(drivetrain, 65), //changed for comp; used to be 75
         new Turn(drivetrain, -20), //-13
         new DriveStraight(drivetrain, 12)), 
-        new BeltCommand(belt)),
-    new ShootCommand(belt, shooter, 1, 3000));
+      new BeltCommand(belt).withTimeout(5)),
+      new ShootCommand(belt, shooter, 1, 3000));
   }
 }
