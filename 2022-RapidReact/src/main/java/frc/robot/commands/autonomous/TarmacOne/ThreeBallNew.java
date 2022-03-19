@@ -27,15 +27,17 @@ public class ThreeBallNew extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new ShootCommand(belt, shooter, 1, 200),
-    new ParallelCommandGroup(new SequentialCommandGroup(
-      new Turn(drivetrain, -22),
-      new DriveStraight(drivetrain, -17), //changed for comp; used to be 20
-      new Turn(drivetrain, 112),
-      new DriveStraight(drivetrain, -70),
-      new Turn(drivetrain, -25),
-      new DriveStraight(drivetrain, 65), //changed for comp; used to be 75
-      new Turn(drivetrain, -20), //-13
-      new DriveStraight(drivetrain, 12)), new BeltCommand(belt)),
+    new ParallelCommandGroup(
+      new SequentialCommandGroup(
+        new Turn(drivetrain, -22),
+        new DriveStraight(drivetrain, -17), //changed for comp; used to be 20
+        new Turn(drivetrain, 112),
+        new DriveStraight(drivetrain, -70),
+        new Turn(drivetrain, -25),
+        new DriveStraight(drivetrain, 65), //changed for comp; used to be 75
+        new Turn(drivetrain, -20), //-13
+        new DriveStraight(drivetrain, 12)), 
+        new BeltCommand(belt)),
     new ShootCommand(belt, shooter, 1, 3000));
   }
 }

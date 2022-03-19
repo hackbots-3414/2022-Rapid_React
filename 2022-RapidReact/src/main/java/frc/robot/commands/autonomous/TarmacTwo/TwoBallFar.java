@@ -1,5 +1,6 @@
 package frc.robot.commands.autonomous.TarmacTwo;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.DriveStraight;
@@ -17,11 +18,13 @@ public class TwoBallFar extends SequentialCommandGroup {
         addRequirements(shooter);
 
         addCommands(
-            new DriveStraight(drivetrain, -26),
-            new BeltCommand(belt).withTimeout(2.5),
-            new DriveStraight(drivetrain, 51),
-            new Turn(drivetrain, -8),
-            new DriveStraight(drivetrain, 20),
+            new ParallelCommandGroup(
+                new SequentialCommandGroup(
+                    new DriveStraight(drivetrain, -26),
+                    new DriveStraight(drivetrain, 51),
+                    new Turn(drivetrain, -8),
+                    new DriveStraight(drivetrain, 20)),
+                new BeltCommand(belt).withTimeout(3.5)),
             new ShootCommand(belt, shooter, 1, 3000),
             new DriveStraight(drivetrain, -86.5)
         );
