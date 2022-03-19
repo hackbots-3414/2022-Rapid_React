@@ -11,14 +11,14 @@ public class ShootCommand extends CommandBase {
 
     private final Belt m_belt;
     private final Shooter m_shooter;
-    private final boolean isHigh;
+    //private final boolean isHigh;
     private final int shooterTimer;
     private long topIRTimer;
-
-    public ShootCommand(Belt subsystem, Shooter shooter, boolean isHigh, int shooterTimer) {
+    private int shootTypes;
+    public ShootCommand(Belt subsystem, Shooter shooter, int shootTypes, int shooterTimer) {
         m_belt = subsystem;
         m_shooter = shooter;
-        this.isHigh = isHigh;
+        this.shootTypes = shootTypes;
         this.shooterTimer = shooterTimer;
     }
 
@@ -29,19 +29,20 @@ public class ShootCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if (m_belt.getIRTop()) {
-            topIRTimer = System.currentTimeMillis();
-        }
-        if (isHigh) {
-            m_shooter.shootHigh();
-            if (m_shooter.highAtSpeed()) {
-                m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeedShooter);
-                m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeedShooter);
-                m_belt.startMotorBottom(Constants.BeltConstants.motorSpeedShooter);
-            } else {
-                m_belt.stopAllMotors();
-            }
-        } else {
+
+        switch (shootTypes) {
+            case 1:
+
+                m_shooter.shootHigh();
+                if (m_shooter.highAtSpeed()) {
+                    m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeedShooter);
+                    m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeedShooter);
+                    m_belt.startMotorBottom(Constants.BeltConstants.motorSpeedShooter);
+                } else {
+                    m_belt.stopAllMotors();
+                }
+            break;  
+            case 2:
             m_shooter.shootLow();
             if (m_shooter.lowAtSpeed()) {
                 m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeedShooter);
@@ -50,7 +51,23 @@ public class ShootCommand extends CommandBase {
             } else {
                 m_belt.stopAllMotors();
             }
+            break;
+            case 3:
+            m_shooter.shootFar();
+            if (m_shooter.farAtSpeed()) {
+                m_belt.startMotorTop(Constants.BeltConstants.topMotorSpeedShooter);
+                m_belt.startMotorMiddle(Constants.BeltConstants.motorSpeedShooter);
+                m_belt.startMotorBottom(Constants.BeltConstants.motorSpeedShooter);
+            } else {
+                m_belt.stopAllMotors();
+            }
+
+
         }
+        if (m_belt.getIRTop()) {
+            topIRTimer = System.currentTimeMillis();
+        }
+
     }
 
     @Override

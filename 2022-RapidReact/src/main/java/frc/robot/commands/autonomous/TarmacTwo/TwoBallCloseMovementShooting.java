@@ -12,14 +12,14 @@ public class TwoBallCloseMovementShooting extends SequentialCommandGroup {
 
     public TwoBallCloseMovementShooting(Drivetrain drivetrain, Belt belt, Shooter shooter) {
         addCommands(
-            new ShootCommand(belt, shooter, true, 100),
+            new ShootCommand(belt, shooter, 1, 100),
             new DriveStraight(drivetrain, -50),
             new Turn(drivetrain, 22),
             new DriveStraight(drivetrain, -20),
             new DriveStraight(drivetrain, 20),
             new Turn(drivetrain, -22),
             new DriveStraight(drivetrain, -50),
-            new ShootCommand(belt, shooter, true, 100)
+            new ShootCommand(belt, shooter, 1, 100)
         );
     }
 }

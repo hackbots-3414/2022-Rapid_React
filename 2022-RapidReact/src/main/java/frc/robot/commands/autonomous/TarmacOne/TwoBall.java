@@ -22,7 +22,7 @@ public class TwoBall extends SequentialCommandGroup {
             new DriveStraight(drivetrain, 51),
             new Turn(drivetrain, 8),
             new DriveStraight(drivetrain, 20),
-            new ShootCommand(belt, shooter, true, 3000),
+            new ShootCommand(belt, shooter, 1, 3000),
             new DriveStraight(drivetrain, -86.5)
         );
     }
