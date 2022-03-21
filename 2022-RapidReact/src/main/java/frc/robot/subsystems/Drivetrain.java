@@ -22,6 +22,8 @@ public class Drivetrain extends SubsystemBase {
 
     private boolean controlsReversed = false;
 
+    private boolean wantHigh = true;
+
     private class EncoderOffsets {
         public double frontLeft;
         public double backLeft;
@@ -78,8 +80,35 @@ public class Drivetrain extends SubsystemBase {
         motor.setSelectedSensorPosition(0, 0, 10);
         motor.setInverted(direction);
 
+
+
         return motor;
     }
+
+    public void setLowCurrentLimit(){
+        frontLeft.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveLowCurrentLimit, DriveConstants.driveLowCurrentLimit, DriveConstants.triggerThresholdTime));
+        frontRight.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveLowCurrentLimit, DriveConstants.driveLowCurrentLimit, DriveConstants.triggerThresholdTime));
+        backLeft.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveLowCurrentLimit, DriveConstants.driveLowCurrentLimit, DriveConstants.triggerThresholdTime));
+        backRight.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveLowCurrentLimit, DriveConstants.driveLowCurrentLimit, DriveConstants.triggerThresholdTime));
+    }
+
+    public void setHighCurrentLimit() {
+        frontLeft.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        frontRight.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        backLeft.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        backRight.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+
+    }
+
+    public void requestCurrentLimit(boolean wantHigh) {
+    this.wantHigh = wantHigh;
+
+    }
+
+    public boolean isHighLimitEnabled() {
+        return wantHigh;
+    }
+
 
     public void setBrakeMode() {
         frontLeft.setNeutralMode(NeutralMode.Brake);

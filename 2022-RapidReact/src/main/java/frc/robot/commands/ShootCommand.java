@@ -25,6 +25,7 @@ public class ShootCommand extends CommandBase {
     @Override
     public void initialize() {
         topIRTimer = System.currentTimeMillis();
+        
     }
 
     @Override
