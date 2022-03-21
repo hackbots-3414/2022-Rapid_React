@@ -32,9 +32,8 @@ public class Robot extends TimedRobot {
         /*UsbCamera camera = CameraServer.startAutomaticCapture();
         camera.setFPS(30);
         camera.setResolution(320, 240);*/
+        setUpLimeLight();
 
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(0);
     }
 
     @Override
@@ -45,6 +44,7 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledInit() {
         m_drivetrain.setCoastMode();
+        setUpLimeLight();
     }
 
     @Override
@@ -56,6 +56,8 @@ public class Robot extends TimedRobot {
         m_robotContainer.getInstance().m_lEDFeedback.setClimbingActivated(false);
         m_autonomousCommand = m_robotContainer.getAutonomousCommand();
         m_drivetrain.setBrakeMode();
+
+        setUpLimeLight();
 
 
         // schedule the autonomous command (example)
@@ -71,6 +73,8 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         m_drivetrain.setBrakeMode();
+
+        setUpLimeLight();
         
         m_robotContainer.getInstance().m_lEDFeedback.setClimbingActivated(false);
         if (m_autonomousCommand != null) {
@@ -90,5 +94,12 @@ public class Robot extends TimedRobot {
 
     @Override
     public void testPeriodic() {
+    }
+
+    public void setUpLimeLight() {
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0); // set pipeline for camera
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); // force off
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); // driver cam: turns off processing
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(0); // side by side display for cameras
     }
 }
