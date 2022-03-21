@@ -29,10 +29,9 @@ public class Robot extends TimedRobot {
         
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
-        // UsbCamera camera = CameraServer.startAutomaticCapture();
-        // camera.setFPS(30);
-        // camera.setResolution(160, 120);
-        // camera.setExposureManual(50);
+        /*UsbCamera camera = CameraServer.startAutomaticCapture();
+        camera.setFPS(30);
+        camera.setResolution(320, 240);*/
 
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(0);

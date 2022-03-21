@@ -3,6 +3,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ClimberConstants;
 
 public class Climber extends SubsystemBase {
@@ -25,7 +26,10 @@ public class Climber extends SubsystemBase {
         climber_2.set(false);
     }
 
+
     @Override
     public void periodic() {
+       
+        SmartDashboard.putNumber("Air Pressure", phCompressor.getPressure());
     }
 }
