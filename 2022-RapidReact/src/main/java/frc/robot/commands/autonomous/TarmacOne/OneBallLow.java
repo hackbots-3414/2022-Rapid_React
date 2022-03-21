@@ -17,7 +17,7 @@ public class OneBallLow extends SequentialCommandGroup {
         
         addCommands(
             new WaitBeforeShoot(), 
-            new ShootCommand(belt, shooter, false, 100),
+            new ShootCommand(belt, shooter, 2, 100),
             new WaitCommand(),
             new DriveStraight(drivetrain, -86.5)
         );
