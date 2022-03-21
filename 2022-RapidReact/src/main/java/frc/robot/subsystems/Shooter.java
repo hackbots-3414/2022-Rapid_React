@@ -58,12 +58,20 @@ public class Shooter extends SubsystemBase {
         leftMotor.set(ControlMode.Velocity, Constants.ShooterConstants.lowShootVelocity);
     }
 
+    public void shootFar() {
+        leftMotor.set(ControlMode.Velocity, Constants.ShooterConstants.shootFarVelocity);
+    } 
+
     public boolean highAtSpeed() {
         return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.highShootVelocity) <= Constants.ShooterConstants.shootVelocityTolerance);
     }
 
     public boolean lowAtSpeed() {
         return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.lowShootVelocity) <= Constants.ShooterConstants.shootVelocityTolerance);
+    }
+
+    public boolean farAtSpeed() {
+        return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.shootFarVelocity) <= Constants.ShooterConstants.shootVelocityTolerance);
     }
 
     public void stop() {
