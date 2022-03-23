@@ -27,6 +27,12 @@ public class Climber extends SubsystemBase {
     }
 
 
+    public double getAirPressure(){
+        return phCompressor.getPressure();
+    }
+
+
+
     @Override
     public void periodic() {
        
