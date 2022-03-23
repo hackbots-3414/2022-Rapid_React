@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomous.TarmacOne;
+package frc.robot.commands.autonomous.tarmacOne;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.BeltCommand;
