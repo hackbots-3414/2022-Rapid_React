@@ -12,7 +12,7 @@ import frc.robot.Constants;
 public class Belt extends SubsystemBase {
 
   private static final Logger LOG = LoggerFactory.getLogger(Belt.class);
-
+public int thisManyBalls;
   DigitalInput irBottom = new DigitalInput(0);
   DigitalInput irTop = new DigitalInput(1);
   WPI_TalonFX topMotor = new WPI_TalonFX(Constants.BeltConstants.topMotor);
@@ -20,6 +20,7 @@ public class Belt extends SubsystemBase {
   WPI_TalonFX bottomMotor = new WPI_TalonFX(Constants.BeltConstants.bottomMotor);
   WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.BeltConstants.intakeMotor);
   Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.BeltConstants.solenoidChannel);
+
 
 
     public boolean getIRBottom() {
@@ -99,5 +100,6 @@ public class Belt extends SubsystemBase {
     @Override
     public void periodic() {
     }
+
 
 }
