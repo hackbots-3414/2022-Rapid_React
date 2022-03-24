@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomous.TarmacTwo;
+package frc.robot.commands.autonomous.tarmacTwo;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveStraight;
