@@ -1,6 +1,17 @@
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 public class Constants {
+    public static final class RobotConstants {
+        public static final double kTrackWidthMeters = 0.6096;
+        public static final double kWheelDiameter = 0.16;
+        public static final double kTicks = 2048;
+        public static final double kGearRatio = 12; // : 1
+        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+        public static final double kDistancePerTick = kWheelDiameter * Math.PI / kTicks / kGearRatio;
+    }
+    
     public static final class CompControllerConstants {
         public static final double left_x_offset = -0.13379;
         public static final double left_x_max = 0.81982;
@@ -34,6 +45,20 @@ public class Constants {
         public static final double kMaxSpeed = 2.5; // 2
         public static final double driveCurrentLimit = 70.0;
         public static final double triggerThresholdTime = .05;
+    }
+
+    public static final class PathweaverConstants {
+        public static final double ksVolts = ;
+        public static final double kvVoltSecondsPerMeter = ;
+        public static final double kaVoltSecondsSquaredPerMeter = ;
+        public static final double kpDriveVel = ;
+        public static final double kiDriveVel = 0;
+        public static final double kdDriveVel = 0;
+        public static final double kMaxSpeedMetersPerSecond = 1;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
+        public static final double kRamseteB = 2;
+        public static final double kRamseteZeta = 0.7;
+
     }
 
     public static final class TransportConstants {
