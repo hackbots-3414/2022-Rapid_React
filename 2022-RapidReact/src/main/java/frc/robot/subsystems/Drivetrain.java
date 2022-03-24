@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -21,6 +22,8 @@ public class Drivetrain extends SubsystemBase {
     private static final Logger LOG = LoggerFactory.getLogger(Drivetrain.class);
 
     private boolean controlsReversed = false;
+
+    private boolean wantLow = true;
 
     private class EncoderOffsets {
         public double frontLeft;
@@ -53,6 +56,8 @@ public class Drivetrain extends SubsystemBase {
     private WPI_TalonFX frontRight;
     private DifferentialDrive differentialDrive;
 
+    private SupplyCurrentLimitConfiguration frontSupplyLimit = new SupplyCurrentLimitConfiguration(false, DriveConstants.driveLowCurrentLimit, DriveConstants.driveLowCurrentLimit, DriveConstants.triggerThresholdTime);
+
     public Drivetrain() {
         frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, TalonFXInvertType.Clockwise);
         backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, TalonFXInvertType.Clockwise);
@@ -61,6 +66,9 @@ public class Drivetrain extends SubsystemBase {
 
         backRight.follow(frontRight);
         backLeft.follow(frontLeft);
+
+        setHighCurrentLimit();
+        setLowCurrentLimit();
 
         differentialDrive = new DifferentialDrive(frontLeft, frontRight);
         addChild("DifferentialDrive", differentialDrive);
@@ -80,6 +88,37 @@ public class Drivetrain extends SubsystemBase {
 
         return motor;
     }
+
+    public void setLowCurrentLimit(){
+        frontLeft.configSupplyCurrentLimit(frontSupplyLimit);
+        frontRight.configSupplyCurrentLimit(frontSupplyLimit);
+       }
+
+    public void setHighCurrentLimit() {
+        frontRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        backRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        backLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+        frontLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
+    }
+
+    public boolean isLowLimitEnabled() {
+        return frontSupplyLimit.enable;
+    }
+
+    public void LowLimitEnable(boolean enable) {
+        frontSupplyLimit.enable = enable;
+        setLowCurrentLimit();
+    }
+
+    public void requestCurrentLimit(boolean wantLow) {
+    this.wantLow = wantLow;
+
+    }
+
+    public boolean isLowCurrentRequested() {
+        return wantLow;
+    }
+
 
     public void setBrakeMode() {
         frontLeft.setNeutralMode(NeutralMode.Brake);

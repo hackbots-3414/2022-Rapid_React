@@ -2,8 +2,11 @@ package frc.robot.commands;
 
 import org.ejml.dense.block.MatrixOps_MT_DDRB;
 
+import ch.qos.logback.classic.pattern.RootCauseFirstThrowableProxyConverter;
+import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Shooter;
 
@@ -25,6 +28,7 @@ public class ShootCommand extends CommandBase {
     @Override
     public void initialize() {
         topIRTimer = System.currentTimeMillis();
+        RobotContainer.getInstance().m_drivetrain.requestCurrentLimit(true);
     }
 
     @Override
@@ -74,6 +78,7 @@ public class ShootCommand extends CommandBase {
     public void end(boolean interrupted) {
         m_belt.stopAllMotors();
         m_shooter.stop();
+        RobotContainer.getInstance().m_drivetrain.requestCurrentLimit(false);
     }
 
     @Override
