@@ -6,7 +6,13 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ClimberConstants;
 
+
+
 public class Climber extends SubsystemBase {
+
+    public static final int CLIMBER_ARRAY_LENGTH = 10;
+    private double Climber_Array[] = new double[CLIMBER_ARRAY_LENGTH]; 
+    private static int Array_Slot = 0;
 
     Solenoid climber_1 = new Solenoid(PneumaticsModuleType.REVPH, ClimberConstants.climberSolenoidChannel_1);
     Solenoid climber_2 = new Solenoid(PneumaticsModuleType.REVPH, ClimberConstants.climberSolenoidChannel_2);
@@ -14,6 +20,7 @@ public class Climber extends SubsystemBase {
 
     public Climber() {
         phCompressor.enableAnalog(95, 120);
+        SmartDashboard.putBoolean("Climber Ready", false);
     }
 
     public void climberUp() {
@@ -26,10 +33,36 @@ public class Climber extends SubsystemBase {
         climber_2.set(false);
     }
 
+    public double getAveragePressure() {
+        double Array_Total = 0;
+        for (int i = 0; i < CLIMBER_ARRAY_LENGTH; i++) {
+            Array_Total = Array_Total+Climber_Array[i];
+        }
+        return Array_Total/CLIMBER_ARRAY_LENGTH;
+    }
+
 
     @Override
     public void periodic() {
+
+        if (Array_Slot <=   CLIMBER_ARRAY_LENGTH-1){
+
+            Climber_Array[Array_Slot] = phCompressor.getPressure();
+            Array_Slot++;
+
+        }
+        else {
+
+            Array_Slot = 0;
+
+            SmartDashboard.putNumber("Air Pressure", getAveragePressure());
+            if (getAveragePressure()>70){
+                SmartDashboard.putBoolean("Climber Ready", true);
+            } else{
+                SmartDashboard.putBoolean("Climber Ready", false);
+            }
+        }
        
-        SmartDashboard.putNumber("Air Pressure", phCompressor.getPressure());
+        
     }
 }
