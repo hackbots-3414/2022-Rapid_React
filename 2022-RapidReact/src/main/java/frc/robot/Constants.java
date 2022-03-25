@@ -37,7 +37,7 @@ public class Constants {
     }
 
     public static final class DriveConstants {
-        public static final int kLeftMotorFrontPort = 10;
+        public static final int kLeftMotorFrontPort = 10; // 10
         public static final int kLeftMotorRearPort = 11;
         public static final int kRightMotorFrontPort = 13;
         public static final int kRightMotorRearPort = 14;
@@ -48,14 +48,14 @@ public class Constants {
     }
 
     public static final class PathweaverConstants {
-        public static final double ksVolts = ;
-        public static final double kvVoltSecondsPerMeter = ;
-        public static final double kaVoltSecondsSquaredPerMeter = ;
-        public static final double kpDriveVel = ;
+        public static final double ksVolts = 0.61355;
+        public static final double kvVoltSecondsPerMeter = 2.5341;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.1884;
+        public static final double kpDriveVel = 2.0;
         public static final double kiDriveVel = 0;
         public static final double kdDriveVel = 0;
-        public static final double kMaxSpeedMetersPerSecond = 1;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 2.5;
+        public static final double kMaxSpeedMetersPerSecond = 1.6;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
 

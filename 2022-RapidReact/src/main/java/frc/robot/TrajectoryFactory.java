@@ -42,8 +42,18 @@ public class TrajectoryFactory {
 
     public static Trajectory getPath(String name) {
         switch (name) {
-            case "TestPath":
-                return getTrajectory("TestPath.wpilib.json");
+            case "3BallAutonPart1":
+                return getTrajectory("3BallAutonPart1.wpilib.json");
+            case "3BallAutonPart2":
+                return getTrajectory("3BallAutonPart2.wpilib.json");
+            case "3BallAutonPart3":
+                return getTrajectory("3BallAutonPart3.wpilib.json");
+            case "3BallAutonPart4":
+                return getTrajectory("3BallAutonPart4.wpilib.json");
+            case "SharpTurnRev":
+                return getTrajectory("SharpTurnRev.wpilib.json");
+            case "SharpTurnFor":
+                return getTrajectory("SharpTurnFor.wpilib.json");
             default:
                 return getTrajectory("TestPath.wpilib.json");
         }

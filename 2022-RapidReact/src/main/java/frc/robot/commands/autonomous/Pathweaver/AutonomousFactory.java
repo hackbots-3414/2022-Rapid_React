@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.autonomous.Pathweaver;
+package frc.robot.commands.autonomous.pathweaver;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -45,7 +45,10 @@ public class AutonomousFactory {
 
     public SequentialCommandGroup createTestCommand() {
         SequentialCommandGroup group = new SequentialCommandGroup();
-        group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("TestPath")));
+        group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1")));
+        group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2")));
+        group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3")));
+        group.addCommands(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart4")));
         return group;
     }
 
@@ -70,6 +73,7 @@ public class AutonomousFactory {
 
         @Override
         public void end(boolean interrupted) {
+            m_drivetrain.tankDriveVolts(0, 0);
             super.end(interrupted);
         }
     }

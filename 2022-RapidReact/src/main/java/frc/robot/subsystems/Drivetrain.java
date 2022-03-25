@@ -119,7 +119,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-        return new DifferentialDriveWheelSpeeds(getLeftEncoderVelocity(), getRightEncoderVelocity());
+        return new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());
     }
 
     public double getLeftEncoderPosition() {
@@ -134,6 +134,10 @@ public class Drivetrain extends SubsystemBase {
         return frontLeft.getSelectedSensorVelocity();
     }
 
+    public double getLeftMetersPerSecond() {
+        return getLeftEncoderVelocity() * RobotConstants.kDistancePerTick * 10;
+    }
+
     public double getRightEncoderPosition() {
         return ((frontRight.getSelectedSensorPosition() + backRight.getSelectedSensorPosition()) / 2D) - encoderOffsets.frontRight;
     }
@@ -144,6 +148,10 @@ public class Drivetrain extends SubsystemBase {
 
     public double getRightEncoderVelocity() {
         return frontRight.getSelectedSensorVelocity();
+    }
+
+    public double getRightMetersPerSecond() {
+        return getRightEncoderVelocity() * RobotConstants.kDistancePerTick * 10;
     }
 
     public double getAverageEncoderPosition() {
