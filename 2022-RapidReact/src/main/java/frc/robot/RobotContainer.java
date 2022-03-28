@@ -26,6 +26,7 @@ import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TeleopCommand;
 import frc.robot.commands.autonomous.TarmacOne.ThreeBallMovementShooting;
 import frc.robot.commands.autonomous.TarmacOne.ThreeBallNew;
+import frc.robot.commands.autonomous.shootFarBackup;
 import frc.robot.commands.autonomous.TarmacOne.OneBallHigh;
 import frc.robot.commands.autonomous.TarmacOne.OneBallLow;
 import frc.robot.commands.autonomous.TarmacOne.ThreeBall;
@@ -95,6 +96,7 @@ public class RobotContainer {
         m_chooser.addOption("Tarmac 1 - 2 Ball", new TwoBall(m_drivetrain, m_belt, m_shooter));
         m_chooser.setDefaultOption("Tarmac 1 - 3 Ball", new ThreeBallNew(m_drivetrain, m_belt, m_shooter));
         m_chooser.addOption("Tarmac 2 - 2 Ball", new TwoBallFar(m_drivetrain, m_belt, m_shooter));
+        m_chooser.addOption("Shoot far back up sabotage", new shootFarBackup(m_shooter, m_drivetrain, m_belt));
         //m_chooser.addOption("3 ball trial", new ThreeBallNew(m_drivetrain, m_belt, m_shooter));
         // m_chooser.addOption("Tarmac 2 - 2 Ball CLose", new TwoBallCloseMovementShooting(m_drivetrain, m_belt, m_shooter));
 
