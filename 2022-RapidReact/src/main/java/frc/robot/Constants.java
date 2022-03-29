@@ -34,7 +34,9 @@ public class Constants {
         public static final double kMaxSpeed = 2.5; // 2
         public static final double driveCurrentLimit = 70.0;
         public static final double triggerThresholdTime = .05;
-        public static final double driveLowCurrentLimit = 20.0;
+
+        public static final double driveLowCurrentLimit = 5.0;
+
     }
 
     public static final class TransportConstants {
@@ -87,7 +89,7 @@ public class Constants {
     }
 
     public static final class PressureConstants {
-        public static final double pressureValue = 80;
+        public static final double pressureValue = 40;
     }
 
     public static final class PowerDistribution {

@@ -9,7 +9,7 @@ import frc.robot.subsystems.Drivetrain;
 public class Turn extends CommandBase {
     private static final Logger LOG = LoggerFactory.getLogger(Turn.class);
 
-    private double turnSpeed = 0.4;
+    private double turnSpeed;
     private double startHeading;
     private double targetHeading;
     private double currentHeading;
@@ -18,6 +18,7 @@ public class Turn extends CommandBase {
     private double m_degrees;
 
     public Turn(Drivetrain subsystem, double degrees) {
+        this.turnSpeed = 0.4;
         m_degrees = degrees;
         
         m_drivetrain = subsystem;
@@ -25,7 +26,6 @@ public class Turn extends CommandBase {
 
     public Turn(Drivetrain subsystem, double degrees, double turnSpeed) {
         this.turnSpeed = turnSpeed;
-        m_degrees = degrees;
         m_degrees = degrees;
         
         m_drivetrain = subsystem;
