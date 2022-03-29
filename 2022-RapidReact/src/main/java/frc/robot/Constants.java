@@ -48,14 +48,14 @@ public class Constants {
     }
 
     public static final class PathweaverConstants {
-        public static final double ksVolts = 0.61355;
-        public static final double kvVoltSecondsPerMeter = 2.5341;
-        public static final double kaVoltSecondsSquaredPerMeter = 0.1884;
-        public static final double kpDriveVel = 2.0;
+        public static final double ksVolts = 0.63458; // 0.61355 - test chassis
+        public static final double kvVoltSecondsPerMeter = 2.4941; // 2.5341 - test chassis
+        public static final double kaVoltSecondsSquaredPerMeter = 0.3322; // 0.1884 - test chassis
+        public static final double kpDriveVel = 3.3673; // 2.0 - test chassis
         public static final double kiDriveVel = 0;
         public static final double kdDriveVel = 0;
-        public static final double kMaxSpeedMetersPerSecond = 1.6;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+        public static final double kMaxSpeedMetersPerSecond = 0.5;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 1.25;
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
 

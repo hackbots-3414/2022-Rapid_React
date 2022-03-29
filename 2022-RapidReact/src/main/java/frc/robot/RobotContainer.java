@@ -71,7 +71,7 @@ public class RobotContainer {
         m_drivetrain = new Drivetrain();
         m_climber = new Climber();
         m_powerdistribution = new PowerDistribution(Constants.PowerDistribution.CanID, ModuleType.kRev);
-        m_autonomousFactory = AutonomousFactory.getInstance(m_drivetrain);
+        m_autonomousFactory = AutonomousFactory.getInstance(m_drivetrain, m_belt, m_shooter);
         
         // m_pixy = new Pixy();
 

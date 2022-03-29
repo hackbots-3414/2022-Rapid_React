@@ -12,6 +12,7 @@ import frc.robot.Constants;
 public class Belt extends SubsystemBase {
 
   private static final Logger LOG = LoggerFactory.getLogger(Belt.class);
+  private Boolean stopBelt = false;
 
   DigitalInput irBottom = new DigitalInput(0);
   DigitalInput irTop = new DigitalInput(1);
@@ -94,6 +95,14 @@ public class Belt extends SubsystemBase {
         bottomMotor.set(lower);
         middleMotor.set(lower);
         topMotor.set(top);
+    }
+
+    public Boolean isStopBelts() {
+        return stopBelt;
+    }
+
+    public void setStopBelt(Boolean stopBelts) {
+        stopBelt = stopBelts;
     }
 
     @Override
