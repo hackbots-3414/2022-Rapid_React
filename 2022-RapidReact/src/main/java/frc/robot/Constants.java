@@ -86,6 +86,8 @@ public class Constants {
         public static final int climbDownAngle = 180;
         public static final int climberSolenoidChannel_1 = 9;
         public static final int climberSolenoidChannel_2 = 10;
+        public static final int minLevelTwoClimb = 70;
+        public static final int minLevelThreeClimb = 105;
     }
 
     public static final class PressureConstants {
