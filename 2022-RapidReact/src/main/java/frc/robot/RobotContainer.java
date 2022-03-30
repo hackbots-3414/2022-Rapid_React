@@ -19,11 +19,7 @@ import frc.robot.commands.Eject;
 import frc.robot.commands.RunShoot;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TeleopCommand;
-
-import frc.robot.commands.autonomous.TarmacOne.ThreeBallMovementShooting;
-import frc.robot.commands.autonomous.TarmacOne.ThreeBallNew;
 import frc.robot.commands.autonomous.shootFarBackup;
-
 import frc.robot.commands.autonomous.TarmacOne.OneBallHigh;
 import frc.robot.commands.autonomous.TarmacOne.OneBallLow;
 import frc.robot.commands.autonomous.TarmacOne.ThreeBall;
