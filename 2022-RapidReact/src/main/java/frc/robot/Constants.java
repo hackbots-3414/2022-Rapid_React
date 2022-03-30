@@ -91,7 +91,7 @@ public class Constants {
     }
 
     public static final class PressureConstants {
-        public static final double pressureValue = 40;
+        public static final double pressureValue = ClimberConstants.minLevelTwoClimb;
     }
 
     public static final class PowerDistribution {

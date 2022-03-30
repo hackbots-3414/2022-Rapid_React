@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DriverStation.MatchType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.PressureConstants;
 import frc.robot.RobotContainer;
@@ -30,7 +31,7 @@ public class DefaultLEDCommand extends CommandBase {
     public void execute() {
         // System.out.print("Running");
         // m_lEDFeedback.setColor(Color.kPurple);
-     if (m_climber.getAirPressure() < PressureConstants.pressureValue){
+     if (m_climber.getAirPressure() < ClimberConstants.minLevelTwoClimb){
          m_lEDFeedback.setColor(Color.kYellow);
 
     }

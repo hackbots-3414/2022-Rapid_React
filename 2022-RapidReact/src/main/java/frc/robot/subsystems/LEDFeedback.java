@@ -19,7 +19,7 @@ public class LEDFeedback extends SubsystemBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(LEDFeedback.class);
 
-    public static final int LED_ARRAY_LENGTH = 20;
+    public static final int LED_ARRAY_LENGTH = 44;
     private AddressableLED ledString;
     private AddressableLED ledString2;
     private AddressableLEDBuffer ledBuffer;

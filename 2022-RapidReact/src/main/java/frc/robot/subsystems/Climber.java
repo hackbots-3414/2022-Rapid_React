@@ -20,7 +20,7 @@ public class Climber extends SubsystemBase {
     Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
 
     public Climber() {
-        phCompressor.enableAnalog(95, 120);
+        phCompressor.enableAnalog(100, 110);
         SmartDashboard.putBoolean("Climber Two", false);
         SmartDashboard.putBoolean("Climber Three", false);
 
