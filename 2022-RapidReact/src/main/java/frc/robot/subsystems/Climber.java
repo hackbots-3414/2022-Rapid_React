@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
 
 
@@ -20,7 +21,9 @@ public class Climber extends SubsystemBase {
 
     public Climber() {
         phCompressor.enableAnalog(95, 120);
-        SmartDashboard.putBoolean("Climber Ready", false);
+        SmartDashboard.putBoolean("Climber Two", false);
+        SmartDashboard.putBoolean("Climber Three", false);
+
     }
 
     public void climberUp() {
@@ -56,10 +59,16 @@ public class Climber extends SubsystemBase {
             Array_Slot = 0;
 
             SmartDashboard.putNumber("Air Pressure", getAveragePressure());
-            if (getAveragePressure()>70){
-                SmartDashboard.putBoolean("Climber Ready", true);
+            if (getAveragePressure()>Constants.ClimberConstants.minLevelTwoClimb){
+                SmartDashboard.putBoolean("Climber Two", true);
             } else{
-                SmartDashboard.putBoolean("Climber Ready", false);
+                SmartDashboard.putBoolean("Climber Two", false);
+            }
+
+            if (getAveragePressure()>Constants.ClimberConstants.minLevelThreeClimb){
+                SmartDashboard.putBoolean("Climber Three", true);
+            } else{
+                SmartDashboard.putBoolean("Climber Three", false);
             }
         }
        
