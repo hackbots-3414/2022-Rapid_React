@@ -28,7 +28,9 @@ public class ShootCommand extends CommandBase {
     @Override
     public void initialize() {
         topIRTimer = System.currentTimeMillis();
+
         RobotContainer.getInstance().m_drivetrain.requestCurrentLimit(true);
+
     }
 
     @Override

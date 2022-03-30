@@ -23,7 +23,9 @@ public class Drivetrain extends SubsystemBase {
 
     private boolean controlsReversed = false;
 
+
     private boolean wantLow = true;
+
 
     private class EncoderOffsets {
         public double frontLeft;
@@ -86,10 +88,13 @@ public class Drivetrain extends SubsystemBase {
         motor.setSelectedSensorPosition(0, 0, 10);
         motor.setInverted(direction);
 
+
+
         return motor;
     }
 
     public void setLowCurrentLimit(){
+
         frontLeft.configSupplyCurrentLimit(frontSupplyLimit);
         frontRight.configSupplyCurrentLimit(frontSupplyLimit);
        }
@@ -117,6 +122,7 @@ public class Drivetrain extends SubsystemBase {
 
     public boolean isLowCurrentRequested() {
         return wantLow;
+
     }
 
 
