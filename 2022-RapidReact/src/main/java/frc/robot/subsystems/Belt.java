@@ -12,7 +12,7 @@ import frc.robot.Constants;
 public class Belt extends SubsystemBase {
 
   private static final Logger LOG = LoggerFactory.getLogger(Belt.class);
-  private Boolean stopBelt = false;
+  private boolean stopBelt = false;
 
   DigitalInput irBottom = new DigitalInput(0);
   DigitalInput irTop = new DigitalInput(1);
