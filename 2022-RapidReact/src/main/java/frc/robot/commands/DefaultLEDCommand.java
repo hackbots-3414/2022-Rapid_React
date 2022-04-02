@@ -5,17 +5,21 @@ import edu.wpi.first.wpilibj.DriverStation.MatchType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.LEDConstants;
 import frc.robot.Constants.PressureConstants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.LEDFeedback;
+import frc.robot.subsystems.Climber;
 
 public class DefaultLEDCommand extends CommandBase {
 
     private final LEDFeedback m_lEDFeedback;
+    private final Climber m_climber;
 
-    public DefaultLEDCommand(LEDFeedback subsystem) {
+    public DefaultLEDCommand(LEDFeedback subsystem, Climber climberSubsystem) {
         m_lEDFeedback = subsystem;
+        m_climber = climberSubsystem;
         addRequirements(m_lEDFeedback);
     }
 
@@ -27,10 +31,15 @@ public class DefaultLEDCommand extends CommandBase {
     public void execute() {
         // System.out.print("Running");
         // m_lEDFeedback.setColor(Color.kPurple);
-    /* if (m_lEDFeedback.checkPressure() < PressureConstants.pressureValue){
+     if (m_climber.getAirPressure() < ClimberConstants.minLevelTwoClimb){
          m_lEDFeedback.setColor(Color.kYellow);
 
-    }   else */ if (m_lEDFeedback.isClimbingActivated()) {
+    }
+
+    
+     
+    
+    /* else  if (m_lEDFeedback.isClimbingActivated()) {
             m_lEDFeedback.setFlash(Color.kGreen, LEDConstants.defaultFlash);
         } else if (DriverStation.getMatchTime() <= 30.0 && DriverStation.isTeleop() && (DriverStation.getMatchType()!= MatchType.None)) {
             // Checks if we're in a Practice, Qualification or Final match to use end game times to flash the LEDs
@@ -50,6 +59,8 @@ public class DefaultLEDCommand extends CommandBase {
             // Check if Robot has one ball and set LEDs to solid color
             m_lEDFeedback.setColor(Color.kOrange);
         } 
+        */
+
         else {
             m_lEDFeedback.setColor(Color.kPurple);
         }

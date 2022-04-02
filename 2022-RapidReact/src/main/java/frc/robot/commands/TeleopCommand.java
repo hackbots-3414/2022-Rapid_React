@@ -39,6 +39,12 @@ public class TeleopCommand extends CommandBase {
 
     @Override
     public void execute() {
+
+        //check if we need to set or unset low current limit
+        if(drivetrain.isLowLimitEnabled() != drivetrain.isLowCurrentRequested()) {
+            drivetrain.LowLimitEnable(drivetrain.isLowCurrentRequested());
+        }
+
         double leftHalo = leftHaloScale.apply(OI.getLeftVerticalRaw());
         double rightHalo = rightHaloScale.apply(OI.getRightLateralRaw());
         double vleftHalo = leftHalo * DriveConstants.kMaxSpeed;

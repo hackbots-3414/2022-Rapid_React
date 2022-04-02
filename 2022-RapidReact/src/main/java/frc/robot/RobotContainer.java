@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
-
-import frc.robot.Constants;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -18,20 +15,16 @@ import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.DefaultLEDCommand;
-import frc.robot.commands.EatBall;
 import frc.robot.commands.Eject;
-import frc.robot.commands.RunBelt;
 import frc.robot.commands.RunShoot;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TeleopCommand;
-import frc.robot.commands.autonomous.TarmacOne.ThreeBallMovementShooting;
-import frc.robot.commands.autonomous.TarmacOne.ThreeBallNew;
+import frc.robot.commands.autonomous.shootFarBackup;
 import frc.robot.commands.autonomous.TarmacOne.OneBallHigh;
 import frc.robot.commands.autonomous.TarmacOne.OneBallLow;
 import frc.robot.commands.autonomous.TarmacOne.ThreeBall;
 import frc.robot.commands.autonomous.TarmacOne.TwoBall;
 import frc.robot.commands.autonomous.TarmacOne.ZeroBall;
-import frc.robot.commands.autonomous.TarmacTwo.TwoBallCloseMovementShooting;
 import frc.robot.commands.autonomous.TarmacTwo.TwoBallFar;
 import frc.robot.commands.autonomous.Pathweaver.AutonomousFactory;
 import frc.robot.subsystems.Belt;
@@ -39,7 +32,6 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.vision.Pixy;
 
 public class RobotContainer {
 
@@ -88,7 +80,7 @@ public class RobotContainer {
         // Configure default commands
 
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
-        m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback));
+        m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback, m_climber));
 
         // Configure autonomous sendable chooser
 
@@ -96,11 +88,12 @@ public class RobotContainer {
         m_chooser.addOption("Any Tarmac - 1 Ball Low", new OneBallLow(m_shooter, m_drivetrain, m_belt));
         m_chooser.addOption("Any Tarmac - 1 Ball High", new OneBallHigh(m_shooter, m_drivetrain, m_belt));
         m_chooser.addOption("Tarmac 1 - 2 Ball", new TwoBall(m_drivetrain, m_belt, m_shooter));
-        m_chooser.setDefaultOption("Tarmac 1 - 3 Ball", new ThreeBallNew(m_drivetrain, m_belt, m_shooter));
+        m_chooser.setDefaultOption("Tarmac 1 - 3 Ball", new ThreeBall(m_drivetrain, m_belt, m_shooter));
         m_chooser.addOption("Tarmac 2 - 2 Ball", new TwoBallFar(m_drivetrain, m_belt, m_shooter));
         m_chooser.addOption("Tarmac 1 - 3 Ball Pathweaver", m_autonomousFactory.create3BallAuton());
         m_chooser.addOption("Tarmac 2 - 2  Pathweaver", m_autonomousFactory.create2BallAutonT2());
         m_chooser.addOption("Tarmac 1 - 2 Ball Pathweaver", m_autonomousFactory.create2BallAutonT1());
+        m_chooser.addOption("Shoot far back up sabotage", new shootFarBackup(m_shooter, m_drivetrain, m_belt));
         //m_chooser.addOption("3 ball trial", new ThreeBallNew(m_drivetrain, m_belt, m_shooter));
         // m_chooser.addOption("Tarmac 2 - 2 Ball CLose", new TwoBallCloseMovementShooting(m_drivetrain, m_belt, m_shooter));
 

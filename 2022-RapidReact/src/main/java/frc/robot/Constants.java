@@ -45,6 +45,9 @@ public class Constants {
         public static final double kMaxSpeed = 2.5; // 2
         public static final double driveCurrentLimit = 70.0;
         public static final double triggerThresholdTime = .05;
+
+        public static final double driveLowCurrentLimit = 5.0;
+
     }
 
     public static final class PathweaverConstants {
@@ -108,10 +111,12 @@ public class Constants {
         public static final int climbDownAngle = 180;
         public static final int climberSolenoidChannel_1 = 9;
         public static final int climberSolenoidChannel_2 = 10;
+        public static final int minLevelTwoClimb = 70;
+        public static final int minLevelThreeClimb = 105;
     }
 
     public static final class PressureConstants {
-        public static final double pressureValue = 80;
+        public static final double pressureValue = ClimberConstants.minLevelTwoClimb;
     }
 
     public static final class PowerDistribution {
