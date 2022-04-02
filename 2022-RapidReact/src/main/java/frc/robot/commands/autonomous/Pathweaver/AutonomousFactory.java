@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.autonomous.pathweaver;
+package frc.robot.commands.autonomous.Pathweaver;
 
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
@@ -71,10 +71,26 @@ public class AutonomousFactory {
         return shooterCommand;
     }
 
-    public SequentialCommandGroup createTestCommand() {
+    public SequentialCommandGroup create3BallAuton() {
         SequentialCommandGroup group = new SequentialCommandGroup();
         group.addCommands(createShooterCommand());
         group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart4")))));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
+        group.addCommands(createShooterCommand());
+        return group;
+    }
+
+    public SequentialCommandGroup create2BallAutonT2() {
+        SequentialCommandGroup group = new SequentialCommandGroup();
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT2Part1")), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT2Part2")))));
+        group.addCommands(createIntakeCommand(false));
+        group.addCommands(createShooterCommand());
+        return group;
+    }
+    
+    public SequentialCommandGroup create2BallAutonT1() {
+        SequentialCommandGroup group = new SequentialCommandGroup();
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part1")), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part2")))));
         group.addCommands(createIntakeCommand(false));
         group.addCommands(createShooterCommand());
         return group;

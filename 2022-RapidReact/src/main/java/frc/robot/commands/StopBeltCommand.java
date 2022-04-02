@@ -9,14 +9,16 @@ import frc.robot.subsystems.Belt;
 
 public class StopBeltCommand extends CommandBase {
   final Belt m_belt;
-  /** Creates a new StopBeltCommand. */
+
   public StopBeltCommand(Belt belt) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_belt = belt;
+  }
+
+  @Override
+  public void initialize() {
     m_belt.setStopBelt(true);
   }
   
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return m_belt.isStopBelts();
