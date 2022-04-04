@@ -1,6 +1,17 @@
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 public class Constants {
+    public static final class RobotConstants {
+        public static final double kTrackWidthMeters = 0.6096;
+        public static final double kWheelDiameter = 0.16;
+        public static final double kTicks = 2048;
+        public static final double kGearRatio = 12; // : 1
+        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
+        public static final double kDistancePerTick = kWheelDiameter * Math.PI / kTicks / kGearRatio;
+    }
+    
     public static final class CompControllerConstants {
         public static final double left_x_offset = -0.13379;
         public static final double left_x_max = 0.81982;
@@ -26,7 +37,7 @@ public class Constants {
     }
 
     public static final class DriveConstants {
-        public static final int kLeftMotorFrontPort = 10;
+        public static final int kLeftMotorFrontPort = 10; // 10
         public static final int kLeftMotorRearPort = 11;
         public static final int kRightMotorFrontPort = 13;
         public static final int kRightMotorRearPort = 14;
@@ -36,6 +47,20 @@ public class Constants {
         public static final double triggerThresholdTime = .05;
 
         public static final double driveLowCurrentLimit = 5.0;
+
+    }
+
+    public static final class PathweaverConstants {
+        public static final double ksVolts = 0.63458; // 0.61355 - test chassis
+        public static final double kvVoltSecondsPerMeter = 2.4941; // 2.5341 - test chassis
+        public static final double kaVoltSecondsSquaredPerMeter = 0.3322; // 0.1884 - test chassis
+        public static final double kpDriveVel = 3.3673; // 2.0 - test chassis
+        public static final double kiDriveVel = 0;
+        public static final double kdDriveVel = 0;
+        public static final double kMaxSpeedMetersPerSecond = 0.5;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 1.25;
+        public static final double kRamseteB = 2;
+        public static final double kRamseteZeta = 0.7;
 
     }
 

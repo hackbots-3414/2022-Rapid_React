@@ -12,10 +12,14 @@ import com.kauailabs.navx.frc.AHRS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.RobotConstants;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -57,6 +61,7 @@ public class Drivetrain extends SubsystemBase {
     private WPI_TalonFX frontLeft;
     private WPI_TalonFX frontRight;
     private DifferentialDrive differentialDrive;
+    private DifferentialDriveOdometry m_odometry;
 
     private SupplyCurrentLimitConfiguration frontSupplyLimit = new SupplyCurrentLimitConfiguration(false, DriveConstants.driveLowCurrentLimit, DriveConstants.driveLowCurrentLimit, DriveConstants.triggerThresholdTime);
 
@@ -77,6 +82,8 @@ public class Drivetrain extends SubsystemBase {
         differentialDrive.setSafetyEnabled(true);
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
+
+        m_odometry = new DifferentialDriveOdometry(ahrs.getRotation2d());
     }
     
     private WPI_TalonFX createTalonFX(int deviceID, TalonFXInvertType direction) {
@@ -147,6 +154,7 @@ public class Drivetrain extends SubsystemBase {
     @Override
     public void periodic() {
         differentialDrive.feed();
+        m_odometry.update(ahrs.getRotation2d(), getLeftEncoderDistance(), getRightEncoderDistance());
         super.periodic();
     }
 
@@ -155,12 +163,40 @@ public class Drivetrain extends SubsystemBase {
         super.simulationPeriodic();
     }
 
+    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+        return new DifferentialDriveWheelSpeeds(getLeftMetersPerSecond(), getRightMetersPerSecond());
+    }
+
     public double getLeftEncoderPosition() {
         return ((frontLeft.getSelectedSensorPosition() + backLeft.getSelectedSensorPosition()) / 2D) - encoderOffsets.frontLeft;
     }
 
+    public double getLeftEncoderDistance() {
+        return getLeftEncoderPosition() * RobotConstants.kDistancePerTick;
+    }
+
+    public double getLeftEncoderVelocity() {
+        return frontLeft.getSelectedSensorVelocity();
+    }
+
+    public double getLeftMetersPerSecond() {
+        return getLeftEncoderVelocity() * RobotConstants.kDistancePerTick * 10;
+    }
+
     public double getRightEncoderPosition() {
         return ((frontRight.getSelectedSensorPosition() + backRight.getSelectedSensorPosition()) / 2D) - encoderOffsets.frontRight;
+    }
+
+    public double getRightEncoderDistance() {
+        return getRightEncoderPosition() * RobotConstants.kDistancePerTick;
+    }
+
+    public double getRightEncoderVelocity() {
+        return frontRight.getSelectedSensorVelocity();
+    }
+
+    public double getRightMetersPerSecond() {
+        return getRightEncoderVelocity() * RobotConstants.kDistancePerTick * 10;
     }
 
     public double getAverageEncoderPosition() {
@@ -184,6 +220,11 @@ public class Drivetrain extends SubsystemBase {
         differentialDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
+    public void tankDriveVolts(double leftVolts, double rightVolts) {
+        frontLeft.setVoltage(leftVolts);    
+        frontRight.setVoltage(rightVolts);
+    }
+
     public void resetHeading() {
         LOG.info("Reseting Heading...");
         ahrs.reset();
@@ -197,5 +238,14 @@ public class Drivetrain extends SubsystemBase {
 
     public void stopDriving() {
         tankDrive(0, 0);
+    }
+
+    public Pose2d getPose() {
+        return m_odometry.getPoseMeters();
+    }
+
+    public void resetOdometry(Pose2d pose) {
+        resetEncoders();
+        m_odometry.resetPosition(pose, ahrs.getRotation2d());
     }
 }

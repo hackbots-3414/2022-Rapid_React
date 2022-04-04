@@ -12,7 +12,9 @@ public class BeltCommand extends CommandBase {
     }
 
     @Override
-    public void initialize() {}
+    public void initialize() {
+        m_belt.setStopBelt(false);
+    }
 
     @Override
     public void execute() {
@@ -39,9 +41,15 @@ public class BeltCommand extends CommandBase {
     @Override
     public boolean isFinished() {
         // Robot has two balls in position
-        return m_belt.getIRTop() && m_belt.getIRBottom();
+        // StopBelts makes it possible to end the command from another part of the code
+        if (m_belt.isStopBelts()) {
+            return true;
+        } else {
+            return m_belt.getIRTop() && m_belt.getIRBottom();
+        }
     }
 
+    @Override
     public void end(boolean interrupted) {
         m_belt.stopAllMotors();
         m_belt.goUp();
