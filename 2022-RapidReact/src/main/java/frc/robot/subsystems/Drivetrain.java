@@ -1,20 +1,23 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.SensorVelocityMeasPeriod;
 import com.kauailabs.navx.frc.AHRS;
 
+import org.opencv.calib3d.StereoBM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
@@ -38,7 +41,8 @@ public class Drivetrain extends SubsystemBase {
             backRight = 0;
         }
 
-        public void setOffsets(WPI_TalonFX frontLeft, WPI_TalonFX backLeft, WPI_TalonFX frontRight, WPI_TalonFX backRight) {
+        public void setOffsets(WPI_TalonFX frontLeft, WPI_TalonFX backLeft, WPI_TalonFX frontRight,
+                WPI_TalonFX backRight) {
             this.frontLeft = frontLeft.getSelectedSensorPosition();
             this.backLeft = backLeft.getSelectedSensorPosition();
             this.frontRight = frontRight.getSelectedSensorPosition();
@@ -56,6 +60,10 @@ public class Drivetrain extends SubsystemBase {
     private WPI_TalonFX frontRight;
     private DifferentialDrive differentialDrive;
 
+    private double targetRPM;
+    private double targetVelocity;
+    private double feedForwardTerm;
+
     private SupplyCurrentLimitConfiguration frontSupplyLimit = new SupplyCurrentLimitConfiguration(false, DriveConstants.driveLowCurrentLimit, DriveConstants.driveLowCurrentLimit, DriveConstants.triggerThresholdTime);
 
     public Drivetrain() {
@@ -66,6 +74,7 @@ public class Drivetrain extends SubsystemBase {
 
         backRight.follow(frontRight);
         backLeft.follow(frontLeft);
+        frontRight.follow(frontLeft);
 
         setHighCurrentLimit();
         setLowCurrentLimit();
@@ -76,7 +85,7 @@ public class Drivetrain extends SubsystemBase {
         differentialDrive.setExpiration(0.1);
         differentialDrive.setMaxOutput(1.0);
     }
-    
+
     private WPI_TalonFX createTalonFX(int deviceID, TalonFXInvertType direction) {
         WPI_TalonFX motor = new WPI_TalonFX(deviceID);
         motor.configFactoryDefault();
@@ -89,10 +98,10 @@ public class Drivetrain extends SubsystemBase {
         return motor;
     }
 
-    public void setLowCurrentLimit(){
+    public void setLowCurrentLimit() {
         frontLeft.configSupplyCurrentLimit(frontSupplyLimit);
         frontRight.configSupplyCurrentLimit(frontSupplyLimit);
-       }
+    }
 
     public void setHighCurrentLimit() {
         frontRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
@@ -111,14 +120,12 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void requestCurrentLimit(boolean wantLow) {
-    this.wantLow = wantLow;
-
+        this.wantLow = wantLow;
     }
 
     public boolean isLowCurrentRequested() {
         return wantLow;
     }
-
 
     public void setBrakeMode() {
         frontLeft.setNeutralMode(NeutralMode.Brake);
@@ -168,6 +175,15 @@ public class Drivetrain extends SubsystemBase {
     public void arcadeDrive(double throttle, double steering) {
         LOG.trace("Throttle = {}, Steering = {}, ControlsReversed = {}", throttle, steering, controlsReversed);
         differentialDrive.arcadeDrive(throttle, steering);
+    }
+
+    public void arcadeDrivePID(double throttle, double steering) {
+        targetRPM = throttle * Constants.DriveConstants.kMaxRPM;
+        targetVelocity = targetRPM * Constants.DriveConstants.ticksPerRevolution;
+        feedForwardTerm = steering * 0.1;
+
+        frontLeft.set(TalonFXControlMode.Velocity, targetVelocity, DemandType.ArbitraryFeedForward, feedForwardTerm);
+        frontRight.follow(frontLeft);
     }
 
     public void curvatureDrive(double throttle, double rotation, boolean turnInPlace) {

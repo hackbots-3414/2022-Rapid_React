@@ -51,7 +51,8 @@ public class TeleopCommand extends CommandBase {
         double vrightHalo = rightHalo * DriveConstants.kMaxSpeed;
 
         if (OI.getButtonB() == 0) {
-            drivetrain.arcadeDrive(vleftHalo, vrightHalo);
+            if (OI.getButtonA()) drivetrain.arcadeDrivePID(vleftHalo, vrightHalo);
+            else drivetrain.arcadeDrive(vleftHalo, vrightHalo);
         } /* else if (OI.getButtonB() == 1) {
             drivetrain.arcadeDrive(vleftArcade, vrightArcade);
         } else if (OI.getButtonB() == 2) {

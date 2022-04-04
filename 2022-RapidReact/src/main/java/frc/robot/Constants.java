@@ -35,6 +35,15 @@ public class Constants {
         public static final double driveCurrentLimit = 70.0;
         public static final double triggerThresholdTime = .05;
         public static final double driveLowCurrentLimit = 5.0;
+        public static final int ticksPerRevolution = 2048;
+        public static final double kMaxRPM = 1217.42590014;
+        public static final double kS = 0.63458;
+        public static final double kV = 2.4941;
+        public static final double kA = 0.3322;
+        public static final double kF = 0.0475;
+        public static final double kP = 3.3673;
+        public static final double kI = 0;
+        public static final double kD = 0;
     }
 
     public static final class TransportConstants {

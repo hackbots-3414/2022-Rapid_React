@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomous.TarmacOne;
+package frc.robot.commands.autonomous.tarmacOne;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -11,7 +11,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 
 public class ThreeBall extends SequentialCommandGroup {
-    public ThreeBall(Drivetrain drivetrain, Belt belt, Shooter shooter) {    
+    public ThreeBall (Drivetrain drivetrain, Belt belt, Shooter shooter) {    
 
         addRequirements(drivetrain);
         addRequirements(belt);
