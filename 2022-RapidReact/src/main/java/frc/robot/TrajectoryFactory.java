@@ -62,6 +62,8 @@ public class TrajectoryFactory {
                 return getTrajectory("5BallAutonPart5.wpilib.json");
             case "5BallAutonPart6":
                 return getTrajectory("5BallAutonPart6.wpilib.json");
+            case "TestTurn":
+                return getTrajectory("TestTurn.wpilib.json");
             default:
                 return getTrajectory("TestPath.wpilib.json");
         }
