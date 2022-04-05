@@ -40,7 +40,7 @@ public class DriveStraight extends CommandBase {
         m_drivetrain.resetEncoders();
 
         this.speed = Math.copySign(this.speed, this.distance);
-        this.distance = Math.abs(this.distance / 0.00083101561761); // converts from inches to motor ticks (wheel diameter 6.432 inches) (old 0.00083101561761)
+        this.distance = Math.abs(this.distance / Constants.RobotConstants.kInchesPerTick); // converts from inches to motor ticks (wheel diameter 6.432 inches) (old 0.00083101561761)
     }
 
     @Override
