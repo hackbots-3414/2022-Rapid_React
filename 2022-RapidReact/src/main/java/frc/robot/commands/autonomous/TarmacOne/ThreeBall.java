@@ -22,12 +22,12 @@ public class ThreeBall extends SequentialCommandGroup {
             new ParallelCommandGroup(
                 new SequentialCommandGroup(
                         new DriveStraight(drivetrain, -46),
-                        new Turn(drivetrain, -23),
-                        new DriveStraight(drivetrain, -13), // changed for comp; used to be 20
-                        new Turn(drivetrain, 105), // 112
+                        new Turn(drivetrain, -14), //-23
+                        new DriveStraight(drivetrain, -6), // changed for comp; used to be -13
+                        new Turn(drivetrain, 98), // 105
                         new DriveStraight(drivetrain, -70),
                         new Turn(drivetrain, -23),
-                        new DriveStraight(drivetrain, 92), // changed for comp; used to be 75
+                        new DriveStraight(drivetrain, 87), // changed for comp; used to be 75
                         new Turn(drivetrain, -27, 0.3), // -13
                         new DriveStraight(drivetrain, 10, 0.55)),
                 new BeltCommand(belt).withTimeout(10)),
