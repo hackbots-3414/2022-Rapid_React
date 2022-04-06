@@ -50,6 +50,8 @@ public class AutonomousFactory {
         return me;
     }
 
+    // CREATING COMMANDS
+
     private RamseteCommand createRamseteCommand(Trajectory trajectory) {
         m_drivetrain.resetHeading();
         RamseteCommand ramseteCommand = new RamseteCommandProxy(trajectory, m_drivetrain::getPose, new RamseteController(PathweaverConstants.kRamseteB, PathweaverConstants.kRamseteZeta), new SimpleMotorFeedforward(PathweaverConstants.ksVolts, PathweaverConstants.kvVoltSecondsPerMeter, PathweaverConstants.kaVoltSecondsSquaredPerMeter), RobotConstants.kDriveKinematics, m_drivetrain::getWheelSpeeds, new PIDController(PathweaverConstants.kpDriveVel, PathweaverConstants.kiDriveVel, PathweaverConstants.kdDriveVel), new PIDController(PathweaverConstants.kpDriveVel, PathweaverConstants.kiDriveVel, PathweaverConstants.kdDriveVel), m_drivetrain::tankDriveVolts, m_drivetrain);
@@ -71,10 +73,12 @@ public class AutonomousFactory {
         return shooterCommand;
     }
 
+    // CREATING GROUPS
+
     public SequentialCommandGroup create3BallAuton() {
         SequentialCommandGroup group = new SequentialCommandGroup();
         group.addCommands(createShooterCommand());
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart4")))));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3")))));
         group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
         group.addCommands(createShooterCommand());
         return group;
@@ -99,14 +103,15 @@ public class AutonomousFactory {
     public SequentialCommandGroup create5BallAuton() {
         SequentialCommandGroup group = new SequentialCommandGroup();
         group.addCommands(createShooterCommand());
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart4")))));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3")))));
         group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
         group.addCommands(createShooterCommand());
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart5")), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart6")))));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart4")), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart5")))));
         group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
         group.addCommands(createShooterCommand());
         return group;
     }
+
     public class RamseteCommandProxy extends RamseteCommand {
         private Trajectory trajectory;
 

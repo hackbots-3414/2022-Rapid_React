@@ -48,8 +48,6 @@ public class TrajectoryFactory {
                 return getTrajectory("3BallAutonPart2.wpilib.json");
             case "3BallAutonPart3":
                 return getTrajectory("3BallAutonPart3.wpilib.json");
-            case "3BallAutonPart4":
-                return getTrajectory("3BallAutonPart4.wpilib.json");
             case "2BallAutonT2Part1":
                 return getTrajectory("2BallAutonT2Part1.wpilib.json");
             case "2BallAutonT2Part2":
@@ -58,10 +56,10 @@ public class TrajectoryFactory {
                 return getTrajectory("2BallAutonT1Part1.wpilib.json");
             case "2BallAutonT1Part2":
                 return getTrajectory("2BallAutonT1Part2.wpilib.json");
+            case "5BallAutonPart4":
+                return getTrajectory("5BallAutonPart4.wpilib.json");
             case "5BallAutonPart5":
                 return getTrajectory("5BallAutonPart5.wpilib.json");
-            case "5BallAutonPart6":
-                return getTrajectory("5BallAutonPart6.wpilib.json");
             default:
                 return getTrajectory("TestPath.wpilib.json");
         }
