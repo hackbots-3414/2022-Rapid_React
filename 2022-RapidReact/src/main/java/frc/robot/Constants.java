@@ -5,11 +5,12 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 public class Constants {
     public static final class RobotConstants {
         public static final double kTrackWidthMeters = 0.6096;
-        public static final double kWheelDiameter = 0.16;
+        public static final double kWheelDiameter = 0.15943; // in meters
         public static final double kTicks = 2048;
-        public static final double kGearRatio = 12; // : 1
+        public static final double kGearRatio = 12; // 12 : 1
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
-        public static final double kDistancePerTick = kWheelDiameter * Math.PI / kTicks / kGearRatio;
+        public static final double kDistancePerTick = kWheelDiameter * Math.PI / kTicks / kGearRatio; // in meters
+        public static final double kInchesPerTick = kDistancePerTick * 39.3701; // Converted meters to Inches
     }
     
     public static final class CompControllerConstants {
