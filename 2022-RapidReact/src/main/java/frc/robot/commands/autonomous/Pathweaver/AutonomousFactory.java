@@ -7,8 +7,6 @@ package frc.robot.commands.autonomous.Pathweaver;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-import javax.swing.text.html.ParagraphView;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -21,13 +19,12 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.Constants.BeltConstants;
 import frc.robot.Constants.PathweaverConstants;
 import frc.robot.Constants.RobotConstants;
+import frc.robot.TrajectoryFactory;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.StopBeltCommand;
-import frc.robot.TrajectoryFactory;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
