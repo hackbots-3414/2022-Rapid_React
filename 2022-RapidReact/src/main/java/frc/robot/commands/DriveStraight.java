@@ -1,5 +1,8 @@
 package frc.robot.commands;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveStraight extends CommandBase {
@@ -33,7 +36,7 @@ public class DriveStraight extends CommandBase {
         m_drivetrain.resetEncoders();
 
         this.speed = Math.copySign(this.speed, this.distance);
-        this.distance = Math.abs(this.distance / 0.00083101561761); // converts from inches to motor ticks (wheel diameter 6.432 inches)
+        this.distance = Math.abs(this.distance / Constants.RobotConstants.kInchesPerTick); // converts from inches to motor ticks (wheel diameter 6.432 inches) (old 0.00083101561761)
     }
 
     @Override
@@ -43,6 +46,8 @@ public class DriveStraight extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        m_drivetrain.arcadeDrive(speed * -1, 0);
+        Timer.delay(0.01);
         m_drivetrain.arcadeDrive(0, 0);
         m_drivetrain.resetEncoders();
     }
