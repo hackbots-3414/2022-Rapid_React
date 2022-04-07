@@ -69,7 +69,7 @@ public class AutonomousFactory {
     }
 
     private Command createShooterCommand() {
-        ShootCommand shooterCommand = new ShootCommand(m_belt, m_shooter, 1, 300);
+        ShootCommand shooterCommand = new ShootCommand(m_belt, m_shooter, 1, 400);
         return shooterCommand;
     }
 
@@ -79,7 +79,7 @@ public class AutonomousFactory {
         SequentialCommandGroup group = new SequentialCommandGroup();
         group.addCommands(createShooterCommand());
         group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart4")))));
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
+        group.addCommands(createIntakeCommand(false));
         group.addCommands(createShooterCommand());
         return group;
     }
