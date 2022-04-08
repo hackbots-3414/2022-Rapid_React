@@ -9,9 +9,14 @@ import java.nio.file.Path;
 import java.util.HashMap;
 
 import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.math.trajectory.constraint.CentripetalAccelerationConstraint;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
+import frc.robot.Constants.PathweaverConstants;
+import frc.robot.Constants.RobotConstants;
 
 /** Add your docs here. */
 public class TrajectoryFactory {
@@ -21,53 +26,45 @@ public class TrajectoryFactory {
     private TrajectoryFactory() {
     }
 
-    private static Trajectory loadTrajectory(String fileName) {
+    // private static Trajectory loadTrajectory(String fileName) {
+    //     try {
+    //         Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(BASE_PATH + fileName);
+    //         return TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+    //     } catch (IOException ex) {
+    //         DriverStation.reportError("Unable to open trajectory: " + BASE_PATH + fileName, ex.getStackTrace());
+    //     }
+    //     return null;
+    // }
+
+    private static Trajectory loadTrajectory(String fileName, TrajectoryConfig trajectoryConfig) {
         try {
-            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(BASE_PATH + fileName);
-            return TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+            trajectoryConfig.setKinematics(RobotConstants.kDriveKinematics);
+            Trajectory trajectory = TrajectoryGenerator.generateTrajectory(WaypointReader.getControlVectors(fileName), trajectoryConfig);
+            return trajectory;
         } catch (IOException ex) {
             DriverStation.reportError("Unable to open trajectory: " + BASE_PATH + fileName, ex.getStackTrace());
         }
         return null;
     }
 
-    private static Trajectory getTrajectory(String fileName) {
+    private static Trajectory getTrajectory(String fileName, TrajectoryConfig trajectoryConfig) {
         Trajectory trajectory = pathCache.get(fileName);
         if (trajectory == null) {
-            trajectory = loadTrajectory(fileName);
+            trajectory = loadTrajectory(fileName, trajectoryConfig);
             pathCache.put(fileName, trajectory);
         }
         return trajectory;
     }
 
     public static Trajectory getPath(String name) {
-        switch (name) {
-            case "3BallAutonPart1":
-                return getTrajectory("3BallAutonPart1.wpilib.json");
-            case "3BallAutonPart2":
-                return getTrajectory("3BallAutonPart2.wpilib.json");
-            case "3BallAutonPart3":
-                return getTrajectory("3BallAutonPart3.wpilib.json");
-            case "3BallAutonPart4":
-                return getTrajectory("3BallAutonPart4.wpilib.json");
-            case "3BallAutonPartWierd3":
-                return getTrajectory("3BallAutonWierd3.wpilib.json");
-            case "3BallAutonPartWierd4":
-                return getTrajectory("3BallAutonWierd4.wpilib.json");
-            case "2BallAutonT2Part1":
-                return getTrajectory("2BallAutonT2Part1.wpilib.json");
-            case "2BallAutonT2Part2":
-                return getTrajectory("2BallAutonT2Part2.wpilib.json");
-            case "2BallAutonT1Part1":
-                return getTrajectory("2BallAutonT1Part1.wpilib.json");
-            case "2BallAutonT1Part2":
-                return getTrajectory("2BallAutonT1Part2.wpilib.json");
-            case "5BallAutonPart4":
-                return getTrajectory("5BallAutonPart5.wpilib.json");
-            case "5BallAutonPart5":
-                return getTrajectory("5BallAutonPart6.wpilib.json");
-            default:
-                return getTrajectory("TestPath.wpilib.json");
-        }
+        TrajectoryConfig config = new TrajectoryConfig(PathweaverConstants.kMaxSpeed, PathweaverConstants.kMaxAcceleration);
+        config.addConstraint(new CentripetalAccelerationConstraint(PathweaverConstants.kMaxSpinAcceleration));
+        config.setEndVelocity(PathweaverConstants.kMaxSpeed);
+        Trajectory trajectory = getTrajectory(name, config);
+        return trajectory;
     }
+
+    // public static Trajectory getPath(String name) {
+    //     return getTrajectory(name + ".wpilib.json");
+    // }
 }
