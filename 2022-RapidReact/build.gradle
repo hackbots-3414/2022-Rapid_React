@@ -94,11 +94,15 @@ jar {
 task copyPaths(type: Copy) {
     from 'src/main/deploy/paths/output'
     into 'src/main/deploy/paths'
-    include '**/*.path'
+    include '**/*.wpilib.json'
     eachFile { details ->
         details.setRelativePath new RelativePath(true, details.name)
     }
     includeEmptyDirs = false
+}
+
+processResources {
+    dependsOn copyPaths
 }
 
 // Configure jar and deploy tasks
