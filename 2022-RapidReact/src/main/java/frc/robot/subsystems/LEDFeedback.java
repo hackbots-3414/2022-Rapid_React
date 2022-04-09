@@ -14,9 +14,9 @@ public class LEDFeedback extends SubsystemBase {
     private AddressableLED ledString;
     private AddressableLEDBuffer ledBuffer;
 
-    private final I2C.Port i2cPort = I2C.Port.kMXP;
+    // private final I2C.Port i2cPort = I2C.Port.kMXP;
 
-    private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+    // private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
     private boolean climbingActivated = false;
     private double flashTimer = 200.0;
     private boolean isLEDOn = false;
@@ -62,10 +62,10 @@ public class LEDFeedback extends SubsystemBase {
         }
     }
 
-    public boolean isClimbLineDetected(){
-        Color detectedColor = m_colorSensor.getColor();
-        return detectedColor.equals(Color.kBlack);
-    }
+    // public boolean isClimbLineDetected(){
+    //     Color detectedColor = m_colorSensor.getColor();
+    //     return detectedColor.equals(Color.kBlack);
+    // }
 
     public boolean isClimbingActivated() {
         return climbingActivated;

@@ -17,6 +17,7 @@ import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.DefaultLEDCommand;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.Eject;
+import frc.robot.commands.PinRetractCommand;
 import frc.robot.commands.RunShoot;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TeleopCommand;
@@ -122,6 +123,8 @@ public class RobotContainer {
         final JoystickButton eatBallButton = new JoystickButton(operatorPad, XboxController.Button.kA.value);
         final JoystickButton shootButton = new JoystickButton(operatorPad, XboxController.Button.kBack.value);
         final JoystickButton shootHighFarButton = new JoystickButton(operatorPad, XboxController.Button.kRightStick.value);
+        final POVButton pinRetract = new POVButton(operatorPad, Constants.ClimberConstants.climbLeftAngle);
+        final POVButton pinRetract2 = new POVButton(operatorPad, Constants.ClimberConstants.climbRightAngle);
 
         //assign button fuctions
         shootHighFarButton.whileHeld(new ShootCommand(m_belt, m_shooter, 3, Constants.ShooterConstants.shooterTimer));
@@ -135,6 +138,8 @@ public class RobotContainer {
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
         // eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
         //beltButton.whileHeld(new BeltCommand(m_belt));
+        pinRetract.whileHeld(new PinRetractCommand(m_climber), true);
+        pinRetract2.whileHeld(new PinRetractCommand(m_climber), true);
 
     }
 

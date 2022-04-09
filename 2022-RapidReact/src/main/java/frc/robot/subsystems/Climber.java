@@ -17,6 +17,7 @@ public class Climber extends SubsystemBase {
 
     Solenoid climber_1 = new Solenoid(PneumaticsModuleType.REVPH, ClimberConstants.climberSolenoidChannel_1);
     Solenoid climber_2 = new Solenoid(PneumaticsModuleType.REVPH, ClimberConstants.climberSolenoidChannel_2);
+    Solenoid climber_3 = new Solenoid(PneumaticsModuleType.REVPH, ClimberConstants.climberSolenoidChannel_3);
     Compressor phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
 
     public Climber() {
@@ -24,6 +25,14 @@ public class Climber extends SubsystemBase {
         SmartDashboard.putBoolean("Climber Two", false);
         SmartDashboard.putBoolean("Climber Three", false);
 
+    }
+
+    public void pinsRetract() {
+        climber_3.set(true);
+    }
+
+    public void pinsPush() {
+        climber_3.set(false);
     }
 
     public void climberUp() {
