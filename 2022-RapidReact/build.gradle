@@ -111,6 +111,11 @@ task copyPathFiles(type: Copy) {
     includeEmptyDirs = false
 }
 
+processResources {
+    dependsOn copyPathFiles
+    dependsOn copyPaths
+}
+
 // Configure jar and deploy tasks
 deployArtifact.jarTask = jar
 wpi.java.configureExecutableTasks(jar)
