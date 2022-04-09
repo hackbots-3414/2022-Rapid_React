@@ -110,8 +110,11 @@ public class Constants {
     public static final class ClimberConstants {
         public static final int climbUpAngle = 0;
         public static final int climbDownAngle = 180;
+        public static final int climbLeftAngle = 270;
+        public static final int climbRightAngle = 90;
         public static final int climberSolenoidChannel_1 = 9;
         public static final int climberSolenoidChannel_2 = 10;
+        public static final int climberSolenoidChannel_3 = 11;
         public static final int minLevelTwoClimb = 70;
         public static final int minLevelThreeClimb = 105;
     }
