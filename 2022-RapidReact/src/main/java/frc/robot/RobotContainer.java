@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.BeltCommand;
+import frc.robot.commands.AutoClimbThirdBar;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.DefaultLEDCommand;
@@ -135,7 +136,8 @@ public class RobotContainer {
         shootHighButton.whileHeld(new ShootCommand(m_belt, m_shooter, 1, Constants.ShooterConstants.shooterTimer), true);
         shootLowButton.whileHeld(new ShootCommand(m_belt, m_shooter, 2, Constants.ShooterConstants.shooterTimer), true);
         climberUpButton.whenPressed(new ClimberUpCommand(m_climber), true);
-        climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
+        //climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
+        climberDownButton.whenPressed(new AutoClimbThirdBar(m_climber), true);
         // eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
         //beltButton.whileHeld(new BeltCommand(m_belt));
         pinRetract.whileHeld(new PinRetractCommand(m_climber), true);

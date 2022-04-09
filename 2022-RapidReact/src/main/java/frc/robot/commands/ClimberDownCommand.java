@@ -6,29 +6,24 @@ import frc.robot.subsystems.Climber;
 
 public class ClimberDownCommand extends CommandBase {
     private final Climber m_climber;
-    DigitalInput limitSwitch = new DigitalInput(ClimberConstants.climbMagneticLimitPort);
+    private long shortDelay;
 
 
     public ClimberDownCommand(Climber subsystem) {
         m_climber = subsystem;
-        addRequirements(m_climber);
+       // addRequirements(m_climber);
     }
 
     @Override
-    public void initialize() {}
+    public void initialize() {
+        shortDelay = 0;
+    }
 
     @Override
     public void execute() {
         m_climber.climberDown();
-
-            if (limitSwitch.get()) {
-                
-                // We are going up and top limit is tripped so stop
-            } else {
-                // We are going up but top limit is not tripped so go at commanded speed
-                m_climber.climberUp();
-            }
-           }
+        shortDelay = System.currentTimeMillis();
+    }
     
 
     @Override
@@ -37,6 +32,10 @@ public class ClimberDownCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
+        // ensure we execute at least once before finishing through this check
+        if (shortDelay > 0) {
+            return true;
+        }
         return false;
     }
 }
