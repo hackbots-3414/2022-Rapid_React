@@ -53,16 +53,16 @@ public class Constants {
     }
 
     public static final class PathweaverConstants {
-        public static final double ksVolts = 0.61355; // 0.61355 - test chassis, 0.63458 - comp chassis
-        public static final double kvVoltSecondsPerMeter = 2.5341; // 2.5341 - test chassis, 2.4941 - comp chassis
-        public static final double kaVoltSecondsSquaredPerMeter = 0.1884; // 0.1884 - test chassis, 0.3322 - comp chassis
-        public static final double kpDriveVel = 2; // 2.0 - test chassis, 3.3673
+        public static final double ksVolts = 0.63458; // 0.61355 - test chassis, 0.63458 - comp chassis
+        public static final double kvVoltSecondsPerMeter = 2.4941; // 2.5341 - test chassis, 2.4941 - comp chassis
+        public static final double kaVoltSecondsSquaredPerMeter = 0.3322; // 0.1884 - test chassis, 0.3322 - comp chassis
+        public static final double kpDriveVel = 3.3673; // 2.0 - test chassis, 3.3673 - comp chassis
         public static final double kiDriveVel = 0;
         public static final double kdDriveVel = 0;
-        public static final double kMaxSpeed = 6; // 5
+        public static final double kMaxSpeed = 6; // 6
         public static final double kMaxEndSpeed = 1; // 1
-        public static final double kMaxAcceleration = 2.5; // 2.5
-        public static final double kMaxSpinAcceleration = 1.5; // 1
+        public static final double kMaxAcceleration = 1.4; // 1.35
+        public static final double kMaxSpinAcceleration = 0.8; // 0.75
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
 
@@ -96,7 +96,7 @@ public class Constants {
         public static final int intakeMotor = 30;
         public static final int solenoidChannel = 8;
         public static final double motorSpeedShooter = 1.0; //used for lower two motors (Bottom and Middle)
-        public static final double intakeSpeed = 0.8;
+        public static final double intakeSpeed = 0.6;
         public static final double topMotorSpeedShooter = 0.75;
         public static final double motorSpeedTransfer = 0.75;
         public static final double topMotorSpeedTransfer = 0.3;
@@ -115,8 +115,8 @@ public class Constants {
         public static final int climbDownAngle = 180;
         public static final int climberSolenoidChannel_1 = 9;
         public static final int climberSolenoidChannel_2 = 10;
-        public static final int minLevelTwoClimb = 70;
-        public static final int minLevelThreeClimb = 105;
+        public static final int minLevelTwoClimb = 50;
+        public static final int minLevelThreeClimb = 50;
     }
 
     public static final class PressureConstants {

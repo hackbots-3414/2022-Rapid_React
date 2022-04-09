@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
-        m_drivetrain.setBrakeMode();
+        m_drivetrain.setCoastMode();
         setUpLimeLight();
     }
 
