@@ -137,8 +137,8 @@ public class RobotContainer {
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
         // eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
         //beltButton.whileHeld(new BeltCommand(m_belt));
-        pinRetract.whileHeld(new PinRetractCommand(m_climber).withTimeout(3), true);
-        pinRetract2.whileHeld(new PinRetractCommand(m_climber).withTimeout(3), true);
+        pinRetract.whileHeld(new PinRetractCommand(m_climber), true);
+        pinRetract2.whileHeld(new PinRetractCommand(m_climber), true);
 
     }
 
