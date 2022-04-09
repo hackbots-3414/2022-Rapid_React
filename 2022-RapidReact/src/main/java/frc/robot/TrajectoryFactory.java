@@ -23,8 +23,7 @@ import frc.robot.Constants.RobotConstants;
 
 /** Add your docs here. */
 public class TrajectoryFactory {
-    private static final String BASE_PATH = "paths/";
-    private static final HashMap<String, Trajectory> pathCache = new HashMap<>();
+    private static final String BASE_PATH = "paths/output";
 
     private TrajectoryFactory() {
     }
@@ -51,7 +50,8 @@ public class TrajectoryFactory {
 
     public static Trajectory getPath(String name, Boolean isReversed) {
         TrajectoryConfig config = new TrajectoryConfig(PathweaverConstants.kMaxSpeed, PathweaverConstants.kMaxAcceleration);
-        DifferentialDriveVoltageConstraint autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(PathweaverConstants.ksVolts, PathweaverConstants.kvVoltSecondsPerMeter, PathweaverConstants.kaVoltSecondsSquaredPerMeter), RobotConstants.kDriveKinematics, 10);
+        
+        DifferentialDriveVoltageConstraint autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(PathweaverConstants.ksVolts, PathweaverConstants.kvVoltSecondsPerMeter, PathweaverConstants.kaVoltSecondsSquaredPerMeter), RobotConstants.kDriveKinematics, 11.5);
         config.addConstraint(new CentripetalAccelerationConstraint(PathweaverConstants.kMaxSpinAcceleration));
         config.setEndVelocity(PathweaverConstants.kMaxEndSpeed);
         config.setKinematics(RobotConstants.kDriveKinematics);

@@ -111,13 +111,14 @@ public class AutonomousFactory {
     public SequentialCommandGroup create5BallAuton() {
         SequentialCommandGroup group = new SequentialCommandGroup();
         group.addCommands(createShooterCommand());
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2", false)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart4", false)))));
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
-        group.addCommands(createShooterCommand());
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart4", true)), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart5", false)))));
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
-        group.addCommands(createShooterCommand());
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2", false)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart4", false)), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart5", true)), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart6", false)))));
+        // group.addCommands(createIntakeCommand(false));
+        // group.addCommands(createShooterCommand());
+        // group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart4", true)), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart5", false)))));
+        // group.addCommands(createIntakeCommand(false));
+        // group.addCommands(createShooterCommand());
         return group;
+        
     }
 
     public class RamseteCommandProxy extends RamseteCommand {
