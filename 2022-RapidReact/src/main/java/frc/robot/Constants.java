@@ -59,10 +59,10 @@ public class Constants {
         public static final double kpDriveVel = 2; // 2.0 - test chassis, 3.3673
         public static final double kiDriveVel = 0;
         public static final double kdDriveVel = 0;
-        public static final double kMaxSpeed = 5; // 5
+        public static final double kMaxSpeed = 6; // 5
         public static final double kMaxEndSpeed = 1; // 1
         public static final double kMaxAcceleration = 2.5; // 2.5
-        public static final double kMaxSpinAcceleration = 1; // 1
+        public static final double kMaxSpinAcceleration = 1.5; // 1
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
 

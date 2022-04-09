@@ -129,7 +129,13 @@ public class AutonomousFactory {
         // group.addCommands(createIntakeCommand(false));
         // group.addCommands(createShooterCommand());
         return group;
-        
+    }
+
+    public SequentialCommandGroup create4BallAuton() {
+        SequentialCommandGroup group = new SequentialCommandGroup();
+        group.addCommands(createShooterCommand());
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part1", true)), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part2", false)), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart5", true)), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart6", false)))));
+        return group;
     }
 
     public class RamseteCommandProxy extends RamseteCommand {
