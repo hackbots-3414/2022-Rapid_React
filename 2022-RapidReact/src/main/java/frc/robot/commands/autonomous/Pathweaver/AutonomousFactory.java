@@ -86,7 +86,7 @@ public class AutonomousFactory {
         group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part1")), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part2")))));
         group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
         group.addCommands(createShooterCommand());
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonWierd3")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonWierd4")))));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonWierdPart3")), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonWierdPart4")))));
         group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
         group.addCommands(createShooterCommand());
         return group;

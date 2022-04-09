@@ -59,7 +59,7 @@ public class TrajectoryFactory {
     public static Trajectory getPath(String name) {
         TrajectoryConfig config = new TrajectoryConfig(PathweaverConstants.kMaxSpeed, PathweaverConstants.kMaxAcceleration);
         config.addConstraint(new CentripetalAccelerationConstraint(PathweaverConstants.kMaxSpinAcceleration));
-        config.setEndVelocity(PathweaverConstants.kMaxSpeed);
+        config.setEndVelocity(PathweaverConstants.kMaxEndSpeed);
         Trajectory trajectory = getTrajectory(name, config);
         return trajectory;
     }
