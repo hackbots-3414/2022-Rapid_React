@@ -1,16 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.MatchType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ClimberConstants;
-import frc.robot.Constants.LEDConstants;
-import frc.robot.Constants.PressureConstants;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.LEDFeedback;
 
 public class DefaultLEDCommand extends CommandBase {
 

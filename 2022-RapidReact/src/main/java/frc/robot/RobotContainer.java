@@ -17,6 +17,7 @@ import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.DefaultLEDCommand;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.Eject;
+import frc.robot.commands.PinRetractCommand;
 import frc.robot.commands.RunShoot;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TeleopCommand;
@@ -96,6 +97,7 @@ public class RobotContainer {
         m_chooser.addOption("Tarmac 1 - 2 Ball Pathweaver", m_autonomousFactory.create2BallAutonT1());
         m_chooser.addOption("Tarmac 1 - 5 Ball Pathweaver", m_autonomousFactory.create5BallAuton());
         m_chooser.addOption("Tarmac 2 - 1 Ball High/Far", new shootFarBackup(m_shooter, m_drivetrain, m_belt));
+        m_chooser.addOption("Tarmac 1 - 3 Ball Pathweaver Wierd", m_autonomousFactory.create3BallAutonWierd());
         //m_chooser.addOption("3 ball trial", new ThreeBallNew(m_drivetrain, m_belt, m_shooter));
         // m_chooser.addOption("Tarmac 2 - 2 Ball CLose", new TwoBallCloseMovementShooting(m_drivetrain, m_belt, m_shooter));
 
@@ -121,6 +123,8 @@ public class RobotContainer {
         final JoystickButton eatBallButton = new JoystickButton(operatorPad, XboxController.Button.kA.value);
         final JoystickButton shootButton = new JoystickButton(operatorPad, XboxController.Button.kBack.value);
         final JoystickButton shootHighFarButton = new JoystickButton(operatorPad, XboxController.Button.kRightStick.value);
+        final POVButton pinRetract = new POVButton(operatorPad, Constants.ClimberConstants.climbLeftAngle);
+        final POVButton pinRetract2 = new POVButton(operatorPad, Constants.ClimberConstants.climbRightAngle);
 
         //assign button fuctions
         shootHighFarButton.whileHeld(new ShootCommand(m_belt, m_shooter, 3, Constants.ShooterConstants.shooterTimer));
@@ -134,6 +138,8 @@ public class RobotContainer {
         climberDownButton.whenPressed(new ClimberDownCommand(m_climber), true);
         // eatBallButton.whileHeld(new EatBall(m_drivetrain, m_pixy), true);
         //beltButton.whileHeld(new BeltCommand(m_belt));
+        pinRetract.whileHeld(new PinRetractCommand(m_climber), true);
+        pinRetract2.whileHeld(new PinRetractCommand(m_climber), true);
 
     }
 

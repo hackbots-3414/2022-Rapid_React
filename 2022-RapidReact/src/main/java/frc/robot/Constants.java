@@ -58,8 +58,9 @@ public class Constants {
         public static final double kpDriveVel = 3.3673; // 2.0 - test chassis
         public static final double kiDriveVel = 0;
         public static final double kdDriveVel = 0;
-        public static final double kMaxSpeedMetersPerSecond = 0.5;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 1.25;
+        public static final double kMaxSpeed = 2.5;
+        public static final double kMaxAcceleration = 1;
+        public static final double kMaxSpinAcceleration = 0.5;
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
 
@@ -110,10 +111,16 @@ public class Constants {
     public static final class ClimberConstants {
         public static final int climbUpAngle = 0;
         public static final int climbDownAngle = 180;
+        public static final int climbLeftAngle = 270;
+        public static final int climbRightAngle = 90;
         public static final int climberSolenoidChannel_1 = 9;
         public static final int climberSolenoidChannel_2 = 10;
 
+
         public static final int climbMagneticLimitPort = 3; 
+
+
+        public static final int climberSolenoidChannel_3 = 11;
 
         public static final int minLevelTwoClimb = 70;
         public static final int minLevelThreeClimb = 105;

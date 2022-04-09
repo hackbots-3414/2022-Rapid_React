@@ -91,6 +91,16 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
+task copyPaths(type: Copy) {
+    from 'src/main/deploy/paths/output'
+    into 'src/main/deploy/paths'
+    include '**/*.path'
+    eachFile { details ->
+        details.setRelativePath new RelativePath(true, details.name)
+    }
+    includeEmptyDirs = false
+}
+
 // Configure jar and deploy tasks
 deployArtifact.jarTask = jar
 wpi.java.configureExecutableTasks(jar)
