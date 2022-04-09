@@ -16,6 +16,7 @@ import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.RobotConstants;
@@ -179,6 +180,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getLeftMetersPerSecond() {
+        SmartDashboard.putNumber("left speed", getLeftEncoderVelocity() * RobotConstants.kDistancePerTick * 10);
         return getLeftEncoderVelocity() * RobotConstants.kDistancePerTick * 10;
     }
 
@@ -195,6 +197,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getRightMetersPerSecond() {
+        SmartDashboard.putNumber("right speed", getRightEncoderVelocity() * RobotConstants.kDistancePerTick * 10);
         return getRightEncoderVelocity() * RobotConstants.kDistancePerTick * 10;
     }
 

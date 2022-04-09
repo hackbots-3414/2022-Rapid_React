@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Constants {
     public static final class RobotConstants {
@@ -58,10 +59,10 @@ public class Constants {
         public static final double kpDriveVel = 2; // 2.0 - test chassis, 3.3673
         public static final double kiDriveVel = 0;
         public static final double kdDriveVel = 0;
-        public static final double kMaxSpeed = 2.5;
-        public static final double kMaxEndSpeed = 0.5;
-        public static final double kMaxAcceleration = 1;
-        public static final double kMaxSpinAcceleration = 0.5;
+        public static final double kMaxSpeed = 5; // 2.5
+        public static final double kMaxEndSpeed = 1; // 2.5
+        public static final double kMaxAcceleration = 5; // 1.05
+        public static final double kMaxSpinAcceleration = 0.5; // 0.5
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
 

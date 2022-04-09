@@ -8,13 +8,16 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.math.trajectory.constraint.CentripetalAccelerationConstraint;
+import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.PathweaverConstants;
 import frc.robot.Constants.RobotConstants;
 
@@ -38,7 +41,6 @@ public class TrajectoryFactory {
 
     private static Trajectory loadTrajectory(String fileName, TrajectoryConfig trajectoryConfig) {
         try {
-            trajectoryConfig.setKinematics(RobotConstants.kDriveKinematics);
             Trajectory trajectory = TrajectoryGenerator.generateTrajectory(WaypointReader.getControlVectors(fileName), trajectoryConfig);
             return trajectory;
         } catch (IOException ex) {
@@ -47,20 +49,15 @@ public class TrajectoryFactory {
         return null;
     }
 
-    private static Trajectory getTrajectory(String fileName, TrajectoryConfig trajectoryConfig) {
-        Trajectory trajectory = pathCache.get(fileName);
-        if (trajectory == null) {
-            trajectory = loadTrajectory(fileName, trajectoryConfig);
-            pathCache.put(fileName, trajectory);
-        }
-        return trajectory;
-    }
-
-    public static Trajectory getPath(String name) {
+    public static Trajectory getPath(String name, Boolean isReversed) {
         TrajectoryConfig config = new TrajectoryConfig(PathweaverConstants.kMaxSpeed, PathweaverConstants.kMaxAcceleration);
+        DifferentialDriveVoltageConstraint autoVoltageConstraint = new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(PathweaverConstants.ksVolts, PathweaverConstants.kvVoltSecondsPerMeter, PathweaverConstants.kaVoltSecondsSquaredPerMeter), RobotConstants.kDriveKinematics, 10);
         config.addConstraint(new CentripetalAccelerationConstraint(PathweaverConstants.kMaxSpinAcceleration));
         config.setEndVelocity(PathweaverConstants.kMaxEndSpeed);
-        Trajectory trajectory = getTrajectory(name, config);
+        config.setKinematics(RobotConstants.kDriveKinematics);
+        config.setReversed(isReversed);
+        config.addConstraint(autoVoltageConstraint);
+        Trajectory trajectory = loadTrajectory(name, config);
         return trajectory;
     }
 
