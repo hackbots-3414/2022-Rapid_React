@@ -69,6 +69,10 @@ public class Shooter extends SubsystemBase {
         return (Math.abs(((leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2) - Constants.ShooterConstants.shootFarVelocity) <= Constants.ShooterConstants.shootVelocityTolerance);
     }
 
+    public double getAverageVelocity() {
+        return (leftMotor.getSelectedSensorVelocity() + rightMotor.getSelectedSensorVelocity()) / 2;
+    }
+
     public void stop() {
         leftMotor.set(0.0);
     }

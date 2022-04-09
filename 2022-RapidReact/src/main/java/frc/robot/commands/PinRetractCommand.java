@@ -21,7 +21,6 @@ public class PinRetractCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    System.out.println("end");
     climber.pinsPush();
   }
 
