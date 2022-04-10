@@ -92,12 +92,11 @@ public class RobotContainer {
         m_chooser.addOption("Tarmac 1 - 2 Ball", new TwoBall(m_drivetrain, m_belt, m_shooter));
         m_chooser.setDefaultOption("Tarmac 1 - 3 Ball", new ThreeBall(m_drivetrain, m_belt, m_shooter));
         m_chooser.addOption("Tarmac 2 - 2 Ball", new TwoBallFar(m_drivetrain, m_belt, m_shooter));
-        m_chooser.addOption("Tarmac 1 - 3 Ball Pathweaver", m_autonomousFactory.create3BallAuton());
-        m_chooser.addOption("Tarmac 2 - 2  Pathweaver", m_autonomousFactory.create2BallAutonT2());
-        m_chooser.addOption("Tarmac 1 - 2 Ball Pathweaver", m_autonomousFactory.create2BallAutonT1());
-        m_chooser.addOption("Tarmac 1 - 5 Ball Pathweaver", m_autonomousFactory.create5BallAuton());
         m_chooser.addOption("Tarmac 2 - 1 Ball High/Far", new shootFarBackup(m_shooter, m_drivetrain, m_belt));
+        m_chooser.addOption("Tarmac 1 - 3 Ball Pathweaver", m_autonomousFactory.create3BallAuton());
+        m_chooser.addOption("Tarmac 1 - 2 Ball Pathweaver", m_autonomousFactory.create2BallAutonT1());
         m_chooser.addOption("Tarmac 1 - 3 Ball Pathweaver Wierd", m_autonomousFactory.create3BallAutonWierd());
+        m_chooser.addOption("Tarmac 1 - 4 Ball Pathweaver Wierd", m_autonomousFactory.create4BallAuton());
         //m_chooser.addOption("3 ball trial", new ThreeBallNew(m_drivetrain, m_belt, m_shooter));
         // m_chooser.addOption("Tarmac 2 - 2 Ball CLose", new TwoBallCloseMovementShooting(m_drivetrain, m_belt, m_shooter));
 
