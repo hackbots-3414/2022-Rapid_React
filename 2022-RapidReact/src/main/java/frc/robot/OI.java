@@ -123,11 +123,6 @@ public class OI {
         return joystick.getRawButton(12);
     }
 
-    public static double getRightTriggerRaw() {
-        updateController();
-        return joystick.getRawAxis(4);
-    }
-
     public static int getButtonB() {
         updateController();
         return 0;

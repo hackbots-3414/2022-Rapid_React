@@ -85,6 +85,7 @@ public class RobotContainer {
 
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback, m_climber));
+        m_shooter.setDefaultCommand(new RevShooterCommand(m_shooter));
 
         // Configure autonomous sendable chooser
 
@@ -104,8 +105,6 @@ public class RobotContainer {
         // m_chooser.addOption("Tarmac 2 - 2 Ball CLose", new TwoBallCloseMovementShooting(m_drivetrain, m_belt, m_shooter));
 
         SmartDashboard.putData("Auton Mode", m_chooser);
-
-        SmartDashboard.putNumber("Shooter Velocity", m_shooter.getAverageVelocity());
 
         // SmartDashboard.putData("Wait Command", new WaitCommand());
 

@@ -1,13 +1,16 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 import frc.robot.OI;
+import frc.robot.RobotContainer;
 
 public class RevShooterCommand extends CommandBase {
   Shooter shooter;
   public RevShooterCommand(Shooter shooter) {
     this.shooter = shooter;
+    addRequirements(shooter);
   }
 
   @Override
@@ -15,24 +18,235 @@ public class RevShooterCommand extends CommandBase {
 
   @Override
   public void execute() {
-    System.out.print(OI.getRightTriggerRaw());
-    if (OI.getRightTriggerRaw() >= 0.50) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    SmartDashboard.putNumber("Shooter Velocity", shooter.getAverageVelocity());
+
+    if (RobotContainer.getInstance().getoperatorPad().getRawAxis(3) >= 0.50) {
     shooter.shootHigh();
+    }
+    else {
+      shooter.stop();
     }
   }
 
   @Override
-  public void end(boolean interrupted) {
-    shooter.stop();
-  }
+  public void end(boolean interrupted) {}
 
   @Override
   public boolean isFinished() {
-    if (OI.getRightTriggerRaw() <= 0.49) {
-      return true;
-    }
-    else {
       return false;
     }
-  }
 }
