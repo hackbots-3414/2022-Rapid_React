@@ -16,7 +16,7 @@ public class LevelThreeClimb extends CommandBase {
   private final Climber m_climber;
   private long startThirdLevelClimb;
   private boolean reachedLimit;
-  private double climberDelay = 500;
+  private double climberDelay = 3000;
 
     public LevelThreeClimb(Climber subsystem) {
         m_climber = subsystem;

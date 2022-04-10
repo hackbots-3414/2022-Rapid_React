@@ -117,7 +117,8 @@ public class Constants {
         public static final int climberSolenoidChannel_2 = 10;
 
 
-        public static final int climbMagneticLimitPort = 3; 
+        public static final int climbMagneticLimitPort = 2
+        ; 
 
 
         public static final int climberSolenoidChannel_3 = 11;
