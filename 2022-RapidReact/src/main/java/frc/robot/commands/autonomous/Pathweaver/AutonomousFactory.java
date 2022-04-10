@@ -75,38 +75,32 @@ public class AutonomousFactory {
     public SequentialCommandGroup create3BallAuton() {
         SequentialCommandGroup group = new SequentialCommandGroup();
         group.addCommands(createShooterCommand());
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2", false)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart4", false)))));
-        group.addCommands(createIntakeCommand(false));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart1", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart2", false)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart3", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonPart4", false)), createIntakeCommand(false))));
         group.addCommands(createShooterCommand());
         return group;
     }
 
     public SequentialCommandGroup create3BallAutonWierd() {
         SequentialCommandGroup group = new SequentialCommandGroup();
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part1", true)), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part2", false)))));
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part1", true)), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part2", false)), createIntakeCommand(false))));
         group.addCommands(createShooterCommand());
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonWierdPart3", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonWierdPart4", false)))));
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(false)));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("3BallAutonWierdPart3", true)), createRamseteCommand(TrajectoryFactory.getPath("3BallAutonWierdPart4", false)), createIntakeCommand(false))));
         group.addCommands(createShooterCommand());
         return group;
     }
     
     public SequentialCommandGroup create2BallAutonT1() {
         SequentialCommandGroup group = new SequentialCommandGroup();
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part1", true)), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part2", false)))));
-        group.addCommands(createIntakeCommand(false));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part1", true)), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part2", false)), createIntakeCommand(false))));
         group.addCommands(createShooterCommand());
         return group;
     }
 
     public SequentialCommandGroup create4BallAuton() {
         SequentialCommandGroup group = new SequentialCommandGroup();
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part1", true)), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part2", false))))); 
-        group.addCommands(createIntakeCommand(false));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part1", true)), createRamseteCommand(TrajectoryFactory.getPath("2BallAutonT1Part2", false)), createIntakeCommand(false)))); 
         group.addCommands(createShooterCommand());
-        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart5", true)), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart6", false)))));
-        group.addCommands(createIntakeCommand(false));
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart5", true)), createRamseteCommand(TrajectoryFactory.getPath("5BallAutonPart6", false)), createIntakeCommand(false))));
         group.addCommands(createShooterCommand());
 
         return group;
