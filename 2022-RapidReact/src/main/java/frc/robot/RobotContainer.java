@@ -18,6 +18,7 @@ import frc.robot.commands.DefaultLEDCommand;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.Eject;
 import frc.robot.commands.PinRetractCommand;
+import frc.robot.commands.RevShooterCommand;
 import frc.robot.commands.RunShoot;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TeleopCommand;
@@ -34,6 +35,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
+import frc.robot.OI;
 
 public class RobotContainer {
 
@@ -83,6 +85,7 @@ public class RobotContainer {
 
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback, m_climber));
+        m_shooter.setDefaultCommand(new RevShooterCommand(m_shooter));
 
         // Configure autonomous sendable chooser
 
@@ -139,7 +142,7 @@ public class RobotContainer {
         //beltButton.whileHeld(new BeltCommand(m_belt));
         pinRetract.whileHeld(new PinRetractCommand(m_climber), true);
         pinRetract2.whileHeld(new PinRetractCommand(m_climber), true);
-
+        
     }
 
     public XboxController getoperatorPad() {
