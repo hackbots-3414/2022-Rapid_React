@@ -85,7 +85,7 @@ public class RobotContainer {
 
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback, m_climber));
-        m_shooter.setDefaultCommand(new RevShooterCommand(m_shooter));
+        // m_shooter.setDefaultCommand(new RevShooterCommand(m_shooter));
 
         // Configure autonomous sendable chooser
 
