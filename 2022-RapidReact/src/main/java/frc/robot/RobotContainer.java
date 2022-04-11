@@ -19,6 +19,7 @@ import frc.robot.commands.DefaultLEDCommand;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.Eject;
 import frc.robot.commands.PinRetractCommand;
+import frc.robot.commands.RevShooterCommand;
 import frc.robot.commands.RunShoot;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.TeleopCommand;
@@ -35,6 +36,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.LEDFeedback;
 import frc.robot.subsystems.Shooter;
+import frc.robot.OI;
 
 public class RobotContainer {
 
@@ -84,6 +86,7 @@ public class RobotContainer {
 
         m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
         m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback, m_climber));
+        // m_shooter.setDefaultCommand(new RevShooterCommand(m_shooter));
 
         // Configure autonomous sendable chooser
 
@@ -93,12 +96,11 @@ public class RobotContainer {
         m_chooser.addOption("Tarmac 1 - 2 Ball", new TwoBall(m_drivetrain, m_belt, m_shooter));
         m_chooser.setDefaultOption("Tarmac 1 - 3 Ball", new ThreeBall(m_drivetrain, m_belt, m_shooter));
         m_chooser.addOption("Tarmac 2 - 2 Ball", new TwoBallFar(m_drivetrain, m_belt, m_shooter));
-        m_chooser.addOption("Tarmac 1 - 3 Ball Pathweaver", m_autonomousFactory.create3BallAuton());
-        m_chooser.addOption("Tarmac 2 - 2  Pathweaver", m_autonomousFactory.create2BallAutonT2());
-        m_chooser.addOption("Tarmac 1 - 2 Ball Pathweaver", m_autonomousFactory.create2BallAutonT1());
-        m_chooser.addOption("Tarmac 1 - 5 Ball Pathweaver", m_autonomousFactory.create5BallAuton());
         m_chooser.addOption("Tarmac 2 - 1 Ball High/Far", new shootFarBackup(m_shooter, m_drivetrain, m_belt));
+        m_chooser.addOption("Tarmac 1 - 3 Ball Pathweaver", m_autonomousFactory.create3BallAuton());
+        m_chooser.addOption("Tarmac 1 - 2 Ball Pathweaver", m_autonomousFactory.create2BallAutonT1());
         m_chooser.addOption("Tarmac 1 - 3 Ball Pathweaver Wierd", m_autonomousFactory.create3BallAutonWierd());
+        m_chooser.addOption("Tarmac 1 - 4 Ball Pathweaver Wierd", m_autonomousFactory.create4BallAuton());
         //m_chooser.addOption("3 ball trial", new ThreeBallNew(m_drivetrain, m_belt, m_shooter));
         // m_chooser.addOption("Tarmac 2 - 2 Ball CLose", new TwoBallCloseMovementShooting(m_drivetrain, m_belt, m_shooter));
 
@@ -126,6 +128,7 @@ public class RobotContainer {
         final JoystickButton shootHighFarButton = new JoystickButton(operatorPad, XboxController.Button.kRightStick.value);
         final POVButton pinRetract = new POVButton(operatorPad, Constants.ClimberConstants.climbLeftAngle);
         final POVButton pinRetract2 = new POVButton(operatorPad, Constants.ClimberConstants.climbRightAngle);
+        final JoystickButton revShooter = new JoystickButton(operatorPad, XboxController.Button.kA.value);
 
         //assign button fuctions
         shootHighFarButton.whileHeld(new ShootCommand(m_belt, m_shooter, 3, Constants.ShooterConstants.shooterTimer));
@@ -142,7 +145,8 @@ public class RobotContainer {
         //beltButton.whileHeld(new BeltCommand(m_belt));
         pinRetract.whileHeld(new PinRetractCommand(m_climber), true);
         pinRetract2.whileHeld(new PinRetractCommand(m_climber), true);
-
+        revShooter.whileHeld(new RevShooterCommand(m_shooter), true);
+        
     }
 
     public XboxController getoperatorPad() {

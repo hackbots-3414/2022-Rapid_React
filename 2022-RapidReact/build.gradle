@@ -101,6 +101,21 @@ task copyPaths(type: Copy) {
     includeEmptyDirs = false
 }
 
+task copyPathFiles(type: Copy) {
+    from 'PathWeaver'
+    into 'src/main/deploy/waypoints'
+    include '**/*.path'
+    eachFile { details ->
+        details.setRelativePath new RelativePath(true, details.name)
+    }
+    includeEmptyDirs = false
+}
+
+processResources {
+    dependsOn copyPathFiles
+    dependsOn copyPaths
+}
+
 // Configure jar and deploy tasks
 deployArtifact.jarTask = jar
 wpi.java.configureExecutableTasks(jar)
