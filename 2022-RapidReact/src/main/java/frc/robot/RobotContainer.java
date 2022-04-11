@@ -127,6 +127,7 @@ public class RobotContainer {
         final JoystickButton shootHighFarButton = new JoystickButton(operatorPad, XboxController.Button.kRightStick.value);
         final POVButton pinRetract = new POVButton(operatorPad, Constants.ClimberConstants.climbLeftAngle);
         final POVButton pinRetract2 = new POVButton(operatorPad, Constants.ClimberConstants.climbRightAngle);
+        final JoystickButton revShooter = new JoystickButton(operatorPad, XboxController.Button.kA.value);
 
         //assign button fuctions
         shootHighFarButton.whileHeld(new ShootCommand(m_belt, m_shooter, 3, Constants.ShooterConstants.shooterTimer));
@@ -142,6 +143,7 @@ public class RobotContainer {
         //beltButton.whileHeld(new BeltCommand(m_belt));
         pinRetract.whileHeld(new PinRetractCommand(m_climber), true);
         pinRetract2.whileHeld(new PinRetractCommand(m_climber), true);
+        revShooter.whileHeld(new RevShooterCommand(m_shooter), true);
         
     }
 

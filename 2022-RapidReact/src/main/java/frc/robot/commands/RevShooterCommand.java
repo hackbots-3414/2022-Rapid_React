@@ -10,7 +10,6 @@ public class RevShooterCommand extends CommandBase {
   Shooter shooter;
   public RevShooterCommand(Shooter shooter) {
     this.shooter = shooter;
-    addRequirements(shooter);
   }
 
   @Override
@@ -23,16 +22,13 @@ public class RevShooterCommand extends CommandBase {
     SmartDashboard.putBoolean("Low at speed", shooter.lowAtSpeed());
     SmartDashboard.putBoolean("High at speed", shooter.highAtSpeed());
 
-    if (RobotContainer.getInstance().getoperatorPad().getRawAxis(3) >= 0.50) {
     shooter.shootHigh();
-    }
-    else {
-      shooter.stop();
-    }
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    shooter.stop();
+  }
 
   @Override
   public boolean isFinished() {
