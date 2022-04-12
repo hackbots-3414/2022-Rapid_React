@@ -1,10 +1,13 @@
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Climber;
 
 public class PinRetractCommand extends CommandBase {
   private final Climber climber;
+  private long timer;
+  private double delay = 3000.0;
 
   public PinRetractCommand(Climber subsytem) {
     climber = subsytem;
@@ -12,7 +15,9 @@ public class PinRetractCommand extends CommandBase {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer = System.currentTimeMillis();
+  }
 
   @Override
   public void execute() {
@@ -27,6 +32,6 @@ public class PinRetractCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return System.currentTimeMillis() - timer > delay;
   }
 }
