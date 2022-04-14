@@ -61,7 +61,7 @@ public class Constants {
         public static final double kdDriveVel = 0;
         public static final double kMaxSpeed = 6; // 6
         public static final double kMaxEndSpeed = 1; // 1
-        public static final double kMaxAcceleration = 1.4; // 1.35
+        public static final double kMaxAcceleration = 1.38; // 1.35
         public static final double kMaxSpinAcceleration = 0.8; // 0.75
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
