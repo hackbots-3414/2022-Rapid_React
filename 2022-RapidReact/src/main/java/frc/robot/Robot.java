@@ -8,6 +8,7 @@ import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
@@ -31,7 +32,6 @@ public class Robot extends TimedRobot {
         camera.setFPS(30);
         camera.setResolution(320, 240);*/
         setUpLimeLight();
-
     }
 
     @Override
@@ -43,6 +43,7 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         m_drivetrain.setCoastMode();
         setUpLimeLight();
+        m_robotContainer.getInstance().m_shooter.stop();
     }
 
     @Override
