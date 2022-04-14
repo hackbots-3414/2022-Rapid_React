@@ -32,8 +32,6 @@ public class Robot extends TimedRobot {
         camera.setFPS(30);
         camera.setResolution(320, 240);*/
         setUpLimeLight();
-
-        SmartDashboard.putBoolean("Auton Shooter Rev", false);
     }
 
     @Override
@@ -69,9 +67,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-        if (SmartDashboard.getBoolean("Auton Shooter Rev", false)) {
-            m_robotContainer.getInstance().m_shooter.shootHigh();
-        }
     }
 
     @Override
