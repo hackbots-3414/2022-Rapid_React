@@ -89,11 +89,11 @@ public class RobotContainer {
 
         // Configure autonomous sendable chooser
 
-        m_chooser.addOption("Any Tarmac - 0 Ball", new ZeroBall(m_drivetrain));
+        m_chooser.setDefaultOption("Any Tarmac - 0 Ball", new ZeroBall(m_drivetrain));
         m_chooser.addOption("Any Tarmac - 1 Ball Low", new OneBallLow(m_shooter, m_drivetrain, m_belt));
         m_chooser.addOption("Any Tarmac - 1 Ball High", new OneBallHigh(m_shooter, m_drivetrain, m_belt));
         m_chooser.addOption("Tarmac 1 - 2 Ball", new TwoBall(m_drivetrain, m_belt, m_shooter));
-        m_chooser.setDefaultOption("Tarmac 1 - 3 Ball", new ThreeBall(m_drivetrain, m_belt, m_shooter));
+        m_chooser.addOption("Tarmac 1 - 3 Ball", new ThreeBall(m_drivetrain, m_belt, m_shooter));
         m_chooser.addOption("Tarmac 2 - 2 Ball", new TwoBallFar(m_drivetrain, m_belt, m_shooter));
         m_chooser.addOption("Tarmac 2 - 1 Ball High/Far", new shootFarBackup(m_shooter, m_drivetrain, m_belt));
         m_chooser.addOption("Tarmac 1 - 3 Ball Pathweaver", m_autonomousFactory.create3BallAuton());
