@@ -59,7 +59,10 @@ public class DefaultLEDCommand extends CommandBase {
         */
 
         else {
-            if (DriverStation.getMatchTime() <= 10.0) {
+            if (DriverStation.getMatchTime() <= 0) {
+                m_lEDFeedback.setColor(Color.kPurple);
+            }
+            else if (DriverStation.getMatchTime() <= 10.0) {
                 m_lEDFeedback.setFlash(Color.kRed, 125);
             }
             else if (DriverStation.getMatchTime() <= 15.0) {
