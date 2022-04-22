@@ -104,6 +104,6 @@ public class Robot extends TimedRobot {
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0); // set pipeline for camera
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); // force off
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); // driver cam: turns off processing
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(0); // side by side display for cameras
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(2); // side by side display for cameras | 2 for PIP mode
     }
 }
