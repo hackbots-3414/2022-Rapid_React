@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Constants {
     public static final class RobotConstants {
         public static final double kTrackWidthMeters = 0.6096;
-        public static final double kWheelDiameter = 0.15965; // in meters
+        public static final double kWheelDiameter = 0.15915; // in meters //0.15965
         public static final double kTicks = 2048;
         public static final double kGearRatio = 12; // 12 : 1
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
