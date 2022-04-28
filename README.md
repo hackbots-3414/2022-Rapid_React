@@ -28,11 +28,8 @@ Unzip the CANSparkMax_for_RobotBuilder_2022_v...zip file in C:\Users\Public.  Th
 |Event|Color pattern|
 |----|----|
 |Idle/Default|Solid Purple|
-|30 seconds remaining | Solid White |
-|20 seconds remaining | Slow Flash White |
-|15 seconds remaining | Flash White |
-|10 seconds remaining | Fast Flash White |
-|Found climb line | Solid green |
-|Robot is Climbing | Flash green |
-| One ball | Solid Orange |
-| Two ball | Flash Orange |
+|30 seconds remaining | Slow Flash Green |
+|20 seconds remaining | Fast Flash Green |
+|15 seconds remaining | Fast Flash White |
+|10 seconds remaining | Fast Flash Red |
+|Low Air Pressure | Solid Yellow |
