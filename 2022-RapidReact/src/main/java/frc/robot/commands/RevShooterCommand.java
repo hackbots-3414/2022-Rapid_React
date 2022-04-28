@@ -17,11 +17,6 @@ public class RevShooterCommand extends CommandBase {
 
   @Override
   public void execute() {
-    
-    SmartDashboard.putNumber("Shooter Velocity", shooter.getAverageVelocity());
-    SmartDashboard.putBoolean("Low at speed", shooter.lowAtSpeed());
-    SmartDashboard.putBoolean("High at speed", shooter.highAtSpeed());
-
     shooter.shootHigh();
   }
 

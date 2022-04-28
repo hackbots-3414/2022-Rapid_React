@@ -1,5 +1,8 @@
 package frc.robot.commands;
 
+import javax.management.loading.MLet;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ClimberConstants;
@@ -25,14 +28,14 @@ public class DefaultLEDCommand extends CommandBase {
     public void execute() {
         // System.out.print("Running");
         // m_lEDFeedback.setColor(Color.kPurple);
-     if (m_climber.getAirPressure() < ClimberConstants.minLevelTwoClimb){
+    if (DriverStation.isAutonomous()) {
+        m_lEDFeedback.setColor(Color.kPurple);
+    }
+    else if (m_climber.getAirPressure() < ClimberConstants.minLevelTwoClimb){
          m_lEDFeedback.setColor(Color.kYellow);
 
     }
 
-    
-     
-    
     /* else  if (m_lEDFeedback.isClimbingActivated()) {
             m_lEDFeedback.setFlash(Color.kGreen, LEDConstants.defaultFlash);
         } else if (DriverStation.getMatchTime() <= 30.0 && DriverStation.isTeleop() && (DriverStation.getMatchType()!= MatchType.None)) {
@@ -56,7 +59,24 @@ public class DefaultLEDCommand extends CommandBase {
         */
 
         else {
-            m_lEDFeedback.setColor(Color.kPurple);
+            if (DriverStation.getMatchTime() <= 0) {
+                m_lEDFeedback.setColor(Color.kPurple);
+            }
+            else if (DriverStation.getMatchTime() <= 10.0) {
+                m_lEDFeedback.setFlash(Color.kRed, 125);
+            }
+            else if (DriverStation.getMatchTime() <= 15.0) {
+                m_lEDFeedback.setFlash(Color.kWhite, 250);
+            }
+            else if (DriverStation.getMatchTime() <= 20.0) {
+                m_lEDFeedback.setFlash(Color.kGreen, 500);
+            }
+            else if (DriverStation.getMatchTime() <= 30.0) {
+                m_lEDFeedback.setFlash(Color.kGreen, 1000);
+            }
+            else {
+                m_lEDFeedback.setColor(Color.kPurple);
+            }
         }
 
     }

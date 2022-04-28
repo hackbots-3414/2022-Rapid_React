@@ -1,5 +1,8 @@
 package frc.robot;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,7 +10,9 @@ import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Drivetrain;
@@ -31,18 +36,19 @@ public class Robot extends TimedRobot {
         camera.setFPS(30);
         camera.setResolution(320, 240);*/
         setUpLimeLight();
-
     }
 
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
+        SmartDashboard.putNumber("Time Remaining", Math.round(DriverStation.getMatchTime()));
     }
 
     @Override
     public void disabledInit() {
         m_drivetrain.setCoastMode();
         setUpLimeLight();
+        m_robotContainer.getInstance().m_shooter.stop();
     }
 
     @Override
@@ -98,6 +104,6 @@ public class Robot extends TimedRobot {
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(0); // set pipeline for camera
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); // force off
         NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1); // driver cam: turns off processing
-        NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(0); // side by side display for cameras
+        NetworkTableInstance.getDefault().getTable("limelight").getEntry("stream").setNumber(2); // side by side display for cameras | 2 for PIP mode
     }
 }

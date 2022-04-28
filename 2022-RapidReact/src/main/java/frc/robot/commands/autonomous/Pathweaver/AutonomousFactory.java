@@ -66,7 +66,7 @@ public class AutonomousFactory {
     }
 
     private Command createShooterCommand() {
-        ShootCommand shooterCommand = new ShootCommand(m_belt, m_shooter, 1, 400);
+        ShootCommand shooterCommand = new ShootCommand(m_belt, m_shooter, 1, 600); //500
         return shooterCommand;
     }
 

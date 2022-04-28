@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Constants {
     public static final class RobotConstants {
         public static final double kTrackWidthMeters = 0.6096;
-        public static final double kWheelDiameter = 0.15943; // in meters
+        public static final double kWheelDiameter = 0.15915; // in meters //0.15965
         public static final double kTicks = 2048;
         public static final double kGearRatio = 12; // 12 : 1
         public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackWidthMeters);
@@ -61,7 +61,7 @@ public class Constants {
         public static final double kdDriveVel = 0;
         public static final double kMaxSpeed = 6; // 6
         public static final double kMaxEndSpeed = 1; // 1
-        public static final double kMaxAcceleration = 1.4; // 1.35
+        public static final double kMaxAcceleration = 1.38; // 1.35
         public static final double kMaxSpinAcceleration = 0.8; // 0.75
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
@@ -77,16 +77,17 @@ public class Constants {
     public static final class ShooterConstants {
         public static final int shooterMotor1 = 40;
         public static final int shooterMotor2 = 41;
-        public static final double highShootVelocity = 6550;
-        public static final double shootFarVelocity = 8500;
+        public static final double highShootVelocity = 6350;
+        public static final double shootFarVelocity = 13000; // 8500
         public static final double lowShootVelocity = 4100;
-        public static final double shootVelocityTolerance = 350;
+        public static final double shootVelocityTolerance = 150; // 350
         public static final double integralZone = 201;
         public static final double kD = 8;
         public static final double kF = 0.045;
         public static final double kI = 0.0005;
         public static final double kP = 0.15;
-        public static final int shooterTimer = 100000;
+        public static final int 
+        shooterTimer = 100000;
     }
 
     public static final class BeltConstants {
@@ -96,7 +97,7 @@ public class Constants {
         public static final int intakeMotor = 30;
         public static final int solenoidChannel = 8;
         public static final double motorSpeedShooter = 1.0; //used for lower two motors (Bottom and Middle)
-        public static final double intakeSpeed = 0.6;
+        public static final double intakeSpeed = 0.7;
         public static final double topMotorSpeedShooter = 0.75;
         public static final double motorSpeedTransfer = 0.75;
         public static final double topMotorSpeedTransfer = 0.3;
