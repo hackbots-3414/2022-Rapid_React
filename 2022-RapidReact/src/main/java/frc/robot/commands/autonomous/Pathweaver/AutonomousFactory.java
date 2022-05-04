@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -262,18 +263,18 @@ public class AutonomousFactory {
                 JSONObject jsonWaypoint = (JSONObject) waypoint;
 
                 JSONObject jsonAnchor = (JSONObject) jsonWaypoint.get("anchorPoint");
-                Translation2d anchorPoint = new Translation2d((double) jsonAnchor.get("x"),
-                        (double) jsonAnchor.get("y"));
-
                 JSONObject jsonPrevControl = (JSONObject) jsonWaypoint.get("prevControl");
+                JSONObject jsonNextControl = (JSONObject) jsonWaypoint.get("nextControl");
+
+                Translation2d anchorPoint = new Translation2d((double) jsonAnchor.get("x"),(double) jsonAnchor.get("y"));
                 Translation2d prevControl = null;
+                Translation2d nextControl = null;
+
                 if (jsonPrevControl != null) {
                     prevControl = new Translation2d(((double) jsonPrevControl.get("x") - (double) jsonAnchor.get("x")),
                             ((double) jsonPrevControl.get("y") - (double) jsonAnchor.get("y")));
                 }
 
-                JSONObject jsonNextControl = (JSONObject) jsonWaypoint.get("nextControl");
-                Translation2d nextControl = null;
                 if (jsonNextControl != null) {
                     nextControl = new Translation2d(((double) jsonNextControl.get("x") - (double) jsonAnchor.get("x")),
                             ((double) jsonNextControl.get("y") - (double) jsonAnchor.get("y")));
@@ -315,14 +316,15 @@ public class AutonomousFactory {
                     double y = splitPaths.get(i).get(0).nextControl.getY();
                     x *= -1;
                     y *= -1;
-                    controlVectorList.add(
-                            new Spline.ControlVector(new double[] { splitPaths.get(i).get(0).anchorPoint.getX(), x },
-                                    new double[] { splitPaths.get(i).get(0).anchorPoint.getY(), y }));
-                    controlVectorList.add(new Spline.ControlVector(
-                            new double[] { splitPaths.get(i).get(0).anchorPoint.getX(),
-                                    splitPaths.get(i).get(0).nextControl.getX() },
-                            new double[] { splitPaths.get(i).get(0).anchorPoint.getY(),
-                                    splitPaths.get(i).get(0).nextControl.getY() }));
+                    controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(0).anchorPoint.getX(), x}, new double[] {splitPaths.get(i).get(0).anchorPoint.getY(), y}));
+                    if (splitPaths.get(i).get(1).prevControl.getX() != splitPaths.get(i).get(1).nextControl.getX() && splitPaths.get(i).get(1).prevControl.getY() != splitPaths.get(i).get(1).nextControl.getY()) {
+                        double prevX = splitPaths.get(i).get(1).prevControl.getX();
+                        double prevY = splitPaths.get(i).get(i).nextControl.getY();
+                        prevX *= -1;
+                        prevY *= -1;
+                        controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(1).anchorPoint.getX(), prevX}, new double[] {splitPaths.get(i).get(1).anchorPoint.getY(), prevY}));
+                    }
+                    controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(1).anchorPoint.getX(), splitPaths.get(i).get(1).nextControl.getX()}, new double[] {splitPaths.get(i).get(1).anchorPoint.getY(), splitPaths.get(i).get(1).nextControl.getY()}));
                     controlVectors.add(controlVectorList);
                     continue;
                 }
@@ -331,27 +333,20 @@ public class AutonomousFactory {
                     double y = splitPaths.get(i).get(1).nextControl.getY();
                     x *= -1;
                     y *= -1;
-                    controlVectorList.add(new Spline.ControlVector(
-                            new double[] { splitPaths.get(i).get(0).anchorPoint.getX(),
-                                    splitPaths.get(i).get(0).nextControl.getX() },
-                            new double[] { splitPaths.get(i).get(0).anchorPoint.getY(),
-                                    splitPaths.get(i).get(0).nextControl.getY() }));
-                    controlVectorList.add(
-                            new Spline.ControlVector(new double[] { splitPaths.get(i).get(0).anchorPoint.getX(), x },
-                                    new double[] { splitPaths.get(i).get(0).anchorPoint.getY(), y }));
+                    controlVectorList.add(new Spline.ControlVector(new double[] { splitPaths.get(i).get(0).anchorPoint.getX(), splitPaths.get(i).get(0).nextControl.getX() }, new double[] { splitPaths.get(i).get(0).anchorPoint.getY(), splitPaths.get(i).get(0).nextControl.getY() }));
+                    controlVectorList.add(new Spline.ControlVector(new double[] { splitPaths.get(i).get(1).anchorPoint.getX(), x }, new double[] { splitPaths.get(i).get(1).anchorPoint.getY(), y }));
                     controlVectors.add(controlVectorList);
                     continue;
                 }
-                controlVectorList.add(new Spline.ControlVector(
-                        new double[] { splitPaths.get(i).get(0).anchorPoint.getX(),
-                                splitPaths.get(i).get(0).nextControl.getX() },
-                        new double[] { splitPaths.get(i).get(0).anchorPoint.getY(),
-                                splitPaths.get(i).get(0).nextControl.getY() }));
-                controlVectorList.add(new Spline.ControlVector(
-                        new double[] { splitPaths.get(i).get(0).anchorPoint.getX(),
-                                splitPaths.get(i).get(0).nextControl.getX() },
-                        new double[] { splitPaths.get(i).get(0).anchorPoint.getY(),
-                                splitPaths.get(i).get(0).nextControl.getY() }));
+                controlVectorList.add(new Spline.ControlVector(new double[] { splitPaths.get(i).get(0).anchorPoint.getX(), splitPaths.get(i).get(0).nextControl.getX() }, new double[] { splitPaths.get(i).get(0).anchorPoint.getY(), splitPaths.get(i).get(0).nextControl.getY() }));
+                if (splitPaths.get(i).get(1).prevControl.getX() != splitPaths.get(i).get(1).nextControl.getX() && splitPaths.get(i).get(1).prevControl.getY() != splitPaths.get(i).get(1).nextControl.getY()) {
+                    double prevX = splitPaths.get(i).get(1).prevControl.getX();
+                    double prevY = splitPaths.get(i).get(i).nextControl.getY();
+                    prevX *= -1;
+                    prevY *= -1;
+                    controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(1).anchorPoint.getX(), prevX}, new double[] {splitPaths.get(i).get(1).anchorPoint.getY(), prevY}));
+                }
+                controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(1).anchorPoint.getX(), splitPaths.get(i).get(1).nextControl.getX()}, new double[] {splitPaths.get(i).get(1).anchorPoint.getY(), splitPaths.get(i).get(1).nextControl.getY()}));
                 controlVectors.add(controlVectorList);
             }
 
