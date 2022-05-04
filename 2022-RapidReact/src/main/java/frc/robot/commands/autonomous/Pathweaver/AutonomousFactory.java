@@ -69,7 +69,6 @@ public class AutonomousFactory {
     // CREATING COMMANDS
 
     private RamseteCommand createRamseteCommand(Trajectory trajectory) {
-        m_drivetrain.resetHeading();
         RamseteCommand ramseteCommand = new RamseteCommandProxy(trajectory, m_drivetrain::getPose,
                 new RamseteController(PathweaverConstants.kRamseteB, PathweaverConstants.kRamseteZeta),
                 new SimpleMotorFeedforward(PathweaverConstants.ksVolts, PathweaverConstants.kvVoltSecondsPerMeter,
@@ -84,19 +83,18 @@ public class AutonomousFactory {
     }
 
     private ArrayList<RamseteCommand> createRamseteCommandArray(ArrayList<Trajectory> trajectory) {
-        m_drivetrain.resetHeading();
         ArrayList<RamseteCommand> ramseteCommands = new ArrayList<>();
         for (int i = 0; i < trajectory.size(); i++) {
             RamseteCommand ramseteCommand = new RamseteCommandProxy(trajectory.get(i), m_drivetrain::getPose,
-                new RamseteController(PathweaverConstants.kRamseteB, PathweaverConstants.kRamseteZeta),
-                new SimpleMotorFeedforward(PathweaverConstants.ksVolts, PathweaverConstants.kvVoltSecondsPerMeter,
-                        PathweaverConstants.kaVoltSecondsSquaredPerMeter),
-                RobotConstants.kDriveKinematics, m_drivetrain::getWheelSpeeds,
-                new PIDController(PathweaverConstants.kpDriveVel, PathweaverConstants.kiDriveVel,
-                        PathweaverConstants.kdDriveVel),
-                new PIDController(PathweaverConstants.kpDriveVel, PathweaverConstants.kiDriveVel,
-                        PathweaverConstants.kdDriveVel),
-                m_drivetrain::tankDriveVolts, m_drivetrain);
+                    new RamseteController(PathweaverConstants.kRamseteB, PathweaverConstants.kRamseteZeta),
+                    new SimpleMotorFeedforward(PathweaverConstants.ksVolts, PathweaverConstants.kvVoltSecondsPerMeter,
+                            PathweaverConstants.kaVoltSecondsSquaredPerMeter),
+                    RobotConstants.kDriveKinematics, m_drivetrain::getWheelSpeeds,
+                    new PIDController(PathweaverConstants.kpDriveVel, PathweaverConstants.kiDriveVel,
+                            PathweaverConstants.kdDriveVel),
+                    new PIDController(PathweaverConstants.kpDriveVel, PathweaverConstants.kiDriveVel,
+                            PathweaverConstants.kdDriveVel),
+                    m_drivetrain::tankDriveVolts, m_drivetrain);
             ramseteCommands.add(ramseteCommand);
         }
         return ramseteCommands;
@@ -121,11 +119,14 @@ public class AutonomousFactory {
 
     public SequentialCommandGroup createPathPlannerTest() {
         SequentialCommandGroup group = new SequentialCommandGroup();
-        ArrayList<RamseteCommand> commands = createRamseteCommandArray(getTrajectoriesFromPathPlanner("Test 3 Ball", true));
-        group.addCommands(createShooterCommand());
+        ArrayList<RamseteCommand> commands = createRamseteCommandArray(
+                getTrajectoriesFromPathPlanner("Test 3 Ball", true));
         group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(
                 commands.get(0),
                 commands.get(1),
+                createIntakeCommand(false))));
+        group.addCommands(createShooterCommand());
+        group.addCommands(new ParallelCommandGroup(createIntakeCommand(true), new SequentialCommandGroup(
                 commands.get(2),
                 commands.get(3),
                 createIntakeCommand(false))));
@@ -190,7 +191,7 @@ public class AutonomousFactory {
     }
 
     // CREATING TRAJECTORIES
-    
+
     public static Trajectory getTrajectoriesFromPathweaver(String pathName, boolean isReversed) {
         try {
             String relativePath = "waypoints/" + pathName + ".path";
@@ -266,7 +267,8 @@ public class AutonomousFactory {
                 JSONObject jsonPrevControl = (JSONObject) jsonWaypoint.get("prevControl");
                 JSONObject jsonNextControl = (JSONObject) jsonWaypoint.get("nextControl");
 
-                Translation2d anchorPoint = new Translation2d((double) jsonAnchor.get("x"),(double) jsonAnchor.get("y"));
+                Translation2d anchorPoint = new Translation2d((double) jsonAnchor.get("x"),
+                        (double) jsonAnchor.get("y"));
                 Translation2d prevControl = null;
                 Translation2d nextControl = null;
 
@@ -282,12 +284,8 @@ public class AutonomousFactory {
 
                 Rotation2d holonomicAngle = Rotation2d.fromDegrees((double) jsonWaypoint.get("holonomicAngle"));
                 boolean isReversal = (boolean) jsonWaypoint.get("isReversal");
-                double velOverride = -1;
-                if (jsonWaypoint.get("velOverride") != null) {
-                    velOverride = (double) jsonWaypoint.get("velOverride");
-                }
 
-                waypoints.add(new AutonomousFactory.Waypoint(anchorPoint, prevControl, nextControl, velOverride,
+                waypoints.add(new AutonomousFactory.Waypoint(anchorPoint, prevControl, nextControl,
                         holonomicAngle, isReversal));
             }
 
@@ -316,15 +314,25 @@ public class AutonomousFactory {
                     double y = splitPaths.get(i).get(0).nextControl.getY();
                     x *= -1;
                     y *= -1;
-                    controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(0).anchorPoint.getX(), x}, new double[] {splitPaths.get(i).get(0).anchorPoint.getY(), y}));
-                    if (splitPaths.get(i).get(1).prevControl.getX() != splitPaths.get(i).get(1).nextControl.getX() && splitPaths.get(i).get(1).prevControl.getY() != splitPaths.get(i).get(1).nextControl.getY()) {
+                    controlVectorList.add(
+                            new Spline.ControlVector(new double[] { splitPaths.get(i).get(0).anchorPoint.getX(), x },
+                                    new double[] { splitPaths.get(i).get(0).anchorPoint.getY(), y }));
+                    if (splitPaths.get(i).get(1).prevControl.getX() != splitPaths.get(i).get(1).nextControl.getX()
+                            && splitPaths.get(i).get(1).prevControl.getY() != splitPaths.get(i).get(1).nextControl
+                                    .getY()) {
                         double prevX = splitPaths.get(i).get(1).prevControl.getX();
                         double prevY = splitPaths.get(i).get(i).nextControl.getY();
                         prevX *= -1;
                         prevY *= -1;
-                        controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(1).anchorPoint.getX(), prevX}, new double[] {splitPaths.get(i).get(1).anchorPoint.getY(), prevY}));
+                        controlVectorList.add(new Spline.ControlVector(
+                                new double[] { splitPaths.get(i).get(1).anchorPoint.getX(), prevX },
+                                new double[] { splitPaths.get(i).get(1).anchorPoint.getY(), prevY }));
                     }
-                    controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(1).anchorPoint.getX(), splitPaths.get(i).get(1).nextControl.getX()}, new double[] {splitPaths.get(i).get(1).anchorPoint.getY(), splitPaths.get(i).get(1).nextControl.getY()}));
+                    controlVectorList.add(new Spline.ControlVector(
+                            new double[] { splitPaths.get(i).get(1).anchorPoint.getX(),
+                                    splitPaths.get(i).get(1).nextControl.getX() },
+                            new double[] { splitPaths.get(i).get(1).anchorPoint.getY(),
+                                    splitPaths.get(i).get(1).nextControl.getY() }));
                     controlVectors.add(controlVectorList);
                     continue;
                 }
@@ -333,20 +341,37 @@ public class AutonomousFactory {
                     double y = splitPaths.get(i).get(1).nextControl.getY();
                     x *= -1;
                     y *= -1;
-                    controlVectorList.add(new Spline.ControlVector(new double[] { splitPaths.get(i).get(0).anchorPoint.getX(), splitPaths.get(i).get(0).nextControl.getX() }, new double[] { splitPaths.get(i).get(0).anchorPoint.getY(), splitPaths.get(i).get(0).nextControl.getY() }));
-                    controlVectorList.add(new Spline.ControlVector(new double[] { splitPaths.get(i).get(1).anchorPoint.getX(), x }, new double[] { splitPaths.get(i).get(1).anchorPoint.getY(), y }));
+                    controlVectorList.add(new Spline.ControlVector(
+                            new double[] { splitPaths.get(i).get(0).anchorPoint.getX(),
+                                    splitPaths.get(i).get(0).nextControl.getX() },
+                            new double[] { splitPaths.get(i).get(0).anchorPoint.getY(),
+                                    splitPaths.get(i).get(0).nextControl.getY() }));
+                    controlVectorList.add(
+                            new Spline.ControlVector(new double[] { splitPaths.get(i).get(1).anchorPoint.getX(), x },
+                                    new double[] { splitPaths.get(i).get(1).anchorPoint.getY(), y }));
                     controlVectors.add(controlVectorList);
                     continue;
                 }
-                controlVectorList.add(new Spline.ControlVector(new double[] { splitPaths.get(i).get(0).anchorPoint.getX(), splitPaths.get(i).get(0).nextControl.getX() }, new double[] { splitPaths.get(i).get(0).anchorPoint.getY(), splitPaths.get(i).get(0).nextControl.getY() }));
-                if (splitPaths.get(i).get(1).prevControl.getX() != splitPaths.get(i).get(1).nextControl.getX() && splitPaths.get(i).get(1).prevControl.getY() != splitPaths.get(i).get(1).nextControl.getY()) {
+                controlVectorList.add(new Spline.ControlVector(
+                        new double[] { splitPaths.get(i).get(0).anchorPoint.getX(),
+                                splitPaths.get(i).get(0).nextControl.getX() },
+                        new double[] { splitPaths.get(i).get(0).anchorPoint.getY(),
+                                splitPaths.get(i).get(0).nextControl.getY() }));
+                if (splitPaths.get(i).get(1).prevControl.getX() != splitPaths.get(i).get(1).nextControl.getX()
+                        && splitPaths.get(i).get(1).prevControl.getY() != splitPaths.get(i).get(1).nextControl.getY()) {
                     double prevX = splitPaths.get(i).get(1).prevControl.getX();
                     double prevY = splitPaths.get(i).get(i).nextControl.getY();
                     prevX *= -1;
                     prevY *= -1;
-                    controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(1).anchorPoint.getX(), prevX}, new double[] {splitPaths.get(i).get(1).anchorPoint.getY(), prevY}));
+                    controlVectorList.add(new Spline.ControlVector(
+                            new double[] { splitPaths.get(i).get(1).anchorPoint.getX(), prevX },
+                            new double[] { splitPaths.get(i).get(1).anchorPoint.getY(), prevY }));
                 }
-                controlVectorList.add(new Spline.ControlVector(new double[] {splitPaths.get(i).get(1).anchorPoint.getX(), splitPaths.get(i).get(1).nextControl.getX()}, new double[] {splitPaths.get(i).get(1).anchorPoint.getY(), splitPaths.get(i).get(1).nextControl.getY()}));
+                controlVectorList.add(new Spline.ControlVector(
+                        new double[] { splitPaths.get(i).get(1).anchorPoint.getX(),
+                                splitPaths.get(i).get(1).nextControl.getX() },
+                        new double[] { splitPaths.get(i).get(1).anchorPoint.getY(),
+                                splitPaths.get(i).get(1).nextControl.getY() }));
                 controlVectors.add(controlVectorList);
             }
 
@@ -383,16 +408,14 @@ public class AutonomousFactory {
         private final Translation2d anchorPoint;
         private final Translation2d prevControl;
         private final Translation2d nextControl;
-        private final double velOverride;
         private final Rotation2d holonomicRotation;
         protected final boolean isReversal;
 
         protected Waypoint(Translation2d anchorPoint, Translation2d prevControl, Translation2d nextControl,
-                double velOverride, Rotation2d holonomicRotation, boolean isReversal) {
+                Rotation2d holonomicRotation, boolean isReversal) {
             this.anchorPoint = anchorPoint;
             this.prevControl = prevControl;
             this.nextControl = nextControl;
-            this.velOverride = velOverride;
             this.holonomicRotation = holonomicRotation;
             this.isReversal = isReversal;
         }
@@ -412,13 +435,9 @@ public class AutonomousFactory {
 
         @Override
         public void initialize() {
+            m_drivetrain.resetHeading();
             m_drivetrain.resetOdometry(trajectory.getInitialPose());
             super.initialize();
-        }
-
-        @Override
-        public void execute() {
-            super.execute();
         }
 
         @Override
