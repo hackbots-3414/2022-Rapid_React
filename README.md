@@ -10,9 +10,11 @@ Hackbots code for the 2022 FRC Rapid React game.
 |Right Rear|14|
 
 
-## Solenoid IDs
-
-
+## Solenoid Channels
+|----|----|
+|Left Climber | 9 |
+|Right Climber | 10 |
+|Release Pins | 11 |
 
 ## Driver Controls
 |Fuction|Control|
