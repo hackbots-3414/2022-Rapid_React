@@ -10,6 +10,10 @@ Hackbots code for the 2022 FRC Rapid React game.
 |Right Rear|14|
 
 
+## Solenoid IDs
+
+
+
 ## Driver Controls
 |Fuction|Control|
 |----|----|
