@@ -2,7 +2,12 @@
 Hackbots code for the 2022 FRC Rapid React game.
 
 ## CAN IDs
-
+|Motor|ID|
+|----|----|
+|Left Front|10|
+|Left Rear|11|
+|Right Front|13|
+|Right Rear|14|
 
 
 ## Driver Controls
