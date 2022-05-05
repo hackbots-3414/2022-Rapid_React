@@ -8,6 +8,14 @@ Hackbots code for the 2022 FRC Rapid React game.
 |Left Rear|11|
 |Right Front|13|
 |Right Rear|14|
+|Shooter Motor 1|40|
+|Shooter Motor 2|41|
+|Top Belt Motor|22|
+|Middle Belt Motor|21|
+|Bottom Belt Motor|20|
+|Intake|30|
+|Power Distribution Board|2|
+
 
 
 ## Solenoid IDs
