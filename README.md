@@ -6,7 +6,10 @@ Hackbots code for the 2022 FRC Rapid React game.
 
 
 ## Driver Controls
-
+|Fuction|Control|
+|----|----|
+|Steering | Right Joystick |
+|Throttle | Left Joystick |
 
 
 ## Operator Controls
