@@ -11,6 +11,7 @@ Hackbots code for the 2022 FRC Rapid React game.
 
 
 ## Solenoid Channels
+|Name | Channel |
 |----|----|
 |Left Climber | 9 |
 |Right Climber | 10 |
