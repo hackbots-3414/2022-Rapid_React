@@ -1,7 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Constants {
     public static final class RobotConstants {
@@ -47,6 +47,9 @@ public class Constants {
         public static final double kMaxSpeed = 2.5; // 2
         public static final double driveCurrentLimit = 70.0;
         public static final double triggerThresholdTime = .05;
+
+        public static final double speedMultiplier = 0.75;
+        public static final double turnMultiplier = 1;
 
         public static final double driveLowCurrentLimit = 5.0;
 

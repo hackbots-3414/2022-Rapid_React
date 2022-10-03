@@ -85,22 +85,22 @@ public class OI {
 
     public static double getLeftLateralRaw() {
         updateController();
-        return joystick.getRawAxis(0);
+        return joystick.getRawAxis(0) * Constants.DriveConstants.turnMultiplier;
     }
 
     public static double getLeftVerticalRaw() {
         updateController();
-        return joystick.getRawAxis(1);
+        return joystick.getRawAxis(1) * Constants.DriveConstants.speedMultiplier;
     }
 
     public static double getRightLateralRaw() {
         updateController();
-        return joystick.getRawAxis(3);
+        return joystick.getRawAxis(3) * Constants.DriveConstants.turnMultiplier;
     }
 
     public static double getRightVerticalRaw() {
         updateController();
-        return joystick.getRawAxis(4);
+        return joystick.getRawAxis(4) * Constants.DriveConstants.speedMultiplier;
     }
 
     public static double getRKnob() {
