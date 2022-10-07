@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.Date;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
@@ -14,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,6 +34,7 @@ public class Drivetrain extends SubsystemBase {
 
     private boolean wantLow = true;
 
+    private int counter = 0;
 
     private class EncoderOffsets {
         public double frontLeft;
@@ -54,7 +59,7 @@ public class Drivetrain extends SubsystemBase {
 
     private EncoderOffsets encoderOffsets = new EncoderOffsets();
 
-    private AHRS ahrs = new AHRS(Port.kMXP);
+    private AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
     private WPI_TalonFX backLeft;
     private WPI_TalonFX backRight;
@@ -156,6 +161,11 @@ public class Drivetrain extends SubsystemBase {
         differentialDrive.feed();
         m_odometry.update(ahrs.getRotation2d(), getLeftEncoderDistance(), getRightEncoderDistance());
         super.periodic();
+        counter += 1;
+        if (counter == 50) {
+            System.out.println(new Date() + " " + (getHeading()));
+            counter = 0;
+        }
     }
 
     @Override
@@ -233,7 +243,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getHeading() {
-        double angle = ahrs.getYaw();
+        double angle = ahrs.getPitch();
         LOG.info("NavX Heading: {}", angle);
         return angle;
     }
