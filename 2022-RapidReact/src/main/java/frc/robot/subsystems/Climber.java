@@ -67,12 +67,11 @@ public class Climber extends SubsystemBase {
 
     @Override
     public void periodic() {
-        //Print out pressure:
-        // counter += 1;
-        // if (counter == 50) {
-        //     System.out.println(new Date() + " " + getAirPressure());
-        //     counter = 0;
-        // }
+        counter += 1;
+        if (counter == 50) {
+            System.out.println(new Date() + " " + getAirPressure());
+            counter = 0;
+        }
 
         if (Array_Slot <=   CLIMBER_ARRAY_LENGTH-1){
 
