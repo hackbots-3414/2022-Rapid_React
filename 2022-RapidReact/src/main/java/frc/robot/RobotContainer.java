@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.DriveStraightSpandan;
 import frc.robot.commands.BeltCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
@@ -83,7 +84,7 @@ public class RobotContainer {
 
         // Configure default commands
 
-        m_drivetrain.setDefaultCommand(new TeleopCommand(m_drivetrain));
+        m_drivetrain.setDefaultCommand(new DriveStraightSpandan(100, m_drivetrain, 0.6));
         m_lEDFeedback.setDefaultCommand(new DefaultLEDCommand(m_lEDFeedback, m_climber));
         // m_shooter.setDefaultCommand(new RevShooterCommand(m_shooter));
 
