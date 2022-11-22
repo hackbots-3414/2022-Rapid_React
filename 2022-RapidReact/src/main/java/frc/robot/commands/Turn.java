@@ -18,10 +18,7 @@ public class Turn extends CommandBase {
     private double m_degrees;
 
     public Turn(Drivetrain subsystem, double degrees) {
-        this.turnSpeed = 0.4;
-        m_degrees = degrees;
-        
-        m_drivetrain = subsystem;
+        this(subsystem, degrees, 0.4);
     }
 
     public Turn(Drivetrain subsystem, double degrees, double turnSpeed) {
