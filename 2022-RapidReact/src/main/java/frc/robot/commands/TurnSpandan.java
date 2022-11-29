@@ -20,7 +20,7 @@ public class TurnSpandan extends CommandBase {
   private final Drivetrain m_drivetrain;
   private double m_degrees;
   /** Creates a new TurnSpandan. */
-  public TurnSpandan(Drivetrain subsystem, double degrees,double turnSpeed) {
+  public TurnSpandan(Drivetrain subsystem, double degrees) {
     this.turnSpeed=0.4;
     m_degrees=degrees;
     m_drivetrain=subsystem;
@@ -77,7 +77,7 @@ public TurnSpandan(Drivetrain subsystem, double degrees, double turnSpeed) {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
-0
+
   //a Returns true when the command should end.
   @Override
   public boolean isFinished() {
