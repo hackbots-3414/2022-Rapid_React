@@ -1,0 +1,51 @@
+package frc.robot.commands.autonomous;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+
+public class WaitCommand extends Command {
+
+    private static final Logger LOG = LoggerFactory.getLogger(WaitCommand.class);
+
+    public long prevMilliseconds;
+    public long waitTime;
+
+    static {
+        SmartDashboard.putNumber("Delay Before Drive", 0);
+    }
+
+    public WaitCommand() {
+    }
+
+    @Override
+    public void initialize() {
+        prevMilliseconds = System.currentTimeMillis();
+        waitTime = (long) SmartDashboard.getNumber("Delay Before Drive", 0);
+
+        LOG.info("wait command starting prevMilliseconds = {}, waitTime = {}", prevMilliseconds, waitTime);
+    }
+
+    @Override
+    public void execute() {
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+    }
+
+    @Override
+    public boolean isFinished() {
+        long currentMillis = System.currentTimeMillis();
+
+        long newMilliseconds = currentMillis - prevMilliseconds;
+
+        if (newMilliseconds >= waitTime) {
+            LOG.info("wait command finished");
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
