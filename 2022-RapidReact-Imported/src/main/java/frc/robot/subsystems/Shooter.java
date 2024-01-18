@@ -2,9 +2,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.SlotConfigs;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.DifferentialFollower;
 import com.ctre.phoenix6.controls.VelocityVoltage;
-import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 
@@ -21,11 +20,11 @@ public class Shooter extends SubsystemBase {
 
     public Shooter() {
 
-        rightMotor = new TalonFX(Constants.ShooterConstants.shooterMotor1);
         leftMotor = new TalonFX(Constants.ShooterConstants.shooterMotor2);
-        configTalon(rightMotor, InvertedValue.CounterClockwise_Positive);
+        rightMotor = new TalonFX(Constants.ShooterConstants.shooterMotor1);
         configTalon(leftMotor, InvertedValue.Clockwise_Positive);
-        rightMotor.follow(leftMotor);
+        // configTalon(rightMotor, InvertedValue.CounterClockwise_Positive);
+        rightMotor.setControl(new DifferentialFollower(leftMotor.getDeviceID(), true));
     }
 
     private void configTalon(TalonFX motor, InvertedValue invertValue) {
