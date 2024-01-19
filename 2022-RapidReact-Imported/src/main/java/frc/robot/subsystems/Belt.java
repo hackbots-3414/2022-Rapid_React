@@ -1,5 +1,5 @@
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -14,10 +14,10 @@ public class Belt extends SubsystemBase {
   public int thisManyBalls;
   DigitalInput irBottom = new DigitalInput(0);
   DigitalInput irTop = new DigitalInput(1);
-  WPI_TalonFX topMotor = new WPI_TalonFX(Constants.BeltConstants.topMotor);
-  WPI_TalonFX middleMotor = new WPI_TalonFX(Constants.BeltConstants.middleMotor);
-  WPI_TalonFX bottomMotor = new WPI_TalonFX(Constants.BeltConstants.bottomMotor);
-  WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.BeltConstants.intakeMotor);
+  TalonFX topMotor = new TalonFX(Constants.BeltConstants.topMotor);
+  TalonFX middleMotor = new TalonFX(Constants.BeltConstants.middleMotor);
+  TalonFX bottomMotor = new TalonFX(Constants.BeltConstants.bottomMotor);
+  TalonFX intakeMotor = new TalonFX(Constants.BeltConstants.intakeMotor);
   Solenoid solenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.BeltConstants.solenoidChannel);
 
 

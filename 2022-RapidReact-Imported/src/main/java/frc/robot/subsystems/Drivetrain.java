@@ -1,11 +1,15 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.DifferentialFollower;
+import com.ctre.phoenix6.controls.NeutralOut;
+import com.ctre.phoenix6.controls.StaticBrake;
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.kauailabs.navx.frc.AHRS;
 
 import org.slf4j.Logger;
@@ -44,11 +48,11 @@ public class Drivetrain extends SubsystemBase {
             backRight = 0;
         }
 
-        public void setOffsets(WPI_TalonFX frontLeft, WPI_TalonFX backLeft, WPI_TalonFX frontRight, WPI_TalonFX backRight) {
-            this.frontLeft = frontLeft.getSelectedSensorPosition();
-            this.backLeft = backLeft.getSelectedSensorPosition();
-            this.frontRight = frontRight.getSelectedSensorPosition();
-            this.backRight = backRight.getSelectedSensorPosition();
+        public void setOffsets(TalonFX frontLeft, TalonFX backLeft, TalonFX frontRight, TalonFX backRight) {
+            this.frontLeft = frontLeft.getRotorPosition().getValueAsDouble();
+            this.backLeft = backLeft.getRotorPosition().getValueAsDouble();
+            this.frontRight = frontRight.getRotorPosition().getValueAsDouble();
+            this.backRight = backRight.getRotorPosition().getValueAsDouble();
         }
     };
 
@@ -56,23 +60,23 @@ public class Drivetrain extends SubsystemBase {
 
     private AHRS ahrs = new AHRS(Port.kMXP);
 
-    private WPI_TalonFX backLeft;
-    private WPI_TalonFX backRight;
-    private WPI_TalonFX frontLeft;
-    private WPI_TalonFX frontRight;
+    private TalonFX backLeft;
+    private TalonFX backRight;
+    private TalonFX frontLeft;
+    private TalonFX frontRight;
     private DifferentialDrive differentialDrive;
     private DifferentialDriveOdometry m_odometry;
 
     private SupplyCurrentLimitConfiguration frontSupplyLimit = new SupplyCurrentLimitConfiguration(false, DriveConstants.driveLowCurrentLimit, DriveConstants.driveLowCurrentLimit, DriveConstants.triggerThresholdTime);
 
     public Drivetrain() {
-        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, TalonFXInvertType.Clockwise);
-        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, TalonFXInvertType.Clockwise);
-        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort, TalonFXInvertType.CounterClockwise);
-        backRight = createTalonFX(DriveConstants.kRightMotorRearPort, TalonFXInvertType.CounterClockwise);
+        frontLeft = createTalonFX(DriveConstants.kLeftMotorFrontPort, InvertedValue.Clockwise_Positive);
+        backLeft = createTalonFX(DriveConstants.kLeftMotorRearPort, InvertedValue.Clockwise_Positive);
+        frontRight = createTalonFX(DriveConstants.kRightMotorFrontPort, InvertedValue.CounterClockwise_Positive);
+        backRight = createTalonFX(DriveConstants.kRightMotorRearPort, InvertedValue.CounterClockwise_Positive);
 
-        backRight.follow(frontRight);
-        backLeft.follow(frontLeft);
+        backRight.setControl(new DifferentialFollower(frontRight.getDeviceID(), false));
+        backLeft.setControl(new DifferentialFollower(frontLeft.getDeviceID(), false));
 
         setHighCurrentLimit();
         setLowCurrentLimit();
@@ -86,14 +90,16 @@ public class Drivetrain extends SubsystemBase {
         m_odometry = new DifferentialDriveOdometry(ahrs.getRotation2d());
     }
     
-    private WPI_TalonFX createTalonFX(int deviceID, TalonFXInvertType direction) {
-        WPI_TalonFX motor = new WPI_TalonFX(deviceID);
-        motor.configFactoryDefault();
+    private TalonFX createTalonFX(int deviceID, InvertedValue direction) {
+        TalonFX motor = new TalonFX(deviceID);
+        motor.getConfigurator().apply(new TalonFXConfiguration());
+        OpenLoopRampsConfigs openLoopRampsConfigs = new OpenLoopRampsConfigs();
+        motor.getConfigurator().apply(openLoopRampsConfigs, 0.2);
         motor.configOpenloopRamp(DriveConstants.voltageRampRate);
         motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, DriveConstants.driveCurrentLimit, DriveConstants.driveCurrentLimit, DriveConstants.triggerThresholdTime));
         motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 10);
         motor.setSelectedSensorPosition(0, 0, 10);
-        motor.setInverted(direction);
+        motor.InvertedValue(direction);
 
 
 
@@ -134,17 +140,17 @@ public class Drivetrain extends SubsystemBase {
 
 
     public void setBrakeMode() {
-        frontLeft.setNeutralMode(NeutralMode.Brake);
-        frontRight.setNeutralMode(NeutralMode.Brake);
-        backLeft.setNeutralMode(NeutralMode.Brake);
-        backRight.setNeutralMode(NeutralMode.Brake);
+        frontLeft.setControl(new StaticBrake());
+        frontRight.setControl(new StaticBrake());
+        backLeft.setControl(new StaticBrake());
+        backRight.setControl(new StaticBrake());
     }
 
     public void setCoastMode() {
-        frontLeft.setNeutralMode(NeutralMode.Coast);
-        frontRight.setNeutralMode(NeutralMode.Coast);
-        backLeft.setNeutralMode(NeutralMode.Coast);
-        backRight.setNeutralMode(NeutralMode.Coast);
+        frontLeft.setControl(new NeutralOut());
+        frontRight.setControl(new NeutralOut());
+        backLeft.setControl(new NeutralOut());
+        backRight.setControl(new NeutralOut());
     }
 
     public boolean isControlsReversed() {
@@ -168,7 +174,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getLeftEncoderPosition() {
-        return ((frontLeft.getSelectedSensorPosition() + backLeft.getSelectedSensorPosition()) / 2D) - encoderOffsets.frontLeft;
+        return ((frontLeft.getRotorPosition().getValueAsDouble() + backLeft.getRotorPosition().getValueAsDouble()) / 2D) - encoderOffsets.frontLeft;
     }
 
     public double getLeftEncoderDistance() {
@@ -176,7 +182,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getLeftEncoderVelocity() {
-        return frontLeft.getSelectedSensorVelocity();
+        return frontLeft.getRotorVelocity().getValueAsDouble();
     }
 
     public double getLeftMetersPerSecond() {
@@ -185,7 +191,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getRightEncoderPosition() {
-        return ((frontRight.getSelectedSensorPosition() + backRight.getSelectedSensorPosition()) / 2D) - encoderOffsets.frontRight;
+        return ((frontRight.getRotorPosition().getValueAsDouble() + backRight.getRotorPosition().getValueAsDouble()) / 2D) - encoderOffsets.frontRight;
     }
 
     public double getRightEncoderDistance() {
@@ -193,7 +199,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double getRightEncoderVelocity() {
-        return frontRight.getSelectedSensorVelocity();
+        return frontRight.getRotorVelocity().getValueAsDouble();
     }
 
     public double getRightMetersPerSecond() {
